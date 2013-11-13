@@ -1,0 +1,40 @@
+{
+    "name": "frankmayer/arangodb-php-core",
+    "description": "ArangoDB-PHP-Core is a low level PHP Client for the ArangoDB Database",
+    "type": "library",
+    "minimum-stability": "stable",
+    "authors": [
+        {
+            "name": "Frank Mayer",
+            "email": "frank@frankmayer.net",
+            "homepage": "https://github.com/frankmayer",
+            "role": "Creator"
+        }
+    ],
+    "keywords": [
+        "ArangoDB",
+        "PHP",
+        "NoSQL",
+        "document store",
+        "graph",
+        "database"
+    ],
+    "homepage": "https://github.com/frankmayer/ArangoDB-PHP-Core",
+    "license": [
+        "Apache-2.0"
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "lib-curl": "*"
+    },
+    "autoload": {
+        "psr-0": {
+            "frankmayer\\ArangoDbPhpCore": "lib/"
+        }
+    },
+    "support": {
+        "source": "https://github.com/frankmayer/ArangoDB-PHP-Core",
+        "issues": "https://github.com/frankmayer/ArangoDB-PHP-Core/issues",
+        "wiki": "https://github.com/frankmayer/ArangoDB-PHP-Core/wiki"
+    }
+}
