@@ -2,6 +2,7 @@
 
 A lightweight, and at the same time flexible "very"-low-level ArangoDB client for PHP.
 
+[![Build Status](https://travis-ci.org/frankmayer/ArangoDB-PHP-Core.png?branch=master)](https://travis-ci.org/frankmayer/ArangoDB-PHP-Core)
 
 ####Purpose:
 
