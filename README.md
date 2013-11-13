@@ -29,13 +29,21 @@ A basis that takes away the boilerplate code of setting up requests and managing
 This project is at the moment in a __highly experimental__ phase.
 The API is not yet stable and there most probably will be significant changes to it.
 
-So it's not recommended to build anything critical on top of it yet. ;)
+So, it's not recommended to build anything critical on top of it yet. ;)
 But... stay tuned...
+
+
+#####Contributing
+
+As the project is very fresh and in a highly experimental state, it's not yet open to pull requests.
+But I'd love to see contributions after the initial experimental phase is over. :)
+I'll let you know via this readme and my Twitter-feed: https://twitter.com/frankmayer_
+Thanks !!
 
 
 ######TODO:
 - Implement missing functionality
-- Implement Travis Testing
+- stabilize API
 - Provide Docs
 
 
