@@ -58,7 +58,6 @@ class DocumentTest extends
 
         $this->assertArrayHasKey('error', json_decode($responseBody, true));
         $decodedJsonBody = json_decode($responseBody, true);
-        $this->assertEquals(200, $decodedJsonBody['code']);
         $this->assertEquals(false, $decodedJsonBody['error']);
         $this->assertEquals($collectionName . '/1', $decodedJsonBody['_id']);
     }
@@ -92,7 +91,8 @@ class DocumentTest extends
 
         $this->assertArrayHasKey('code', json_decode($responseBody, true));
         $decodedJsonBody = json_decode($responseBody, true);
-        $this->assertEquals(200, $decodedJsonBody['code']);    }
+        $this->assertEquals(200, $decodedJsonBody['code']);
+    }
 
     /**
      * Test if we can get the server version
@@ -110,7 +110,6 @@ class DocumentTest extends
 
         $this->assertArrayHasKey('error', json_decode($responseBody, true));
         $decodedJsonBody = json_decode($responseBody, true);
-        $this->assertEquals(200, $decodedJsonBody['code']);
         $this->assertEquals(false, $decodedJsonBody['error']);
         $this->assertEquals($collectionName . '/1', $decodedJsonBody['_id']);
 
@@ -141,9 +140,8 @@ class DocumentTest extends
         //        var_dump($responseBody);
         $this->assertArrayHasKey('error', json_decode($responseBody, true));
         $decodedJsonBody = json_decode($responseBody, true);
-        $this->assertEquals(200, $decodedJsonBody['code']);
-        $this->assertEquals(true,$decodedJsonBody['error']);
-        $this->assertEquals(200, $decodedJsonBody['code']);
+        $this->assertEquals(true, $decodedJsonBody['error']);
+        $this->assertEquals(404, $decodedJsonBody['code']);
         $this->assertEquals(1202, $decodedJsonBody['errorNum']);
     }
 
