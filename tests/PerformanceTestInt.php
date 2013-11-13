@@ -29,6 +29,8 @@ class TestClass
     public $pubVarArray;
     public $var2;
     public $var3;
+    public $var4;
+    public $var5;
 
 
     public function testArray($array)
