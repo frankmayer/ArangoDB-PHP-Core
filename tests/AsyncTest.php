@@ -64,7 +64,9 @@ class AsyncTest extends
         $responseObject = $document->get($collectionName . '/1', $requestBody);
 
         $responseBody = $responseObject->body;
-        $this->assertEquals($collectionName . '/1', json_decode($responseBody, true)['_id']);
+        $decodedJsonBody = json_decode($responseBody, true);
+
+        $this->assertEquals($collectionName . '/1', $decodedJsonBody['_id']);
     }
 
     public function testCreateCollectionAndStoredAsyncDocumentCreation()
