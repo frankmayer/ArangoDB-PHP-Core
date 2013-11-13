@@ -42,8 +42,9 @@ class AsyncTest extends
         $body           = $responseObject->body;
 
         $this->assertArrayHasKey('code', json_decode($body, true));
-        $this->assertEquals(200, json_decode($body, true)['code']);
-        $this->assertEquals($collectionName, json_decode($body, true)['name']);
+        $decodedJsonBody = json_decode($body, true);
+        $this->assertEquals(200, $decodedJsonBody['code']);
+        $this->assertEquals($collectionName, $decodedJsonBody['name']);
 
         $collectionName = 'ArangoDB-PHP-Core-CollectionTestSuite-Collection';
 
@@ -78,9 +79,9 @@ class AsyncTest extends
         $responseObject = $collection->create($collectionName, $collectionOptions);
         $body           = $responseObject->body;
 
-        $this->assertArrayHasKey('code', json_decode($body, true));
-        $this->assertEquals(200, json_decode($body, true)['code']);
-        $this->assertEquals($collectionName, json_decode($body, true)['name']);
+        $decodedJsonBody = json_decode($body, true);
+        $this->assertEquals(200, $decodedJsonBody['code']);
+        $this->assertEquals($collectionName, $decodedJsonBody['name']);
 
         $collectionName = 'ArangoDB-PHP-Core-CollectionTestSuite-Collection';
 
@@ -99,8 +100,9 @@ class AsyncTest extends
         $document       = new ArangoDbApi\Document($this->client);
         $responseObject = $document->get($collectionName . '/1', $requestBody);
 
-        $responseBody = $responseObject->body;
-        $this->assertEquals($collectionName . '/1', json_decode($responseBody, true)['_id']);
+        $responseBody    = $responseObject->body;
+        $decodedJsonBody = json_decode($responseBody, true);
+        $this->assertEquals($collectionName . '/1', $decodedJsonBody['_id']);
     }
 
 
