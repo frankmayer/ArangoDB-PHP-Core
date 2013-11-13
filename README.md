@@ -25,7 +25,7 @@ A basis that takes away the boilerplate code of setting up requests and managing
 
 
 #####Caution:
-This project is at the moment in a highly experimental phase.
+This project is at the moment in a __highly experimental__ phase.
 The API is not yet stable and there most probably will be significant changes to it.
 
 So it's not recommended to build anything critical on top of it yet. ;)
