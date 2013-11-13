@@ -87,6 +87,7 @@ class TestClass3 extends
         if (property_exists($this, $property)) {
             return $this->$property;
         }
+        throw new ClientException('Property doesn\'t exist');
     }
 
     public function __set($property, $value)
@@ -103,6 +104,7 @@ class PerformanceTest extends
 {
     protected $client;
     protected $clientOptions;
+    protected $startTime;
 
 
     public function setUp()

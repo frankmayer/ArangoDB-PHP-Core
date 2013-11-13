@@ -14,6 +14,7 @@
 namespace frankmayer\ArangoDbPhpCore\Config;
 
 use frankmayer\ArangoDbPhpCore\ClientException;
+use frankmayer\ArangoDbPhpCore\Exception;
 
 /**
  * Simple container class for the client options.
@@ -181,7 +182,7 @@ class ClientOptions implements
      *
      * @param array $options - initial options
      *
-     * @return \frankmayer\ArangoDbPhpCore\ClientOptions
+     * @return \frankmayer\ArangoDbPhpCore\Config\ClientOptions
      */
     public function __construct(array $options)
     {
