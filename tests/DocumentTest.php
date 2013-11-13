@@ -116,7 +116,6 @@ class DocumentTest extends
         $responseObject = $document->getAllUri($collectionName);
 
         $responseBody = $responseObject->body;
-        //        var_dump($responseBody);
         $this->assertArrayHasKey('documents', json_decode($responseBody, true));
         $decodedJsonBody = json_decode($responseBody, true);
 
@@ -128,7 +127,6 @@ class DocumentTest extends
         $responseObject = $document->delete($collectionName . '/1');
 
         $responseBody = $responseObject->body;
-        //        var_dump($responseBody);
         $this->assertArrayHasKey('error', json_decode($responseBody, true));
         $decodedJsonBody = json_decode($responseBody, true);
         $this->assertEquals(false, $decodedJsonBody['error']);
@@ -137,7 +135,6 @@ class DocumentTest extends
         $responseObject = $document->delete($collectionName . '/1');
 
         $responseBody = $responseObject->body;
-        //        var_dump($responseBody);
         $this->assertArrayHasKey('error', json_decode($responseBody, true));
         $decodedJsonBody = json_decode($responseBody, true);
         $this->assertEquals(true, $decodedJsonBody['error']);
@@ -171,7 +168,6 @@ class DocumentTest extends
         $responseObject = $document->replace($collectionName . '/1', $requestBody);
 
         $responseBody = $responseObject->body;
-        //                var_dump($responseBody);
 
         $this->assertArrayHasKey('error', json_decode($responseBody, true));
         $decodedJsonBody = json_decode($responseBody, true);
@@ -184,7 +180,6 @@ class DocumentTest extends
         $responseObject = $document->get($collectionName . '/1', $requestBody);
 
         $responseBody = $responseObject->body;
-        //                var_dump($responseBody);
 
         $this->assertArrayNotHasKey('bike', json_decode($responseBody, true));
         $decodedJsonBody = json_decode($responseBody, true);
@@ -192,12 +187,9 @@ class DocumentTest extends
         $this->assertEquals('Mike', $decodedJsonBody['name']);
         $this->assertEquals($collectionName . '/1', $decodedJsonBody['_id']);
 
-
-        //
         $responseObject = $document->delete($collectionName . '/1');
 
         $responseBody = $responseObject->body;
-        //        var_dump($responseBody);
         $this->assertArrayHasKey('error', json_decode($responseBody, true));
         $decodedJsonBody = json_decode($responseBody, true);
 
@@ -207,7 +199,6 @@ class DocumentTest extends
         $responseObject = $document->delete($collectionName . '/1');
 
         $responseBody = $responseObject->body;
-        //        var_dump($responseBody);
         $this->assertArrayHasKey('error', json_decode($responseBody, true));
         $decodedJsonBody = json_decode($responseBody, true);
 

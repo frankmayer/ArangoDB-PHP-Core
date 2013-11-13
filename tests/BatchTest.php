@@ -101,16 +101,5 @@ class BatchTest extends
                                        $collectionName
             );
         }
-        //        $batchParts = array();
-        //        foreach ($this->collectionNames as $collectionName) {
-        //            $collection   = new ArangoDbApi\Collection($this->client);
-        //            $batchParts[] = $collection->delete(
-        //                                       $collectionName,
-        //                                       array('isBatchPart' => true)
-        //            );
-        //        }
-        //
-        //        $batch = new ArangoDbApi\Batch($this->client);
-        //        $batch->sendBatch($batchParts);
     }
 }

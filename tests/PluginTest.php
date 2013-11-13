@@ -30,7 +30,7 @@ class PluginTest extends
         $this->client = getClient($connector);
     }
 
-
+    // todo 1 Frank Complete plugin tests
     /**
      * Test if we can get the server version
      */
