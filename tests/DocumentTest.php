@@ -37,8 +37,9 @@ class DocumentTest extends
         $body = $responseObject->body;
 
         $this->assertArrayHasKey('code', json_decode($body, true));
-        $this->assertEquals(200, json_decode($body, true)['code']);
-        $this->assertEquals($collectionName, json_decode($body, true)['name']);
+        $decodedJsonBody = json_decode($body, true);
+        $this->assertEquals(200, $decodedJsonBody['code']);
+        $this->assertEquals($collectionName, $decodedJsonBody['name']);
     }
 
 
@@ -56,8 +57,10 @@ class DocumentTest extends
         $responseBody = $responseObject->body;
 
         $this->assertArrayHasKey('error', json_decode($responseBody, true));
-        $this->assertEquals(false, json_decode($responseBody, true)['error']);
-        $this->assertEquals($collectionName . '/1', json_decode($responseBody, true)['_id']);
+        $decodedJsonBody = json_decode($responseBody, true);
+        $this->assertEquals(200, $decodedJsonBody['code']);
+        $this->assertEquals(false, $decodedJsonBody['error']);
+        $this->assertEquals($collectionName . '/1', $decodedJsonBody['_id']);
     }
 
 
@@ -77,8 +80,10 @@ class DocumentTest extends
         $responseBody = $responseObject->body;
 
         $this->assertArrayHasKey('error', json_decode($responseBody, true));
-        $this->assertEquals(false, json_decode($responseBody, true)['error']);
-        $this->assertEquals($collectionName . '/1', json_decode($responseBody, true)['_id']);
+        $decodedJsonBody = json_decode($responseBody, true);
+
+        $this->assertEquals(false, $decodedJsonBody['error']);
+        $this->assertEquals($collectionName . '/1', $decodedJsonBody['_id']);
 
         $collection = new ArangoDbApi\Collection($this->client);
 
@@ -86,8 +91,8 @@ class DocumentTest extends
         $responseBody   = $responseObject->body;
 
         $this->assertArrayHasKey('code', json_decode($responseBody, true));
-        $this->assertEquals(200, json_decode($responseBody, true)['code']);
-    }
+        $decodedJsonBody = json_decode($responseBody, true);
+        $this->assertEquals(200, $decodedJsonBody['code']);    }
 
     /**
      * Test if we can get the server version
@@ -104,17 +109,21 @@ class DocumentTest extends
         $responseBody = $responseObject->body;
 
         $this->assertArrayHasKey('error', json_decode($responseBody, true));
-        $this->assertEquals(false, json_decode($responseBody, true)['error']);
-        $this->assertEquals($collectionName . '/1', json_decode($responseBody, true)['_id']);
+        $decodedJsonBody = json_decode($responseBody, true);
+        $this->assertEquals(200, $decodedJsonBody['code']);
+        $this->assertEquals(false, $decodedJsonBody['error']);
+        $this->assertEquals($collectionName . '/1', $decodedJsonBody['_id']);
 
         $responseObject = $document->getAllUri($collectionName);
 
         $responseBody = $responseObject->body;
         //        var_dump($responseBody);
         $this->assertArrayHasKey('documents', json_decode($responseBody, true));
+        $decodedJsonBody = json_decode($responseBody, true);
+
         $this->assertEquals(
              '/_api/document/ArangoDB-PHP-Core-CollectionTestSuite-Collection/1',
-             json_decode($responseBody, true)['documents'][0]
+             $decodedJsonBody['documents'][0]
         );
 
         $responseObject = $document->delete($collectionName . '/1');
@@ -122,7 +131,8 @@ class DocumentTest extends
         $responseBody = $responseObject->body;
         //        var_dump($responseBody);
         $this->assertArrayHasKey('error', json_decode($responseBody, true));
-        $this->assertEquals(false, json_decode($responseBody, true)['error']);
+        $decodedJsonBody = json_decode($responseBody, true);
+        $this->assertEquals(false, $decodedJsonBody['error']);
 
         // Try to delete a second time .. should throw an error
         $responseObject = $document->delete($collectionName . '/1');
@@ -130,9 +140,11 @@ class DocumentTest extends
         $responseBody = $responseObject->body;
         //        var_dump($responseBody);
         $this->assertArrayHasKey('error', json_decode($responseBody, true));
-        $this->assertEquals(true, json_decode($responseBody, true)['error']);
-        $this->assertEquals(404, json_decode($responseBody, true)['code']);
-        $this->assertEquals(1202, json_decode($responseBody, true)['errorNum']);
+        $decodedJsonBody = json_decode($responseBody, true);
+        $this->assertEquals(200, $decodedJsonBody['code']);
+        $this->assertEquals(true,$decodedJsonBody['error']);
+        $this->assertEquals(200, $decodedJsonBody['code']);
+        $this->assertEquals(1202, $decodedJsonBody['errorNum']);
     }
 
 
@@ -150,8 +162,10 @@ class DocumentTest extends
         $responseBody = $responseObject->body;
 
         $this->assertArrayHasKey('error', json_decode($responseBody, true));
-        $this->assertEquals(false, json_decode($responseBody, true)['error']);
-        $this->assertEquals($collectionName . '/1', json_decode($responseBody, true)['_id']);
+        $decodedJsonBody = json_decode($responseBody, true);
+
+        $this->assertEquals(false, $decodedJsonBody['error']);
+        $this->assertEquals($collectionName . '/1', $decodedJsonBody['_id']);
         //
 
         $requestBody    = array('name' => 'Mike');
@@ -162,8 +176,10 @@ class DocumentTest extends
         //                var_dump($responseBody);
 
         $this->assertArrayHasKey('error', json_decode($responseBody, true));
-        $this->assertEquals(false, json_decode($responseBody, true)['error']);
-        $this->assertEquals($collectionName . '/1', json_decode($responseBody, true)['_id']);
+        $decodedJsonBody = json_decode($responseBody, true);
+
+        $this->assertEquals(false, $decodedJsonBody['error']);
+        $this->assertEquals($collectionName . '/1', $decodedJsonBody['_id']);
 
 
         $document       = new ArangoDbApi\Document($this->client);
@@ -173,8 +189,10 @@ class DocumentTest extends
         //                var_dump($responseBody);
 
         $this->assertArrayNotHasKey('bike', json_decode($responseBody, true));
-        $this->assertEquals('Mike', json_decode($responseBody, true)['name']);
-        $this->assertEquals($collectionName . '/1', json_decode($responseBody, true)['_id']);
+        $decodedJsonBody = json_decode($responseBody, true);
+
+        $this->assertEquals('Mike', $decodedJsonBody['name']);
+        $this->assertEquals($collectionName . '/1', $decodedJsonBody['_id']);
 
 
         //
@@ -183,7 +201,9 @@ class DocumentTest extends
         $responseBody = $responseObject->body;
         //        var_dump($responseBody);
         $this->assertArrayHasKey('error', json_decode($responseBody, true));
-        $this->assertEquals(false, json_decode($responseBody, true)['error']);
+        $decodedJsonBody = json_decode($responseBody, true);
+
+        $this->assertEquals(false, $decodedJsonBody['error']);
 
         // Try to delete a second time .. should throw an error
         $responseObject = $document->delete($collectionName . '/1');
@@ -191,9 +211,11 @@ class DocumentTest extends
         $responseBody = $responseObject->body;
         //        var_dump($responseBody);
         $this->assertArrayHasKey('error', json_decode($responseBody, true));
-        $this->assertEquals(true, json_decode($responseBody, true)['error']);
-        $this->assertEquals(404, json_decode($responseBody, true)['code']);
-        $this->assertEquals(1202, json_decode($responseBody, true)['errorNum']);
+        $decodedJsonBody = json_decode($responseBody, true);
+
+        $this->assertEquals(true, $decodedJsonBody['error']);
+        $this->assertEquals(404, $decodedJsonBody['code']);
+        $this->assertEquals(1202, $decodedJsonBody['errorNum']);
     }
 
 

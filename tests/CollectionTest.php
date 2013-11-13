@@ -43,8 +43,9 @@ class CollectionTest extends
         $body           = $responseObject->body;
 
         $this->assertArrayHasKey('code', json_decode($body, true));
-        $this->assertEquals(200, json_decode($body, true)['code']);
-        $this->assertEquals($collectionName, json_decode($body, true)['name']);
+        $decodedJsonBody = json_decode($body, true);
+        $this->assertEquals(200, $decodedJsonBody['code']);
+        $this->assertEquals($collectionName, $decodedJsonBody['name']);
     }
 
 
@@ -62,8 +63,9 @@ class CollectionTest extends
         $body           = $responseObject->body;
 
         $this->assertArrayHasKey('code', json_decode($body, true));
-        $this->assertEquals(200, json_decode($body, true)['code']);
-        $this->assertEquals($collectionName, json_decode($body, true)['name']);
+        $decodedJsonBody = json_decode($body, true);
+        $this->assertEquals(200, $decodedJsonBody['code']);
+        $this->assertEquals($collectionName, $decodedJsonBody['name']);
     }
 
 
@@ -82,7 +84,8 @@ class CollectionTest extends
         $body           = $responseObject->body;
 
         $this->assertArrayHasKey('code', json_decode($body, true));
-        $this->assertEquals(200, json_decode($body, true)['code']);
+        $decodedJsonBody = json_decode($body, true);
+        $this->assertEquals(200, $decodedJsonBody['code']);
     }
 
 

@@ -65,7 +65,8 @@ class BatchTest extends
         foreach ($batchResponseParts as $batchPart) {
             $body = $batchPart->body;
             $this->assertArrayHasKey('code', json_decode($body, true));
-            $this->assertEquals(200, json_decode($body, true)['code']);
+            $decodedJsonBody = json_decode($body, true);
+            $this->assertEquals(200, $decodedJsonBody['code']);
         }
 
         $batchParts = array();
@@ -86,7 +87,8 @@ class BatchTest extends
         foreach ($batchResponseParts as $batchPart) {
             $body = $batchPart->body;
             $this->assertArrayHasKey('code', json_decode($body, true));
-            $this->assertEquals(200, json_decode($body, true)['code']);
+            $decodedJsonBody = json_decode($body, true);
+            $this->assertEquals(200, $decodedJsonBody['code']);
         }
     }
 
