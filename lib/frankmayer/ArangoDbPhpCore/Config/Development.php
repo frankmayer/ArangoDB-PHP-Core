@@ -1,6 +1,5 @@
 <?php
 /**
- * /**
  * ArangoDB-PHP-Core client: client options
  *
  * Taken from the original ArangoDB-Client, in order to maintain easy migration. Thanks Jan ;)
