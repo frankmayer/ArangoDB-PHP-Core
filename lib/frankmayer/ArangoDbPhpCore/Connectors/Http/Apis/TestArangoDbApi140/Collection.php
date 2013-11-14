@@ -63,6 +63,7 @@ class Collection extends
             );
         } else {
             // This is the way to bind an HttpRequest in PHP 5.3.x
+
             $me = $this;
             $this->client->bind(
                          'httpRequest',
@@ -72,7 +73,7 @@ class Collection extends
             );
         }
         // And here's how one gets an HttpRequest object through the IOC.
-        // Note the type-name 'httpRequest', is the name we bound our HttpRequest class creation-closure to. (see above)
+        // Note that the type-name 'httpRequest' is the name we bound our HttpRequest class creation-closure to. (see above)
         $this->request = $this->client->make('httpRequest');
 
         //        $this->request    = $requestClass::construct($this->client);

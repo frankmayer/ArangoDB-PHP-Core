@@ -1,7 +1,7 @@
 <?php
 
 /**
- * ArangoDB PHP Core Client Test-Suite: Plugin Test
+ * ArangoDB PHP Core Client Performance-Test-Suite: Performance Test for HttpRequest Object instantiation using different methods
  *
  * @package   frankmayer\ArangoDbPhpCore
  * @author    Frank Mayer
@@ -43,11 +43,6 @@ class Performance01Test extends
         $this->client       = getClient($connector);
         $this->requestClass = $this->client->requestClass;
     }
-
-    // todo 1 Frank Complete plugin tests
-    /**
-     * Test if we can get the server version
-     */
 
 
     public function testInstantiateRequestsThroughResolvingRequestClassProperty()
@@ -95,10 +90,5 @@ class Performance01Test extends
                     true
                 ) - $startTime) . ' ms ' . PHP_EOL;
         unset ($request);
-    }
-
-
-    public function tearDown()
-    {
     }
 }
