@@ -32,7 +32,10 @@ class Client
 
     public $requestClass;
     public $responseClass;
-
+    /**
+     * @var string The ArangoDB api version to signal
+     */
+    public $arangodbApiVersion;
 
     public function __construct(ConnectorInterface $connector, $clientOptions = null)
     {
@@ -43,6 +46,10 @@ class Client
         $this->requestClass  = $this->clientOptions[ClientOptions::OPTION_REQUEST_CLASS];
         $this->responseClass = $this->clientOptions[ClientOptions::OPTION_RESPONSE_CLASS];
 
+        if (isset($this->clientOptions[ClientOptions::OPTION_ARANGODB_API_VERSION])) {
+
+        $this->arangodbApiVersion=$this->clientOptions[ClientOptions::OPTION_ARANGODB_API_VERSION];
+        }
         if (isset($this->clientOptions['plugins'])) {
             $this->pluginManager = new PluginManager($this, isset($this->clientOptions['plugins']) ? $this->clientOptions['plugins'] : null, isset($this->clientOptions['PluginManager']['options']) ? $this->clientOptions['PluginManager']['options'] : null);
         };

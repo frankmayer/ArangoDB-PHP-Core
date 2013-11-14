@@ -33,6 +33,8 @@ function getClientOptions()
         // ClientOptions::OPTION_PLUGINS => $plugins,
         ClientOptions::OPTION_REQUEST_CLASS    => 'frankmayer\ArangoDbPhpCore\Connectors\Http\HttpRequest',
         ClientOptions::OPTION_RESPONSE_CLASS   => 'frankmayer\ArangoDbPhpCore\Connectors\Http\HttpResponse',
+        ClientOptions::OPTION_ARANGODB_API_VERSION   => '10400',
+
     );
 }
 
