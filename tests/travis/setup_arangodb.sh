@@ -3,7 +3,7 @@
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 cd $DIR
 
-VERSION=1.4.0
+VERSION=1.4.1
 NAME=ArangoDB-$VERSION
 
 if [ ! -d "$DIR/$NAME" ]; then
@@ -21,6 +21,7 @@ PID_FILE="/tmp/arangodb.$PID.pid"
 ARANGODB_DIR="$DIR/$NAME"
 
 # temporary removal of databases symlink, so tests don't fail because of ArangoDB not being able to create its databases directory...
+echo "rm -f ${ARANGODB_DIR}/js/apps/databases"
 rm -f ${ARANGODB_DIR}/js/apps/databases
 
 ARANGOD="${ARANGODB_DIR}/bin/arangod"
