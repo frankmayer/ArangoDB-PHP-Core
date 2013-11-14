@@ -28,6 +28,18 @@ A basis that takes away the boilerplate code of setting up requests and managing
 - Includes a few test classes that provide basic testing functionality against the server and also a bit of insight on how to build a client on top of the core.
 
 
+####PHP Versions:
+
+Supported: 5.3, 5.4, 5.5
+
+Recomended: 5.4, 5.5
+
+Notes: 
+
+While PHP 5.3 is still supported, the core client runs faster and with a smaller memory footprint, when used with PHP 5.4 and newer.
+In other words... Do yourself a favor and upgrade to PHP 5.4 or even better to PHP 5.5.
+ 
+
 #####Caution:
 This project is at the moment in a __highly experimental__ phase.
 The API is not yet stable and there most probably will be significant changes to it.
