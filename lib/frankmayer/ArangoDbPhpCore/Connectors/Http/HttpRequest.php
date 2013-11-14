@@ -79,6 +79,10 @@ class HttpRequest implements
      * @var ResponseInterface The response-object as a result of the request
      */
     public $responseObject;
+    /**
+     * @var string The ArangoDB api version to signal
+     */
+    public $arangodbApiVersion;
 
 
     /**
@@ -124,6 +128,10 @@ class HttpRequest implements
                 $async = var_export($async, true);
             }
             $this->headers[] = 'x-arango-async: ' . $async;
+        }
+
+        if (isset($this->arangodbApiVersion)) {
+            $this->headers['x-arango-version: ' . $this->arangodbApiVersion];
         }
 
         if (isset($this->options['isBatchPart']) && $this->options['isBatchPart'] === true) {
