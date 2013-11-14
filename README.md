@@ -18,6 +18,9 @@ A basis that takes away the boilerplate code of setting up requests and managing
 - A wrapper around connectors (at the moment only CURL)
 - Flexibility through dependency injection:
   - Inject your own connector, Request or Response Objects
+     - directly
+     - via configuration resolution
+     - via the client class's own simple IOC container
 - Register your plugins (for example a trace plugin)
 - Extend the core's functionality through traits (not yet implemented)
 - supports ArangoDB's Async and Batch functionality
