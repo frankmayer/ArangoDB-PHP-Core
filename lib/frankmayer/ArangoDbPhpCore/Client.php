@@ -24,6 +24,8 @@ use frankmayer\ArangoDbPhpCore\Plugins\PluginManager;
  */
 class Client
 {
+    public $iocContainerArray;
+
     public $pluginManager;
     public $connector;
     public $clientOptions;
@@ -48,7 +50,7 @@ class Client
 
         if (isset($this->clientOptions[ClientOptions::OPTION_ARANGODB_API_VERSION])) {
 
-        $this->arangodbApiVersion=$this->clientOptions[ClientOptions::OPTION_ARANGODB_API_VERSION];
+            $this->arangodbApiVersion = $this->clientOptions[ClientOptions::OPTION_ARANGODB_API_VERSION];
         }
         if (isset($this->clientOptions['plugins'])) {
             $this->pluginManager = new PluginManager($this, isset($this->clientOptions['plugins']) ? $this->clientOptions['plugins'] : null, isset($this->clientOptions['PluginManager']['options']) ? $this->clientOptions['PluginManager']['options'] : null);
@@ -157,5 +159,30 @@ class Client
         $responseClass = $this->responseClass;
 
         return new $responseClass($requestObject);
+    }
+
+
+    /**
+     * Binding method for the IOC Container
+     *
+     * @param $type
+     * @param $closure
+     */
+    public function bind($type, $closure)
+    {
+        $this->iocContainerArray[$type] = $closure;
+    }
+
+
+    /**
+     * Make method for the IOC Container
+     *
+     * @param $type
+     *
+     * @return mixed
+     */
+    public function make($type)
+    {
+        return $this->iocContainerArray[$type]();
     }
 }

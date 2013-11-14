@@ -11,7 +11,8 @@
 namespace frankmayer\ArangoDbPhpCore\Connectors\Http\Apis\TestArangoDbApi140;
 
     //use frankmayer\ArangoDbPhpCore\Client;
-    //use frankmayer\ArangoDbPhpCore\Connectors\Http\HttpRequest;
+//use frankmayer\ArangoDbPhpCore\Connectors\Http\HttpRequest;
+use frankmayer\ArangoDbPhpCore\Connectors\Http\HttpRequest;
 
 
 /**
@@ -46,7 +47,17 @@ class Collection extends
         $collectionParameters = array(),
         $options = array()
     ) {
-        $this->request    = new $this->requestClass($this->client);
+        $requestClass = $this->requestClass;
+
+        $this->client->bind(
+                     'httpRequest',
+                         function () {
+                             return new HttpRequest($this->client);
+                         }
+        );
+        $this->request = $this->client->make('httpRequest');
+
+        //        $this->request    = $requestClass::construct($this->client);
         $request          = $this->request;
         $request->options = $options;
         $request->body    = array('name' => $collectionName);
@@ -74,12 +85,11 @@ class Collection extends
         $options = array()
     ) {
         $this->request = new $this->requestClass($this->client);
-        $request       = $this->request;
-
+        //        $this->request    = new $this->client->make('requestClass');
+        $request          = $this->request;
         $request->options = $options;
-
-        $request->path   = $this->client->getDatabasePath() . self::API_COLLECTION . '/' . $collectionName;
-        $request->method = self::METHOD_DELETE;
+        $request->path    = $this->client->getDatabasePath() . self::API_COLLECTION . '/' . $collectionName;
+        $request->method  = self::METHOD_DELETE;
 
         $responseObject = $request->request();
 
