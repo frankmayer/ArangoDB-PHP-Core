@@ -11,6 +11,7 @@
 namespace frankmayer\ArangoDbPhpCore;
 
 use frankmayer\ArangoDbPhpCore\Connectors\ConnectorInterface;
+use frankmayer\ArangoDbPhpCore\Connectors\Http\HttpConnectorInterface;
 use frankmayer\ArangoDbPhpCore\Plugins\PluginManager;
 
 /**
@@ -39,6 +40,11 @@ class Client
      */
     public $arangodbApiVersion;
 
+    /**
+     * @param ConnectorInterface|HttpConnectorInterface $connector
+     *
+     * @param null                                      $clientOptions
+     */
     public function __construct(ConnectorInterface $connector, $clientOptions = null)
     {
         $this->connector     = $connector;
@@ -69,60 +75,6 @@ class Client
         $this->pluginManager->notifyPlugins($eventName, $eventData);
     }
 
-
-    //    /**
-    //     * @param \frankmayer\ArangoDbPhpCore\Connectors\ConnectorInterface $connector
-    //     */
-    //    public function setConnector($connector)
-    //    {
-    //        $this->connector = $connector;
-    //    }
-    //
-    //
-    //    /**
-    //     * @return \frankmayer\ArangoDbPhpCore\Connectors\ConnectorInterface
-    //     */
-    //    public function getConnector()
-    //    {
-    //        return $this->connector;
-    //    }
-    //
-    //
-    //    /**
-    //     * @param mixed $database
-    //     */
-    //    public function setDatabase($database)
-    //    {
-    //        $this->database = $database;
-    //    }
-    //
-    //
-    //    /**
-    //     * @return mixed
-    //     */
-    //    public function getDatabase()
-    //    {
-    //        return $this->database;
-    //    }
-    //
-    //
-    //    /**
-    //     * @param string $endpoint
-    //     */
-    //    public function setEndpoint($endpoint)
-    //    {
-    //        $this->endpoint = $endpoint;
-    //    }
-    //
-    //
-    //    /**
-    //     * @return string
-    //     */
-    //    public function getEndpoint()
-    //    {
-    //        return $this->endpoint;
-    //    }
-    //
 
     /**
      * @return string
