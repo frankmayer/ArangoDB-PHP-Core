@@ -11,13 +11,14 @@
 namespace frankmayer\ArangoDbPhpCore\Connectors\Http;
 
 use frankmayer\ArangoDbPhpCore\Client;
+use frankmayer\ArangoDbPhpCore\Connectors\Http\HttpRequest;
+use frankmayer\ArangoDbPhpCore\Connectors\Http\HttpRequestInterface;
 use frankmayer\ArangoDbPhpCore\ServerException;
 
 
 /**
  * This connector provides the connection to PHP's curl class.
  * It must be injected into the client object upon the client's creation.
- *
  *
  * @package frankmayer\ArangoDbPhpCore
  */
@@ -37,6 +38,9 @@ class CurlHttpConnector extends
     protected $client;
 
 
+    /**
+     * Constructor
+     */
     public function __construct()
     {
         $this->verbose = false;
@@ -44,12 +48,12 @@ class CurlHttpConnector extends
 
 
     /**
-     * @param HttpRequest $request
+     * @param HttpRequest|HttpRequestInterface $request
      *
      * @throws \frankmayer\ArangoDbPhpCore\ServerException
      * @return mixed
      */
-    public function request(HttpRequest $request)
+    public function request(HttpRequestInterface $request)
     {
         $ch        = curl_init($request->address);
         $body      = $request->body;
@@ -77,47 +81,6 @@ class CurlHttpConnector extends
 
 
     /**
-     * @param HttpRequest $request
-     *
-     * @return mixed
-     */
-    public function get(HttpRequest $request)
-    {
-        return $this->request($request);
-    }
-
-
-    /**
-     * @param HttpRequest $request
-     *
-     * @return mixed
-     */
-    public function post(HttpRequest $request)
-    {
-        return $this->request($request);
-    }
-
-    /**
-     * @param HttpRequest $request
-     *
-     * @return mixed
-     */
-    public function delete(HttpRequest $request)
-    {
-        return $this->request($request);
-    }
-
-    /**
-     * @param HttpRequest $request
-     *
-     * @return mixed
-     */
-    public function put(HttpRequest $request)
-    {
-        return $this->request($request);
-    }
-
-    /**
      * @param $client
      *
      * @return HttpRequest
@@ -126,6 +89,7 @@ class CurlHttpConnector extends
     {
         return new $client->getRequest($client);
     }
+
 
     /**
      * @param HttpRequest $request

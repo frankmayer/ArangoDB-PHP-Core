@@ -26,14 +26,11 @@ interface  HttpConnectorInterface extends
     ConnectorInterface
 {
 
+    public function request(HttpRequestInterface $request);
 
-    //    public function get(HttpRequest $request);
-    public function post(HttpRequest $request);
+    public function instantiateRequestObject($client);
 
-    public function put(HttpRequest $request);
+    public function instantiateResponseObject($request);
 
-    //    public function patch(HttpRequest $request);
-    public function delete(HttpRequest $request);
-    //    public function head(HttpRequest $request);
-    //    public function options(HttpRequest $request);
+
 }

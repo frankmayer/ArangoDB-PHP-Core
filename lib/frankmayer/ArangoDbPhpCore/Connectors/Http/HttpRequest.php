@@ -142,7 +142,7 @@ class HttpRequest implements
                 $this->headers[] = 'Content-Type: application/json';
             }
             $this->address  = $this->client->endpoint . $this->path;
-            $this->response = $this->connector->{$this->method}($this);
+            $this->response = $this->connector->request($this);
         }
 
         return $this->client->connector->instantiateResponseObject($this);
