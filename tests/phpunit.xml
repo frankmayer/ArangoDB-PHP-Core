@@ -2,7 +2,11 @@
 <phpunit bootstrap="bootstrap.php" colors="true" verbose="true" backupGlobals="false">
     <testsuites>
         <testsuite name="ArangoDB-PHP-Core">
-            <directory>.</directory>
+            <directory>standard</directory>
+        </testsuite>
+       <testsuite name="ArangoDB-PHP-Core-Performance">
+            <directory>performance</directory>
         </testsuite>
     </testsuites>
 </phpunit>
+
