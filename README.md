@@ -24,7 +24,7 @@ A basis that takes away the boilerplate code of setting up requests and managing
 - Register your plugins (for example a trace plugin)
 - Extend the core's functionality through traits (not yet implemented)
 - supports ArangoDB's Async and Batch functionality
-- provides a toolbox for handling everything around communication with an ArangoDB server, such as url, parameter and header building tools.
+- provides a toolbox for handling everything around communication with an ArangoDB server, such as url-, parameter- and header-building tools.
 - Includes a few test classes that provide basic testing functionality against the server and also a bit of insight on how to build a client on top of the core.
 
 
@@ -32,7 +32,7 @@ A basis that takes away the boilerplate code of setting up requests and managing
 
 Supported: 5.3, 5.4, 5.5
 
-Recomended: 5.4, 5.5
+Recommended: 5.4, 5.5
 
 Notes: 
 
