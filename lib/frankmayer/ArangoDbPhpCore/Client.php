@@ -15,11 +15,9 @@ use frankmayer\ArangoDbPhpCore\Connectors\Http\HttpConnectorInterface;
 use frankmayer\ArangoDbPhpCore\Plugins\PluginManager;
 
 /**
- * Provides access to the ArangoDB server
- * As all access is done using HTTP, we do not need to establish a
- * persistent client and keep its state.
- * Instead, clients are established on the fly for each request
- * and are destroyed afterwards.
+ * The Client class.
+ * This is the base operating class through which everything cooperates.
+ * The class provides its own IOC Container for easy injection and instantiation of needed classes.
  *
  * @package frankmayer\ArangoDbPhpCore
  */

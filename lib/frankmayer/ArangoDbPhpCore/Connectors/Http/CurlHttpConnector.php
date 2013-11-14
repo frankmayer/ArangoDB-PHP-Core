@@ -17,7 +17,7 @@ use frankmayer\ArangoDbPhpCore\ServerException;
 
 
 /**
- * This connector provides the connection to PHP's curl class.
+ * This connector acts as a wrapper to PHP's curl class.
  * It must be injected into the client object upon the client's creation.
  *
  * @package frankmayer\ArangoDbPhpCore

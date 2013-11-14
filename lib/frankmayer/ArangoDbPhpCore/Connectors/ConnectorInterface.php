@@ -11,13 +11,9 @@
 namespace frankmayer\ArangoDbPhpCore\Connectors;
 
 /**
- * Provides access to the ArangoDB server
- * As all access is done using HTTP, we do not need to establish a
- * persistent client and keep its state.
- * Instead, clients are established on the fly for each request
- * and are destroyed afterwards.
+ * A Connector Interface
  *
- * @package frankmayer\ArangoDbPhpCore
+ * @package frankmayer\ArangoDbPhpCoreCore
  */
 interface  ConnectorInterface
 {

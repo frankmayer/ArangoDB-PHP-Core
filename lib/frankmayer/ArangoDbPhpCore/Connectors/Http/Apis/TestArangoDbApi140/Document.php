@@ -12,11 +12,7 @@ namespace frankmayer\ArangoDbPhpCore\Connectors\Http\Apis\TestArangoDbApi140;
 
 
 /**
- * Provides access to the ArangoDB server
- * As all access is done using HTTP, we do not need to establish a
- * persistent client and keep its state.
- * Instead, clients are established on the fly for each request
- * and are destroyed afterwards.
+ * A document class for testing and demonstration purposes
  *
  * @package frankmayer\ArangoDbPhpCore
  */

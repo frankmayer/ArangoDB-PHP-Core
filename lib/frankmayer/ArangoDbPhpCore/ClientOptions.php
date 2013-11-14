@@ -11,6 +11,11 @@
 namespace frankmayer\ArangoDbPhpCore;
 
 
+/**
+ * Class ClientOptions
+ *
+ * @package frankmayer\ArangoDbPhpCore
+ */
 class ClientOptions
 {
     /**
@@ -87,6 +92,4 @@ class ClientOptions
      * ResponseClass index constant
      */
     const OPTION_ARANGODB_API_VERSION = 'arangodbApiVersion';
-
-
 }

@@ -57,13 +57,13 @@ class TraitClient
         return $this->pluginManager->setPluginsFromPluginArray($plugins);
     }
 
-//        public function logThis()
-//        {
-////            echo $this->log('Trait WORKS!!!!');
-////
-////            $test1 = 1;
-////            $this->notifyPlugins('core.client.traceThis', array('test1' => &$test1));
-//        }
+    //        public function logThis()
+    //        {
+    ////            echo $this->log('Trait WORKS!!!!');
+    ////
+    ////            $test1 = 1;
+    ////            $this->notifyPlugins('core.client.traceThis', array('test1' => &$test1));
+    //        }
 
     public function notifyPlugins($eventName, $eventData = array())
     {

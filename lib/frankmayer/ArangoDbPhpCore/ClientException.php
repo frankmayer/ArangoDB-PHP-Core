@@ -11,6 +11,11 @@
 namespace frankmayer\ArangoDbPhpCore;
 
 
+/**
+ * Class ClientException
+ *
+ * @package frankmayer\ArangoDbPhpCore
+ */
 class ClientException extends
     Exception
 {

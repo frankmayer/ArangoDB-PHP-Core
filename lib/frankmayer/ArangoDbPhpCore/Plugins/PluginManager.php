@@ -10,15 +10,35 @@
 
 namespace frankmayer\ArangoDbPhpCore\Plugins;
 
-
 use frankmayer\ArangoDbPhpCore\ClientException;
 
+
+/**
+ * Class PluginManager
+ *
+ * @package frankmayer\ArangoDbPhpCore\Plugins
+ */
 class PluginManager
 {
+    /**
+     * @var array
+     */
     protected $pluginStorage;
+    /**
+     * @var
+     */
     protected $object;
+    /**
+     * @var array
+     */
     protected $options;
 
+
+    /**
+     * @param       $object
+     * @param array $plugins
+     * @param array $options
+     */
     public function __construct($object, $plugins = array(), $options = array('notificationsEnabled' => true))
     {
         $options['notificationsEnabled'] = true;
@@ -29,6 +49,13 @@ class PluginManager
         $this->setPluginsFromPluginArray($plugins);
     }
 
+
+    /**
+     * @param null $plugins
+     *
+     * @return bool
+     * @throws \frankmayer\ArangoDbPhpCore\ClientException
+     */
     public function setPluginsFromPluginArray($plugins = null)
     {
         if (is_array($plugins) && count($plugins) > 0) {
@@ -47,6 +74,10 @@ class PluginManager
     }
 
 
+    /**
+     * @param       $eventName
+     * @param array $eventData
+     */
     public function notifyPlugins($eventName, $eventData = array())
     {
         if ($this->options['notificationsEnabled'] == true) {
@@ -60,6 +91,13 @@ class PluginManager
         }
     }
 
+
+    /**
+     * @param $a
+     * @param $b
+     *
+     * @return int
+     */
     function comparePluginPriorities($a, $b)
     {
         if ($this->pluginStorage[$a]['priority'] == $this->pluginStorage[$b]['priority']) {

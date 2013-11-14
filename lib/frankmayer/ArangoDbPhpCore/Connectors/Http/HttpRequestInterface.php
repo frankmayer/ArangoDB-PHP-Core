@@ -10,15 +10,11 @@
 
 namespace frankmayer\ArangoDbPhpCore\Connectors\Http;
 
-/**
- * Value object representing a single collection-based document
- *
- * @package ArangoDbPhpClient
- */
 use frankmayer\ArangoDbPhpCore\Connectors\RequestInterface;
 
+
 /**
- * Class Collection
+ * An HttpRequest Interface
  *
  * @package frankmayer\ArangoDbPhpCoreCore
  */

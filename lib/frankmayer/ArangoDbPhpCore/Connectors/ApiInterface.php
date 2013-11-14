@@ -10,7 +10,11 @@
 
 namespace frankmayer\ArangoDbPhpCore\Connectors;
 
-
+/**
+ * An API Interface
+ *
+ * @package frankmayer\ArangoDbPhpCoreCore
+ */
 interface  ApiInterface
 {
 }

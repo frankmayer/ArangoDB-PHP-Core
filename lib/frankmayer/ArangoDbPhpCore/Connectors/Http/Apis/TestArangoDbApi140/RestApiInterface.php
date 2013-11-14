@@ -13,11 +13,7 @@ namespace frankmayer\ArangoDbPhpCore\Connectors\Http\Apis\TestArangoDbApi140;
 use frankmayer\ArangoDbPhpCore\Connectors\ApiInterface;
 
 /**
- * Provides access to the ArangoDB server
- * As all access is done using HTTP, we do not need to establish a
- * persistent client and keep its state.
- * Instead, clients are established on the fly for each request
- * and are destroyed afterwards.
+ * A REST API Interface
  *
  * @package frankmayer\ArangoDbPhpCore
  */

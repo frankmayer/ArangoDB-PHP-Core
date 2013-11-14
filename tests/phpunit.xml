@@ -4,7 +4,7 @@
         <testsuite name="ArangoDB-PHP-Core">
             <directory>standard</directory>
         </testsuite>
-       <testsuite name="ArangoDB-PHP-Core-Performance">
+        <testsuite name="ArangoDB-PHP-Core-Performance">
             <directory>performance</directory>
         </testsuite>
     </testsuites>

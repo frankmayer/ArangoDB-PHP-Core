@@ -15,11 +15,7 @@ use frankmayer\ArangoDbPhpCore\Connectors\Http\HttpRequest;
 
 
 /**
- * Provides access to the ArangoDB server
- * As all access is done using HTTP, we do not need to establish a
- * persistent client and keep its state.
- * Instead, clients are established on the fly for each request
- * and are destroyed afterwards.
+ * A base API class for testing and demonstration purposes
  *
  * @package frankmayer\ArangoDbPhpCore
  */
@@ -60,7 +56,6 @@ class Api
         $this->client       = $client;
         $this->connector    = $this->client->connector;
         $this->requestClass = $this->client->requestClass;
-
     }
 
     //    /**

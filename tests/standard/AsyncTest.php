@@ -63,7 +63,7 @@ class AsyncTest extends
         $document       = new ArangoDbApi\Document($this->client);
         $responseObject = $document->get($collectionName . '/1', $requestBody);
 
-        $responseBody = $responseObject->body;
+        $responseBody    = $responseObject->body;
         $decodedJsonBody = json_decode($responseBody, true);
 
         $this->assertEquals($collectionName . '/1', $decodedJsonBody['_id']);

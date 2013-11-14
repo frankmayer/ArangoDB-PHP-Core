@@ -35,6 +35,7 @@ class Performance01Test extends
 {
     protected $clientOptions;
     protected $client;
+    protected $requestClass;
 
 
     public function setUp()

@@ -11,9 +11,21 @@
 namespace frankmayer\ArangoDbPhpCore\Plugins;
 
 
+/**
+ * Class TracerPlugin
+ *
+ * @package frankmayer\ArangoDbPhpCore\Plugins
+ */
 class TracerPlugin extends
     Plugin
 {
+    /**
+     * @param $eventName
+     * @param $client
+     * @param $eventData
+     *
+     * @return mixed|void
+     */
     public function notify($eventName, $client, $eventData)
     {
         //// todo 1 Frank Check if implemented and tested completely

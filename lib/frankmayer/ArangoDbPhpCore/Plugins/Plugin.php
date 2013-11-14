@@ -11,8 +11,16 @@
 namespace frankmayer\ArangoDbPhpCore\Plugins;
 
 
+/**
+ * Class Plugin
+ *
+ * @package frankmayer\ArangoDbPhpCore\Plugins
+ */
 abstract class Plugin implements
     PluginInterface
 {
+    /**
+     * @var
+     */
     public $priority;
 }

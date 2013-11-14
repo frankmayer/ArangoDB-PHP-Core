@@ -10,19 +10,13 @@
 
 namespace frankmayer\ArangoDbPhpCore\Connectors\Http;
 
-
+    // todo 1 Frank Check if we can remove this class.
 /**
- * Provides access to the ArangoDB server
- * As all access is done using HTTP, we do not need to establish a
- * persistent client and keep its state.
- * Instead, clients are established on the fly for each request
- * and are destroyed afterwards.
+ * An HTTP Connector class
  *
  * @package frankmayer\ArangoDbPhpCore
  */
 class HttpConnector
 {
     const HTTP_EOL = "\r\n";
-
-
 }

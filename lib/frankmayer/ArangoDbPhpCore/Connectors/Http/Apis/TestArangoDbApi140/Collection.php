@@ -10,17 +10,11 @@
 
 namespace frankmayer\ArangoDbPhpCore\Connectors\Http\Apis\TestArangoDbApi140;
 
-    //use frankmayer\ArangoDbPhpCore\Client;
-//use frankmayer\ArangoDbPhpCore\Connectors\Http\HttpRequest;
 use frankmayer\ArangoDbPhpCore\Connectors\Http\HttpRequest;
 
 
 /**
- * Provides access to the ArangoDB server
- * As all access is done using HTTP, we do not need to establish a
- * persistent client and keep its state.
- * Instead, clients are established on the fly for each request
- * and are destroyed afterwards.
+ * A collection class for testing and demonstration purposes
  *
  * @package frankmayer\ArangoDbPhpCore
  */
@@ -47,7 +41,7 @@ class Collection extends
         $collectionParameters = array(),
         $options = array()
     ) {
-        $requestClass = $this->requestClass;
+        //        $requestClass = $this->requestClass;
 
         // Here's how a binding for the HttpRequest should take place in the IOC container.
         // The actual binding should only happen once in the client construction, though. This is only for testing...

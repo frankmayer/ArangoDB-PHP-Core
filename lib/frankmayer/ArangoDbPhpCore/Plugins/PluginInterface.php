@@ -10,12 +10,20 @@
 
 namespace frankmayer\ArangoDbPhpCore\Plugins;
 
+
 /**
- * The Plugin Interface Class which plugins must implement
+ * Interface PluginInterface
  *
- * @package frankmayer\ArangoDbPhpCore
+ * @package frankmayer\ArangoDbPhpCore\Plugins
  */
 interface  PluginInterface
 {
+    /**
+     * @param $eventName
+     * @param $client
+     * @param $eventData
+     *
+     * @return mixed
+     */
     public function notify($eventName, $client, $eventData);
 }
