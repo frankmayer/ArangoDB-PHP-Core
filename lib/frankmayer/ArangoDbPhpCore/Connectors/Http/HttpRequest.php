@@ -154,7 +154,7 @@ class HttpRequest implements
      */
     public function sendBatch(
         $batchParts = array(),
-        $boundary = 'XXXsubpartXXX'
+        $boundary = 'XXXbXXX'
     ) {
         $this->body = '';
         /** @var $batchPart HttpResponse */
