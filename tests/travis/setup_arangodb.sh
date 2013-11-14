@@ -20,6 +20,9 @@ TMP_DIR="/tmp/arangodb.$PID"
 PID_FILE="/tmp/arangodb.$PID.pid"
 ARANGODB_DIR="$DIR/$NAME"
 
+# temporary removal of databases symlink, so tests don't fail because of ArangoDB not being able to create its databases directory...
+rm -f ${ARANGODB_DIR}/js/apps/databases
+
 ARANGOD="${ARANGODB_DIR}/bin/arangod"
 if [ "$ARCH" == "x86_64" ]; then
   ARANGOD="${ARANGOD}_x86_64"
