@@ -19,7 +19,7 @@ use frankmayer\ArangoDbPhpCore\Connectors\Http\HttpResponse;
 class AsyncTest extends
     \PHPUnit_Framework_TestCase
 {
-    protected $client;
+    public $client;
 
 
     public function setUp()

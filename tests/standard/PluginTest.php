@@ -20,8 +20,8 @@ use frankmayer\ArangoDbPhpCore\Plugins\TracerPlugin;
 class PluginTest extends
     \PHPUnit_Framework_TestCase
 {
-    protected $clientOptions;
-    protected $client;
+    public $clientOptions;
+    public $client;
 
 
     public function setUp()

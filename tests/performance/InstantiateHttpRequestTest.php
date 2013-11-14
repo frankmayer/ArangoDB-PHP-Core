@@ -33,9 +33,12 @@ use frankmayer\ArangoDbPhpCore\Connectors\Http\HttpRequest;
 class Performance01Test extends
     \PHPUnit_Framework_TestCase
 {
-    protected $clientOptions;
-    protected $client;
-    protected $requestClass;
+    public $clientOptions;
+    /**
+     * @var Client
+     */
+    public $client;
+    public $requestClass;
 
 
     public function setUp()
@@ -76,12 +79,29 @@ class Performance01Test extends
 
     public function testInstantiateRequestsViaIocContainer()
     {
-        $this->client->bind(
-                     'httpRequest',
-                         function () {
-                             return new HttpRequest($this->client);
-                         }
-        );
+        // Here's how a binding for the HttpRequest should take place in the IOC container.
+        // The actual binding should only happen once in the client construction, though. This is only for testing...
+
+        if (version_compare(PHP_VERSION, '5.4.0') >= 0) {
+            // This is the way to bind an HttpRequest in PHP 5.4+
+
+            $this->client->bind(
+                         'ArangoCollection',
+                             function () {
+                                 return new ArangoDbApi\Collection($this->client);
+                             }
+            );
+        } else {
+            // This is the way to bind an HttpRequest in PHP 5.3.x
+
+            $me = $this;
+            $this->client->bind(
+                         'ArangoCollection',
+                             function () use ($me) {
+                                 return new ArangoDbApi\Collection($me->client);
+                             }
+            );
+        }
         $startTime = microtime(true);
 
         for ($i = 1; $i <= 1000; $i++) {

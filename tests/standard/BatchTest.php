@@ -20,8 +20,8 @@ use frankmayer\ArangoDbPhpCore\Connectors\Http\HttpResponse;
 class BatchTest extends
     \PHPUnit_Framework_TestCase
 {
-    protected $client;
-    protected $collectionNames;
+    public $client;
+    public $collectionNames;
 
 
     public function setUp()

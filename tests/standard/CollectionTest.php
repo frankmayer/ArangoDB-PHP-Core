@@ -23,7 +23,7 @@ class CollectionTest extends
     /**
      * @var Client
      */
-    protected $client;
+    public $client;
 
     public function setUp()
     {
@@ -101,7 +101,7 @@ class CollectionTest extends
         $decodedJsonBody = json_decode($body, true);
         $this->assertEquals(200, $decodedJsonBody['code']);
         $this->assertEquals($collectionName, $decodedJsonBody['name']);
-        $responseObject = $collection->delete($collectionName);
+        $collection->delete($collectionName);
     }
 
 
