@@ -46,6 +46,9 @@ class Api
      * @var HTTPRequest
      */
     public $request;
+    /**
+     * @var HTTPRequest
+     */
     public $requestClass;
 
     /**
@@ -57,6 +60,7 @@ class Api
         $this->client       = $client;
         $this->connector    = $this->client->connector;
         $this->requestClass = $this->client->requestClass;
+
     }
 
     //    /**
