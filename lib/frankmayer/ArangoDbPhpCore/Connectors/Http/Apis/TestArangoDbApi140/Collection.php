@@ -41,8 +41,6 @@ class Collection extends
         $collectionParameters = array(),
         $options = array()
     ) {
-        //        $requestClass = $this->requestClass;
-
         // Here's how a binding for the HttpRequest should take place in the IOC container.
         // The actual binding should only happen once in the client construction, though. This is only for testing...
 
