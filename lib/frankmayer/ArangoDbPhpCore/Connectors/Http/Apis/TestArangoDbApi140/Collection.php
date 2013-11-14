@@ -48,11 +48,11 @@ class Collection extends
         $options = array()
     ) {
         $requestClass = $this->requestClass;
-
+        $me = $this;
         $this->client->bind(
                      'httpRequest',
-                         function () use ($this) {
-                             return new HttpRequest($this->client);
+                         function () use ($me) {
+                             return new HttpRequest($me->client);
                          }
         );
         $this->request = $this->client->make('httpRequest');
