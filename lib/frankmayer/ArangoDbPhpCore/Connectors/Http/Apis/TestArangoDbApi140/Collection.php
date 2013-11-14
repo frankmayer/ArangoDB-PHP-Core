@@ -48,13 +48,30 @@ class Collection extends
         $options = array()
     ) {
         $requestClass = $this->requestClass;
-        $me = $this;
-        $this->client->bind(
-                     'httpRequest',
-                         function () use ($me) {
-                             return new HttpRequest($me->client);
-                         }
-        );
+
+        // Here's how a binding for the HttpRequest should take place in the IOC container.
+        // The actual binding should only happen once in the client construction, though. This is only for testing...
+
+        if (version_compare(PHP_VERSION, '5.4.0') >= 0) {
+            // This is the way to bind an HttpRequest in PHP 5.4+
+
+            $this->client->bind(
+                         'httpRequest',
+                             function () {
+                                 return new HttpRequest($this->client);
+                             }
+            );
+        } else {
+            // This is the way to bind an HttpRequest in PHP 5.3.x
+            $me = $this;
+            $this->client->bind(
+                         'httpRequest',
+                             function () use ($me) {
+                                 return new HttpRequest($me->client);
+                             }
+            );
+        }
+
         $this->request = $this->client->make('httpRequest');
 
         //        $this->request    = $requestClass::construct($this->client);
