@@ -51,7 +51,7 @@ class Collection extends
 
         $this->client->bind(
                      'httpRequest',
-                         function () {
+                         function () use ($this) {
                              return new HttpRequest($this->client);
                          }
         );
