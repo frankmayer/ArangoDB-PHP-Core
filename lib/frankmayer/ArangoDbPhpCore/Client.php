@@ -134,12 +134,11 @@ class Client
      */
     public static function make($type)
     {
-        try {
+        if (isset(static::$iocContainerArray[$type])) {
             $type = static::$iocContainerArray[$type];
 
             return $type();
-        } catch (Exception $e) {
-            throw new ClientException('No type registered with that name');
         }
+        throw new ClientException('No type registered with that name');
     }
 }
