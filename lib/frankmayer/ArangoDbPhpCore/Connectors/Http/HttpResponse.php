@@ -29,6 +29,9 @@ class HttpResponse
     public $status;
 
 
+    /**
+     * @param $requestObject
+     */
     public function __construct($requestObject)
     {
         $this->request = $requestObject;
@@ -39,18 +42,22 @@ class HttpResponse
      */
     public function doConstruct()
     {
-        $this->splitResponseToHeadersArrayAndBody($this->request->response);
+        $this->splitResponseToHeadersArrayAndBody();
+        // todo 1 Frank Find a better way to extract the status
         $this->status = substr($this->headers['status'], 9, 3);
-        // todo 1 Frank do a check if response or request is async ... (update... still needed?)
     }
 
 
     /**
-     * @param $response
+     * Splits the response data to a Headers array and a body
+     *
+     * It expects the response data to be in $this->request->response
+     * It puts the headers into $this->headers and
+     * the body into $this->body
      */
-    public function splitResponseToHeadersArrayAndBody($response)
+    protected function splitResponseToHeadersArrayAndBody()
     {
-        list($headers, $this->body) = explode("\r\n\r\n", $response, 2);
+        list($headers, $this->body) = explode("\r\n\r\n", $this->request->response, 2);
 
         $headersArray = explode("\r\n", $headers);
         foreach ($headersArray as $line => $header) {
