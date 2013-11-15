@@ -69,7 +69,7 @@ class CollectionTest extends
         if (version_compare(PHP_VERSION, '5.4.0') >= 0) {
             // This is the way to bind an HttpRequest in PHP 5.4+
 
-            $this->client->bind(
+            Client::bind(
                          'ArangoCollection',
                              function () {
                                  return new ArangoDbApi\Collection($this->client);
@@ -79,7 +79,7 @@ class CollectionTest extends
             // This is the way to bind an HttpRequest in PHP 5.3.x
 
             $me = $this;
-            $this->client->bind(
+            Client::bind(
                          'ArangoCollection',
                              function () use ($me) {
                                  return new ArangoDbApi\Collection($me->client);
@@ -88,7 +88,7 @@ class CollectionTest extends
         }
         // And here's how one gets an HttpRequest object through the IOC.
         // Note that the type-name 'httpRequest' is the name we bound our HttpRequest class creation-closure to. (see above)
-        $collection = $this->client->make('ArangoCollection');
+        $collection = Client::make('ArangoCollection');
 
 
 //        $collection = new ArangoDbApi\Collection($this->client);

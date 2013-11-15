@@ -85,7 +85,7 @@ class Performance01Test extends
         if (version_compare(PHP_VERSION, '5.4.0') >= 0) {
             // This is the way to bind an HttpRequest in PHP 5.4+
 
-            $this->client->bind(
+            Client::bind(
                          'ArangoCollection',
                              function () {
                                  return new ArangoDbApi\Collection($this->client);
@@ -95,7 +95,7 @@ class Performance01Test extends
             // This is the way to bind an HttpRequest in PHP 5.3.x
 
             $me = $this;
-            $this->client->bind(
+            Client::bind(
                          'ArangoCollection',
                              function () use ($me) {
                                  return new ArangoDbApi\Collection($me->client);
@@ -105,7 +105,7 @@ class Performance01Test extends
         $startTime = microtime(true);
 
         for ($i = 1; $i <= 1000; $i++) {
-            $request[] = $this->client->make('httpRequest');
+            $request[] = Client::make('ArangoCollection');
         }
         echo 'testInstantiateRequestsViaIocContainer() => Process time: ' . (microtime(
                     true

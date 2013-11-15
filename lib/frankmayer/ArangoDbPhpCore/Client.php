@@ -23,7 +23,7 @@ use frankmayer\ArangoDbPhpCore\Plugins\PluginManager;
  */
 class Client
 {
-    public $iocContainerArray;
+    protected static $iocContainerArray;
 
     public $pluginManager;
     public $connector;
@@ -118,9 +118,9 @@ class Client
      * @param $type
      * @param $closure
      */
-    public function bind($type, $closure)
+    public static function bind($type, \Closure $closure)
     {
-        $this->iocContainerArray[$type] = $closure;
+        static::$iocContainerArray[$type] = $closure;
     }
 
 
@@ -129,10 +129,17 @@ class Client
      *
      * @param $type
      *
+     * @throws ClientException
      * @return mixed
      */
-    public function make($type)
+    public static function make($type)
     {
-        return $this->iocContainerArray[$type]();
+        try {
+            $type = static::$iocContainerArray[$type];
+
+            return $type();
+        } catch (Exception $e) {
+            throw new ClientException('No type registered with that name');
+        }
     }
 }
