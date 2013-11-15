@@ -133,10 +133,6 @@ class HttpRequest implements
         if (isset($this->options['isBatchPart']) && $this->options['isBatchPart'] === true) {
             $this->requestBatchPart();
             $this->address = $this->client->endpoint . $this->path;
-            //            $this->method  = $this->client->endpoint . $this->path;
-            //        } elseif (isset($options['isAsync']) && $options['isAsync'] === true) {
-            //            $this->requestAsync();
-
         } else {
             if (isset($this->options['isBatchRequest']) && $this->options['isBatchRequest'] === false) {
                 $this->headers[] = 'Content-Type: application/json';
