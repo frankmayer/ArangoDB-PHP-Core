@@ -5,5 +5,8 @@
 
 echo -- Updating Composer
 composer self-update
-echo -- Installing the dependencies
-composer install --dev
+
+# those are not needed
+#
+# echo -- Installing the dependencies
+# composer install --dev
