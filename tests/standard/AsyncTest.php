@@ -59,9 +59,6 @@ class AsyncTest extends
         /** @var $responseObject HttpResponse */
         $this->assertEquals(202, $responseObject->status);
 
-
-        // todo 1 Frank test if the document was inserted, by checking again after a second
-
         sleep(1);
 
         $document         = new ArangoDbApi\Document();
@@ -102,9 +99,6 @@ class AsyncTest extends
 
         /** @var $responseObject HttpResponse */
         $this->assertEquals(202, $responseObject->status);
-
-
-        // todo 1 Frank test if the document was inserted, by checking again after a second
 
         sleep(1);
 
