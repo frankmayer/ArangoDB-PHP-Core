@@ -29,6 +29,7 @@ class HttpResponse
     public $protocol;
     public $status;
     public $statusPhrase;
+    public $verboseExtractStatusLine = false;
 
 
     /**
@@ -38,9 +39,12 @@ class HttpResponse
         $this->splitResponseToHeadersArrayAndBody();
         $statusLineArray = explode(" ", $this->headers['status']);
 
-        $this->protocol     = $statusLineArray[0];
-        $this->status       = $statusLineArray[1];
-        $this->statusPhrase = $statusLineArray[2];
+        $this->status = $statusLineArray[1];
+
+        if ($this->verboseExtractStatusLine === true) {
+            $this->protocol     = $statusLineArray[0];
+            $this->statusPhrase = $statusLineArray[2];
+        }
     }
 
 
@@ -161,5 +165,37 @@ class HttpResponse
     public function getStatus()
     {
         return $this->status;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getProtocol()
+    {
+        return $this->protocol;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getStatusPhrase()
+    {
+        return $this->statusPhrase;
+    }
+
+    /**
+     * @param boolean $verboseStatusLine
+     */
+    public function setVerboseExtractStatusLine($verboseStatusLine)
+    {
+        $this->verboseExtractStatusLine = $verboseStatusLine;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getVerboseExtractStatusLine()
+    {
+        return $this->verboseExtractStatusLine;
     }
 }
