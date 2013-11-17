@@ -18,5 +18,5 @@ after_script:
 
 script:
  - mkdir -p build/logs
- - phpunit --configuration ./tests/phpunit.xml --testsuite ArangoDB-PHP-Core --coverage-clover build/logs/clover.xml
+ - phpunit --testsuite ArangoDB-PHP-Core --coverage-clover build/logs/clover.xml
 
