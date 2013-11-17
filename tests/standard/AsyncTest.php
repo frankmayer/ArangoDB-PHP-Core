@@ -50,7 +50,10 @@ class AsyncTest extends
         $collectionName = 'ArangoDB-PHP-Core-CollectionTestSuite-Collection';
 
         $requestBody    = array('name' => 'frank', '_key' => '1');
-        $document       = new ArangoDbApi\Document($this->client);
+        $document       = new ArangoDbApi\Document();
+        $document->client = $this->client;
+
+
         $responseObject = $document->create($collectionName, $requestBody, null, array('async' => true));
 
         /** @var $responseObject HttpResponse */
@@ -61,7 +64,9 @@ class AsyncTest extends
 
         sleep(1);
 
-        $document       = new ArangoDbApi\Document($this->client);
+        $document       = new ArangoDbApi\Document();
+        $document->client = $this->client;
+
         $responseObject = $document->get($collectionName . '/1', $requestBody);
 
         $responseBody    = $responseObject->body;
@@ -90,7 +95,9 @@ class AsyncTest extends
         $collectionName = 'ArangoDB-PHP-Core-CollectionTestSuite-Collection';
 
         $requestBody    = array('name' => 'frank', '_key' => '1');
-        $document       = new ArangoDbApi\Document($this->client);
+        $document       = new ArangoDbApi\Document();
+        $document->client = $this->client;
+
         $responseObject = $document->create($collectionName, $requestBody, null, array('async' => 'store'));
 
         /** @var $responseObject HttpResponse */
@@ -101,7 +108,9 @@ class AsyncTest extends
 
         sleep(1);
 
-        $document       = new ArangoDbApi\Document($this->client);
+        $document       = new ArangoDbApi\Document();
+        $document->client = $this->client;
+
         $responseObject = $document->get($collectionName . '/1', $requestBody);
 
         $responseBody    = $responseObject->body;

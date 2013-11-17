@@ -57,7 +57,10 @@ class Collection extends
             Client::bind(
                   'httpRequest',
                       function () {
-                          return new HttpRequest($this->client);
+                          $request         = new $this->client->requestClass();
+                          $request->client = $this->client;
+
+                          return $request;
                       }
             );
         } else {
@@ -67,7 +70,10 @@ class Collection extends
             Client::bind(
                   'httpRequest',
                       function () use ($me) {
-                          return new HttpRequest($me->client);
+                          $request         = new $this->client->requestClass();
+                          $request->client = $me->client;
+
+                          return $request;
                       }
             );
         }
@@ -75,7 +81,6 @@ class Collection extends
         // Note that the type-name 'httpRequest' is the name we bound our HttpRequest class creation-closure to. (see above)
         $this->request = Client::make('httpRequest');
 
-        //        $this->request    = $requestClass::construct($this->client);
         $request          = $this->request;
         $request->options = $options;
         $request->body    = array('name' => $collectionName);
@@ -102,8 +107,9 @@ class Collection extends
         $collectionName,
         $options = array()
     ) {
-        $this->request = new $this->client->requestClass($this->client);
-        //        $this->request    = new $this->client->make('requestClass');
+        $this->request         = new $this->client->requestClass();
+        $this->request->client = $this->client;
+
         $request          = $this->request;
         $request->options = $options;
         $request->path    = $this->client->getDatabasePath() . self::API_COLLECTION . '/' . $collectionName;
@@ -125,7 +131,9 @@ class Collection extends
         $collectionName,
         $options = array()
     ) {
-        $this->request    = new $this->client->requestClass($this->client);
+        $this->request         = new $this->client->requestClass();
+        $this->request->client = $this->client;
+
         $request          = $this->request;
         $request->options = $options;
 
@@ -147,7 +155,9 @@ class Collection extends
     public function getAll(
         $options = array()
     ) {
-        $this->request    = new $this->client->requestClass($this->client);
+        $this->request         = new $this->client->requestClass();
+        $this->request->client = $this->client;
+
         $request          = $this->request;
         $request->options = $options;
 

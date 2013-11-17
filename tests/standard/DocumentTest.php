@@ -52,7 +52,9 @@ class DocumentTest extends
         $collectionName = 'ArangoDB-PHP-Core-CollectionTestSuite-Collection';
 
         $requestBody    = array('name' => 'frank', '_key' => '1');
-        $document       = new ArangoDbApi\Document($this->client);
+        $document       = new ArangoDbApi\Document();
+        $document->client = $this->client;
+
         $responseObject = $document->create($collectionName, $requestBody);
 
         $responseBody = $responseObject->body;
@@ -74,7 +76,9 @@ class DocumentTest extends
 
         $documentParameters = array('createCollection' => true);
         $requestBody        = array('name' => 'frank', '_key' => '1');
-        $document           = new ArangoDbApi\Document($this->client);
+        $document       = new ArangoDbApi\Document();
+        $document->client = $this->client;
+
         $responseObject     = $document->create($collectionName, $requestBody, $documentParameters);
 
         $responseBody = $responseObject->body;
@@ -104,7 +108,9 @@ class DocumentTest extends
 
 
         $requestBody    = array('name' => 'frank', '_key' => '1');
-        $document       = new ArangoDbApi\Document($this->client);
+        $document       = new ArangoDbApi\Document();
+        $document->client = $this->client;
+
         $responseObject = $document->create($collectionName, $requestBody);
 
         $responseBody = $responseObject->body;
@@ -152,7 +158,9 @@ class DocumentTest extends
         $collectionName = 'ArangoDB-PHP-Core-CollectionTestSuite-Collection';
 
         $requestBody    = array('name' => 'Frank', 'bike' => 'vfr', '_key' => '1');
-        $document       = new ArangoDbApi\Document($this->client);
+        $document       = new ArangoDbApi\Document();
+        $document->client = $this->client;
+
         $responseObject = $document->create($collectionName, $requestBody);
 
         $responseBody = $responseObject->body;
@@ -165,7 +173,9 @@ class DocumentTest extends
         //
 
         $requestBody    = array('name' => 'Mike');
-        $document       = new ArangoDbApi\Document($this->client);
+        $document       = new ArangoDbApi\Document();
+        $document->client = $this->client;
+
         $responseObject = $document->replace($collectionName . '/1', $requestBody);
 
         $responseBody = $responseObject->body;
@@ -177,7 +187,9 @@ class DocumentTest extends
         $this->assertEquals($collectionName . '/1', $decodedJsonBody['_id']);
 
 
-        $document       = new ArangoDbApi\Document($this->client);
+        $document       = new ArangoDbApi\Document();
+        $document->client = $this->client;
+
         $responseObject = $document->get($collectionName . '/1', $requestBody);
 
         $responseBody = $responseObject->body;

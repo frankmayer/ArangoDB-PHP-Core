@@ -96,9 +96,6 @@ class CollectionTest extends
         // Note that the type-name 'httpRequest' is the name we bound our HttpRequest class creation-closure to. (see above)
         $collection = Client::make('ArangoCollection');
 
-
-        //        $collection = new ArangoDbApi\Collection($this->client);
-
         /** @var $collection Collection */
         $responseObject = $collection->create($collectionName, $collectionOptions);
         $body           = $responseObject->body;

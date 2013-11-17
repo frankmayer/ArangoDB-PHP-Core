@@ -20,16 +20,17 @@ class Batch extends
     Api implements
     RestApiInterface
 {
-    public function __construct($client)
-    {
-        $this->client       = $client;
-        $this->connector    = $this->client->connector;
-        $this->requestClass = $this->client->requestClass;
-    }
+//    public function __construct($client)
+//    {
+//        $this->client       = $client;
+//        $this->connector    = $this->client->connector;
+//        $this->requestClass = $this->client->requestClass;
+//    }
 
     public function send()
     {
-        $this->request = new $this->requestClass($this->client);
+        $this->request = new $this->client->requestClass();
+        $this->request->client=$this->client;
         $request       = $this->request;
 
         return $request->sendBatch();

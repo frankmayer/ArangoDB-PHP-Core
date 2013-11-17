@@ -52,7 +52,10 @@ class IocTest extends
             Client::bind(
                   'httpRequest',
                       function () {
-                          return new HttpRequest($this->client);
+                          $instance         = new HttpRequest();
+                          $instance->client = $this->client;
+
+                          return $instance;
                       }
             );
         } else {
@@ -62,7 +65,10 @@ class IocTest extends
             Client::bind(
                   'httpRequest',
                       function () use ($me) {
-                          return new HttpRequest($me->client);
+                          $instance         = new HttpRequest();
+                          $instance->client = $me->client;
+
+                          return $instance;
                       }
             );
         }

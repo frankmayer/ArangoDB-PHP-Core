@@ -87,11 +87,10 @@ class HttpRequest implements
      *
      * @param Client $client
      */
-    public function __construct(Client $client)
-    {
-        $this->client    = $client;
-        $this->connector = $client->connector;
-    }
+//    public function __construct(Client $client)
+//    {
+//        $this->client    = $client;
+//    }
 
 
     /**
@@ -138,7 +137,7 @@ class HttpRequest implements
                 $this->headers['Content-Type'] = 'application/json';
             }
             $this->address  = $this->client->endpoint . $this->path;
-            $this->response = $this->connector->request($this);
+            $this->response = $this->client->connector->request($this);
         }
 
         return $this->client->connector->instantiateResponseObject($this);
