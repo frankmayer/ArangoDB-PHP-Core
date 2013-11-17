@@ -122,6 +122,6 @@ class IocTest extends
         //        echo get_class($this->request);
         $this->assertInstanceOf('frankmayer\ArangoDbPhpCore\Connectors\Http\HttpResponse', $this->response);
         $decodedBody = json_decode($this->response->body, true);
-        $this->assertTrue($decodedBody['server'] == 'arango');
+        $this->assertTrue($decodedBody['server'] === 'arango');
     }
 }

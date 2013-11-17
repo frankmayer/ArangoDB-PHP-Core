@@ -80,7 +80,7 @@ class PluginManager
      */
     public function notifyPlugins($eventName, $eventData = array())
     {
-        if ($this->options['notificationsEnabled'] == true) {
+        if ($this->options['notificationsEnabled'] === true) {
             if (count($this->pluginStorage) > 0) {
                 foreach ($this->pluginStorage as $key => $priority) {
                     $plugin = $this->pluginStorage[$key]['plugin'];
@@ -100,7 +100,7 @@ class PluginManager
      */
     function comparePluginPriorities($a, $b)
     {
-        if ($this->pluginStorage[$a]['priority'] == $this->pluginStorage[$b]['priority']) {
+        if ($this->pluginStorage[$a]['priority'] === $this->pluginStorage[$b]['priority']) {
             return 0;
         }
 
