@@ -1,7 +1,7 @@
 <?php
 
 /**
- * ArangoDB PHP Core Client Performance-Test-Suite: Performance Test for HttpRequest Object instantiation using different methods
+ * ArangoDB PHP Core Client Performance-Test-Suite: Performance Test for Collection Object instantiation using different methods
  *
  * @package   frankmayer\ArangoDbPhpCore
  * @author    Frank Mayer
