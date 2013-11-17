@@ -75,7 +75,6 @@ class IocTest extends
         // And here's how one gets an HttpRequest object through the IOC.
         // Note that the type-name 'httpRequest' is the name we bound our HttpRequest class creation-closure to. (see above)
         $this->request = Client::make('httpRequest');
-        //        echo get_class($this->request);
         $this->assertInstanceOf('frankmayer\ArangoDbPhpCore\Connectors\Http\HttpRequestInterface', $this->request);
     }
 

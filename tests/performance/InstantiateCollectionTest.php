@@ -44,13 +44,12 @@ class InstantiateCollectionTest extends
 
     public function setUp()
     {
-        $connector          = new CurlHttpConnector();
-        $this->client       = getClient($connector);
-        $this->requestClass = $this->client->requestClass;
+        $connector    = new CurlHttpConnector();
+        $this->client = getClient($connector);
     }
 
 
-    public function testInstantiateRequestsDirectly()
+    public function testInstantiateCollectionsDirectly()
     {
 
         $startTime = microtime(true);
@@ -59,12 +58,14 @@ class InstantiateCollectionTest extends
             $collection[$i]         = new Collection();
             $collection[$i]->client = $this->client;
         }
-        echo 'testInstantiateRequestsDirectly() => Process time: ' . (microtime(true) - $startTime) . ' ms ' . PHP_EOL;
+        echo 'testInstantiateCollectionsDirectly() => Process time: ' . (microtime(
+                    true
+                ) - $startTime) . ' ms ' . PHP_EOL;
         unset ($collection);
     }
 
 
-    public function testInstantiateRequestsViaIocContainer()
+    public function testInstantiateCollectionsViaIocContainer()
     {
         // Here's how a binding for the HttpRequest should take place in the IOC container.
         // The actual binding should only happen once in the client construction, though. This is only for testing...
@@ -100,7 +101,7 @@ class InstantiateCollectionTest extends
         for ($i = 1; $i <= 1000; $i++) {
             $request[] = Client::make('ArangoCollection');
         }
-        echo 'testInstantiateRequestsViaIocContainer() => Process time: ' . (microtime(
+        echo 'testInstantiateCollectionsViaIocContainer() => Process time: ' . (microtime(
                     true
                 ) - $startTime) . ' ms ' . PHP_EOL;
         unset ($request);
