@@ -53,9 +53,9 @@ class Api
      */
     public function __construct()
     {
-//        $this->client       = $client;
-//        $this->connector    = $this->client->connector;
-//        $this->requestClass = $this->client->requestClass;
+        //        $this->client       = $client;
+        //        $this->connector    = $this->client->connector;
+        //        $this->requestClass = $this->client->requestClass;
     }
 
     //    /**

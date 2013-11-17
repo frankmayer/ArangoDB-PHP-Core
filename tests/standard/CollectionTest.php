@@ -43,8 +43,8 @@ class CollectionTest extends
 
         $collection         = new ArangoDbApi\Collection();
         $collection->client = $this->client;
-        $responseObject = $collection->create($collectionName, $collectionOptions);
-        $body           = $responseObject->body;
+        $responseObject     = $collection->create($collectionName, $collectionOptions);
+        $body               = $responseObject->body;
 
         $this->assertArrayHasKey('code', json_decode($body, true));
         $decodedJsonBody = json_decode($body, true);
@@ -53,7 +53,7 @@ class CollectionTest extends
     }
 
 
-   /**
+    /**
      * Test if we can get the server version
      */
     public function testCreateCollectionViaIocContainer()
@@ -70,24 +70,26 @@ class CollectionTest extends
             // This is the way to bind an HttpRequest in PHP 5.4+
 
             Client::bind(
-                         'ArangoCollection',
-                             function () {
-                                 $instance = new ArangoDbApi\Collection();
-                                 $instance->client=$this->client;
-                                 return $instance;
-                             }
+                  'ArangoCollection',
+                      function () {
+                          $instance         = new ArangoDbApi\Collection();
+                          $instance->client = $this->client;
+
+                          return $instance;
+                      }
             );
         } else {
             // This is the way to bind an HttpRequest in PHP 5.3.x
 
             $me = $this;
             Client::bind(
-                         'ArangoCollection',
-                             function () use ($me) {
-                                 $instance = new ArangoDbApi\Collection();
-                                 $instance->client=$me->client;
-                                 return $instance;
-                             }
+                  'ArangoCollection',
+                      function () use ($me) {
+                          $instance         = new ArangoDbApi\Collection();
+                          $instance->client = $me->client;
+
+                          return $instance;
+                      }
             );
         }
         // And here's how one gets an HttpRequest object through the IOC.
@@ -95,7 +97,7 @@ class CollectionTest extends
         $collection = Client::make('ArangoCollection');
 
 
-//        $collection = new ArangoDbApi\Collection($this->client);
+        //        $collection = new ArangoDbApi\Collection($this->client);
 
         /** @var $collection Collection */
         $responseObject = $collection->create($collectionName, $collectionOptions);
@@ -119,8 +121,8 @@ class CollectionTest extends
 
         $collection         = new ArangoDbApi\Collection();
         $collection->client = $this->client;
-        $responseObject = $collection->truncate($collectionName);
-        $body           = $responseObject->body;
+        $responseObject     = $collection->truncate($collectionName);
+        $body               = $responseObject->body;
 
         $this->assertArrayHasKey('code', json_decode($body, true));
         $decodedJsonBody = json_decode($body, true);
@@ -140,8 +142,8 @@ class CollectionTest extends
 
         $collection         = new ArangoDbApi\Collection();
         $collection->client = $this->client;
-        $responseObject = $collection->delete($collectionName);
-        $body           = $responseObject->body;
+        $responseObject     = $collection->delete($collectionName);
+        $body               = $responseObject->body;
 
         $this->assertArrayHasKey('code', json_decode($body, true));
         $decodedJsonBody = json_decode($body, true);
@@ -156,8 +158,8 @@ class CollectionTest extends
     {
         $collection         = new ArangoDbApi\Collection();
         $collection->client = $this->client;
-        $responseObject = $collection->getAll();
-        $response       = json_decode($responseObject->body);
+        $responseObject     = $collection->getAll();
+        $response           = json_decode($responseObject->body);
 
         $this->assertObjectHasAttribute('_graphs', $response->names);
     }

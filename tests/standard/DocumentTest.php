@@ -33,7 +33,7 @@ class DocumentTest extends
 
         $collection         = new ArangoDbApi\Collection();
         $collection->client = $this->client;
-        $responseObject = $collection->create($collectionName, $collectionOptions);
+        $responseObject     = $collection->create($collectionName, $collectionOptions);
 
         $body = $responseObject->body;
 
@@ -87,8 +87,8 @@ class DocumentTest extends
 
         $collection         = new ArangoDbApi\Collection();
         $collection->client = $this->client;
-        $responseObject = $collection->delete($collectionName);
-        $responseBody   = $responseObject->body;
+        $responseObject     = $collection->delete($collectionName);
+        $responseBody       = $responseObject->body;
 
         $this->assertArrayHasKey('code', json_decode($responseBody, true));
         $decodedJsonBody = json_decode($responseBody, true);
@@ -218,7 +218,7 @@ class DocumentTest extends
         foreach ($collectionNames as $collectionName) {
             $collection         = new ArangoDbApi\Collection();
             $collection->client = $this->client;
-            $responseObject = $collection->delete($collectionName);
+            $responseObject     = $collection->delete($collectionName);
             $responseObject->body;
         }
     }
