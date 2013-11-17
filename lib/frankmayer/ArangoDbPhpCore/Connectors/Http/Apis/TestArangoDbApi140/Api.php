@@ -51,11 +51,11 @@ class Api
      * @param \frankmayer\ArangoDbPhpCore\Client $client
      *
      */
-    public function __construct(Client $client)
+    public function __construct()
     {
-        $this->client       = $client;
-        $this->connector    = $this->client->connector;
-        $this->requestClass = $this->client->requestClass;
+//        $this->client       = $client;
+//        $this->connector    = $this->client->connector;
+//        $this->requestClass = $this->client->requestClass;
     }
 
     //    /**

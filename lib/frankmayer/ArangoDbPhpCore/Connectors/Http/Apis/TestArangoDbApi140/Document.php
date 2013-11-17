@@ -27,6 +27,12 @@ class Document extends
      */
     const API_DOCUMENT = '/_api/document';
 
+    public function __construct($client)
+    {
+        $this->client       = $client;
+        $this->connector    = $this->client->connector;
+        $this->requestClass = $this->client->requestClass;
+    }
 
     /**
      * @param       $collection

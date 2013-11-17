@@ -45,11 +45,13 @@ class BatchTest extends
         $batchParts = array();
 
         foreach ($this->collectionNames as $collectionName) {
-            $collection = new ArangoDbApi\Collection($this->client);
-            $batchPart  = $collection->create(
-                                     $collectionName,
-                                     $collectionOptions,
-                                     array('isBatchPart' => true)
+            $collection         = new ArangoDbApi\Collection();
+            $collection->client = $this->client;
+
+            $batchPart = $collection->create(
+                                    $collectionName,
+                                    $collectionOptions,
+                                    array('isBatchPart' => true)
             );
             $this->assertEquals(202, $batchPart->status);
             $batchParts[] = $batchPart;
@@ -72,10 +74,11 @@ class BatchTest extends
         $batchParts = array();
 
         foreach ($this->collectionNames as $collectionName) {
-            $collection   = new ArangoDbApi\Collection($this->client);
-            $batchParts[] = $collection->delete(
-                                       $collectionName,
-                                       array('isBatchPart' => true)
+            $collection         = new ArangoDbApi\Collection();
+            $collection->client = $this->client;
+            $batchParts[]       = $collection->delete(
+                                             $collectionName,
+                                             array('isBatchPart' => true)
             );
         }
 
@@ -96,9 +99,10 @@ class BatchTest extends
     public function tearDown()
     {
         foreach ($this->collectionNames as $collectionName) {
-            $collection   = new ArangoDbApi\Collection($this->client);
-            $batchParts[] = $collection->delete(
-                                       $collectionName
+            $collection         = new ArangoDbApi\Collection();
+            $collection->client = $this->client;
+            $batchParts[]       = $collection->delete(
+                                             $collectionName
             );
         }
     }

@@ -13,6 +13,7 @@ namespace frankmayer\ArangoDbPhpCore;
 
 use frankmayer\ArangoDbPhpCore\Connectors\Http\Apis\TestArangoDbApi140 as ArangoDbApi;
 
+use frankmayer\ArangoDbPhpCore\Connectors\Http\Apis\TestArangoDbApi140\Collection;
 use frankmayer\ArangoDbPhpCore\Connectors\Http\CurlHttpConnector;
 use frankmayer\ArangoDbPhpCore\Connectors\Http\HttpRequest;
 
@@ -30,7 +31,7 @@ use frankmayer\ArangoDbPhpCore\Connectors\Http\HttpRequest;
  */
 
 
-class InstantiateHttpRequestTest extends
+class InstantiateCollectionTest extends
     \PHPUnit_Framework_TestCase
 {
     public $clientOptions;
@@ -49,31 +50,17 @@ class InstantiateHttpRequestTest extends
     }
 
 
-    public function testInstantiateRequestsThroughResolvingRequestClassProperty()
-    {
-
-        $startTime = microtime(true);
-
-        for ($i = 1; $i <= 1000; $i++) {
-            $request[] = new $this->requestClass($this->client);
-        }
-        echo 'testInstantiateRequestsThroughResolvingRequestClassProperty() => Process time: ' . (microtime(
-                    true
-                ) - $startTime) . ' ms ' . PHP_EOL;
-        unset ($request);
-    }
-
-
     public function testInstantiateRequestsDirectly()
     {
 
         $startTime = microtime(true);
 
         for ($i = 1; $i <= 1000; $i++) {
-            $request[] = new HttpRequest($this->client);
+            $collection[$i]         = new Collection();
+            $collection[$i]->client = $this->client;
         }
         echo 'testInstantiateRequestsDirectly() => Process time: ' . (microtime(true) - $startTime) . ' ms ' . PHP_EOL;
-        unset ($request);
+        unset ($collection);
     }
 
 

@@ -31,7 +31,8 @@ class DocumentTest extends
 
         $collectionOptions = array("waitForSync" => true);
 
-        $collection     = new ArangoDbApi\Collection($this->client);
+        $collection         = new ArangoDbApi\Collection();
+        $collection->client = $this->client;
         $responseObject = $collection->create($collectionName, $collectionOptions);
 
         $body = $responseObject->body;
@@ -84,8 +85,8 @@ class DocumentTest extends
         $this->assertEquals(false, $decodedJsonBody['error']);
         $this->assertEquals($collectionName . '/1', $decodedJsonBody['_id']);
 
-        $collection = new ArangoDbApi\Collection($this->client);
-
+        $collection         = new ArangoDbApi\Collection();
+        $collection->client = $this->client;
         $responseObject = $collection->delete($collectionName);
         $responseBody   = $responseObject->body;
 
@@ -215,8 +216,8 @@ class DocumentTest extends
         $collectionNames[1] = 'ArangoDB-PHP-Core-CollectionTestSuite-NonExistingCollection';
 
         foreach ($collectionNames as $collectionName) {
-            $collection = new ArangoDbApi\Collection($this->client);
-
+            $collection         = new ArangoDbApi\Collection();
+            $collection->client = $this->client;
             $responseObject = $collection->delete($collectionName);
             $responseObject->body;
         }

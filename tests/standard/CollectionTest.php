@@ -41,8 +41,8 @@ class CollectionTest extends
 
         $collectionOptions = array("waitForSync" => true);
 
-        $collection = new ArangoDbApi\Collection($this->client);
-
+        $collection         = new ArangoDbApi\Collection();
+        $collection->client = $this->client;
         $responseObject = $collection->create($collectionName, $collectionOptions);
         $body           = $responseObject->body;
 
@@ -72,7 +72,9 @@ class CollectionTest extends
             Client::bind(
                          'ArangoCollection',
                              function () {
-                                 return new ArangoDbApi\Collection($this->client);
+                                 $instance = new ArangoDbApi\Collection();
+                                 $instance->client=$this->client;
+                                 return $instance;
                              }
             );
         } else {
@@ -82,7 +84,9 @@ class CollectionTest extends
             Client::bind(
                          'ArangoCollection',
                              function () use ($me) {
-                                 return new ArangoDbApi\Collection($me->client);
+                                 $instance = new ArangoDbApi\Collection();
+                                 $instance->client=$me->client;
+                                 return $instance;
                              }
             );
         }
@@ -113,8 +117,8 @@ class CollectionTest extends
         $collectionName = 'ArangoDB-PHP-Core-CollectionTestSuite-Collection';
 
 
-        $collection = new ArangoDbApi\Collection($this->client);
-
+        $collection         = new ArangoDbApi\Collection();
+        $collection->client = $this->client;
         $responseObject = $collection->truncate($collectionName);
         $body           = $responseObject->body;
 
@@ -134,8 +138,8 @@ class CollectionTest extends
         $collectionName = 'ArangoDB-PHP-Core-CollectionTestSuite-Collection';
 
 
-        $collection = new ArangoDbApi\Collection($this->client);
-
+        $collection         = new ArangoDbApi\Collection();
+        $collection->client = $this->client;
         $responseObject = $collection->delete($collectionName);
         $body           = $responseObject->body;
 
@@ -150,8 +154,8 @@ class CollectionTest extends
      */
     public function testGetCollections()
     {
-        $collection = new ArangoDbApi\Collection($this->client);
-
+        $collection         = new ArangoDbApi\Collection();
+        $collection->client = $this->client;
         $responseObject = $collection->getAll();
         $response       = json_decode($responseObject->body);
 

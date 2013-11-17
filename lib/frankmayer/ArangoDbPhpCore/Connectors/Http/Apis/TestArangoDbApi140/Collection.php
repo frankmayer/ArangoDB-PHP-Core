@@ -29,6 +29,12 @@ class Collection extends
      */
     const API_COLLECTION = '/_api/collection';
 
+    //    public function __construct($client)
+    //    {
+    //                $this->client       = $client;
+    //                $this->connector    = $this->client->connector;
+    //                $this->requestClass = $this->client->requestClass;
+    //    }
 
     /**
      * @param       $collectionName
@@ -49,20 +55,20 @@ class Collection extends
             // This is the way to bind an HttpRequest in PHP 5.4+
 
             Client::bind(
-                         'httpRequest',
-                             function () {
-                                 return new HttpRequest($this->client);
-                             }
+                  'httpRequest',
+                      function () {
+                          return new HttpRequest($this->client);
+                      }
             );
         } else {
             // This is the way to bind an HttpRequest in PHP 5.3.x
 
             $me = $this;
             Client::bind(
-                         'httpRequest',
-                             function () use ($me) {
-                                 return new HttpRequest($me->client);
-                             }
+                  'httpRequest',
+                      function () use ($me) {
+                          return new HttpRequest($me->client);
+                      }
             );
         }
         // And here's how one gets an HttpRequest object through the IOC.
@@ -96,7 +102,7 @@ class Collection extends
         $collectionName,
         $options = array()
     ) {
-        $this->request = new $this->requestClass($this->client);
+        $this->request = new $this->client->requestClass($this->client);
         //        $this->request    = new $this->client->make('requestClass');
         $request          = $this->request;
         $request->options = $options;
@@ -119,7 +125,7 @@ class Collection extends
         $collectionName,
         $options = array()
     ) {
-        $this->request    = new $this->requestClass($this->client);
+        $this->request    = new $this->client->requestClass($this->client);
         $request          = $this->request;
         $request->options = $options;
 
@@ -141,7 +147,7 @@ class Collection extends
     public function getAll(
         $options = array()
     ) {
-        $this->request    = new $this->requestClass($this->client);
+        $this->request    = new $this->client->requestClass($this->client);
         $request          = $this->request;
         $request->options = $options;
 

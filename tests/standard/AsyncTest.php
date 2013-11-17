@@ -36,7 +36,8 @@ class AsyncTest extends
 
         $collectionOptions = array("waitForSync" => true);
 
-        $collection = new ArangoDbApi\Collection($this->client);
+        $collection         = new ArangoDbApi\Collection();
+        $collection->client = $this->client;
 
         $responseObject = $collection->create($collectionName, $collectionOptions);
         $body           = $responseObject->body;
@@ -76,7 +77,8 @@ class AsyncTest extends
 
         $collectionOptions = array("waitForSync" => true);
 
-        $collection = new ArangoDbApi\Collection($this->client);
+        $collection         = new ArangoDbApi\Collection();
+        $collection->client = $this->client;
 
         $responseObject = $collection->create($collectionName, $collectionOptions);
         $body           = $responseObject->body;
@@ -113,7 +115,8 @@ class AsyncTest extends
         $collectionName = 'ArangoDB-PHP-Core-CollectionTestSuite-Collection';
 
 
-        $collection = new ArangoDbApi\Collection($this->client);
+        $collection         = new ArangoDbApi\Collection();
+        $collection->client = $this->client;
 
         $collection->delete($collectionName);
     }

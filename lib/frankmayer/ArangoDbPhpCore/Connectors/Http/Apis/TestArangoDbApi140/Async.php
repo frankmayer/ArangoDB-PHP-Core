@@ -20,6 +20,12 @@ class Async extends
     Api implements
     RestApiInterface
 {
+    public function __construct($client)
+    {
+        $this->client       = $client;
+        $this->connector    = $this->client->connector;
+        $this->requestClass = $this->client->requestClass;
+    }
 
     public function fetchJobResult($jobId)
     {
