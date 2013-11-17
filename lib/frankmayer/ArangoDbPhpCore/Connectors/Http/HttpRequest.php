@@ -205,4 +205,180 @@ class HttpRequest implements
 
         return $parts;
     }
+
+    /**
+     * @param string $address
+     */
+    public function setAddress($address)
+    {
+        $this->address = $address;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAddress()
+    {
+        return $this->address;
+    }
+
+    /**
+     * @param string $body
+     */
+    public function setBody($body)
+    {
+        $this->body = $body;
+    }
+
+    /**
+     * @return string
+     */
+    public function getBody()
+    {
+        return $this->body;
+    }
+
+    /**
+     * @param \frankmayer\ArangoDbPhpCore\Client $client
+     */
+    public function setClient($client)
+    {
+        $this->client = $client;
+    }
+
+    /**
+     * @return \frankmayer\ArangoDbPhpCore\Client
+     */
+    public function getClient()
+    {
+        return $this->client;
+    }
+
+    /**
+     * @param \frankmayer\ArangoDbPhpCore\Connectors\ConnectorInterface $connector
+     */
+    public function setConnector($connector)
+    {
+        $this->connector = $connector;
+    }
+
+    /**
+     * @return \frankmayer\ArangoDbPhpCore\Connectors\ConnectorInterface
+     */
+    public function getConnector()
+    {
+        return $this->connector;
+    }
+
+    /**
+     * @param array $headers
+     */
+    public function setHeaders($headers)
+    {
+        $this->headers = $headers;
+    }
+
+    /**
+     * @return array
+     */
+    public function getHeaders()
+    {
+        return $this->headers;
+    }
+
+    /**
+     * @param string $method
+     */
+    public function setMethod($method)
+    {
+        $this->method = $method;
+    }
+
+    /**
+     * @return string
+     */
+    public function getMethod()
+    {
+        return $this->method;
+    }
+
+    /**
+     * @param array $options
+     */
+    public function setOptions($options)
+    {
+        $this->options = $options;
+    }
+
+    /**
+     * @return array
+     */
+    public function getOptions()
+    {
+        return $this->options;
+    }
+
+    /**
+     * @param string $path
+     */
+    public function setPath($path)
+    {
+        $this->path = $path;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPath()
+    {
+        return $this->path;
+    }
+
+    /**
+     * @param string $response
+     */
+    public function setResponse($response)
+    {
+        $this->response = $response;
+    }
+
+    /**
+     * @return string
+     */
+    public function getResponse()
+    {
+        return $this->response;
+    }
+
+    /**
+     * @param \frankmayer\ArangoDbPhpCore\Connectors\ResponseInterface $responseObject
+     */
+    public function setResponseObject($responseObject)
+    {
+        $this->responseObject = $responseObject;
+    }
+
+    /**
+     * @return \frankmayer\ArangoDbPhpCore\Connectors\ResponseInterface
+     */
+    public function getResponseObject()
+    {
+        return $this->responseObject;
+    }
+
+    /**
+     * @param string $type
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+    }
+
+    /**
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
 }

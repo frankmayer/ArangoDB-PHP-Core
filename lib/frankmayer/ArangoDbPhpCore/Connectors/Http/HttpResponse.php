@@ -30,13 +30,6 @@ class HttpResponse
 
 
     /**
-     * @param $requestObject
-     */
-    //    public function __construct()
-    //    {
-    //    }
-
-    /**
      */
     public function doConstruct()
     {
@@ -67,5 +60,101 @@ class HttpResponse
                 $this->headers['status'] = $header;
             }
         }
+    }
+
+    /**
+     * @param mixed $async
+     */
+    public function setAsync($async)
+    {
+        $this->async = $async;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAsync()
+    {
+        return $this->async;
+    }
+
+    /**
+     * @param mixed $batch
+     */
+    public function setBatch($batch)
+    {
+        $this->batch = $batch;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getBatch()
+    {
+        return $this->batch;
+    }
+
+    /**
+     * @param mixed $body
+     */
+    public function setBody($body)
+    {
+        $this->body = $body;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getBody()
+    {
+        return $this->body;
+    }
+
+    /**
+     * @param array $headers
+     */
+    public function setHeaders($headers)
+    {
+        $this->headers = $headers;
+    }
+
+    /**
+     * @return array
+     */
+    public function getHeaders()
+    {
+        return $this->headers;
+    }
+
+    /**
+     * @param \frankmayer\ArangoDbPhpCore\Connectors\Http\HttpRequest $request
+     */
+    public function setRequest($request)
+    {
+        $this->request = $request;
+    }
+
+    /**
+     * @return \frankmayer\ArangoDbPhpCore\Connectors\Http\HttpRequest
+     */
+    public function getRequest()
+    {
+        return $this->request;
+    }
+
+    /**
+     * @param mixed $status
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getStatus()
+    {
+        return $this->status;
     }
 }

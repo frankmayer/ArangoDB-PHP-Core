@@ -147,4 +147,133 @@ class Client
         }
         throw new ClientException('No type registered with that name');
     }
+
+    /**
+     * @param string $arangodbApiVersion
+     */
+    public function setArangodbApiVersion($arangodbApiVersion)
+    {
+        $this->arangodbApiVersion = $arangodbApiVersion;
+    }
+
+    /**
+     * @return string
+     */
+    public function getArangodbApiVersion()
+    {
+        return $this->arangodbApiVersion;
+    }
+
+    /**
+     * @param null $clientOptions
+     */
+    public function setClientOptions($clientOptions)
+    {
+        $this->clientOptions = $clientOptions;
+    }
+
+    /**
+     * @return null
+     */
+    public function getClientOptions()
+    {
+        return $this->clientOptions;
+    }
+
+    /**
+     * @param \frankmayer\ArangoDbPhpCore\Connectors\ConnectorInterface|\frankmayer\ArangoDbPhpCore\Connectors\Http\HttpConnectorInterface $connector
+     */
+    public function setConnector($connector)
+    {
+        $this->connector = $connector;
+    }
+
+    /**
+     * @return \frankmayer\ArangoDbPhpCore\Connectors\ConnectorInterface|\frankmayer\ArangoDbPhpCore\Connectors\Http\HttpConnectorInterface
+     */
+    public function getConnector()
+    {
+        return $this->connector;
+    }
+
+    /**
+     * @param mixed $database
+     */
+    public function setDatabase($database)
+    {
+        $this->database = $database;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDatabase()
+    {
+        return $this->database;
+    }
+
+    /**
+     * @param mixed $endpoint
+     */
+    public function setEndpoint($endpoint)
+    {
+        $this->endpoint = $endpoint;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEndpoint()
+    {
+        return $this->endpoint;
+    }
+
+    /**
+     * @param \frankmayer\ArangoDbPhpCore\Plugins\PluginManager $pluginManager
+     */
+    public function setPluginManager($pluginManager)
+    {
+        $this->pluginManager = $pluginManager;
+    }
+
+    /**
+     * @return \frankmayer\ArangoDbPhpCore\Plugins\PluginManager
+     */
+    public function getPluginManager()
+    {
+        return $this->pluginManager;
+    }
+
+    /**
+     * @param mixed $requestClass
+     */
+    public function setRequestClass($requestClass)
+    {
+        $this->requestClass = $requestClass;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRequestClass()
+    {
+        return $this->requestClass;
+    }
+
+    /**
+     * @param mixed $responseClass
+     */
+    public function setResponseClass($responseClass)
+    {
+        $this->responseClass = $responseClass;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getResponseClass()
+    {
+        return $this->responseClass;
+    }
+
 }

@@ -85,4 +85,37 @@ class CurlHttpConnector extends
 
         return $response;
     }
+
+    /**
+     * @param \frankmayer\ArangoDbPhpCore\Client $client
+     */
+    public function setClient($client)
+    {
+        $this->client = $client;
+    }
+
+    /**
+     * @return \frankmayer\ArangoDbPhpCore\Client
+     */
+    public function getClient()
+    {
+        return $this->client;
+    }
+
+    /**
+     * @param boolean $verbose
+     */
+    public function setVerbose($verbose)
+    {
+        $this->verbose = $verbose;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getVerbose()
+    {
+        return $this->verbose;
+    }
+
 }
