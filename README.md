@@ -4,6 +4,9 @@ A lightweight, and at the same time flexible "very"-low-level ArangoDB client fo
 
 [![Build Status](https://travis-ci.org/frankmayer/ArangoDB-PHP-Core.png?branch=master)](https://travis-ci.org/frankmayer/ArangoDB-PHP-Core)
 
+[![Coverage Status](https://coveralls.io/repos/frankmayer/ArangoDB-PHP-Core/badge.png)](https://coveralls.io/r/frankmayer/ArangoDB-PHP-Core)
+
+
 ####Purpose:
 
 The core client should serve as a flexible low level base for higher level client implementations (AR,ODM,OGM) to be built on top of it.
