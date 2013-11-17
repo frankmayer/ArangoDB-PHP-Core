@@ -17,7 +17,5 @@ namespace frankmayer\ArangoDbPhpCore\Connectors;
  */
 interface  ConnectorInterface
 {
-    public function instantiateRequestObject($client);
 
-    public function instantiateResponseObject($client);
 }

@@ -85,28 +85,4 @@ class CurlHttpConnector extends
 
         return $response;
     }
-
-
-    /**
-     * @param $client
-     *
-     * @return HttpRequest
-     */
-    public function instantiateRequestObject($client)
-    {
-        return new $client->getRequest($client);
-    }
-
-
-    /**
-     * @param HttpRequest $request
-     *
-     * @return HttpResponse
-     */
-    public function instantiateResponseObject($request)
-    {
-        $client = $request->client;
-
-        return $client->doRequest($request);
-    }
 }

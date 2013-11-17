@@ -22,8 +22,4 @@ interface  HttpConnectorInterface extends
     ConnectorInterface
 {
     public function request(HttpRequestInterface $request);
-
-    public function instantiateRequestObject($client);
-
-    public function instantiateResponseObject($request);
 }
