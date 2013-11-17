@@ -11,8 +11,6 @@
 namespace frankmayer\ArangoDbPhpCore\Connectors\Http;
 
 use frankmayer\ArangoDbPhpCore\Client;
-use frankmayer\ArangoDbPhpCore\Connectors\Http\HttpRequest;
-use frankmayer\ArangoDbPhpCore\Connectors\Http\HttpRequestInterface;
 use frankmayer\ArangoDbPhpCore\ServerException;
 
 

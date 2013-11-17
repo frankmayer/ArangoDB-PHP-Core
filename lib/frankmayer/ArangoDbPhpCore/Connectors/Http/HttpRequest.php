@@ -10,7 +10,6 @@
 
 namespace frankmayer\ArangoDbPhpCore\Connectors\Http;
 
-use frankmayer\ArangoDbPhpCore\Client;
 use frankmayer\ArangoDbPhpCore\Connectors\ResponseInterface;
 
 

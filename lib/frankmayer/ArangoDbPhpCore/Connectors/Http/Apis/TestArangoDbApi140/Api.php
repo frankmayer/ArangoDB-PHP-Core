@@ -10,7 +10,6 @@
 
 namespace frankmayer\ArangoDbPhpCore\Connectors\Http\Apis\TestArangoDbApi140;
 
-use frankmayer\ArangoDbPhpCore\Client;
 use frankmayer\ArangoDbPhpCore\Connectors\Http\HttpRequest;
 
 

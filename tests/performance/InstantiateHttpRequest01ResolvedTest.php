@@ -14,7 +14,6 @@ namespace frankmayer\ArangoDbPhpCore;
 use frankmayer\ArangoDbPhpCore\Connectors\Http\Apis\TestArangoDbApi140 as ArangoDbApi;
 
 use frankmayer\ArangoDbPhpCore\Connectors\Http\CurlHttpConnector;
-use frankmayer\ArangoDbPhpCore\Connectors\Http\HttpRequest;
 
 
 class InstantiateHttpRequestResolvedTest extends

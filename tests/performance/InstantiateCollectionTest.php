@@ -15,7 +15,6 @@ use frankmayer\ArangoDbPhpCore\Connectors\Http\Apis\TestArangoDbApi140 as Arango
 
 use frankmayer\ArangoDbPhpCore\Connectors\Http\Apis\TestArangoDbApi140\Collection;
 use frankmayer\ArangoDbPhpCore\Connectors\Http\CurlHttpConnector;
-use frankmayer\ArangoDbPhpCore\Connectors\Http\HttpRequest;
 
 
 class InstantiateCollectionTest extends
