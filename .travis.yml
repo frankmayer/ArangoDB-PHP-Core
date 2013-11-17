@@ -16,5 +16,7 @@ after_script:
   # or enable logging
  - php vendor/bin/coveralls -v
 
-script: phpunit --configuration ./tests/phpunit.xml --testsuite ArangoDB-PHP-Core --coverage-clover build/logs/clover.xml
+script:
+ - mkdir -p build/logs
+ - phpunit --configuration ./tests/phpunit.xml --testsuite ArangoDB-PHP-Core --coverage-clover build/logs/clover.xml
 
