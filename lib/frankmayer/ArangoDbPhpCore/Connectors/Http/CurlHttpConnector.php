@@ -55,10 +55,16 @@ class CurlHttpConnector extends
      */
     public function request(HttpRequestInterface $request)
     {
-        $ch        = curl_init($request->address);
-        $body      = $request->body;
-        $headers   = $request->headers;
-        $headers[] = 'Content-Length: ' . strlen($body);
+        $curlHeaders = array();
+
+        $ch   = curl_init($request->address);
+        $body = $request->body;
+
+        $request->headers['Content-Length'] = strlen($body);
+
+        foreach ($request->headers as $headerKey => $headerVal) {
+            $curlHeaders[] = $headerKey . ': ' . $headerVal;
+        }
 
         curl_setopt_array(
             $ch,
@@ -68,9 +74,10 @@ class CurlHttpConnector extends
                  CURLOPT_RETURNTRANSFER => true,
                  CURLOPT_HEADER         => true,
                  CURLOPT_POSTFIELDS     => $body,
-                 CURLOPT_HTTPHEADER     => $headers
+                 CURLOPT_HTTPHEADER     => $curlHeaders
             )
         );
+
         $response = curl_exec($ch);
         if ($response === false) {
             throw new ServerException(curl_error($ch), curl_errno($ch));

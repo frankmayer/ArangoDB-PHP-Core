@@ -123,11 +123,11 @@ class HttpRequest implements
             if (is_bool($async)) {
                 $async = var_export($async, true);
             }
-            $this->headers[] = 'x-arango-async: ' . $async;
+            $this->headers['x-arango-async'] = $async;
         }
 
         if (isset($this->client->arangodbApiVersion)) {
-            $this->headers[] = 'x-arango-version: ' . $this->client->arangodbApiVersion;
+            $this->headers['x-arango-version'] =  $this->client->arangodbApiVersion;
         }
 
         if (isset($this->options['isBatchPart']) && $this->options['isBatchPart'] === true) {
@@ -135,7 +135,7 @@ class HttpRequest implements
             $this->address = $this->client->endpoint . $this->path;
         } else {
             if (isset($this->options['isBatchRequest']) && $this->options['isBatchRequest'] === false) {
-                $this->headers[] = 'Content-Type: application/json';
+                $this->headers['Content-Type'] = 'application/json';
             }
             $this->address  = $this->client->endpoint . $this->path;
             $this->response = $this->connector->request($this);
@@ -170,7 +170,7 @@ class HttpRequest implements
         }
         $this->body .= '--' . $boundary . '--' . HttpConnector::HTTP_EOL;
         $this->path      = $this->client->getDatabasePath() . self::API_BATCH;
-        $this->headers[] = 'Content-Type: multipart/form-data; boundary=XXXsubpartXXX';
+        $this->headers['Content-Type'] = 'multipart/form-data; boundary=XXXbXXX';
 
         $this->method = 'post';
 
