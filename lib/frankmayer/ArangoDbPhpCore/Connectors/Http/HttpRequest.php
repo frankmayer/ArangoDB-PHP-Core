@@ -301,36 +301,37 @@ class HttpRequest extends
     {
         return $this->response;
     }
+    // todo 1 Frank Revisit this method and getter/setter
 
-    /**
-     * @param \frankmayer\ArangoDbPhpCore\Connectors\ResponseInterface $responseObject
-     */
-    public function setResponseObject($responseObject)
-    {
-        $this->responseObject = $responseObject;
-    }
-
-    /**
-     * @return \frankmayer\ArangoDbPhpCore\Connectors\ResponseInterface
-     */
-    public function getResponseObject()
-    {
-        return $this->responseObject;
-    }
-
-    /**
-     * @param string $type
-     */
-    public function setType($type)
-    {
-        $this->type = $type;
-    }
-
-    /**
-     * @return string
-     */
-    public function getType()
-    {
-        return $this->type;
-    }
+//    /**
+    //     * @param \frankmayer\ArangoDbPhpCore\Connectors\ResponseInterface $responseObject
+    //     */
+    //    public function setResponseObject($responseObject)
+    //    {
+    //        $this->responseObject = $responseObject;
+    //    }
+    //
+    //    /**
+    //     * @return \frankmayer\ArangoDbPhpCore\Connectors\ResponseInterface
+    //     */
+    //    public function getResponseObject()
+    //    {
+    //        return $this->responseObject;
+    //    }
+    // todo 1 Frank Revisit this method and getter/setter
+//    /**
+//     * @param string $type
+//     */
+//    public function setType($type)
+//    {
+//        $this->type = $type;
+//    }
+//
+//    /**
+//     * @return string
+//     */
+//    public function getType()
+//    {
+//        return $this->type;
+//    }
 }

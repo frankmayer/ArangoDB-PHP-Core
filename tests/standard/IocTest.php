@@ -35,11 +35,14 @@ class IocTest extends
      * @var HttpResponse|HttpResponseInterface
      */
     public $response;
+    public $connector;
 
 
     public function setUp()
     {
-        $connector    = new CurlHttpConnector();
+        $connector       = new CurlHttpConnector();
+        $this->connector = $connector;
+
         $this->client = $this->client = getClient($connector);
     }
 
@@ -76,6 +79,94 @@ class IocTest extends
         // Note that the type-name 'httpRequest' is the name we bound our HttpRequest class creation-closure to. (see above)
         $this->request = Client::make('httpRequest');
         $this->assertInstanceOf('frankmayer\ArangoDbPhpCore\Connectors\Http\HttpRequestInterface', $this->request);
+
+
+        $testValue = $this->request->getAddress();
+        $this->assertNull($testValue);
+
+        $this->request->setAddress('testAddress');
+
+        $testValue = $this->request->getAddress();
+        $this->assertEquals('testAddress', $testValue);
+
+
+        $testValue = $this->request->getBody();
+        $this->assertNull($testValue);
+
+        $this->request->setBody('testBody');
+
+        $testValue = $this->request->getBody();
+        $this->assertEquals('testBody', $testValue);
+
+
+        $testValue1 = $this->request->getClient();
+        $this->assertInstanceOf('\frankmayer\ArangoDbPhpCore\Client', $testValue1);
+
+        $this->request->setClient($this->client);
+
+        $testValue1 = $this->request->getClient();
+        $this->assertEquals($this->client, $testValue1);
+
+
+        $testValue1 = $this->request->getConnector();
+        $this->assertNull($testValue1);
+
+        $this->request->setConnector($this->connector);
+
+        $testValue1 = $this->request->getConnector();
+        $this->assertEquals($this->connector, $testValue1);
+
+
+        $testValue = $this->request->getHeaders();
+        $this->assertNull($testValue);
+
+        $this->request->setHeaders('testHeaders');
+
+        $testValue = $this->request->getHeaders();
+        $this->assertEquals('testHeaders', $testValue);
+
+        
+        $testValue = $this->request->getMethod();
+        $this->assertNull($testValue);
+
+        $this->request->setMethod('testMethod');
+
+        $testValue = $this->request->getMethod();
+        $this->assertEquals('testMethod', $testValue);
+
+
+        $testValue1 = $this->request->getOptions();
+        $this->assertNull($testValue1);
+
+        $this->request->setOptions(array('testOption' => 'testVal'));
+
+        $testValue = $this->request->getOptions();
+        $this->assertArrayHasKey('testOption', $testValue);
+
+        $this->request->setOptions($testValue1);
+
+        $testValue = $this->request->getOptions();
+        $this->assertEquals($testValue1, $testValue);
+
+
+        $testValue = $this->request->getPath();
+        $this->assertNull($testValue);
+
+        $this->request->setPath('testPath');
+
+        $testValue = $this->request->getPath();
+        $this->assertEquals('testPath', $testValue);
+
+
+     $testValue = $this->request->getResponse();
+        $this->assertNull($testValue);
+
+        $this->request->setResponse('testResponse');
+
+        $testValue = $this->request->getResponse();
+        $this->assertEquals('testResponse', $testValue);
+
+
     }
 
 
@@ -162,7 +253,7 @@ class IocTest extends
         $testValue = $this->response->getBody();
         $this->assertEquals('testBody', $testValue);
 
-        
+
         $testValue = $this->response->getHeaders();
         $this->assertNotEmpty($testValue);
 
@@ -171,16 +262,16 @@ class IocTest extends
         $testValue = $this->response->getHeaders();
         $this->assertEquals('testHeaders', $testValue);
 
-        
+
         $testValue = $this->response->getRequest();
-        $this->assertInternalType('object',$testValue);
+        $this->assertInternalType('object', $testValue);
 
         $this->response->setRequest($testValue);
 
         $testValue = $this->response->getRequest();
-        $this->assertInternalType('object',$testValue);
+        $this->assertInternalType('object', $testValue);
 
-        
+
         $testValue = $this->response->getStatus();
         $this->assertNotEmpty($testValue);
 
@@ -189,7 +280,7 @@ class IocTest extends
         $testValue = $this->response->getStatus();
         $this->assertEquals(202, $testValue);
 
-        
+
         $testValue = $this->response->getProtocol();
         $this->assertEquals('HTTP/1.1', $testValue);
 
@@ -197,8 +288,7 @@ class IocTest extends
         $testValue = $this->response->getStatusPhrase();
         $this->assertEquals('OK', $testValue);
 
-        
-        
+
         $testValue = $this->response->getVerboseExtractStatusLine();
         $this->assertEquals(true, $testValue);
 
@@ -206,7 +296,5 @@ class IocTest extends
 
         $testValue = $this->response->getVerboseExtractStatusLine();
         $this->assertEquals(false, $testValue);
-
-
     }
 }

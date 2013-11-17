@@ -22,6 +22,7 @@ class Document extends
 {
     public $urlQuery;
 
+
     /**
      *
      */

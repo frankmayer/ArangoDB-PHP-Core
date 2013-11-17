@@ -183,7 +183,7 @@ class Client
     /**
      * @param \frankmayer\ArangoDbPhpCore\Connectors\ConnectorInterface|\frankmayer\ArangoDbPhpCore\Connectors\Http\HttpConnectorInterface $connector
      */
-    public function setConnector($connector)
+    public function setConnector(\frankmayer\ArangoDbPhpCore\Connectors\ConnectorInterface $connector)
     {
         $this->connector = $connector;
     }
@@ -228,6 +228,7 @@ class Client
         return $this->endpoint;
     }
 
+
     /**
      * @param \frankmayer\ArangoDbPhpCore\Plugins\PluginManager $pluginManager
      */
@@ -244,36 +245,40 @@ class Client
         return $this->pluginManager;
     }
 
-    /**
-     * @param mixed $requestClass
-     */
-    public function setRequestClass($requestClass)
-    {
-        $this->requestClass = $requestClass;
-    }
 
-    /**
-     * @return mixed
-     */
-    public function getRequestClass()
-    {
-        return $this->requestClass;
-    }
 
-    /**
-     * @param mixed $responseClass
-     */
-    public function setResponseClass($responseClass)
-    {
-        $this->responseClass = $responseClass;
-    }
+    // todo 1 Frank Rework request/response classes configuration
 
-    /**
-     * @return mixed
-     */
-    public function getResponseClass()
-    {
-        return $this->responseClass;
-    }
+//    /**
+//     * @param mixed $requestClass
+//     */
+//    public function setRequestClass($requestClass)
+//    {
+//        $this->requestClass = $requestClass;
+//    }
+//
+//    /**
+//     * @return mixed
+//     */
+//    public function getRequestClass()
+//    {
+//        return $this->requestClass;
+//    }
+//
+//    /**
+//     * @param mixed $responseClass
+//     */
+//    public function setResponseClass($responseClass)
+//    {
+//        $this->responseClass = $responseClass;
+//    }
+//
+//    /**
+//     * @return mixed
+//     */
+//    public function getResponseClass()
+//    {
+//        return $this->responseClass;
+//    }
 
 }
