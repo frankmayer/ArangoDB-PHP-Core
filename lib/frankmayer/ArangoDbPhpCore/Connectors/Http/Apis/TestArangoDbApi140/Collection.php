@@ -63,7 +63,7 @@ class Collection extends
             Client::bind(
                   'httpRequest',
                       function () use ($me) {
-                          $request         = new $this->client->requestClass();
+                          $request         = new $me->client->requestClass();
                           $request->client = $me->client;
 
                           return $request;
