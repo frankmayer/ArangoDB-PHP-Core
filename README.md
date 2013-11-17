@@ -37,6 +37,7 @@ Recommended: 5.4, 5.5
 Notes: 
 
 While PHP 5.3 is still supported, the core client runs faster and with a smaller memory footprint, when used with PHP 5.4 and newer.
+PHP 5.4 and up also have some handy new features, like traits or Class member access on instantiation.
 In other words... Do yourself a favor and upgrade to PHP 5.4 or even better to PHP 5.5.
  
 
@@ -57,8 +58,7 @@ Thanks !!
 
 
 ######TODO:
-- Implement missing functionality
-- stabilize API
+- stabilize Plugin API
 - Provide Docs
 
 

@@ -2,6 +2,12 @@
 Experimental Phase
 ------------------
 
+* Lots of cleanup.
+
+* (Hopefully) stabilized IoC container
+
+* Removed constructor parameters from all classes except the Client
+
 * Reorganized tests directory. Included performance test suite
 
 * IDE hinting...
