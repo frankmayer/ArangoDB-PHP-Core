@@ -115,5 +115,4 @@ class CurlHttpConnector extends
     {
         return $this->verbose;
     }
-
 }

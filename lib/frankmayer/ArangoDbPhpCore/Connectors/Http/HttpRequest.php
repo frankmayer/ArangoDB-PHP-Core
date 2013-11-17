@@ -10,8 +10,6 @@
 
 namespace frankmayer\ArangoDbPhpCore\Connectors\Http;
 
-use frankmayer\ArangoDbPhpCore\Connectors\ResponseInterface;
-
 
 /**
  * HTTP-Request object that holds a request. Requests are in some cases not directly passed to the server,
@@ -19,7 +17,8 @@ use frankmayer\ArangoDbPhpCore\Connectors\ResponseInterface;
  *
  * @package frankmayer\ArangoDbPhpCore
  */
-class HttpRequest implements
+class HttpRequest extends
+    HttpRequestBase implements
     HttpRequestInterface
 {
 
@@ -32,52 +31,6 @@ class HttpRequest implements
     const METHOD_OPTIONS = 'OPTIONS';
 
     const API_BATCH = '/_api/batch';
-
-
-    /**
-     * @var \frankmayer\ArangoDbPhpCore\Client
-     */
-    public $client;
-    /**
-     * @var \frankmayer\ArangoDbPhpCore\Connectors\ConnectorInterface
-     */
-    public $connector;
-    /**
-     * @var string The address of the endpoint
-     */
-    public $address;
-    /**
-     * @var string The path-part of the request
-     */
-    public $path;
-    /**
-     * @var string The Body of the request
-     */
-    public $body;
-    /**
-     * @var array The headers of the request
-     */
-    public $headers;
-    /**
-     * @var array The options of the request
-     */
-    public $options;
-    /**
-     * @var string The type of the request
-     */
-    public $type;
-    /**
-     * @var string The method of the request
-     */
-    public $method;
-    /**
-     * @var string The response data as a result of the request
-     */
-    public $response;
-    /**
-     * @var ResponseInterface The response-object as a result of the request
-     */
-    public $responseObject;
 
 
     /**
