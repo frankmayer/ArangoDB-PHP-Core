@@ -29,6 +29,33 @@ class CollectionTest extends
     {
         $connector    = new CurlHttpConnector();
         $this->client = $this->client = getClient($connector);
+
+        if (version_compare(PHP_VERSION, '5.4.0') >= 0) {
+            // This is the way to bind an HttpRequest in PHP 5.4+
+
+            Client::bind(
+                  'ArangoCollection',
+                      function () {
+                          $instance         = new ArangoDbApi\Collection();
+                          $instance->client = $this->client;
+
+                          return $instance;
+                      }
+            );
+        } else {
+            // This is the way to bind an HttpRequest in PHP 5.3.x
+
+            $me = $this;
+            Client::bind(
+                  'ArangoCollection',
+                      function () use ($me) {
+                          $instance         = new ArangoDbApi\Collection();
+                          $instance->client = $me->client;
+
+                          return $instance;
+                      }
+            );
+        }
     }
 
 
@@ -66,32 +93,7 @@ class CollectionTest extends
         // Here's how a binding for the HttpRequest should take place in the IOC container.
         // The actual binding should only happen once in the client construction, though. This is only for testing...
 
-        if (version_compare(PHP_VERSION, '5.4.0') >= 0) {
-            // This is the way to bind an HttpRequest in PHP 5.4+
 
-            Client::bind(
-                  'ArangoCollection',
-                      function () {
-                          $instance         = new ArangoDbApi\Collection();
-                          $instance->client = $this->client;
-
-                          return $instance;
-                      }
-            );
-        } else {
-            // This is the way to bind an HttpRequest in PHP 5.3.x
-
-            $me = $this;
-            Client::bind(
-                  'ArangoCollection',
-                      function () use ($me) {
-                          $instance         = new ArangoDbApi\Collection();
-                          $instance->client = $me->client;
-
-                          return $instance;
-                      }
-            );
-        }
         // And here's how one gets an HttpRequest object through the IOC.
         // Note that the type-name 'httpRequest' is the name we bound our HttpRequest class creation-closure to. (see above)
         $collection = Client::make('ArangoCollection');
@@ -104,7 +106,6 @@ class CollectionTest extends
         $decodedJsonBody = json_decode($body, true);
         $this->assertEquals(200, $decodedJsonBody['code']);
         $this->assertEquals($collectionName, $decodedJsonBody['name']);
-        $collection->delete($collectionName);
     }
 
 
@@ -163,5 +164,9 @@ class CollectionTest extends
 
     public function tearDown()
     {
+        $collectionName = 'ArangoDB-PHP-Core-CollectionTestSuite-CollectionViaIocContainer';
+
+        $collection = Client::make('ArangoCollection');
+        $collection->delete($collectionName);
     }
 }
