@@ -30,7 +30,7 @@ use frankmayer\ArangoDbPhpCore\Connectors\Http\HttpRequest;
  */
 
 
-class InstantiateHttpRequestTest extends
+class InstantiateHttpRequestResolvedTest extends
     \PHPUnit_Framework_TestCase
 {
     public $clientOptions;
@@ -39,6 +39,7 @@ class InstantiateHttpRequestTest extends
      */
     public $client;
     public $requestClass;
+    public $loops;
 
 
     public function setUp()
@@ -46,6 +47,8 @@ class InstantiateHttpRequestTest extends
         $connector          = new CurlHttpConnector();
         $this->client       = getClient($connector);
         $this->requestClass = $this->client->requestClass;
+
+        $this->loops = 1000;
     }
 
 
@@ -54,66 +57,10 @@ class InstantiateHttpRequestTest extends
 
         $startTime = microtime(true);
 
-        for ($i = 1; $i <= 1000; $i++) {
+        for ($i = 1; $i <= $this->loops; $i++) {
             $request[] = new $this->requestClass($this->client);
         }
         echo 'testInstantiateRequestsThroughResolvingRequestClassProperty() => Process time: ' . (microtime(
-                    true
-                ) - $startTime) . ' ms ' . PHP_EOL;
-        unset ($request);
-    }
-
-
-    public function testInstantiateRequestsDirectly()
-    {
-
-        $startTime = microtime(true);
-
-        for ($i = 1; $i <= 1000; $i++) {
-            $request[] = new HttpRequest($this->client);
-        }
-        echo 'testInstantiateRequestsDirectly() => Process time: ' . (microtime(true) - $startTime) . ' ms ' . PHP_EOL;
-        unset ($request);
-    }
-
-
-    public function testInstantiateRequestsViaIocContainer()
-    {
-        // Here's how a binding for the HttpRequest should take place in the IOC container.
-        // The actual binding should only happen once in the client construction, though. This is only for testing...
-
-        if (version_compare(PHP_VERSION, '5.4.0') >= 0) {
-            // This is the way to bind an HttpRequest in PHP 5.4+
-
-            Client::bind(
-                  'ArangoCollection',
-                      function () {
-                          $instance         = new ArangoDbApi\Collection();
-                          $instance->client = $this->client;
-
-                          return $instance;
-                      }
-            );
-        } else {
-            // This is the way to bind an HttpRequest in PHP 5.3.x
-
-            $me = $this;
-            Client::bind(
-                  'ArangoCollection',
-                      function () use ($me) {
-                          $instance         = new ArangoDbApi\Collection();
-                          $instance->client = $me->client;
-
-                          return $instance;
-                      }
-            );
-        }
-        $startTime = microtime(true);
-
-        for ($i = 1; $i <= 1000; $i++) {
-            $request[] = Client::make('ArangoCollection');
-        }
-        echo 'testInstantiateRequestsViaIocContainer() => Process time: ' . (microtime(
                     true
                 ) - $startTime) . ' ms ' . PHP_EOL;
         unset ($request);
