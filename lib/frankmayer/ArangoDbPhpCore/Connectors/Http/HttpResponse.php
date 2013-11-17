@@ -26,7 +26,9 @@ class HttpResponse
     public $body;
     public $batch;
     public $async;
+    public $protocol;
     public $status;
+    public $statusPhrase;
 
 
     /**
@@ -34,8 +36,11 @@ class HttpResponse
     public function doConstruct()
     {
         $this->splitResponseToHeadersArrayAndBody();
-        // todo 1 Frank Find a better way to extract the status
-        $this->status = substr($this->headers['status'], 9, 3);
+        $statusLineArray = explode(" ", $this->headers['status']);
+
+        $this->protocol     = $statusLineArray[0];
+        $this->status       = $statusLineArray[1];
+        $this->statusPhrase = $statusLineArray[2];
     }
 
 
