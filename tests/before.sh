@@ -4,7 +4,10 @@
 # It updates composer
 
 echo -- Updating Composer
-composer self-update
+wget http://getcomposer.org/composer.phar
+php composer.phar require satooshi/php-coveralls:dev-master --dev --no-progress --prefer-source
+
+# composer self-update
 
 # those are not needed
 #

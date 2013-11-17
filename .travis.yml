@@ -9,7 +9,6 @@ before_script:
   - chmod 777 ./tests/travis/setup_arangodb.sh
   - ./tests/travis/setup_arangodb.sh
   - bash tests/before.sh
-  - php composer require satooshi/php-coveralls:dev-master --dev --no-progress --prefer-source
 
 
 after_script:
