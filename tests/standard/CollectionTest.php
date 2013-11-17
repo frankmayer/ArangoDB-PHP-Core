@@ -162,6 +162,19 @@ class CollectionTest extends
         $this->assertObjectHasAttribute('_graphs', $response->names);
     }
 
+    /**
+     * Test if we can get all collections
+     */
+    public function testGetCollectionsExcludeSystem()
+    {
+        $collection         = new ArangoDbApi\Collection();
+        $collection->client = $this->client;
+        $responseObject     = $collection->getAll(array('excludeSystem'=>true));
+        $response           = json_decode($responseObject->body);
+
+        $this->assertObjectNotHasAttribute('_graphs', $response->names);
+    }
+
     public function tearDown()
     {
         $collectionName = 'ArangoDB-PHP-Core-CollectionTestSuite-CollectionViaIocContainer';

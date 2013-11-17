@@ -220,6 +220,76 @@ class DocumentTest extends
         $this->assertEquals(1202, $decodedJsonBody['errorNum']);
     }
 
+    /**
+     * Test if we can get the server version
+     */
+    public function testCreateUpdateDocumentAndDeleteDocumentInExistingCollection()
+    {
+        $collectionName = 'ArangoDB-PHP-Core-CollectionTestSuite-Collection';
+
+        $requestBody      = array('name' => 'Frank', 'bike' => 'vfr', '_key' => '1');
+        $document         = new ArangoDbApi\Document();
+        $document->client = $this->client;
+
+        $responseObject = $document->create($collectionName, $requestBody);
+
+        $responseBody = $responseObject->body;
+
+        $this->assertArrayHasKey('error', json_decode($responseBody, true));
+        $decodedJsonBody = json_decode($responseBody, true);
+
+        $this->assertEquals(false, $decodedJsonBody['error']);
+        $this->assertEquals($collectionName . '/1', $decodedJsonBody['_id']);
+        //
+
+        $requestBody      = array('name' => 'Mike');
+        $document         = new ArangoDbApi\Document();
+        $document->client = $this->client;
+
+        $responseObject = $document->update($collectionName . '/1', $requestBody);
+
+        $responseBody = $responseObject->body;
+
+        $this->assertArrayHasKey('error', json_decode($responseBody, true));
+        $decodedJsonBody = json_decode($responseBody, true);
+
+        $this->assertEquals(false, $decodedJsonBody['error']);
+        $this->assertEquals($collectionName . '/1', $decodedJsonBody['_id']);
+
+
+        $document         = new ArangoDbApi\Document();
+        $document->client = $this->client;
+
+        $responseObject = $document->get($collectionName . '/1', $requestBody);
+
+        $responseBody = $responseObject->body;
+
+        $this->assertArrayHasKey('bike', json_decode($responseBody, true));
+        $decodedJsonBody = json_decode($responseBody, true);
+
+        $this->assertEquals('Mike', $decodedJsonBody['name']);
+        $this->assertEquals($collectionName . '/1', $decodedJsonBody['_id']);
+
+        $responseObject = $document->delete($collectionName . '/1');
+
+        $responseBody = $responseObject->body;
+        $this->assertArrayHasKey('error', json_decode($responseBody, true));
+        $decodedJsonBody = json_decode($responseBody, true);
+
+        $this->assertEquals(false, $decodedJsonBody['error']);
+
+        // Try to delete a second time .. should throw an error
+        $responseObject = $document->delete($collectionName . '/1');
+
+        $responseBody = $responseObject->body;
+        $this->assertArrayHasKey('error', json_decode($responseBody, true));
+        $decodedJsonBody = json_decode($responseBody, true);
+
+        $this->assertEquals(true, $decodedJsonBody['error']);
+        $this->assertEquals(404, $decodedJsonBody['code']);
+        $this->assertEquals(1202, $decodedJsonBody['errorNum']);
+    }
+
 
     public function tearDown()
     {

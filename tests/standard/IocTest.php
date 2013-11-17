@@ -79,7 +79,7 @@ class IocTest extends
     }
 
 
-    public function testBindAndMakeHttpResponse()
+    public function testBindAndMakeHttpResponsePlusGettersSetters()
     {
         $this->request         = Client::make('httpRequest');
         $this->request->path   = '/_admin/version';
@@ -95,7 +95,8 @@ class IocTest extends
                           $response = new HttpResponse();
 
                           $response->request = $this->request;
-                          $response->doConstruct();
+
+                          //                          $response->doConstruct();
 
                           return $response;
                       }
@@ -110,7 +111,8 @@ class IocTest extends
                           $response = new HttpResponse();
 
                           $response->request = $me->request;
-                          $response->doConstruct();
+
+                          //                          $response->doConstruct();
 
                           return $response;
                       }
@@ -119,9 +121,92 @@ class IocTest extends
         // And here's how one gets an HttpRequest object through the IOC.
         // Note that the type-name 'httpRequest' is the name we bound our HttpRequest class creation-closure to. (see above)
         $this->response = Client::make('httpResponse');
+        $this->response->doConstruct();
+
         //        echo get_class($this->request);
         $this->assertInstanceOf('frankmayer\ArangoDbPhpCore\Connectors\Http\HttpResponse', $this->response);
         $decodedBody = json_decode($this->response->body, true);
         $this->assertTrue($decodedBody['server'] === 'arango');
+        $this->assertAttributeEmpty('protocol', $this->response);
+
+
+        // test verboseExtractStatusLine
+        $this->response                           = Client::make('httpResponse');
+        $this->response->verboseExtractStatusLine = true;
+        $this->response->doConstruct();
+        $this->assertAttributeNotEmpty('protocol', $this->response);
+
+        $testValue = $this->response->getAsync();
+        $this->assertEmpty($testValue);
+
+        $this->response->setAsync(true);
+
+        $testValue = $this->response->getAsync();
+        $this->assertTrue($testValue);
+
+
+        $testValue = $this->response->getBatch();
+        $this->assertEmpty($testValue);
+
+        $this->response->setBatch(true);
+
+        $testValue = $this->response->getBatch();
+        $this->assertTrue($testValue);
+
+
+        $testValue = $this->response->getBody();
+        $this->assertNotEmpty($testValue);
+
+        $this->response->setBody('testBody');
+
+        $testValue = $this->response->getBody();
+        $this->assertEquals('testBody', $testValue);
+
+        
+        $testValue = $this->response->getHeaders();
+        $this->assertNotEmpty($testValue);
+
+        $this->response->setHeaders('testHeaders');
+
+        $testValue = $this->response->getHeaders();
+        $this->assertEquals('testHeaders', $testValue);
+
+        
+        $testValue = $this->response->getRequest();
+        $this->assertInternalType('object',$testValue);
+
+        $this->response->setRequest($testValue);
+
+        $testValue = $this->response->getRequest();
+        $this->assertInternalType('object',$testValue);
+
+        
+        $testValue = $this->response->getStatus();
+        $this->assertNotEmpty($testValue);
+
+        $this->response->setStatus(202);
+
+        $testValue = $this->response->getStatus();
+        $this->assertEquals(202, $testValue);
+
+        
+        $testValue = $this->response->getProtocol();
+        $this->assertEquals('HTTP/1.1', $testValue);
+
+
+        $testValue = $this->response->getStatusPhrase();
+        $this->assertEquals('OK', $testValue);
+
+        
+        
+        $testValue = $this->response->getVerboseExtractStatusLine();
+        $this->assertEquals(true, $testValue);
+
+        $this->response->setVerboseExtractStatusLine(false);
+
+        $testValue = $this->response->getVerboseExtractStatusLine();
+        $this->assertEquals(false, $testValue);
+
+
     }
 }
