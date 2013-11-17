@@ -106,9 +106,15 @@ class Client
      */
     public function doRequest($requestObject)
     {
-        $responseClass = $this->responseClass;
 
-        return new $responseClass($requestObject);
+
+        $responseClass = $this->responseClass;
+        $response      = new $responseClass($requestObject);
+
+        $response->request = $requestObject;
+        $response->doConstruct();
+
+        return $response;
     }
 
 

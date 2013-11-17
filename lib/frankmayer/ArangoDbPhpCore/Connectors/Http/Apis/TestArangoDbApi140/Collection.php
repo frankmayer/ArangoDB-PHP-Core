@@ -29,12 +29,6 @@ class Collection extends
      */
     const API_COLLECTION = '/_api/collection';
 
-    //    public function __construct($client)
-    //    {
-    //                $this->client       = $client;
-    //                $this->connector    = $this->client->connector;
-    //                $this->requestClass = $this->client->requestClass;
-    //    }
 
     /**
      * @param       $collectionName

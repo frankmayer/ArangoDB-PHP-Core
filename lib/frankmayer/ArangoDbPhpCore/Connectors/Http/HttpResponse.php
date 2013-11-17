@@ -32,11 +32,9 @@ class HttpResponse
     /**
      * @param $requestObject
      */
-    public function __construct($requestObject)
-    {
-        $this->request = $requestObject;
-        $this->doConstruct();
-    }
+    //    public function __construct()
+    //    {
+    //    }
 
     /**
      */

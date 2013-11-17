@@ -82,18 +82,6 @@ class HttpRequest implements
 
 
     /**
-     * HTTP Request constructor.
-     * Constructs an HTTP Request object which can be configured appropriately and executed in order to return an HTTPResponse object.
-     *
-     * @param Client $client
-     */
-//    public function __construct(Client $client)
-//    {
-//        $this->client    = $client;
-//    }
-
-
-    /**
      * This prepares the "fake" response for batch parts
      */
     private function requestBatchPart()
@@ -140,7 +128,7 @@ class HttpRequest implements
             $this->response = $this->client->connector->request($this);
         }
 
-        return $this->client->connector->instantiateResponseObject($this);
+        return $this->client->doRequest($this);
     }
 
 

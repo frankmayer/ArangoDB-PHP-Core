@@ -27,12 +27,6 @@ class Document extends
      */
     const API_DOCUMENT = '/_api/document';
 
-//    public function __construct($client)
-//    {
-//        $this->client       = $client;
-//        $this->connector    = $this->client->connector;
-//        $this->requestClass = $this->client->requestClass;
-//    }
 
     /**
      * @param       $collection
@@ -51,7 +45,7 @@ class Document extends
         $this->request         = new $this->client->requestClass();
         $this->request->client = $this->client;
 
-        $request       = $this->request;
+        $request = $this->request;
 
         //        $urlQuery = $urlQuery;
         $request->options = $options;
@@ -99,7 +93,7 @@ class Document extends
         $this->request         = new $this->client->requestClass();
         $this->request->client = $this->client;
 
-        $request       = $this->request;
+        $request = $this->request;
 
         //        $urlQuery = $urlQuery;
         $request->options = $options;
@@ -139,7 +133,7 @@ class Document extends
         $this->request         = new $this->client->requestClass();
         $this->request->client = $this->client;
 
-        $request       = $this->request;
+        $request = $this->request;
 
         //        $urlQuery = $urlQuery;
         $request->options = $options;
@@ -176,7 +170,7 @@ class Document extends
         $this->request         = new $this->client->requestClass();
         $this->request->client = $this->client;
 
-        $request       = $this->request;
+        $request = $this->request;
 
         $request->options = $options;
 
@@ -204,7 +198,7 @@ class Document extends
         $this->request         = new $this->client->requestClass();
         $this->request->client = $this->client;
 
-        $request       = $this->request;
+        $request = $this->request;
 
         $request->options = $options;
 
@@ -232,7 +226,7 @@ class Document extends
         $this->request         = new $this->client->requestClass();
         $this->request->client = $this->client;
 
-        $request       = $this->request;
+        $request = $this->request;
 
         $request->options = $options;
 

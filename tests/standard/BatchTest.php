@@ -58,7 +58,7 @@ class BatchTest extends
         }
 
 
-        $batch       = new ArangoDbApi\Batch();
+        $batch         = new ArangoDbApi\Batch();
         $batch->client = $this->client;
 
         $responseObject = $batch->send($batchParts);
@@ -84,7 +84,7 @@ class BatchTest extends
             );
         }
 
-        $batch       = new ArangoDbApi\Batch();
+        $batch         = new ArangoDbApi\Batch();
         $batch->client = $this->client;
 
         $responseObject = $batch->send($batchParts);

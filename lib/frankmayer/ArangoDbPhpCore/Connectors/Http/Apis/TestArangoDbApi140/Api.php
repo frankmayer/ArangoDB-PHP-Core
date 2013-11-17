@@ -47,34 +47,6 @@ class Api
      */
     public $requestClass;
 
-    /**
-     * @param \frankmayer\ArangoDbPhpCore\Client $client
-     *
-     */
-    public function __construct()
-    {
-        //        $this->client       = $client;
-        //        $this->connector    = $this->client->connector;
-        //        $this->requestClass = $this->client->requestClass;
-    }
-
-    //    /**
-    //     * @param Client $client
-    //     *
-    //     * @return HttpRequest
-    //     */
-    //    public static function instantiateRequestObject(Client $client){
-    //        return $client->getConnector()->instantiateRequestObject($client);
-    //    }
-    //
-    //    /**
-    //     * @param \frankmayer\ArangoDbPhpCore\Connectors\Http\HttpRequest $request
-    //     *
-    //     * @return HttpRequest
-    //     */
-    //    public static function instantiateResponseObject(HttpRequest $request){
-    //        return $request->client->getConnector()->instantiateResponseObject($request);
-    //    }
 
     public function buildUrlQuery($urlQueryArray)
     {

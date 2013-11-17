@@ -20,17 +20,17 @@ class Async extends
     Api implements
     RestApiInterface
 {
-    public function __construct($client)
-    {
-        $this->client       = $client;
-        $this->connector    = $this->client->connector;
-        $this->requestClass = $this->client->requestClass;
-    }
+//    public function __construct($client)
+//    {
+//        $this->client       = $client;
+//        $this->connector    = $this->client->connector;
+//        $this->requestClass = $this->client->requestClass;
+//    }
 
     public function fetchJobResult($jobId)
     {
-        $this->request = new $this->requestClass();
-        $this->request->client=$this->client;
+        $this->request         = new $this->requestClass();
+        $this->request->client = $this->client;
         //        $request       = $this->request;
         //        return $request->sendBatch();
     }
@@ -38,16 +38,16 @@ class Async extends
 
     public function deleteJobResult($jobId)
     {
-        $this->request = new $this->requestClass();
-        $this->request->client=$this->client;
+        $this->request         = new $this->requestClass();
+        $this->request->client = $this->client;
         //        $request       = $this->request;
         //        return $request->sendBatch();
     }
 
     public function listJobResults($count, $type)
     {
-        $this->request = new $this->requestClass();
-        $this->request->client=$this->client;
+        $this->request         = new $this->requestClass();
+        $this->request->client = $this->client;
         //        $request       = $this->request;
         //        return $request->sendBatch();
     }

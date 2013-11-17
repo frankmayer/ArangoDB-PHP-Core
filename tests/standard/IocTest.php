@@ -92,7 +92,12 @@ class IocTest extends
             Client::bind(
                   'httpResponse',
                       function () {
-                          return $response = new HttpResponse($this->request);
+                          $response = new HttpResponse();
+
+                          $response->request = $this->request;
+                          $response->doConstruct();
+
+                          return $response;
                       }
             );
         } else {
@@ -102,7 +107,12 @@ class IocTest extends
             Client::bind(
                   'httpResponse',
                       function () use ($me) {
-                          return new HttpResponse($me->request);
+                          $response = new HttpResponse();
+
+                          $response->request = $me->request;
+                          $response->doConstruct();
+
+                          return $response;
                       }
             );
         }
