@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<phpunit backupGlobals="false"
+         backupStaticAttributes="false"
+         bootstrap="bootstrap/autoload.php"
+         colors="true"
+         convertErrorsToExceptions="true"
+         convertNoticesToExceptions="true"
+         convertWarningsToExceptions="true"
+         processIsolation="false"
+         stopOnFailure="false"
+         syntaxCheck="false"
+        >
+    <testsuites>
+        <testsuite name="ArangoDB-PHP-Core">
+            <directory>./tests/standard</directory>
+        </testsuite>
+        <testsuite name="ArangoDB-PHP-Core-Performance">
+            <directory>./tests/performance</directory>
+        </testsuite>
+    </testsuites>
+</phpunit>
+
