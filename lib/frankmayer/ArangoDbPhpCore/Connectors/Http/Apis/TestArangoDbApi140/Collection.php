@@ -81,7 +81,7 @@ class Collection extends
         $request->body = self::array_merge_recursive_distinct($request->body, $collectionParameters);
         $request->body = json_encode($request->body);
 
-        $request->path   = $this->client->getDatabasePath() . self::API_COLLECTION;
+        $request->path   = $this->request->getDatabasePath() . self::API_COLLECTION;
         $request->method = self::METHOD_POST;
 
         $responseObject = $request->request();
@@ -105,7 +105,7 @@ class Collection extends
 
         $request          = $this->request;
         $request->options = $options;
-        $request->path    = $this->client->getDatabasePath() . self::API_COLLECTION . '/' . $collectionName;
+        $request->path    = $this->request->getDatabasePath() . self::API_COLLECTION . '/' . $collectionName;
         $request->method  = self::METHOD_DELETE;
 
         $responseObject = $request->request();
@@ -130,7 +130,7 @@ class Collection extends
         $request          = $this->request;
         $request->options = $options;
 
-        $request->path   = $this->client->getDatabasePath(
+        $request->path   = $this->request->getDatabasePath(
             ) . self::API_COLLECTION . '/' . $collectionName . '/truncate';
         $request->method = self::METHOD_PUT;
 
@@ -154,7 +154,7 @@ class Collection extends
         $request          = $this->request;
         $request->options = $options;
 
-        $request->path = $this->client->getDatabasePath() . self::API_COLLECTION;
+        $request->path = $this->request->getDatabasePath() . self::API_COLLECTION;
         if (isset($request->options['excludeSystem']) && $request->options['excludeSystem'] === true) {
             $request->path .= '?excludeSystem=true';
         }

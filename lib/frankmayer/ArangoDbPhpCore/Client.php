@@ -74,24 +74,6 @@ class Client
     }
 
 
-    /**
-     * @return string
-     */
-    public function getEndpointAndDatabasePath()
-    {
-        return $this->endpoint . '/_db/' . $this->database;
-    }
-
-
-    /**
-     * @return string
-     */
-    public function getDatabasePath()
-    {
-        return '/_db/' . $this->database;
-    }
-
-
     //    public function getRequest()
     //    {
     //

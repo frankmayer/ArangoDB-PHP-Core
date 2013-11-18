@@ -56,7 +56,7 @@ class Document extends
             $request->body = json_encode($request->body);
         }
 
-        $request->path = $this->client->getDatabasePath() . self::API_DOCUMENT;
+        $request->path = $this->request->getDatabasePath() . self::API_DOCUMENT;
 
         if (isset($collection)) {
             $urlQuery = array_merge(
@@ -104,7 +104,7 @@ class Document extends
             $request->body = json_encode($request->body);
         }
 
-        $request->path = $this->client->getDatabasePath() . self::API_DOCUMENT . '/' . $handle;
+        $request->path = $this->request->getDatabasePath() . self::API_DOCUMENT . '/' . $handle;
 
         $urlQuery = $this->buildUrlQuery($urlQuery);
 
@@ -144,7 +144,7 @@ class Document extends
             $request->body = json_encode($request->body);
         }
 
-        $request->path = $this->client->getDatabasePath() . self::API_DOCUMENT . '/' . $handle;
+        $request->path = $this->request->getDatabasePath() . self::API_DOCUMENT . '/' . $handle;
 
         $urlQuery = $this->buildUrlQuery($urlQuery);
 
@@ -175,7 +175,7 @@ class Document extends
 
         $request->options = $options;
 
-        $request->path = $this->client->getDatabasePath() . self::API_DOCUMENT;
+        $request->path = $this->request->getDatabasePath() . self::API_DOCUMENT;
         $request->path .= '?collection=' . $collection;
 
         $request->method = self::METHOD_GET;
@@ -203,7 +203,7 @@ class Document extends
 
         $request->options = $options;
 
-        $request->path = $this->client->getDatabasePath() . self::API_DOCUMENT . '/' . $handle;
+        $request->path = $this->request->getDatabasePath() . self::API_DOCUMENT . '/' . $handle;
 
 
         $request->method = self::METHOD_GET;
@@ -231,7 +231,7 @@ class Document extends
 
         $request->options = $options;
 
-        $request->path   = $this->client->getDatabasePath() . self::API_DOCUMENT . '/' . $handle;
+        $request->path   = $this->request->getDatabasePath() . self::API_DOCUMENT . '/' . $handle;
         $request->method = self::METHOD_DELETE;
 
         $responseObject = $request->request();
