@@ -22,12 +22,12 @@ class Batch extends
 {
 
 
-    public function send()
+    public function send($batchParts)
     {
         $this->request         = new $this->client->requestClass();
         $this->request->client = $this->client;
         $request               = $this->request;
 
-        return $request->sendBatch();
+        return $request->sendBatch($batchParts);
     }
 }

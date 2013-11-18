@@ -62,6 +62,7 @@ class BatchTest extends
         $batch->client = $this->client;
 
         $responseObject = $batch->send($batchParts);
+        $this->assertEquals(200, $responseObject->status);
 
         $batchResponseParts = $responseObject->batch;
 

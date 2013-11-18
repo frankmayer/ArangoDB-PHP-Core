@@ -1,6 +1,7 @@
 
 Experimental Phase
 ------------------
+* Fixed Batch functionality
 
 * Lots of cleanup.
 

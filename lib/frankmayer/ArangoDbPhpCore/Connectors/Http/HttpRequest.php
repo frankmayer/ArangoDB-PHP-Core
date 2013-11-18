@@ -73,7 +73,11 @@ class HttpRequest extends
             $this->requestBatchPart();
             $this->address = $this->client->endpoint . $this->path;
         } else {
-            if (isset($this->options['isBatchRequest']) && $this->options['isBatchRequest'] === false) {
+            if (isset($this->options) && (!array_key_exists(
+                        'isBatchRequest',
+                        $this->options
+                    ) || (isset($this->options['isBatchRequest']) && $this->options['isBatchRequest'] !== true))
+            ) {
                 $this->headers['Content-Type'] = 'application/json';
             }
             $this->address  = $this->client->endpoint . $this->path;
@@ -108,7 +112,7 @@ class HttpRequest extends
             $this->body .= $batchPart->request->body . HttpConnector::HTTP_EOL;
         }
         $this->body .= '--' . $boundary . '--' . HttpConnector::HTTP_EOL;
-        $this->path                    = $this->client->getDatabasePath() . self::API_BATCH;
+        $this->path                    = $this->getDatabasePath() . self::API_BATCH;
         $this->headers['Content-Type'] = 'multipart/form-data; boundary=XXXbXXX';
 
         $this->method = 'post';
@@ -157,6 +161,16 @@ class HttpRequest extends
 
         return $parts;
     }
+
+
+    /**
+     * @return string
+     */
+    public function getDatabasePath()
+    {
+        return '/_db/' . $this->client->database;
+    }
+
 
     /**
      * @param string $address
@@ -303,7 +317,7 @@ class HttpRequest extends
     }
     // todo 1 Frank Revisit this method and getter/setter
 
-//    /**
+    //    /**
     //     * @param \frankmayer\ArangoDbPhpCore\Connectors\ResponseInterface $responseObject
     //     */
     //    public function setResponseObject($responseObject)
@@ -319,19 +333,19 @@ class HttpRequest extends
     //        return $this->responseObject;
     //    }
     // todo 1 Frank Revisit this method and getter/setter
-//    /**
-//     * @param string $type
-//     */
-//    public function setType($type)
-//    {
-//        $this->type = $type;
-//    }
-//
-//    /**
-//     * @return string
-//     */
-//    public function getType()
-//    {
-//        return $this->type;
-//    }
+    //    /**
+    //     * @param string $type
+    //     */
+    //    public function setType($type)
+    //    {
+    //        $this->type = $type;
+    //    }
+    //
+    //    /**
+    //     * @return string
+    //     */
+    //    public function getType()
+    //    {
+    //        return $this->type;
+    //    }
 }
