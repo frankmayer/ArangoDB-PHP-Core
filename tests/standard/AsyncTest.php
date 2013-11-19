@@ -75,6 +75,11 @@ class AsyncTest extends
     public function testCreateCollectionAndStoredAsyncDocumentCreation()
     {
 
+        $job         = new ArangoDbApi\Async();
+        $job->client = $this->client;
+        $jobList = $job->deleteJobResult('all');
+
+
         $collectionName = 'ArangoDB-PHP-Core-CollectionTestSuite-Collection';
 
         $collectionOptions = array("waitForSync" => true);
@@ -101,6 +106,18 @@ class AsyncTest extends
         $this->assertEquals(202, $responseObject->status);
 
         sleep(1);
+
+        $jobId=$responseObject->headers['x-arango-async-id'];
+        $jobList = $job->listJobResults('done',1);
+        $jobArray = json_decode($jobList->body,true);
+
+        $this->assertTrue(in_array($jobId,$jobArray));
+
+
+        $jobResult = $job->fetchJobResult($responseObject->headers['x-arango-async-id']);
+        $this->assertTrue($jobResult->headers['x-arango-async-id'] == $responseObject->headers['x-arango-async-id']);
+        $this->assertArrayHasKey('x-arango-async-id', $jobResult->headers);
+
 
         $document         = new ArangoDbApi\Document();
         $document->client = $this->client;

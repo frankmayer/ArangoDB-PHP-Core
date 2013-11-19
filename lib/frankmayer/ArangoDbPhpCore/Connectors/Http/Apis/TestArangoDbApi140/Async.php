@@ -20,35 +20,105 @@ class Async extends
     Api implements
     RestApiInterface
 {
-    //    public function __construct($client)
-    //    {
-    //        $this->client       = $client;
-    //        $this->connector    = $this->client->connector;
-    //        $this->requestClass = $this->client->requestClass;
-    //    }
 
-    public function fetchJobResult($jobId)
-    {
-        $this->request         = new $this->requestClass();
+    const API_JOB = '/_api/job';
+
+    /**
+     * @param string $handle The job handle of the job we want to get. Example: 1
+     * @param array  $options
+     *
+     * @return \frankmayer\ArangoDbPhpCore\Connectors\Http\HttpResponse
+     */
+    public function fetchJobResult(
+        $handle,
+        $options = array()
+    ) {
+        $this->request         = new $this->client->requestClass();
         $this->request->client = $this->client;
-        //        $request       = $this->request;
-        //        return $request->sendBatch();
+
+        $request = $this->request;
+
+        $request->options = $options;
+
+        $request->path = $this->request->getDatabasePath() . self::API_JOB . '/' . $handle;
+
+        $request->method = self::METHOD_PUT;
+
+        $responseObject = $request->request();
+
+        return $responseObject;
     }
 
 
-    public function deleteJobResult($jobId)
-    {
-        $this->request         = new $this->requestClass();
+    /**
+     * @param string  $type The type of jobs to return. Might be `done` or `pending`. Example: 'pending'
+     * @param integer $count
+     * @param array   $options
+     *
+     * @return \frankmayer\ArangoDbPhpCore\Connectors\Http\HttpResponse
+     */
+    public function listJobResults(
+        $type,
+        $count = null,
+        $options = array()
+    ) {
+        $this->request         = new $this->client->requestClass();
         $this->request->client = $this->client;
-        //        $request       = $this->request;
-        //        return $request->sendBatch();
+
+        $request = $this->request;
+
+        $request->options = $options;
+
+        $request->path = $this->request->getDatabasePath() . self::API_JOB . '/' . $type;
+
+        if ($count) {
+            $urlQuery = array('count' => $count);
+
+            $urlQuery = $this->request->buildUrlQuery($urlQuery);
+        }
+
+        $request->path .= $urlQuery;
+
+        $request->method = self::METHOD_GET;
+
+        $responseObject = $request->request();
+
+        return $responseObject;
     }
 
-    public function listJobResults($count, $type)
-    {
-        $this->request         = new $this->requestClass();
+    /**
+     * @param mixed   $type The type or specific job id of jobs to delete. Example: 1 or `all` or `expired`
+     * @param integer $stamp
+     * @param array   $options
+     *
+     * @return \frankmayer\ArangoDbPhpCore\Connectors\Http\HttpResponse
+     */
+    public function deleteJobResult(
+        $type,
+        $stamp = null,
+        $options = array()
+    ) {
+        $this->request         = new $this->client->requestClass();
         $this->request->client = $this->client;
-        //        $request       = $this->request;
-        //        return $request->sendBatch();
+
+        $request = $this->request;
+
+        $request->options = $options;
+
+        $request->path = $this->request->getDatabasePath() . self::API_JOB . '/' . $type;
+
+        if ($stamp) {
+
+            $urlQuery = array('stamp' => $stamp);
+
+            $urlQuery = $this->request->buildUrlQuery($urlQuery);
+        }
+        $request->path .= $urlQuery;
+
+        $request->method = self::METHOD_DELETE;
+
+        $responseObject = $request->request();
+
+        return $responseObject;
     }
 }
