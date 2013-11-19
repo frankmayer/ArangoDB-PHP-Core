@@ -172,6 +172,17 @@ class HttpRequest extends
     }
 
 
+    public function buildUrlQuery($urlQueryArray)
+    {
+        $params = array();
+        foreach ($urlQueryArray as $key => $value) {
+            $params[] = $key . '=' . $value;
+        }
+
+        return '?' . implode('&', $params);
+    }
+
+
     /**
      * @param string $address
      */

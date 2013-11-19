@@ -65,7 +65,7 @@ class Document extends
             );
         }
 
-        $urlQuery = $this->buildUrlQuery($urlQuery);
+        $urlQuery = $this->request->buildUrlQuery($urlQuery);
 
         $request->path .= $urlQuery;
 
@@ -106,7 +106,7 @@ class Document extends
 
         $request->path = $this->request->getDatabasePath() . self::API_DOCUMENT . '/' . $handle;
 
-        $urlQuery = $this->buildUrlQuery($urlQuery);
+        $urlQuery = $this->request->buildUrlQuery($urlQuery);
 
         $request->path .= $urlQuery;
 
@@ -146,7 +146,7 @@ class Document extends
 
         $request->path = $this->request->getDatabasePath() . self::API_DOCUMENT . '/' . $handle;
 
-        $urlQuery = $this->buildUrlQuery($urlQuery);
+        $urlQuery = $this->request->buildUrlQuery($urlQuery);
 
         $request->path .= $urlQuery;
 
