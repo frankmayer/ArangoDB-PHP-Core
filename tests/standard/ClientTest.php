@@ -24,6 +24,9 @@ class ClientTest extends
      * @var Client
      */
     public $client;
+    /**
+     * @var \frankmayer\ArangoDbPhpCore\Connectors\Http\CurlHttpConnector
+     */
     public $connector;
 
 
@@ -43,6 +46,7 @@ class ClientTest extends
     }
 
 
+    //    simple getter/setter tests nothing fancy, only checking if the properties get set and are readable.
     public function testGettersSetters()
     {
         $testValue1 = $this->client->getArangodbApiVersion();
@@ -95,7 +99,7 @@ class ClientTest extends
         $testValue = $this->client->getDatabase();
         $this->assertEquals($testValue1, $testValue);
 
-        
+
         $testValue1 = $this->client->getEndpoint();
         $this->assertNotEmpty($testValue1);
 
@@ -108,10 +112,40 @@ class ClientTest extends
 
         $testValue = $this->client->getEndpoint();
         $this->assertEquals($testValue1, $testValue);
+
+
+        $testValue1 = $this->client->connector->getVerboseLogging();
+        $this->assertFalse($testValue1);
+
+        $this->client->connector->setVerboseLogging(true);
+
+        $testValue = $this->client->connector->getVerboseLogging();
+        $this->assertEquals(true, $testValue);
+
+        $this->client->connector->setVerboseLogging($testValue1);
+
+        $testValue = $this->client->connector->getVerboseLogging();
+        $this->assertEquals($testValue1, $testValue);
     }
 
-    public
-    function tearDown()
+    /**
+     * @expectedException     \frankmayer\ArangoDbPhpCore\ServerException
+     */
+    public function testConnectorWrongEndpoint(){
+
+        $collectionName = 'ArangoDB-PHP-Core-CollectionTestSuite-Collection';
+        $this->client->endpoint='http://127.0.0.1:12345';
+        $collectionOptions = array("waitForSync" => true);
+
+        $collection         = new ArangoDbApi\Collection();
+        $collection->client = $this->client;
+        $responseObject     = $collection->create($collectionName, $collectionOptions);
+        $body               = $responseObject->body;
+
+    }
+
+
+    public function tearDown()
     {
     }
 }

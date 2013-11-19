@@ -10,7 +10,6 @@
 
 namespace frankmayer\ArangoDbPhpCore\Connectors\Http;
 
-use frankmayer\ArangoDbPhpCore\Client;
 use frankmayer\ArangoDbPhpCore\ServerException;
 
 
@@ -28,20 +27,14 @@ class CurlHttpConnector extends
     /**
      * @var bool switch for turning on curl verbose logging
      */
-    protected $verbose;
-
-    /**
-     * @var Client client property
-     */
-    protected $client;
-
+    protected $verboseLogging;
 
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->verbose = false;
+        $this->verboseLogging = false;
     }
 
 
@@ -68,7 +61,7 @@ class CurlHttpConnector extends
             $ch,
             array(
                  CURLOPT_CUSTOMREQUEST  => $request->method,
-                 CURLOPT_VERBOSE        => $this->verbose,
+                 CURLOPT_VERBOSE        => $this->verboseLogging,
                  CURLOPT_RETURNTRANSFER => true,
                  CURLOPT_HEADER         => true,
                  CURLOPT_POSTFIELDS     => $body,
@@ -84,35 +77,20 @@ class CurlHttpConnector extends
         return $response;
     }
 
-    /**
-     * @param \frankmayer\ArangoDbPhpCore\Client $client
-     */
-    public function setClient($client)
-    {
-        $this->client = $client;
-    }
-
-    /**
-     * @return \frankmayer\ArangoDbPhpCore\Client
-     */
-    public function getClient()
-    {
-        return $this->client;
-    }
 
     /**
      * @param boolean $verbose
      */
-    public function setVerbose($verbose)
+    public function setVerboseLogging($verbose)
     {
-        $this->verbose = $verbose;
+        $this->verboseLogging = $verbose;
     }
 
     /**
      * @return boolean
      */
-    public function getVerbose()
+    public function getVerboseLogging()
     {
-        return $this->verbose;
+        return $this->verboseLogging;
     }
 }

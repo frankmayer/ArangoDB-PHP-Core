@@ -62,6 +62,7 @@ class Async extends
         $count = null,
         $options = array()
     ) {
+        $urlQuery              = null;
         $this->request         = new $this->client->requestClass();
         $this->request->client = $this->client;
 
@@ -98,6 +99,7 @@ class Async extends
         $stamp = null,
         $options = array()
     ) {
+        $urlQuery              = null;
         $this->request         = new $this->client->requestClass();
         $this->request->client = $this->client;
 
