@@ -75,9 +75,12 @@ class AsyncTest extends
     public function testCreateCollectionAndStoredAsyncDocumentCreation()
     {
 
-        $job         = new ArangoDbApi\Async();
-        $job->client = $this->client;
-        $jobList = $job->deleteJobResult('all');
+        $job               = new ArangoDbApi\Async();
+        $job->client       = $this->client;
+        $jobDeleteResponse = $job->deleteJobResult('all');
+
+        // todo 1 Frank Write real test for deleting job results with stamp
+        $jobDeleteResponse = $job->deleteJobResult('all', time());
 
 
         $collectionName = 'ArangoDB-PHP-Core-CollectionTestSuite-Collection';
@@ -107,11 +110,11 @@ class AsyncTest extends
 
         sleep(1);
 
-        $jobId=$responseObject->headers['x-arango-async-id'];
-        $jobList = $job->listJobResults('done',1);
-        $jobArray = json_decode($jobList->body,true);
+        $jobId    = $responseObject->headers['x-arango-async-id'];
+        $jobList  = $job->listJobResults('done', 1);
+        $jobArray = json_decode($jobList->body, true);
 
-        $this->assertTrue(in_array($jobId,$jobArray));
+        $this->assertTrue(in_array($jobId, $jobArray));
 
 
         $jobResult = $job->fetchJobResult($responseObject->headers['x-arango-async-id']);
