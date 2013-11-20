@@ -44,6 +44,9 @@ class Collection extends
         // Here's how a binding for the HttpRequest should take place in the IOC container.
         // The actual binding should only happen once in the client construction, though. This is only for testing...
 
+        // Ignoring code coverage for this part. It's covered but giving false stats because we're testing different PHP versions
+        // @codeCoverageIgnoreStart
+
         if (version_compare(PHP_VERSION, '5.4.0') >= 0) {
             // This is the way to bind an HttpRequest in PHP 5.4+
 
@@ -58,8 +61,6 @@ class Collection extends
             );
         } else {
             // This is the way to bind an HttpRequest in PHP 5.3.x
-            // Ignoring code coverage for this part. It's covered but giving false stats because we're testing different PHP versions
-            // @codeCoverageIgnoreStart
 
             $me = $this;
             Client::bind(
@@ -71,8 +72,9 @@ class Collection extends
                           return $request;
                       }
             );
-            // @codeCoverageIgnoreEnd
         }
+        // @codeCoverageIgnoreEnd
+
         // And here's how one gets an HttpRequest object through the IOC.
         // Note that the type-name 'httpRequest' is the name we bound our HttpRequest class creation-closure to. (see above)
         $this->request = Client::make('httpRequest');
