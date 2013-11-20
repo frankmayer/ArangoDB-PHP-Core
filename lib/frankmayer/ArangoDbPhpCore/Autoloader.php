@@ -36,6 +36,8 @@ class Autoloader
      *
      * @throws Exception
      * @return void
+     *
+     * @codeCoverageIgnore
      */
     public static function init()
     {
@@ -73,6 +75,8 @@ class Autoloader
      *
      * @throws ClientException
      * @return void
+     *
+     * @codeCoverageIgnore
      */
     private static function checkEnvironment()
     {
