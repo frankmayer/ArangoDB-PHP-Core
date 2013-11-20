@@ -23,27 +23,27 @@ class PluginManager
     /**
      * @var array
      */
-    protected $pluginStorage;
+    public $pluginStorage;
     /**
      * @var
      */
-    protected $object;
+    public $client;
     /**
      * @var array
      */
-    protected $options;
+    public $options;
 
 
     /**
-     * @param       $object
+     * @param       $client
      * @param array $plugins
      * @param array $options
      */
-    public function __construct($object, $plugins = array(), $options = array('notificationsEnabled' => true))
+    public function __construct($client, $plugins = array(), $options = array('notificationsEnabled' => true))
     {
         $options['notificationsEnabled'] = true;
 
-        $this->object        = $object;
+        $this->client        = $client;
         $this->pluginStorage = array();
         $this->options       = $options;
         $this->setPluginsFromPluginArray($plugins);
@@ -85,7 +85,7 @@ class PluginManager
                 foreach ($this->pluginStorage as $key => $priority) {
                     $plugin = $this->pluginStorage[$key]['plugin'];
                     /** @var $plugin Plugin */
-                    $plugin->notify($eventName, $this->object, $eventData);
+                    $plugin->notify($eventName, $this->client, $eventData);
                 }
             }
         }

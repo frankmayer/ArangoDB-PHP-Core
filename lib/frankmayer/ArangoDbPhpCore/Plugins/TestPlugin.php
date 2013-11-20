@@ -1,7 +1,7 @@
 <?php
 
 /**
- * ArangoDB PHP Core Client: Basic Tracer Plugin
+ * ArangoDB PHP Core Client: Basic Test Plugin
  *
  * @package   frankmayer\ArangoDbPhpCore
  * @author    Frank Mayer
@@ -16,7 +16,7 @@ namespace frankmayer\ArangoDbPhpCore\Plugins;
  *
  * @package frankmayer\ArangoDbPhpCore\Plugins
  */
-class TracerPlugin extends
+class TestPlugin extends
     Plugin
 {
     /**
@@ -28,7 +28,7 @@ class TracerPlugin extends
      */
     public function notify($eventName, $client, $eventData)
     {
-        // todo 1 Frank Make basic tracer plugin
-        echo "tracing event (".($this->priority)."):",$eventName,PHP_EOL;
+        //        echo "tracing event (".($this->priority)."):",$eventName,PHP_EOL;
+        $eventData->pluginTest='plugin tested';
     }
 }

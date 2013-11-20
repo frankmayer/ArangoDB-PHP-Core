@@ -25,6 +25,9 @@ class Client
 {
     protected static $iocContainerArray;
 
+    /**
+     * @var Plugins\PluginManager
+     */
     public $pluginManager;
     public $connector;
     public $clientOptions;
@@ -70,7 +73,9 @@ class Client
 
     public function notifyPlugins($eventName, $eventData = array())
     {
-        $this->pluginManager->notifyPlugins($eventName, $eventData);
+        if ($this->pluginManager) {
+            $this->pluginManager->notifyPlugins($eventName, $eventData);
+        }
     }
 
 
@@ -91,7 +96,7 @@ class Client
 
 
         $responseClass = $this->responseClass;
-        $response      = new $responseClass($requestObject);
+        $response      = new $responseClass();
 
         $response->request = $requestObject;
         $response->doConstruct();
@@ -226,41 +231,38 @@ class Client
     {
         return $this->pluginManager;
     }
-
-
-
     // todo 1 Frank Rework request/response classes configuration
 
-//    /**
-//     * @param mixed $requestClass
-//     */
-//    public function setRequestClass($requestClass)
-//    {
-//        $this->requestClass = $requestClass;
-//    }
-//
-//    /**
-//     * @return mixed
-//     */
-//    public function getRequestClass()
-//    {
-//        return $this->requestClass;
-//    }
-//
-//    /**
-//     * @param mixed $responseClass
-//     */
-//    public function setResponseClass($responseClass)
-//    {
-//        $this->responseClass = $responseClass;
-//    }
-//
-//    /**
-//     * @return mixed
-//     */
-//    public function getResponseClass()
-//    {
-//        return $this->responseClass;
-//    }
+    //    /**
+    //     * @param mixed $requestClass
+    //     */
+    //    public function setRequestClass($requestClass)
+    //    {
+    //        $this->requestClass = $requestClass;
+    //    }
+    //
+    //    /**
+    //     * @return mixed
+    //     */
+    //    public function getRequestClass()
+    //    {
+    //        return $this->requestClass;
+    //    }
+    //
+    //    /**
+    //     * @param mixed $responseClass
+    //     */
+    //    public function setResponseClass($responseClass)
+    //    {
+    //        $this->responseClass = $responseClass;
+    //    }
+    //
+    //    /**
+    //     * @return mixed
+    //     */
+    //    public function getResponseClass()
+    //    {
+    //        return $this->responseClass;
+    //    }
 
 }

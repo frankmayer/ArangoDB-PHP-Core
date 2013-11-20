@@ -57,6 +57,7 @@ class HttpRequest extends
      */
     public function request()
     {
+        $this->client->notifyPlugins('beforeRequest', $this);
         if (isset($this->options['async'])) {
             $async = $this->options['async'];
             if (is_bool($async)) {
