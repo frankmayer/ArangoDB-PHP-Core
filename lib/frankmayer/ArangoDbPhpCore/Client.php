@@ -27,20 +27,38 @@ class Client
     protected static $iocContainerArray;
 
     /**
-     * @var Plugins\PluginManager
+     * @var Plugins\PluginManager The plugin-manager for this client.
      */
     public $pluginManager;
+    /**
+     * @var Connectors\ConnectorInterface|Connectors\Http\HttpConnectorInterface
+     */
     public $connector;
+    /**
+     * @var null The client options. An array of client options.
+     */
     public $clientOptions;
+    /**
+     * @var string The database to use. For example: 'my_database'
+     */
     public $database;
+    /**
+     * @var string The endpoint to connect to. For example: 'http://localhost:8529'
+     */
     public $endpoint;
-
+    /**
+     * @var string The class name (including path) for example 'frankmayer\ArangoDbPhpCore\Connectors\Http\HttpRequest'
+     */
     public $requestClass;
+    /**
+     * @var string The class name (including path) for example 'frankmayer\ArangoDbPhpCore\Connectors\Http\HttpResponse'
+     */
     public $responseClass;
     /**
      * @var string The ArangoDB api version to signal
      */
     public $arangodbApiVersion;
+
 
     /**
      * @param ConnectorInterface|HttpConnectorInterface $connector
@@ -66,25 +84,27 @@ class Client
     }
 
 
+    /**
+     * @param null $plugins
+     *
+     * @return bool
+     */
     public function setPluginsFromPluginArray($plugins = null)
     {
         return $this->pluginManager->setPluginsFromPluginArray($plugins);
     }
 
 
+    /**
+     * @param       $eventName
+     * @param array $eventData
+     */
     public function notifyPlugins($eventName, $eventData = array())
     {
         if ($this->pluginManager) {
             $this->pluginManager->notifyPlugins($eventName, $eventData);
         }
     }
-
-
-    //    public function getRequest()
-    //    {
-    //
-    //        return new $this->requestClass($this);
-    //    }
 
 
     /**
@@ -137,6 +157,7 @@ class Client
         throw new ClientException('No type registered with that name');
     }
 
+
     /**
      * @param string $arangodbApiVersion
      *
@@ -149,6 +170,7 @@ class Client
         return $this;
     }
 
+
     /**
      * @return string
      */
@@ -156,6 +178,7 @@ class Client
     {
         return $this->arangodbApiVersion;
     }
+
 
     /**
      * @param null $clientOptions
@@ -169,6 +192,7 @@ class Client
         return $this;
     }
 
+
     /**
      * @return null
      */
@@ -177,17 +201,19 @@ class Client
         return $this->clientOptions;
     }
 
+
     /**
      * @param \frankmayer\ArangoDbPhpCore\Connectors\ConnectorInterface|\frankmayer\ArangoDbPhpCore\Connectors\Http\HttpConnectorInterface $connector
      *
      * @return $this
      */
-    public function setConnector(\frankmayer\ArangoDbPhpCore\Connectors\ConnectorInterface $connector)
+    public function setConnector(ConnectorInterface $connector)
     {
         $this->connector = $connector;
 
         return $this;
     }
+
 
     /**
      * @return \frankmayer\ArangoDbPhpCore\Connectors\ConnectorInterface|\frankmayer\ArangoDbPhpCore\Connectors\Http\HttpConnectorInterface
@@ -196,6 +222,7 @@ class Client
     {
         return $this->connector;
     }
+
 
     /**
      * @param mixed $database
@@ -209,6 +236,7 @@ class Client
         return $this;
     }
 
+
     /**
      * @return mixed
      */
@@ -216,6 +244,7 @@ class Client
     {
         return $this->database;
     }
+
 
     /**
      * @param mixed $endpoint
@@ -228,6 +257,7 @@ class Client
 
         return $this;
     }
+
 
     /**
      * @return mixed
@@ -250,6 +280,7 @@ class Client
         return $this;
     }
 
+
     /**
      * @return \frankmayer\ArangoDbPhpCore\Plugins\PluginManager
      */
@@ -258,7 +289,6 @@ class Client
         return $this->pluginManager;
     }
 
-    // todo 1 Frank Rework request/response classes configuration
 
     /**
      * @param mixed $requestClass
@@ -272,6 +302,7 @@ class Client
         return $this;
     }
 
+
     /**
      * @return mixed
      */
@@ -279,6 +310,7 @@ class Client
     {
         return $this->requestClass;
     }
+
 
     /**
      * @param mixed $responseClass
@@ -291,6 +323,7 @@ class Client
 
         return $this;
     }
+
 
     /**
      * @return mixed
