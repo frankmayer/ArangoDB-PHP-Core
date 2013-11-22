@@ -12,8 +12,8 @@ namespace frankmayer\ArangoDbPhpCore;
 
 use frankmayer\ArangoDbPhpCore\Connectors\ConnectorInterface;
 use frankmayer\ArangoDbPhpCore\Connectors\Http\HttpConnectorInterface;
+use frankmayer\ArangoDbPhpCore\Connectors\Http\HttpResponse;
 use frankmayer\ArangoDbPhpCore\Plugins\PluginManager;
-use frankmayer\ArangoDbPhpCore\Plugins\TracerPlugin;
 
 /**
  * The Client class.
@@ -66,9 +66,6 @@ class Client
     }
 
 
-
-
-
     public function setPluginsFromPluginArray($plugins = null)
     {
         return $this->pluginManager->setPluginsFromPluginArray($plugins);
@@ -103,6 +100,7 @@ class Client
         $response      = new $responseClass();
 
         $response->request = $requestObject;
+        /** @var $response HttpResponse */
         $response->doConstruct();
 
         return $response;
@@ -141,10 +139,14 @@ class Client
 
     /**
      * @param string $arangodbApiVersion
+     *
+     * @return $this
      */
     public function setArangodbApiVersion($arangodbApiVersion)
     {
         $this->arangodbApiVersion = $arangodbApiVersion;
+
+        return $this;
     }
 
     /**
@@ -157,10 +159,14 @@ class Client
 
     /**
      * @param null $clientOptions
+     *
+     * @return $this
      */
     public function setClientOptions($clientOptions)
     {
         $this->clientOptions = $clientOptions;
+
+        return $this;
     }
 
     /**
@@ -173,10 +179,14 @@ class Client
 
     /**
      * @param \frankmayer\ArangoDbPhpCore\Connectors\ConnectorInterface|\frankmayer\ArangoDbPhpCore\Connectors\Http\HttpConnectorInterface $connector
+     *
+     * @return $this
      */
     public function setConnector(\frankmayer\ArangoDbPhpCore\Connectors\ConnectorInterface $connector)
     {
         $this->connector = $connector;
+
+        return $this;
     }
 
     /**
@@ -189,10 +199,14 @@ class Client
 
     /**
      * @param mixed $database
+     *
+     * @return $this
      */
     public function setDatabase($database)
     {
         $this->database = $database;
+
+        return $this;
     }
 
     /**
@@ -205,10 +219,14 @@ class Client
 
     /**
      * @param mixed $endpoint
+     *
+     * @return $this
      */
     public function setEndpoint($endpoint)
     {
         $this->endpoint = $endpoint;
+
+        return $this;
     }
 
     /**
@@ -222,10 +240,14 @@ class Client
 
     /**
      * @param \frankmayer\ArangoDbPhpCore\Plugins\PluginManager $pluginManager
+     *
+     * @return $this
      */
     public function setPluginManager($pluginManager)
     {
         $this->pluginManager = $pluginManager;
+
+        return $this;
     }
 
     /**
@@ -240,10 +262,14 @@ class Client
 
     /**
      * @param mixed $requestClass
+     *
+     * @return $this
      */
     public function setRequestClass($requestClass)
     {
         $this->requestClass = $requestClass;
+
+        return $this;
     }
 
     /**
@@ -256,10 +282,14 @@ class Client
 
     /**
      * @param mixed $responseClass
+     *
+     * @return $this
      */
     public function setResponseClass($responseClass)
     {
         $this->responseClass = $responseClass;
+
+        return $this;
     }
 
     /**

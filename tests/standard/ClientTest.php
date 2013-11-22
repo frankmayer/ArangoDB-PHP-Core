@@ -13,8 +13,6 @@ namespace frankmayer\ArangoDbPhpCore;
 
 use frankmayer\ArangoDbPhpCore\Connectors\Http\Apis\TestArangoDbApi140 as ArangoDbApi;
 use frankmayer\ArangoDbPhpCore\Connectors\Http\CurlHttpConnector;
-use frankmayer\ArangoDbPhpCore\Connectors\Http\HttpRequest;
-use frankmayer\ArangoDbPhpCore\Connectors\Http\HttpResponse;
 use frankmayer\ArangoDbPhpCore\Plugins\TracerPlugin;
 
 
@@ -80,12 +78,14 @@ class ClientTest extends
         $testValue1 = $this->client->getArangodbApiVersion();
         $this->assertNotEmpty($testValue1);
 
-        $this->client->setArangodbApiVersion(10300);
+        $object = $this->client->setArangodbApiVersion(10300);
+        $this->assertTrue($this->client === $object);
 
         $testValue = $this->client->getArangodbApiVersion();
         $this->assertEquals(10300, $testValue);
 
-        $this->client->setArangodbApiVersion(10400);
+        $object = $this->client->setArangodbApiVersion(10400);
+        $this->assertTrue($this->client === $object);
 
         $testValue = $this->client->getArangodbApiVersion();
         $this->assertEquals(10400, $testValue);
@@ -94,12 +94,14 @@ class ClientTest extends
         $testValue1 = $this->client->getClientOptions();
         $this->assertNotEmpty($testValue1);
 
-        $this->client->setClientOptions(array('testOption' => 'testVal'));
+        $object = $this->client->setClientOptions(array('testOption' => 'testVal'));
+        $this->assertTrue($this->client === $object);
 
         $testValue = $this->client->getClientOptions();
         $this->assertArrayHasKey('testOption', $testValue);
 
-        $this->client->setClientOptions($testValue1);
+        $object = $this->client->setClientOptions($testValue1);
+        $this->assertTrue($this->client === $object);
 
         $testValue = $this->client->getClientOptions();
         $this->assertEquals($testValue1, $testValue);
@@ -108,7 +110,8 @@ class ClientTest extends
         $testValue1 = $this->client->getConnector();
         $this->assertEquals($this->connector, $testValue1);
 
-        $this->client->setConnector($this->connector);
+        $object = $this->client->setConnector($this->connector);
+        $this->assertTrue($this->client === $object);
 
         $testValue1 = $this->client->getConnector();
         $this->assertEquals($this->connector, $testValue1);
@@ -117,12 +120,14 @@ class ClientTest extends
         $testValue1 = $this->client->getDatabase();
         $this->assertNotEmpty($testValue1);
 
-        $this->client->setDatabase('testDB');
+        $object = $this->client->setDatabase('testDB');
+        $this->assertTrue($this->client === $object);
 
         $testValue = $this->client->getDatabase();
         $this->assertEquals('testDB', $testValue);
 
-        $this->client->setDatabase($testValue1);
+        $object = $this->client->setDatabase($testValue1);
+        $this->assertTrue($this->client === $object);
 
         $testValue = $this->client->getDatabase();
         $this->assertEquals($testValue1, $testValue);
@@ -131,12 +136,14 @@ class ClientTest extends
         $testValue1 = $this->client->getEndpoint();
         $this->assertNotEmpty($testValue1);
 
-        $this->client->setEndpoint('testEndpoint');
+        $object = $this->client->setEndpoint('testEndpoint');
+        $this->assertTrue($this->client === $object);
 
         $testValue = $this->client->getEndpoint();
         $this->assertEquals('testEndpoint', $testValue);
 
-        $this->client->setEndpoint($testValue1);
+        $object = $this->client->setEndpoint($testValue1);
+        $this->assertTrue($this->client === $object);
 
         $testValue = $this->client->getEndpoint();
         $this->assertEquals($testValue1, $testValue);
@@ -158,12 +165,14 @@ class ClientTest extends
         $getRequestOriginalClass = $this->client->getRequestClass();
         $this->assertEquals('frankmayer\ArangoDbPhpCore\Connectors\Http\HttpRequest', $getRequestOriginalClass);
 
-        $this->client->setRequestClass('frankmayer\ArangoDbPhpCore\Connectors\Http\HttpRequestTest');
+        $object = $this->client->setRequestClass('frankmayer\ArangoDbPhpCore\Connectors\Http\HttpRequestTest');
+        $this->assertTrue($this->client === $object);
 
         $getRequestClass = $this->client->getRequestClass();
         $this->assertEquals('frankmayer\ArangoDbPhpCore\Connectors\Http\HttpRequestTest', $getRequestClass);
 
-        $this->client->setRequestClass($getRequestOriginalClass);
+        $object = $this->client->setRequestClass($getRequestOriginalClass);
+        $this->assertTrue($this->client === $object);
 
         $getRequestClass = $this->client->getRequestClass();
         $this->assertEquals('frankmayer\ArangoDbPhpCore\Connectors\Http\HttpRequest', $getRequestClass);
@@ -171,12 +180,14 @@ class ClientTest extends
         $getResponseOriginalClass = $this->client->getResponseClass();
         $this->assertEquals('frankmayer\ArangoDbPhpCore\Connectors\Http\HttpResponse', $getResponseOriginalClass);
 
-        $this->client->setResponseClass('frankmayer\ArangoDbPhpCore\Connectors\Http\HttpResponseTest');
+        $object = $this->client->setResponseClass('frankmayer\ArangoDbPhpCore\Connectors\Http\HttpResponseTest');
+        $this->assertTrue($this->client === $object);
 
         $getResponseClass = $this->client->getResponseClass();
         $this->assertEquals('frankmayer\ArangoDbPhpCore\Connectors\Http\HttpResponseTest', $getResponseClass);
 
-        $this->client->setResponseClass($getResponseOriginalClass);
+        $object = $this->client->setResponseClass($getResponseOriginalClass);
+        $this->assertTrue($this->client === $object);
 
         $getResponseClass = $this->client->getResponseClass();
         $this->assertEquals('frankmayer\ArangoDbPhpCore\Connectors\Http\HttpResponse', $getResponseClass);
