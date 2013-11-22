@@ -62,6 +62,8 @@ Thanks !!
 
 ###### Major Todo's:
 - [x] stabilize Plugin API
+- [x] implement ArangoDB authentication
+- [ ] implement Basic Plugin
 - [ ] Provide Docs
 
 
