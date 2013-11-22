@@ -26,9 +26,12 @@ class TracerPlugin extends
      *
      * @return mixed|void
      */
+    // Ignoring this for now, as we will revisit this later...
+    // @codeCoverageIgnoreStart
     public function notify($eventName, $client, $eventData)
     {
         // todo 1 Frank Make basic tracer plugin
-        echo "tracing event (".($this->priority)."):",$eventName,PHP_EOL;
+        echo "tracing event (" . ($this->priority) . "):", $eventName, PHP_EOL;
     }
+    // @codeCoverageIgnoreEnd
 }
