@@ -1,6 +1,13 @@
 
 Experimental Phase
 ------------------
+
+* Made Client Setters chain-able (+tests)
+
+* Refactored and testing of Plugin functionality
+
+* Implemented Async Jobs management and basic tests for examples
+
 * Fixed Batch functionality
 
 * Lots of cleanup.

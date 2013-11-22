@@ -60,9 +60,9 @@ I'll let you know via this readme and my Twitter-feed: https://twitter.com/frank
 Thanks !!
 
 
-######TODO:
-- stabilize Plugin API
-- Provide Docs
+###### Major Todo's:
+- [x] stabilize Plugin API
+- [ ] Provide Docs
 
 
 ######License:
