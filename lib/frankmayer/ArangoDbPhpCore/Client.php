@@ -13,6 +13,7 @@ namespace frankmayer\ArangoDbPhpCore;
 use frankmayer\ArangoDbPhpCore\Connectors\ConnectorInterface;
 use frankmayer\ArangoDbPhpCore\Connectors\Http\HttpConnectorInterface;
 use frankmayer\ArangoDbPhpCore\Plugins\PluginManager;
+use frankmayer\ArangoDbPhpCore\Plugins\TracerPlugin;
 
 /**
  * The Client class.
@@ -63,6 +64,9 @@ class Client
             $this->pluginManager = new PluginManager($this, isset($this->clientOptions['plugins']) ? $this->clientOptions['plugins'] : null, isset($this->clientOptions['PluginManager']['options']) ? $this->clientOptions['PluginManager']['options'] : null);
         };
     }
+
+
+
 
 
     public function setPluginsFromPluginArray($plugins = null)
@@ -231,38 +235,38 @@ class Client
     {
         return $this->pluginManager;
     }
+
     // todo 1 Frank Rework request/response classes configuration
 
-    //    /**
-    //     * @param mixed $requestClass
-    //     */
-    //    public function setRequestClass($requestClass)
-    //    {
-    //        $this->requestClass = $requestClass;
-    //    }
-    //
-    //    /**
-    //     * @return mixed
-    //     */
-    //    public function getRequestClass()
-    //    {
-    //        return $this->requestClass;
-    //    }
-    //
-    //    /**
-    //     * @param mixed $responseClass
-    //     */
-    //    public function setResponseClass($responseClass)
-    //    {
-    //        $this->responseClass = $responseClass;
-    //    }
-    //
-    //    /**
-    //     * @return mixed
-    //     */
-    //    public function getResponseClass()
-    //    {
-    //        return $this->responseClass;
-    //    }
+    /**
+     * @param mixed $requestClass
+     */
+    public function setRequestClass($requestClass)
+    {
+        $this->requestClass = $requestClass;
+    }
 
+    /**
+     * @return mixed
+     */
+    public function getRequestClass()
+    {
+        return $this->requestClass;
+    }
+
+    /**
+     * @param mixed $responseClass
+     */
+    public function setResponseClass($responseClass)
+    {
+        $this->responseClass = $responseClass;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getResponseClass()
+    {
+        return $this->responseClass;
+    }
 }

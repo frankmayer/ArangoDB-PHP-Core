@@ -13,7 +13,9 @@ namespace frankmayer\ArangoDbPhpCore;
 
 use frankmayer\ArangoDbPhpCore\Connectors\Http\Apis\TestArangoDbApi140 as ArangoDbApi;
 use frankmayer\ArangoDbPhpCore\Connectors\Http\CurlHttpConnector;
+use frankmayer\ArangoDbPhpCore\Connectors\Http\HttpRequest;
 use frankmayer\ArangoDbPhpCore\Connectors\Http\HttpResponse;
+use frankmayer\ArangoDbPhpCore\Plugins\TracerPlugin;
 
 
 class ClientTest extends
@@ -36,6 +38,32 @@ class ClientTest extends
         $this->connector = $connector;
         $this->client    = $this->client = getClient($connector);
     }
+
+    function setupClientWithPluginConfiguration()
+    {
+
+        $plugins = array('TracerPlugin' => new TracerPlugin());
+
+        return array(
+            ClientOptions::OPTION_ENDPOINT             => 'http://localhost:8529',
+            ClientOptions::OPTION_DEFAULT_DATABASE     => '_system',
+            ClientOptions::OPTION_TIMEOUT              => 5,
+            ClientOptions::OPTION_PLUGINS              => $plugins,
+            ClientOptions::OPTION_REQUEST_CLASS        => 'frankmayer\ArangoDbPhpCore\Connectors\Http\HttpRequest',
+            ClientOptions::OPTION_RESPONSE_CLASS       => 'frankmayer\ArangoDbPhpCore\Connectors\Http\HttpResponse',
+            ClientOptions::OPTION_ARANGODB_API_VERSION => '10400',
+
+        );
+    }
+
+
+    function testClientWithPluginConfiguration()
+    {
+        $client = new Client($this->connector, $this->setupClientWithPluginConfiguration());
+
+        $this->assertArrayHasKey('TracerPlugin', $client->pluginManager->pluginStorage);
+    }
+
 
     /**
      * @expectedException     \frankmayer\ArangoDbPhpCore\ClientException
@@ -126,22 +154,48 @@ class ClientTest extends
 
         $testValue = $this->client->connector->getVerboseLogging();
         $this->assertEquals($testValue1, $testValue);
+
+        $getRequestOriginalClass = $this->client->getRequestClass();
+        $this->assertEquals('frankmayer\ArangoDbPhpCore\Connectors\Http\HttpRequest', $getRequestOriginalClass);
+
+        $this->client->setRequestClass('frankmayer\ArangoDbPhpCore\Connectors\Http\HttpRequestTest');
+
+        $getRequestClass = $this->client->getRequestClass();
+        $this->assertEquals('frankmayer\ArangoDbPhpCore\Connectors\Http\HttpRequestTest', $getRequestClass);
+
+        $this->client->setRequestClass($getRequestOriginalClass);
+
+        $getRequestClass = $this->client->getRequestClass();
+        $this->assertEquals('frankmayer\ArangoDbPhpCore\Connectors\Http\HttpRequest', $getRequestClass);
+
+        $getResponseOriginalClass = $this->client->getResponseClass();
+        $this->assertEquals('frankmayer\ArangoDbPhpCore\Connectors\Http\HttpResponse', $getResponseOriginalClass);
+
+        $this->client->setResponseClass('frankmayer\ArangoDbPhpCore\Connectors\Http\HttpResponseTest');
+
+        $getResponseClass = $this->client->getResponseClass();
+        $this->assertEquals('frankmayer\ArangoDbPhpCore\Connectors\Http\HttpResponseTest', $getResponseClass);
+
+        $this->client->setResponseClass($getResponseOriginalClass);
+
+        $getResponseClass = $this->client->getResponseClass();
+        $this->assertEquals('frankmayer\ArangoDbPhpCore\Connectors\Http\HttpResponse', $getResponseClass);
     }
 
     /**
      * @expectedException     \frankmayer\ArangoDbPhpCore\ServerException
      */
-    public function testConnectorWrongEndpoint(){
+    public function testConnectorWrongEndpoint()
+    {
 
-        $collectionName = 'ArangoDB-PHP-Core-CollectionTestSuite-Collection';
-        $this->client->endpoint='http://127.0.0.1:12345';
-        $collectionOptions = array("waitForSync" => true);
+        $collectionName         = 'ArangoDB-PHP-Core-CollectionTestSuite-Collection';
+        $this->client->endpoint = 'http://127.0.0.113:12345';
+        $collectionOptions      = array("waitForSync" => true);
 
         $collection         = new ArangoDbApi\Collection();
         $collection->client = $this->client;
         $responseObject     = $collection->create($collectionName, $collectionOptions);
         $body               = $responseObject->body;
-
     }
 
 
