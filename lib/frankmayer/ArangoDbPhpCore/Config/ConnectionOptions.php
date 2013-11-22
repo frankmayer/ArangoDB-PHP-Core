@@ -24,7 +24,7 @@ use frankmayer\ArangoDbPhpCore\Exception;
  *
  * @package frankmayer\ArangoDbPhpCore
  */
-class ClientOptions implements
+class ConnectionOptions implements
     \ArrayAccess
 {
     /**
