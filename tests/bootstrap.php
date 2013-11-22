@@ -19,7 +19,7 @@ require dirname(__FILE__) . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '
 function getClientOptions()
 {
 
-//    $plugins = array('TracerPlugin' => new TracerPlugin());
+    //    $plugins = array('TracerPlugin' => new TracerPlugin());
 
     return array(
         ClientOptions::OPTION_ENDPOINT             => 'http://localhost:8529',
@@ -30,10 +30,9 @@ function getClientOptions()
         ClientOptions::OPTION_AUTH_USER       => '',                      // user for basic authorization
         ClientOptions::OPTION_AUTH_PASSWD     => '',                      // password for basic authorization
         */
-        ClientOptions::OPTION_TIMEOUT              => 5,
         // timeout in seconds
-        // ClientOptions::OPTION_TRACE           => $traceFunc,              // tracer function, can be used for debugging
-//        ClientOptions::OPTION_PLUGINS              => $plugins,
+        ClientOptions::OPTION_TIMEOUT              => 5,
+        // ClientOptions::OPTION_PLUGINS              => $plugins,
         ClientOptions::OPTION_REQUEST_CLASS        => 'frankmayer\ArangoDbPhpCore\Connectors\Http\HttpRequest',
         ClientOptions::OPTION_RESPONSE_CLASS       => 'frankmayer\ArangoDbPhpCore\Connectors\Http\HttpResponse',
         ClientOptions::OPTION_ARANGODB_API_VERSION => '10400',
