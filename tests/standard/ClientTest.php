@@ -12,6 +12,8 @@ namespace frankmayer\ArangoDbPhpCore;
 
 
 use frankmayer\ArangoDbPhpCore\Connectors\Http\Apis\TestArangoDbApi140 as ArangoDbApi;
+use frankmayer\ArangoDbPhpCore\Connectors\Http\Apis\TestArangoDbApi140\Api;
+use frankmayer\ArangoDbPhpCore\Connectors\Http\Apis\TestArangoDbApi140\Collection;
 use frankmayer\ArangoDbPhpCore\Connectors\Http\CurlHttpConnector;
 use frankmayer\ArangoDbPhpCore\Plugins\TracerPlugin;
 
@@ -61,6 +63,44 @@ class ClientTest extends
 
         $this->assertArrayHasKey('TracerPlugin', $client->pluginManager->pluginStorage);
     }
+
+
+    function setupClientWithAuthenticationConfiguration()
+    {
+
+        return array(
+            ClientOptions::OPTION_ENDPOINT             => 'http://localhost:8529',
+            ClientOptions::OPTION_DEFAULT_DATABASE     => '_system',
+            ClientOptions::OPTION_TIMEOUT              => 5,
+            ClientOptions::OPTION_REQUEST_CLASS        => 'frankmayer\ArangoDbPhpCore\Connectors\Http\HttpRequest',
+            ClientOptions::OPTION_RESPONSE_CLASS       => 'frankmayer\ArangoDbPhpCore\Connectors\Http\HttpResponse',
+            ClientOptions::OPTION_ARANGODB_API_VERSION => '10400',
+            ClientOptions::OPTION_AUTH_TYPE            => 'Basic', // use basic authorization
+            ClientOptions::OPTION_AUTH_USER            => 'coreTestUser', // user for basic authorization
+            ClientOptions::OPTION_AUTH_PASSWD          => 'coreTestPassword', // password for basic authorization
+        );
+    }
+
+
+    // Can test this only if we set the server to actually authenticate (which is tested manually by the way... :D )
+    //    /**
+    //     * @expectedException     \frankmayer\ArangoDbPhpCore\ServerException
+    //     */
+    //    function testClientWithAuthenticationConfiguration()
+    //    {
+    //        $client = new Client($this->connector, $this->setupClientWithAuthenticationConfiguration());
+    //
+    //
+    //        $request         = new $client->requestClass();
+    //        $request->client = $client;
+    //
+    //        $request->path = $request->getDatabasePath() . Collection::API_COLLECTION;
+    //
+    //        $request->method = Api::METHOD_GET;
+    //
+    //
+    //        $request->request();
+    //    }
 
 
     /**
@@ -208,6 +248,15 @@ class ClientTest extends
         $responseObject     = $collection->create($collectionName, $collectionOptions);
         $body               = $responseObject->body;
     }
+
+    public function testHelperFunctionArray_merge_recursive_distinct()
+    {
+
+       $merged = Api::array_merge_recursive_distinct(array('key' => array('org value')), array('key' => array('new value')));
+        $this->assertEquals('new value', $merged['key'][0]);
+    }
+
+
 
 
     public function tearDown()

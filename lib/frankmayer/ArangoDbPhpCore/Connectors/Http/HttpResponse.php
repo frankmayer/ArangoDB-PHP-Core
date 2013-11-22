@@ -10,6 +10,8 @@
 
 namespace frankmayer\ArangoDbPhpCore\Connectors\Http;
 
+use frankmayer\ArangoDbPhpCore\ServerException;
+
 
 /**
  * Http-Response object holding the raw and objectified Response data.
@@ -44,6 +46,15 @@ class HttpResponse
         if ($this->verboseExtractStatusLine === true) {
             $this->protocol     = $statusLineArray[0];
             $this->statusPhrase = $statusLineArray[2];
+        }
+
+        if ($this->status === '401') {
+            // Ignoring this, as the server needs to have authentication enabled in order to run through this.
+            // @codeCoverageIgnoreStart
+            $this->protocol     = $statusLineArray[0];
+            $this->statusPhrase = $statusLineArray[2];
+            throw new ServerException($this->statusPhrase, $this->status);
+            // @codeCoverageIgnoreEnd
         }
     }
 

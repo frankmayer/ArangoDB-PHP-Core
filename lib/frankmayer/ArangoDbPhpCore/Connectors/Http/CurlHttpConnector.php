@@ -10,6 +10,7 @@
 
 namespace frankmayer\ArangoDbPhpCore\Connectors\Http;
 
+use frankmayer\ArangoDbPhpCore\ClientOptions;
 use frankmayer\ArangoDbPhpCore\ServerException;
 
 
@@ -69,10 +70,25 @@ class CurlHttpConnector extends
             )
         );
 
+        $clientOptions = $request->client->clientOptions;
+        // Ignoring this, as the server needs to have authentication enabled in order to run through this.
+        // @codeCoverageIgnoreStart
+        if (isset ($clientOptions[ClientOptions::OPTION_AUTH_TYPE])) {
+            if (strtolower($clientOptions[ClientOptions::OPTION_AUTH_TYPE]) === 'basic') {
+                curl_setopt(
+                    $ch,
+                    CURLOPT_USERPWD,
+                    $clientOptions[ClientOptions::OPTION_AUTH_USER] . ":" . $clientOptions[ClientOptions::OPTION_AUTH_PASSWD]
+                );
+            }
+        }
+        // @codeCoverageIgnoreEnd
+
         $response = curl_exec($ch);
         if ($response === false) {
             throw new ServerException(curl_error($ch), curl_errno($ch));
         }
+
 
         return $response;
     }
