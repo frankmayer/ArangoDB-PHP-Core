@@ -39,6 +39,7 @@ class ClientTest extends
         $this->client    = $this->client = getClient($connector);
     }
 
+
     function setupClientWithPluginConfiguration()
     {
 
@@ -233,12 +234,12 @@ class ClientTest extends
         $this->assertEquals('frankmayer\ArangoDbPhpCore\Connectors\Http\HttpResponse', $getResponseClass);
     }
 
+
     /**
      * @expectedException     \frankmayer\ArangoDbPhpCore\ServerException
      */
     public function testConnectorWrongEndpoint()
     {
-
         $collectionName         = 'ArangoDB-PHP-Core-CollectionTestSuite-Collection';
         $this->client->endpoint = 'http://127.0.0.113:12345';
         $collectionOptions      = array("waitForSync" => true);
@@ -249,14 +250,31 @@ class ClientTest extends
         $body               = $responseObject->body;
     }
 
-    public function testHelperFunctionArray_merge_recursive_distinct()
-    {
 
-       $merged = Api::array_merge_recursive_distinct(array('key' => array('org value')), array('key' => array('new value')));
-        $this->assertEquals('new value', $merged['key'][0]);
+    /**
+     * @expectedException     \frankmayer\ArangoDbPhpCore\ServerException
+     */
+    public function testServerException()
+    {
+        $request         = new $this->client->requestClass();
+        $request->client = $this->client;
+
+        $request->path = $request->getDatabasePath() . Collection::API_COLLECTION;
+
+        $request->method = Api::METHOD_PATCH;
+
+
+        $request->request();
     }
 
-
+    public function testHelperFunctionArray_merge_recursive_distinct()
+    {
+        $merged = Api::array_merge_recursive_distinct(
+                     array('key' => array('org value')),
+                     array('key' => array('new value'))
+        );
+        $this->assertEquals('new value', $merged['key'][0]);
+    }
 
 
     public function tearDown()

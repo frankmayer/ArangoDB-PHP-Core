@@ -20,6 +20,16 @@ use frankmayer\ArangoDbPhpCore\ServerException;
  */
 class HttpResponse
 {
+
+
+    /**
+     * @var array An array with the http status codes of the ones, that we want to raise an exception for.
+     *
+     * This should be set with an array like array(400,401,402,403);
+     */
+    public $enabledHttpServerExceptions;
+
+
     /**
      * @var HttpRequest $request
      */
@@ -33,6 +43,11 @@ class HttpResponse
     public $statusPhrase;
     public $verboseExtractStatusLine = false;
 
+    public function __construct()
+    {
+        // 404 intentionally left out as a default, as not finding some data shouldn't always raise an exception
+        $this->enabledHttpServerExceptions = array(400, 401, 403, 405, 412, 500, 600, 601);
+    }
 
     /**
      */
@@ -44,18 +59,37 @@ class HttpResponse
         $this->status = $statusLineArray[1];
 
         if ($this->verboseExtractStatusLine === true) {
-            $this->protocol     = $statusLineArray[0];
-            $this->statusPhrase = $statusLineArray[2];
+            $this->protocol = $statusLineArray[0];
+
+            $this->statusPhrase = $this->decodeGetStatusPhrase($statusLineArray);
         }
 
-        if ($this->status === '401') {
+        if (in_array(intval($this->status), $this->enabledHttpServerExceptions)) {
             // Ignoring this, as the server needs to have authentication enabled in order to run through this.
             // @codeCoverageIgnoreStart
             $this->protocol     = $statusLineArray[0];
-            $this->statusPhrase = $statusLineArray[2];
+            $this->statusPhrase = $this->decodeGetStatusPhrase($statusLineArray);
             throw new ServerException($this->statusPhrase, $this->status);
             // @codeCoverageIgnoreEnd
         }
+    }
+
+    /**
+     * @param $statusLineArray
+     *
+     * @return string
+     */
+    public function decodeGetStatusPhrase($statusLineArray)
+    {
+        $phrase = '';
+        foreach ($statusLineArray as $key => $part) {
+            if ($key > 1) {
+                $phrase .= $part . ' ';
+            }
+        }
+        $phrase = trim($phrase, " ");
+
+        return $phrase;
     }
 
 
