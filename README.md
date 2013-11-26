@@ -61,10 +61,10 @@ Thanks !!
 
 
 ###### Major Todo's:
-- [x] stabilize Plugin API
+- [x] stabilize plugin API
 - [x] implement ArangoDB authentication
-- [ ] implement Basic Plugin
-- [ ] Provide Docs
+- [ ] implement basic tracer plugin
+- [ ] provide docs
 
 
 ######License:

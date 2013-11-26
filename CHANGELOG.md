@@ -2,6 +2,13 @@
 Experimental Phase
 ------------------
 
+* Made ServerExceptions more flexible.
+  It's now configurable, which HTTP Response code triggers an exception.
+
+  Also fixed an issue with the decoding of the status header and extraction of the status phrase
+
+* Implemented Authentication support. Throws ServerException if Server returns a 401.
+
 * Made Client Setters chain-able (+tests)
 
 * Refactored and testing of Plugin functionality
