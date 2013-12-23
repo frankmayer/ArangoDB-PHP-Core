@@ -33,14 +33,16 @@ A basis that takes away the boilerplate code of setting up requests and managing
 
 ####PHP Versions:
 
-Supported: 5.3, 5.4, 5.5
+Supported: 5.4, 5.5, HHVM 2.3.0+
 
-Recommended: 5.4, 5.5
 
 Notes: 
 
-While PHP 5.3 is still supported, the core client runs faster and with a smaller memory footprint, when used with PHP 5.4 and newer.
-PHP 5.4 and up also have some handy new features, like traits or Class member access on instantiation.
+~~While PHP 5.3 is still supported~~ PHP 5.3 support will be removed, because:
+- the core client runs faster and with a smaller memory footprint, when used with PHP 5.4 and newer. 
+- PHP 5.3 is EOL.
+- PHP 5.4 and up also have some handy new features, like traits or Class member access on instantiation.
+
 In other words... Do yourself a favor and upgrade to PHP 5.4 or even better to PHP 5.5.
  
 
