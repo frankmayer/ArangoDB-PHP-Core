@@ -14,6 +14,7 @@ before_script:
   - chmod 777 ./tests/travis/setup_arangodb.sh
   - ./tests/travis/setup_arangodb.sh
   - bash tests/before.sh
+  - composer install --prefer-source --no-interaction --dev
 
 
 after_script:
