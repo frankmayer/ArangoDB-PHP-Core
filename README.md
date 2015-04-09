@@ -11,8 +11,7 @@ A lightweight, and at the same time flexible "very"-low-level ArangoDB client fo
 
 The core client should serve as a flexible low level base for higher level client implementations (AR,ODM,OGM) to be built on top of it.
 
-It does by itself not provide any direct abstraction of ArangoDB's API. Instead it provides a basis, that can be used by higher level drivers in order to provide that abstraction.
-A basis that takes away the boilerplate code of setting up requests and managing responses (headers, statuses, etc...)
+It does by itself not provide any direct abstraction of ArangoDB's API. Instead it provides a basis, that can be used by higher level drivers in order to provide that abstraction. A basis that takes away the boilerplate code of setting up requests and managing responses (headers, statuses, etc...)
 
 
 ####Highlights:
@@ -20,7 +19,7 @@ A basis that takes away the boilerplate code of setting up requests and managing
 - Request / Response Objects
 - A wrapper around connectors (at the moment only CURL)
 - Flexibility through dependency injection:
-  - Inject your own connector, Request or Response Objects
+  - Inject your own connector, Request or Response classes
      - directly
      - via configuration resolution
      - via the client class's own simple IOC container
@@ -33,18 +32,8 @@ A basis that takes away the boilerplate code of setting up requests and managing
 
 ####PHP Versions:
 
-Supported: 5.4, 5.5, HHVM 2.3.0+
+Supported: 5.4 (unless functionality requiring 5.5+ is to be implemented), 5.5, 5.6, HHVM 2.3.0+
 
-
-Notes: 
-
-~~While PHP 5.3 is still supported~~ PHP 5.3 support will be removed, because:
-- the core client runs faster and with a smaller memory footprint, when used with PHP 5.4 and newer. 
-- PHP 5.3 is EOL.
-- PHP 5.4 and up also have some handy new features, like traits or Class member access on instantiation.
-
-In other words... Do yourself a favor and upgrade to PHP 5.4 or even better to PHP 5.5.
- 
 
 #####Caution:
 This project is at the moment in a __highly experimental__ phase.
