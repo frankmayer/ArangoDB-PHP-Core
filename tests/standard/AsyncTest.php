@@ -16,12 +16,22 @@ use frankmayer\ArangoDbPhpCore\Connectors\Http\CurlHttpConnector;
 use frankmayer\ArangoDbPhpCore\Connectors\Http\HttpResponse;
 
 
+/**
+ * Class AsyncTest
+ * @package frankmayer\ArangoDbPhpCore
+ */
 class AsyncTest extends
     \PHPUnit_Framework_TestCase
 {
+    /**
+     * @var
+     */
     public $client;
 
 
+    /**
+     *
+     */
     public function setUp()
     {
         $connector    = new CurlHttpConnector();
@@ -29,12 +39,15 @@ class AsyncTest extends
     }
 
 
+    /**
+     *
+     */
     public function testCreateCollectionAndSimpleAsyncDocumentCreation()
     {
 
         $collectionName = 'ArangoDB-PHP-Core-CollectionTestSuite-Collection';
 
-        $collectionOptions = array("waitForSync" => true);
+        $collectionOptions = ["waitForSync" => true];
 
         $collection         = new ArangoDbApi\Collection();
         $collection->client = $this->client;
@@ -49,12 +62,12 @@ class AsyncTest extends
 
         $collectionName = 'ArangoDB-PHP-Core-CollectionTestSuite-Collection';
 
-        $requestBody      = array('name' => 'frank', '_key' => '1');
+        $requestBody      = ['name' => 'frank', '_key' => '1'];
         $document         = new ArangoDbApi\Document();
         $document->client = $this->client;
 
 
-        $responseObject = $document->create($collectionName, $requestBody, null, array('async' => true));
+        $responseObject = $document->create($collectionName, $requestBody, null, ['async' => true]);
 
         /** @var $responseObject HttpResponse */
         $this->assertEquals(202, $responseObject->status);
@@ -72,6 +85,9 @@ class AsyncTest extends
         $this->assertEquals($collectionName . '/1', $decodedJsonBody['_id']);
     }
 
+    /**
+     *
+     */
     public function testCreateCollectionAndStoredAsyncDocumentCreation()
     {
 
@@ -85,7 +101,7 @@ class AsyncTest extends
 
         $collectionName = 'ArangoDB-PHP-Core-CollectionTestSuite-Collection';
 
-        $collectionOptions = array("waitForSync" => true);
+        $collectionOptions = ["waitForSync" => true];
 
         $collection         = new ArangoDbApi\Collection();
         $collection->client = $this->client;
@@ -99,11 +115,11 @@ class AsyncTest extends
 
         $collectionName = 'ArangoDB-PHP-Core-CollectionTestSuite-Collection';
 
-        $requestBody      = array('name' => 'frank', '_key' => '1');
+        $requestBody      = ['name' => 'frank', '_key' => '1'];
         $document         = new ArangoDbApi\Document();
         $document->client = $this->client;
 
-        $responseObject = $document->create($collectionName, $requestBody, null, array('async' => 'store'));
+        $responseObject = $document->create($collectionName, $requestBody, null, ['async' => 'store']);
 
         /** @var $responseObject HttpResponse */
         $this->assertEquals(202, $responseObject->status);
@@ -133,6 +149,9 @@ class AsyncTest extends
     }
 
 
+    /**
+     *
+     */
     public function tearDown()
     {
         $collectionName = 'ArangoDB-PHP-Core-CollectionTestSuite-Collection';

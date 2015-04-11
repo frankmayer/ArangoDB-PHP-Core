@@ -22,6 +22,8 @@ class PluginTest extends
     \PHPUnit_Framework_TestCase
 {
     public $clientOptions;
+
+    /* $client frankmayer\ArangoDbPhpCore\Connectors\Http\CurlHttpConnector */
     public $client;
 
 
@@ -35,13 +37,10 @@ class PluginTest extends
     /**
      * Test if we can get the server version
      */
-    public function testRegisterPluginsWithDifferentPrioritiesTestAndUnregisterPlugin()
+    public function testRegisterPluginsWithDifferentPrioritiesTestAndUnRegisterPlugin()
     {
-
-
         $this->client->setPluginManager(new PluginManager($this->client));
         $this->assertInstanceOf('\frankmayer\ArangoDbPhpCore\Plugins\PluginManager', $this->client->getPluginManager());
-
 
 
         $tracer            = new TestPlugin();
@@ -53,19 +52,19 @@ class PluginTest extends
         $tracer4           = new TestPlugin();
         $tracer4->priority = 20;
 
-        $this->clientOptions['plugins'] = array(
+        $this->clientOptions['plugins'] = [
             'tracer1' => $tracer,
             'tracer2' => $tracer2,
             'tracer3' => $tracer3,
-            'tracer4' => $tracer4
-        );
+            'tracer4' => $tracer4,
+        ];
 
         $this->client->setPluginsFromPluginArray($this->clientOptions['plugins']);
         $this->assertArrayHasKey('tracer3', $this->client->pluginManager->pluginStorage);
 
         $e = null;
         try {
-            $this->client->setPluginsFromPluginArray(array('tracer5' => new \stdClass()));
+            $this->client->setPluginsFromPluginArray(['tracer5' => new \stdClass()]);
         } catch (\Exception $e) {
         }
         $this->assertInstanceOf('\Exception', $e);
