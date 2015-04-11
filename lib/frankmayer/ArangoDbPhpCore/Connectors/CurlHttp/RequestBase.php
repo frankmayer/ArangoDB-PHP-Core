@@ -8,9 +8,10 @@
  * @copyright Copyright 2013, FRANKMAYER.NET, Athens, Greece
  */
 
-namespace frankmayer\ArangoDbPhpCore\Connectors\Http;
+namespace frankmayer\ArangoDbPhpCore\Connectors\CurlHttp;
 
-use frankmayer\ArangoDbPhpCore\Connectors\ResponseInterface;
+use frankmayer\ArangoDbPhpCore\HttpRequestInterface;
+use frankmayer\ArangoDbPhpCore\ResponseInterface;
 
 
 /**
@@ -19,7 +20,7 @@ use frankmayer\ArangoDbPhpCore\Connectors\ResponseInterface;
  *
  * @package frankmayer\ArangoDbPhpCore
  */
-abstract class HttpRequestBase implements
+abstract class RequestBase implements
     HttpRequestInterface
 {
 
@@ -39,7 +40,7 @@ abstract class HttpRequestBase implements
      */
     public $client;
     /**
-     * @var \frankmayer\ArangoDbPhpCore\Connectors\ConnectorInterface
+     * @var \frankmayer\ArangoDbPhpCore\ConnectorInterface
      */
     public $connector;
     /**

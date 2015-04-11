@@ -8,9 +8,7 @@
  * @copyright Copyright 2013, FRANKMAYER.NET, Athens, Greece
  */
 
-namespace frankmayer\ArangoDbPhpCore\Connectors\Http;
-
-use frankmayer\ArangoDbPhpCore\Connectors\ResponseInterface;
+namespace frankmayer\ArangoDbPhpCore;
 
 
 /**

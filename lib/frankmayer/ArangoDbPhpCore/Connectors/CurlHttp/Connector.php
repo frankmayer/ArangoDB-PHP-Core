@@ -8,9 +8,11 @@
  * @copyright Copyright 2013, FRANKMAYER.NET, Athens, Greece
  */
 
-namespace frankmayer\ArangoDbPhpCore\Connectors\Http;
+namespace frankmayer\ArangoDbPhpCore\Connectors\CurlHttp;
 
 use frankmayer\ArangoDbPhpCore\ClientOptions;
+use frankmayer\ArangoDbPhpCore\HttpConnectorInterface;
+use frankmayer\ArangoDbPhpCore\HttpRequestInterface;
 use frankmayer\ArangoDbPhpCore\ServerException;
 
 
@@ -20,10 +22,10 @@ use frankmayer\ArangoDbPhpCore\ServerException;
  *
  * @package frankmayer\ArangoDbPhpCore
  */
-class CurlHttpConnector extends
-    HttpConnector implements
+class Connector implements
     HttpConnectorInterface
 {
+    const HTTP_EOL = "\r\n";
 
     /**
      * @var bool switch for turning on curl verbose logging
@@ -47,7 +49,7 @@ class CurlHttpConnector extends
      */
     public function request(HttpRequestInterface $request)
     {
-        $curlHeaders = array();
+        $curlHeaders = [];
 
         $ch   = curl_init($request->address);
         $body = $request->body;
@@ -60,14 +62,14 @@ class CurlHttpConnector extends
 
         curl_setopt_array(
             $ch,
-            array(
+            [
                  CURLOPT_CUSTOMREQUEST  => $request->method,
                  CURLOPT_VERBOSE        => $this->verboseLogging,
                  CURLOPT_RETURNTRANSFER => true,
                  CURLOPT_HEADER         => true,
                  CURLOPT_POSTFIELDS     => $body,
                  CURLOPT_HTTPHEADER     => $curlHeaders
-            )
+            ]
         );
 
         $clientOptions = $request->client->clientOptions;

@@ -8,9 +8,7 @@
  * @copyright Copyright 2013, FRANKMAYER.NET, Athens, Greece
  */
 
-namespace frankmayer\ArangoDbPhpCore\Connectors\Http;
-
-use frankmayer\ArangoDbPhpCore\Connectors\RequestInterface;
+namespace frankmayer\ArangoDbPhpCore;
 
 
 /**
@@ -21,6 +19,4 @@ use frankmayer\ArangoDbPhpCore\Connectors\RequestInterface;
 interface HttpRequestInterface extends
     RequestInterface
 {
-
-
 }

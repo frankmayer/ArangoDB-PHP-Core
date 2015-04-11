@@ -8,9 +8,7 @@
  * @copyright Copyright 2013, FRANKMAYER.NET, Athens, Greece
  */
 
-namespace frankmayer\ArangoDbPhpCore\Connectors\Http\Apis\TestArangoDbApi140;
-
-use frankmayer\ArangoDbPhpCore\Connectors\ApiInterface;
+namespace frankmayer\ArangoDbPhpCore;
 
 /**
  * A REST API Interface
@@ -20,5 +18,4 @@ use frankmayer\ArangoDbPhpCore\Connectors\ApiInterface;
 interface  RestApiInterface extends
     ApiInterface
 {
-
 }

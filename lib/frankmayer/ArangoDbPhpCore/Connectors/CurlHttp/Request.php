@@ -8,7 +8,9 @@
  * @copyright Copyright 2013, FRANKMAYER.NET, Athens, Greece
  */
 
-namespace frankmayer\ArangoDbPhpCore\Connectors\Http;
+namespace frankmayer\ArangoDbPhpCore\Connectors\CurlHttp;
+
+use frankmayer\ArangoDbPhpCore\HttpRequestInterface;
 
 
 /**
@@ -17,8 +19,8 @@ namespace frankmayer\ArangoDbPhpCore\Connectors\Http;
  *
  * @package frankmayer\ArangoDbPhpCore
  */
-class HttpRequest extends
-    HttpRequestBase implements
+class Request extends
+    RequestBase implements
     HttpRequestInterface
 {
 
@@ -39,13 +41,13 @@ class HttpRequest extends
     private function requestBatchPart()
     {
         // Fake a result so we can move on.
-        $this->response = 'HTTP/1.1 202 Accepted' . HttpConnector::HTTP_EOL;
-        $this->response .= 'location: /_api/document/0/0' . HttpConnector::HTTP_EOL;
-        $this->response .= 'server: triagens GmbH High-Performance HTTP Server' . HttpConnector::HTTP_EOL;
-        $this->response .= 'content-type: application/json; charset=utf-8' . HttpConnector::HTTP_EOL;
-        $this->response .= 'etag: "0"' . HttpConnector::HTTP_EOL;
-        $this->response .= 'client: Close' . HttpConnector::HTTP_EOL . HttpConnector::HTTP_EOL;
-        $this->response .= '{"error":false,"_id":"0/0","id":"0","_rev":0,"hasMore":0, "result":[{}], "documents":[{}]}' . HttpConnector::HTTP_EOL . HttpConnector::HTTP_EOL;
+        $this->response = 'HTTP/1.1 202 Accepted' . Connector::HTTP_EOL;
+        $this->response .= 'location: /_api/document/0/0' . Connector::HTTP_EOL;
+        $this->response .= 'server: triagens GmbH High-Performance HTTP Server' . Connector::HTTP_EOL;
+        $this->response .= 'content-type: application/json; charset=utf-8' . Connector::HTTP_EOL;
+        $this->response .= 'etag: "0"' . Connector::HTTP_EOL;
+        $this->response .= 'client: Close' . Connector::HTTP_EOL . Connector::HTTP_EOL;
+        $this->response .= '{"error":false,"_id":"0/0","id":"0","_rev":0,"hasMore":0, "result":[{}], "documents":[{}]}' . Connector::HTTP_EOL . Connector::HTTP_EOL;
     }
 
 
@@ -53,7 +55,7 @@ class HttpRequest extends
      * Main HTTP Request method.
      * All request should be done through this method. Any async or batch handling is done within this method.
      *
-     * @return HttpResponse Http Response object
+     * @return Response Http Response object
      */
     public function request()
     {
@@ -66,8 +68,8 @@ class HttpRequest extends
             $this->headers['x-arango-async'] = $async;
         }
 
-        if (isset($this->client->arangodbApiVersion)) {
-            $this->headers['x-arango-version'] = $this->client->arangodbApiVersion;
+        if (isset($this->client->arangoDBApiVersion)) {
+            $this->headers['x-arango-version'] = $this->client->arangoDBApiVersion;
         }
 
         if (isset($this->options['isBatchPart']) && $this->options['isBatchPart'] === true) {
@@ -93,26 +95,26 @@ class HttpRequest extends
      * @param array  $batchParts
      * @param string $boundary
      *
-     * @return \frankmayer\ArangoDbPhpCore\Connectors\Http\HttpResponse
+     * @return \frankmayer\ArangoDbPhpCore\Connectors\CurlHttp\Response
      */
     public function sendBatch(
-        $batchParts = array(),
+        $batchParts = [],
         $boundary = 'XXXbXXX'
     ) {
         $this->body = '';
-        /** @var $batchPart HttpResponse */
+        /** @var $batchPart Response */
         // Reminder... The reason, that at this time the batch-parts are HttpResponses is, because of the quasi "promise" that we have to return immediately
         foreach ($batchParts as $contentId => $batchPart) {
-            $this->body .= '--' . $boundary . HttpConnector::HTTP_EOL;
-            $this->body .= 'Content-Type: application/x-arango-batchpart' . HttpConnector::HTTP_EOL;
-            $this->body .= 'Content-Id: ' . ($contentId + 1) . HttpConnector::HTTP_EOL;
+            $this->body .= '--' . $boundary . Connector::HTTP_EOL;
+            $this->body .= 'Content-Type: application/x-arango-batchpart' . Connector::HTTP_EOL;
+            $this->body .= 'Content-Id: ' . ($contentId + 1) . Connector::HTTP_EOL;
 
-            $this->body .= HttpConnector::HTTP_EOL;
+            $this->body .= Connector::HTTP_EOL;
             $this->body .= strtoupper($batchPart->request->method) . ' ' . $batchPart->request->path
-                . ' ' . 'HTTP/1.1' . HttpConnector::HTTP_EOL . HttpConnector::HTTP_EOL;
-            $this->body .= $batchPart->request->body . HttpConnector::HTTP_EOL;
+                . ' ' . 'HTTP/1.1' . Connector::HTTP_EOL . Connector::HTTP_EOL;
+            $this->body .= $batchPart->request->body . Connector::HTTP_EOL;
         }
-        $this->body .= '--' . $boundary . '--' . HttpConnector::HTTP_EOL;
+        $this->body .= '--' . $boundary . '--' . Connector::HTTP_EOL;
         $this->path                    = $this->getDatabasePath() . self::API_BATCH;
         $this->headers['Content-Type'] = 'multipart/form-data; boundary=XXXbXXX';
 
@@ -126,23 +128,23 @@ class HttpRequest extends
 
 
     /**
-     * @param HttpResponse $responseObject
+     * @param Response $responseObject
      * @param Array        $batchParts
      * @param              $boundary
      */
-    public function deconstructBatchResponseBody(HttpResponse $responseObject, $batchParts, $boundary)
+    public function deconstructBatchResponseBody(Response $responseObject, $batchParts, $boundary)
     {
         $batchResponseBody = $responseObject->body;
         $batchResponseBody = rtrim($batchResponseBody, '--' . $boundary . '--');
 
-        $parts = explode('--' . $boundary . HttpConnector::HTTP_EOL, $batchResponseBody);
+        $parts = explode('--' . $boundary . Connector::HTTP_EOL, $batchResponseBody);
         array_shift($parts);
         $i = 0;
         foreach ($batchParts as &$batchPart) {
 
             $batchPartHeaders = self::splitBatchPart($parts[$i]);
 
-            /** @var $batchPart HttpResponse */
+            /** @var $batchPart Response */
             $batchPart->request->response = $batchPartHeaders[1];
             $batchPart->doConstruct($batchPart->request);
             $i++;
@@ -175,7 +177,7 @@ class HttpRequest extends
 
     public function buildUrlQuery($urlQueryArray)
     {
-        $params = array();
+        $params = [];
         foreach ($urlQueryArray as $key => $value) {
             $params[] = $key . '=' . $value;
         }
@@ -233,7 +235,7 @@ class HttpRequest extends
     }
 
     /**
-     * @param \frankmayer\ArangoDbPhpCore\Connectors\ConnectorInterface $connector
+     * @param \frankmayer\ArangoDbPhpCore\ConnectorInterface $connector
      */
     public function setConnector($connector)
     {
@@ -241,7 +243,7 @@ class HttpRequest extends
     }
 
     /**
-     * @return \frankmayer\ArangoDbPhpCore\Connectors\ConnectorInterface
+     * @return \frankmayer\ArangoDbPhpCore\ConnectorInterface
      */
     public function getConnector()
     {

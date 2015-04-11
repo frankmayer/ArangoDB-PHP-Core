@@ -8,7 +8,7 @@
  * @copyright Copyright 2013, FRANKMAYER.NET, Athens, Greece
  */
 
-namespace frankmayer\ArangoDbPhpCore\Connectors\Http;
+namespace frankmayer\ArangoDbPhpCore\Connectors\CurlHttp;
 
 use frankmayer\ArangoDbPhpCore\ServerException;
 
@@ -18,7 +18,7 @@ use frankmayer\ArangoDbPhpCore\ServerException;
  *
  * @package frankmayer\ArangoDbPhpCore
  */
-class HttpResponse
+class Response
 {
 
 
@@ -31,10 +31,10 @@ class HttpResponse
 
 
     /**
-     * @var HttpRequest $request
+     * @var Request $request
      */
     public $request;
-    public $headers = array();
+    public $headers = [];
     public $body;
     public $batch;
     public $async;
@@ -45,8 +45,8 @@ class HttpResponse
 
     public function __construct()
     {
-        // 404 intentionally left out as a default, as not finding some data shouldn't always raise an exception
-        $this->enabledHttpServerExceptions = array(400, 401, 403, 405, 412, 500, 600, 601);
+        // 404 intentionally left out as a default, as not finding data shouldn't raise an exception
+        $this->enabledHttpServerExceptions = [400, 401, 403, 405, 412, 500, 600, 601];
     }
 
     /**
@@ -181,7 +181,7 @@ class HttpResponse
     }
 
     /**
-     * @param \frankmayer\ArangoDbPhpCore\Connectors\Http\HttpRequest $request
+     * @param \frankmayer\ArangoDbPhpCore\Connectors\CurlHttp\Request $request
      */
     public function setRequest($request)
     {
@@ -189,7 +189,7 @@ class HttpResponse
     }
 
     /**
-     * @return \frankmayer\ArangoDbPhpCore\Connectors\Http\HttpRequest
+     * @return \frankmayer\ArangoDbPhpCore\Connectors\CurlHttp\Request
      */
     public function getRequest()
     {

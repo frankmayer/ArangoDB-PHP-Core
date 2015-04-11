@@ -1,21 +1,21 @@
 <?php
 
 /**
- * ArangoDB PHP Core Client: Connector Interface
+ * ArangoDB PHP Core Client: Response Interface
  *
  * @package   frankmayer\ArangoDbPhpCore
  * @author    Frank Mayer
  * @copyright Copyright 2013, FRANKMAYER.NET, Athens, Greece
  */
 
-namespace frankmayer\ArangoDbPhpCore\Connectors;
+namespace frankmayer\ArangoDbPhpCore;
 
 /**
- * A Connector Interface
+ * A Response Interface
  *
  * @package frankmayer\ArangoDbPhpCoreCore
  */
-interface  ConnectorInterface
+interface ResponseInterface
 {
 
 }

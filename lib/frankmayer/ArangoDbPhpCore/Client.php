@@ -10,9 +10,7 @@
 
 namespace frankmayer\ArangoDbPhpCore;
 
-use frankmayer\ArangoDbPhpCore\Connectors\ConnectorInterface;
-use frankmayer\ArangoDbPhpCore\Connectors\Http\HttpConnectorInterface;
-use frankmayer\ArangoDbPhpCore\Connectors\Http\HttpResponse;
+use frankmayer\ArangoDbPhpCore\Connectors\Http\Response;
 use frankmayer\ArangoDbPhpCore\Plugins\PluginManager;
 
 /**
@@ -31,7 +29,7 @@ class Client
      */
     public $pluginManager;
     /**
-     * @var Connectors\ConnectorInterface|Connectors\Http\HttpConnectorInterface
+     * @var ConnectorInterface|HttpConnectorInterface
      */
     public $connector;
     /**
@@ -57,7 +55,7 @@ class Client
     /**
      * @var string The ArangoDB api version to signal
      */
-    public $arangodbApiVersion;
+    public $arangoDBApiVersion;
 
 
     /**
@@ -76,7 +74,7 @@ class Client
 
         if (isset($this->clientOptions[ClientOptions::OPTION_ARANGODB_API_VERSION])) {
 
-            $this->arangodbApiVersion = $this->clientOptions[ClientOptions::OPTION_ARANGODB_API_VERSION];
+            $this->arangoDBApiVersion = $this->clientOptions[ClientOptions::OPTION_ARANGODB_API_VERSION];
         }
         if (isset($this->clientOptions['plugins'])) {
             $this->pluginManager = new PluginManager($this, isset($this->clientOptions['plugins']) ? $this->clientOptions['plugins'] : null, isset($this->clientOptions['PluginManager']['options']) ? $this->clientOptions['PluginManager']['options'] : null);
@@ -99,7 +97,7 @@ class Client
      * @param       $eventName
      * @param array $eventData
      */
-    public function notifyPlugins($eventName, $eventData = array())
+    public function notifyPlugins($eventName, $eventData = [])
     {
         if ($this->pluginManager) {
             $this->pluginManager->notifyPlugins($eventName, $eventData);
@@ -120,7 +118,7 @@ class Client
         $response      = new $responseClass();
 
         $response->request = $requestObject;
-        /** @var $response HttpResponse */
+        /** @var $response Response */
         $response->doConstruct();
 
         return $response;
@@ -159,13 +157,13 @@ class Client
 
 
     /**
-     * @param string $arangodbApiVersion
+     * @param string $version
      *
      * @return $this
      */
-    public function setArangodbApiVersion($arangodbApiVersion)
+    public function setArangoDBApiVersion($version)
     {
-        $this->arangodbApiVersion = $arangodbApiVersion;
+        $this->arangoDBApiVersion = $version;
 
         return $this;
     }
@@ -174,9 +172,9 @@ class Client
     /**
      * @return string
      */
-    public function getArangodbApiVersion()
+    public function getArangoDBApiVersion()
     {
-        return $this->arangodbApiVersion;
+        return $this->arangoDBApiVersion;
     }
 
 
@@ -203,7 +201,7 @@ class Client
 
 
     /**
-     * @param \frankmayer\ArangoDbPhpCore\Connectors\ConnectorInterface|\frankmayer\ArangoDbPhpCore\Connectors\Http\HttpConnectorInterface $connector
+     * @param \frankmayer\ArangoDbPhpCore\ConnectorInterface|\frankmayer\ArangoDbPhpCore\HttpConnectorInterface $connector
      *
      * @return $this
      */
@@ -216,7 +214,7 @@ class Client
 
 
     /**
-     * @return \frankmayer\ArangoDbPhpCore\Connectors\ConnectorInterface|\frankmayer\ArangoDbPhpCore\Connectors\Http\HttpConnectorInterface
+     * @return \frankmayer\ArangoDbPhpCore\ConnectorInterface|\frankmayer\ArangoDbPhpCore\HttpConnectorInterface
      */
     public function getConnector()
     {
