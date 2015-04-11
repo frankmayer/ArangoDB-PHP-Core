@@ -80,10 +80,8 @@ class Autoloader
      */
     private static function checkEnvironment()
     {
-        list($major, $minor) = explode('.', phpversion());
-
-        if ((int) $major < 5 or ((int) $major === 5 && (int) $minor < 3)) {
-            throw new ClientException('Incompatible PHP environment. Expecting PHP 5.3 or higher');
+        if (version_compare(PHP_MAJOR_VERSION . '.' . PHP_MINOR_VERSION . '.' . PHP_RELEASE_VERSION, "5.4.0", "<")) {
+            throw new ClientException('Incompatible PHP environment. Expecting PHP 5.4 or higher');
         }
     }
 }
