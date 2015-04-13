@@ -15,6 +15,7 @@ use frankmayer\ArangoDbPhpCore\Connectors\CurlHttp\Connector;
 use frankmayer\ArangoDbPhpCore\Protocols\Http\Request;
 use frankmayer\ArangoDbPhpCore\Protocols\Http\Response;
 
+//todo: fix tests
 
 class IocTest extends
     \PHPUnit_Framework_TestCase
@@ -49,26 +50,26 @@ class IocTest extends
             // This is the way to bind an HttpRequest in PHP 5.4+
 
             Client::bind(
-                  'httpRequest',
-                      function () {
-                          $instance         = new Request();
-                          $instance->client = $this->client;
+                'httpRequest',
+                function () {
+                    $instance         = new Request();
+                    $instance->client = $this->client;
 
-                          return $instance;
-                      }
+                    return $instance;
+                }
             );
         } else {
             // This is the way to bind an HttpRequest in PHP 5.3.x
 
             $me = $this;
             Client::bind(
-                  'httpRequest',
-                      function () use ($me) {
-                          $instance         = new Request();
-                          $instance->client = $me->client;
+                'httpRequest',
+                function () use ($me) {
+                    $instance         = new Request();
+                    $instance->client = $me->client;
 
-                          return $instance;
-                      }
+                    return $instance;
+                }
             );
         }
         // And here's how one gets an HttpRequest object through the IOC.
@@ -121,7 +122,7 @@ class IocTest extends
         $testValue = $this->request->getHeaders();
         $this->assertEquals('testHeaders', $testValue);
 
-        
+
         $testValue = $this->request->getMethod();
         $this->assertNull($testValue);
 
@@ -154,15 +155,13 @@ class IocTest extends
         $this->assertEquals('testPath', $testValue);
 
 
-     $testValue = $this->request->getResponse();
+        $testValue = $this->request->getResponse();
         $this->assertNull($testValue);
 
         $this->request->setResponse('testResponse');
 
         $testValue = $this->request->getResponse();
         $this->assertEquals('testResponse', $testValue);
-
-
     }
 
 
@@ -177,32 +176,32 @@ class IocTest extends
             // This is the way to bind an HttpRequest in PHP 5.4+
 
             Client::bind(
-                  'httpResponse',
-                      function () {
-                          $response = new Response();
+                'httpResponse',
+                function () {
+                    $response = new Response();
 
-                          $response->request = $this->request;
+                    $response->request = $this->request;
 
-                          //                          $response->doConstruct();
+                    //                          $response->doConstruct();
 
-                          return $response;
-                      }
+                    return $response;
+                }
             );
         } else {
             // This is the way to bind an HttpRequest in PHP 5.3.x
 
             $me = $this;
             Client::bind(
-                  'httpResponse',
-                      function () use ($me) {
-                          $response = new Response();
+                'httpResponse',
+                function () use ($me) {
+                    $response = new Response();
 
-                          $response->request = $me->request;
+                    $response->request = $me->request;
 
-                          //                          $response->doConstruct();
+                    //                          $response->doConstruct();
 
-                          return $response;
-                      }
+                    return $response;
+                }
             );
         }
         // And here's how one gets an HttpRequest object through the IOC.

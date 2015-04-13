@@ -14,7 +14,7 @@ class ArangoDbPhpCoreTestCase extends
     \PHPUnit_Framework_TestCase
 {
     const API_COLLECTION = '/_api/collection';
-    const API_DOCUMENT = '/_api/document';
+    const API_DOCUMENT   = '/_api/document';
 
     const METHOD_GET     = 'GET';
     const METHOD_POST    = 'POST';

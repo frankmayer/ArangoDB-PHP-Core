@@ -14,6 +14,7 @@ namespace frankmayer\ArangoDbPhpCore;
 use frankmayer\ArangoDbPhpCore\Connectors\CurlHttp\Connector;
 use frankmayer\ArangoDbPhpCore\Plugins\TracerPlugin;
 
+//todo: fix tests
 
 class ClientTest extends
     \PHPUnit_Framework_TestCase
@@ -264,15 +265,15 @@ class ClientTest extends
     //        $request->request();
     //    }
 
-//    public function testHelperFunctionArray_merge_recursive_distinct()
-//    {
-//        $merged = Api::array_merge_recursive_distinct(
-//            ['key' => ['org value']],
-//            ['key' => ['new value']]
-//        );
-//        $this->assertEquals('new value', $merged['key'][0]);
-//    }
-//
+    //    public function testHelperFunctionArray_merge_recursive_distinct()
+    //    {
+    //        $merged = Api::array_merge_recursive_distinct(
+    //            ['key' => ['org value']],
+    //            ['key' => ['new value']]
+    //        );
+    //        $this->assertEquals('new value', $merged['key'][0]);
+    //    }
+    //
 
     public function tearDown()
     {

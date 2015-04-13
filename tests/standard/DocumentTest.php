@@ -15,6 +15,7 @@ require_once('ArangoDbPhpCoreTestCase.php');
 
 use frankmayer\ArangoDbPhpCore\Connectors\CurlHttp\Connector;
 
+//todo: fix tests
 
 class DocumentTest extends
     ArangoDbPhpCoreTestCase
