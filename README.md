@@ -1,5 +1,7 @@
 ##ArangoDB-PHP-Core
 
+[![Join the chat at https://gitter.im/frankmayer/ArangoDB-PHP-Core](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/frankmayer/ArangoDB-PHP-Core?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 A lightweight, and at the same time flexible "very"-low-level ArangoDB client for PHP.
 
 [![Build Status](https://travis-ci.org/frankmayer/ArangoDB-PHP-Core.png?branch=devel)](https://travis-ci.org/frankmayer/ArangoDB-PHP-Core)
@@ -18,22 +20,22 @@ A basis that takes away the boilerplate code of setting up requests and managing
 ####Highlights:
 
 - Request / Response Objects
-- A wrapper around connectors (at the moment only CURL)
+- A wrapper around connectors (at the moment only cUrl is built in, there is a placeholder directory to also provide a wrapper to FSock). A Guzzle 5 Connector is in the works.
 - Flexibility through dependency injection:
   - Inject your own connector, Request or Response Objects
      - directly
      - via configuration resolution
      - via the client class's own simple IOC container
 - Register your plugins (for example a trace plugin)
-- Extend the core's functionality through traits (not yet implemented)
-- supports ArangoDB's Async and Batch functionality
+- Extend the core's functionality through traits (This is not yet standardized because of the client not being stable yet)
+- supports ArangoDB's Async and Batch functionality (sort of. There are some more things to do)
 - provides a toolbox for handling everything around communication with an ArangoDB server, such as url-, parameter- and header-building tools.
 - Includes a few test classes that provide basic testing functionality against the server and also a bit of insight on how to build a client on top of the core.
 
 
 ####PHP Versions:
 
-Supported: 5.4, 5.5, HHVM 2.3.0+
+Supported: 5.4 (unless functionality requiring 5.5+ is to be implemented before release), 5.5, 5.6, HHVM 2.3.0+
 
 
 Notes: 
