@@ -8,7 +8,9 @@
  * @copyright Copyright 2013, FRANKMAYER.NET, Athens, Greece
  */
 
-namespace frankmayer\ArangoDbPhpCore;
+namespace frankmayer\ArangoDbPhpCore\Protocols\Http;
+
+use frankmayer\ArangoDbPhpCore\ServerException;
 
 
 /**
@@ -179,7 +181,7 @@ class Response
     }
 
     /**
-     * @param \frankmayer\ArangoDbPhpCore\Connectors\CurlHttp\Request $request
+     * @param \frankmayer\ArangoDbPhpCore\Protocols\Http\Request $request
      */
     public function setRequest($request)
     {
@@ -187,7 +189,7 @@ class Response
     }
 
     /**
-     * @return \frankmayer\ArangoDbPhpCore\Connectors\CurlHttp\Request
+     * @return \frankmayer\ArangoDbPhpCore\Protocols\Http\Request
      */
     public function getRequest()
     {

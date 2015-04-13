@@ -11,13 +11,9 @@
 namespace frankmayer\ArangoDbPhpCore;
 
 
-use frankmayer\ArangoDbPhpCore\Connectors\Http\Apis\TestArangoDbApi140 as ArangoDbApi;
-
-use frankmayer\ArangoDbPhpCore\Connectors\Http\CurlHttpConnector;
-use frankmayer\ArangoDbPhpCore\Connectors\Http\HttpRequest;
-use frankmayer\ArangoDbPhpCore\Connectors\Http\HttpRequestInterface;
-use frankmayer\ArangoDbPhpCore\Connectors\Http\HttpResponse;
-use frankmayer\ArangoDbPhpCore\Connectors\Http\HttpResponseInterface;
+use frankmayer\ArangoDbPhpCore\Connectors\CurlHttp\Connector;
+use frankmayer\ArangoDbPhpCore\Protocols\Http\Request;
+use frankmayer\ArangoDbPhpCore\Protocols\Http\Response;
 
 
 class IocTest extends
@@ -27,12 +23,12 @@ class IocTest extends
     public $collectionNames;
 
     /**
-     * @var HttpRequest|HttpRequestInterface
+     * @var RequestInterface
      */
     public $request;
 
     /**
-     * @var HttpResponse|HttpResponseInterface
+     * @var ResponseInterface
      */
     public $response;
     public $connector;
@@ -40,7 +36,7 @@ class IocTest extends
 
     public function setUp()
     {
-        $connector       = new CurlHttpConnector();
+        $connector       = new Connector();
         $this->connector = $connector;
 
         $this->client = $this->client = getClient($connector);
@@ -55,7 +51,7 @@ class IocTest extends
             Client::bind(
                   'httpRequest',
                       function () {
-                          $instance         = new HttpRequest();
+                          $instance         = new Request();
                           $instance->client = $this->client;
 
                           return $instance;
@@ -68,7 +64,7 @@ class IocTest extends
             Client::bind(
                   'httpRequest',
                       function () use ($me) {
-                          $instance         = new HttpRequest();
+                          $instance         = new Request();
                           $instance->client = $me->client;
 
                           return $instance;
@@ -78,7 +74,7 @@ class IocTest extends
         // And here's how one gets an HttpRequest object through the IOC.
         // Note that the type-name 'httpRequest' is the name we bound our HttpRequest class creation-closure to. (see above)
         $this->request = Client::make('httpRequest');
-        $this->assertInstanceOf('frankmayer\ArangoDbPhpCore\Connectors\Http\HttpRequestInterface', $this->request);
+        $this->assertInstanceOf('frankmayer\ArangoDbPhpCore\Protocols\Http\RequestInterface', $this->request);
 
 
         $testValue = $this->request->getAddress();
@@ -138,7 +134,7 @@ class IocTest extends
         $testValue1 = $this->request->getOptions();
         $this->assertNull($testValue1);
 
-        $this->request->setOptions(array('testOption' => 'testVal'));
+        $this->request->setOptions(['testOption' => 'testVal']);
 
         $testValue = $this->request->getOptions();
         $this->assertArrayHasKey('testOption', $testValue);
@@ -174,7 +170,7 @@ class IocTest extends
     {
         $this->request         = Client::make('httpRequest');
         $this->request->path   = '/_admin/version';
-        $this->request->method = HttpRequest::METHOD_GET;
+        $this->request->method = Request::METHOD_GET;
         $this->request->request();
 
         if (version_compare(PHP_VERSION, '5.4.0') >= 0) {
@@ -183,7 +179,7 @@ class IocTest extends
             Client::bind(
                   'httpResponse',
                       function () {
-                          $response = new HttpResponse();
+                          $response = new Response();
 
                           $response->request = $this->request;
 
@@ -199,7 +195,7 @@ class IocTest extends
             Client::bind(
                   'httpResponse',
                       function () use ($me) {
-                          $response = new HttpResponse();
+                          $response = new Response();
 
                           $response->request = $me->request;
 
@@ -215,7 +211,7 @@ class IocTest extends
         $this->response->doConstruct();
 
         //        echo get_class($this->request);
-        $this->assertInstanceOf('frankmayer\ArangoDbPhpCore\Connectors\Http\HttpResponse', $this->response);
+        $this->assertInstanceOf('frankmayer\ArangoDbPhpCore\Protocols\Http\Response', $this->response);
         $decodedBody = json_decode($this->response->body, true);
         $this->assertTrue($decodedBody['server'] === 'arango');
         $this->assertAttributeEmpty('protocol', $this->response);

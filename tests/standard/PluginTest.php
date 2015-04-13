@@ -11,9 +11,7 @@
 namespace frankmayer\ArangoDbPhpCore;
 
 
-use frankmayer\ArangoDbPhpCore\Connectors\Http\Apis\TestArangoDbApi140 as ArangoDbApi;
-
-use frankmayer\ArangoDbPhpCore\Connectors\Http\CurlHttpConnector;
+use frankmayer\ArangoDbPhpCore\Connectors\CurlHttp\Connector;
 use frankmayer\ArangoDbPhpCore\Plugins\PluginManager;
 use frankmayer\ArangoDbPhpCore\Plugins\TestPlugin;
 
@@ -29,7 +27,7 @@ class PluginTest extends
 
     public function setUp()
     {
-        $connector    = new CurlHttpConnector();
+        $connector    = new Connector();
         $this->client = getClient($connector);
     }
 

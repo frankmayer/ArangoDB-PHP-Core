@@ -33,8 +33,8 @@ function getClientOptions()
         // timeout in seconds
         ClientOptions::OPTION_TIMEOUT              => 5,
         // ClientOptions::OPTION_PLUGINS              => $plugins,
-        ClientOptions::OPTION_REQUEST_CLASS        => 'frankmayer\ArangoDbPhpCore\Request',
-        ClientOptions::OPTION_RESPONSE_CLASS       => 'frankmayer\ArangoDbPhpCore\Response',
+        ClientOptions::OPTION_REQUEST_CLASS        => 'frankmayer\ArangoDbPhpCore\Protocols\Http\Request',
+        ClientOptions::OPTION_RESPONSE_CLASS       => 'frankmayer\ArangoDbPhpCore\Protocols\Http\Response',
         ClientOptions::OPTION_ARANGODB_API_VERSION => '10400',
 
     );

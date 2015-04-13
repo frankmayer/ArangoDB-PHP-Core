@@ -11,8 +11,8 @@
 namespace frankmayer\ArangoDbPhpCore\Connectors\CurlHttp;
 
 use frankmayer\ArangoDbPhpCore\ClientOptions;
-use frankmayer\ArangoDbPhpCore\HttpConnectorInterface;
-use frankmayer\ArangoDbPhpCore\HttpRequestInterface;
+use frankmayer\ArangoDbPhpCore\Protocols\Http\ConnectorInterface;
+use frankmayer\ArangoDbPhpCore\Protocols\Http\RequestInterface;
 use frankmayer\ArangoDbPhpCore\ServerException;
 
 
@@ -23,7 +23,7 @@ use frankmayer\ArangoDbPhpCore\ServerException;
  * @package frankmayer\ArangoDbPhpCore
  */
 class Connector implements
-    HttpConnectorInterface
+    ConnectorInterface
 {
     const HTTP_EOL = "\r\n";
 
@@ -42,12 +42,12 @@ class Connector implements
 
 
     /**
-     * @param HttpRequest|HttpRequestInterface $request
+     * @param RequestInterface $request
      *
      * @throws \frankmayer\ArangoDbPhpCore\ServerException
      * @return mixed
      */
-    public function request(HttpRequestInterface $request)
+    public function request(RequestInterface $request)
     {
         $curlHeaders = [];
 

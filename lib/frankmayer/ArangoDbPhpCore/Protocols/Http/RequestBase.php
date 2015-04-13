@@ -8,7 +8,7 @@
  * @copyright Copyright 2013, FRANKMAYER.NET, Athens, Greece
  */
 
-namespace frankmayer\ArangoDbPhpCore;
+namespace frankmayer\ArangoDbPhpCore\Protocols\Http;
 
 
 /**
@@ -18,7 +18,7 @@ namespace frankmayer\ArangoDbPhpCore;
  * @package frankmayer\ArangoDbPhpCore
  */
 abstract class RequestBase implements
-    HttpRequestInterface
+    RequestInterface
 {
 
     const METHOD_GET     = 'GET';

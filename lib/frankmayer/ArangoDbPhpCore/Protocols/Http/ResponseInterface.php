@@ -8,7 +8,7 @@
  * @copyright Copyright 2013, FRANKMAYER.NET, Athens, Greece
  */
 
-namespace frankmayer\ArangoDbPhpCore;
+namespace frankmayer\ArangoDbPhpCore\Protocols\Http;
 
 
 /**
@@ -16,7 +16,7 @@ namespace frankmayer\ArangoDbPhpCore;
  *
  * @package frankmayer\ArangoDbPhpCoreCore
  */
-interface HttpResponseInterface extends
-    ResponseInterface
+interface ResponseInterface extends
+    \frankmayer\ArangoDbPhpCore\ResponseInterface
 {
 }

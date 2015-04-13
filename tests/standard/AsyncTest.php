@@ -11,6 +11,7 @@
 namespace frankmayer\ArangoDbPhpCore;
 
 
+use frankmayer\ArangoDbPhpCore\Connectors\CurlHttp\Connector;
 use frankmayer\ArangoDbPhpCore\Connectors\Http\Apis\TestArangoDbApi140 as ArangoDbApi;
 use frankmayer\ArangoDbPhpCore\Connectors\Http\CurlHttpConnector;
 use frankmayer\ArangoDbPhpCore\Connectors\Http\HttpResponse;
@@ -34,7 +35,7 @@ class AsyncTest extends
      */
     public function setUp()
     {
-        $connector    = new CurlHttpConnector();
+        $connector    = new Connector();
         $this->client = $this->client = getClient($connector);
     }
 

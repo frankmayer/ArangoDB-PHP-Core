@@ -8,7 +8,9 @@
  * @copyright Copyright 2013, FRANKMAYER.NET, Athens, Greece
  */
 
-namespace frankmayer\ArangoDbPhpCore;
+namespace frankmayer\ArangoDbPhpCore\Protocols\Http;
+
+use frankmayer\ArangoDbPhpCore\Connectors\CurlHttp\Connector;
 
 
 /**
@@ -19,7 +21,7 @@ namespace frankmayer\ArangoDbPhpCore;
  */
 class Request extends
     RequestBase implements
-    HttpRequestInterface
+    RequestInterface
 {
 
     const METHOD_GET     = 'GET';
@@ -38,6 +40,7 @@ class Request extends
      */
     private function requestBatchPart()
     {
+        //todo: fix hardwired Connector to use injected one.
         // Fake a result so we can move on.
         $this->response = 'HTTP/1.1 202 Accepted' . Connector::HTTP_EOL;
         $this->response .= 'location: /_api/document/0/0' . Connector::HTTP_EOL;
@@ -93,7 +96,7 @@ class Request extends
      * @param array  $batchParts
      * @param string $boundary
      *
-     * @return \frankmayer\ArangoDbPhpCore\Connectors\CurlHttp\Response
+     * @return ResponseInterface
      */
     public function sendBatch(
         $batchParts = [],
