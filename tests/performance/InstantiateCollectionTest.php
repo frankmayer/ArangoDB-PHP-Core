@@ -14,7 +14,7 @@ namespace frankmayer\ArangoDbPhpCore;
 use frankmayer\ArangoDbPhpCore\Connectors\Http\Apis\TestArangoDbApi140 as ArangoDbApi;
 
 use frankmayer\ArangoDbPhpCore\Connectors\Http\Apis\TestArangoDbApi140\Collection;
-use frankmayer\ArangoDbPhpCore\Connectors\Http\CurlHttpConnector;
+use frankmayer\ArangoDbPhpCore\Connectors\CurlHttp\Connector;
 
 
 class InstantiateCollectionTest extends
@@ -30,7 +30,7 @@ class InstantiateCollectionTest extends
 
     public function setUp()
     {
-        $connector    = new CurlHttpConnector();
+        $connector    = new Connector();
         $this->client = getClient($connector);
     }
 

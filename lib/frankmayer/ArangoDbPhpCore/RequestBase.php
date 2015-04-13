@@ -8,10 +8,7 @@
  * @copyright Copyright 2013, FRANKMAYER.NET, Athens, Greece
  */
 
-namespace frankmayer\ArangoDbPhpCore\Connectors\CurlHttp;
-
-use frankmayer\ArangoDbPhpCore\HttpRequestInterface;
-use frankmayer\ArangoDbPhpCore\ResponseInterface;
+namespace frankmayer\ArangoDbPhpCore;
 
 
 /**

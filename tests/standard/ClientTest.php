@@ -201,7 +201,7 @@ class ClientTest extends
         $this->assertEquals($testValue1, $testValue);
 
         $getRequestOriginalClass = $this->client->getRequestClass();
-        $this->assertEquals('frankmayer\ArangoDbPhpCore\Connectors\CurlHttp\Request', $getRequestOriginalClass);
+        $this->assertEquals('frankmayer\ArangoDbPhpCore\Request', $getRequestOriginalClass);
 
         $object = $this->client->setRequestClass('frankmayer\ArangoDbPhpCore\Connectors\CurlHttp\RequestTest');
         $this->assertTrue($this->client === $object);
@@ -213,10 +213,10 @@ class ClientTest extends
         $this->assertTrue($this->client === $object);
 
         $getRequestClass = $this->client->getRequestClass();
-        $this->assertEquals('frankmayer\ArangoDbPhpCore\Connectors\CurlHttp\Request', $getRequestClass);
+        $this->assertEquals('frankmayer\ArangoDbPhpCore\Request', $getRequestClass);
 
         $getResponseOriginalClass = $this->client->getResponseClass();
-        $this->assertEquals('frankmayer\ArangoDbPhpCore\Connectors\CurlHttp\Response', $getResponseOriginalClass);
+        $this->assertEquals('frankmayer\ArangoDbPhpCore\Response', $getResponseOriginalClass);
 
         $object = $this->client->setResponseClass('frankmayer\ArangoDbPhpCore\Connectors\CurlHttp\ResponseTest');
         $this->assertTrue($this->client === $object);
@@ -228,7 +228,7 @@ class ClientTest extends
         $this->assertTrue($this->client === $object);
 
         $getResponseClass = $this->client->getResponseClass();
-        $this->assertEquals('frankmayer\ArangoDbPhpCore\Connectors\CurlHttp\Response', $getResponseClass);
+        $this->assertEquals('frankmayer\ArangoDbPhpCore\Response', $getResponseClass);
     }
 
 

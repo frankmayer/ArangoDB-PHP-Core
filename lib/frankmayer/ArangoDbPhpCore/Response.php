@@ -8,9 +8,7 @@
  * @copyright Copyright 2013, FRANKMAYER.NET, Athens, Greece
  */
 
-namespace frankmayer\ArangoDbPhpCore\Connectors\CurlHttp;
-
-use frankmayer\ArangoDbPhpCore\ServerException;
+namespace frankmayer\ArangoDbPhpCore;
 
 
 /**
@@ -34,7 +32,7 @@ class Response
      * @var Request $request
      */
     public $request;
-    public $headers = [];
+    public $headers                  = [];
     public $body;
     public $batch;
     public $async;
