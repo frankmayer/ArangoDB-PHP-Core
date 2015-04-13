@@ -1,7 +1,7 @@
 <?php
 
 /**
- * ArangoDB PHP Core Client: Server Exception
+ * ArangoDB PHP Core Client: Exception
  *
  * @package   frankmayer\ArangoDbPhpCore
  * @author    Frank Mayer
@@ -12,11 +12,11 @@ namespace frankmayer\ArangoDbPhpCore;
 
 
 /**
- * Class ServerException
+ * Class Exception
  *
  * @package frankmayer\ArangoDbPhpCore
  */
-class ServerException extends
-    ConnectionException
+class ConnectionException extends
+    Exception
 {
 }
