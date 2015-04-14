@@ -41,6 +41,10 @@ abstract class RequestBase implements
      */
     public $connector;
     /**
+     * @var array
+     */
+    public $connectorOptions = [];
+    /**
      * @var string The address of the endpoint
      */
     public $address;
@@ -55,11 +59,11 @@ abstract class RequestBase implements
     /**
      * @var array The headers of the request
      */
-    public $headers;
+    public $headers = [];
     /**
      * @var array The options of the request
      */
-    public $options;
+    public $options = [];
     /**
      * @var string The type of the request
      */
