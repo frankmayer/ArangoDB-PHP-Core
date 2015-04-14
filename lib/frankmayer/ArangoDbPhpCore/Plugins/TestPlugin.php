@@ -29,6 +29,6 @@ class TestPlugin extends
     public function notify($eventName, $client, $eventData)
     {
         //        echo "tracing event (".($this->priority)."):",$eventName,PHP_EOL;
-        $eventData->pluginTest='plugin tested';
+        $eventData->pluginTest = 'plugin tested';
     }
 }

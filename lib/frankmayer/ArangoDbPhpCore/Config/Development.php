@@ -11,27 +11,27 @@
 
 namespace frankmayer\ArangoDbPhpCore\Config;
 
-return array(
-    ClientOptions::OPTION_ENDPOINT      => 'tcp://localhost:8529/',
+use frankmayer\ArangoDbPhpCore\ClientOptions;
+
+return [
     // endpoint to connect to
-    ClientOptions::OPTION_CLIENT        => 'Close',
+    ClientOptions::OPTION_ENDPOINT      => 'tcp://localhost:8529/',
     // can use either 'Close' (one-time clients) or 'Keep-Alive' (re-used clients)
-    ClientOptions::OPTION_AUTH_TYPE     => 'Basic',
+    ClientOptions::OPTION_CLIENT        => 'Close',
     // use basic authorization
+    ClientOptions::OPTION_AUTH_TYPE     => 'Basic',
     /*
     ClientOptions::OPTION_AUTH_USER       => '',                      // user for basic authorization
     ClientOptions::OPTION_AUTH_PASSWD     => '',                      // password for basic authorization
     ClientOptions::OPTION_PORT            => 8529,                    // port to connect to (deprecated, should use endpoint instead)
     ClientOptions::OPTION_HOST            => "localhost",             // host to connect to (deprecated, should use endpoint instead)
     */
-    ClientOptions::OPTION_TIMEOUT       => 5,
     // timeout in seconds
+    ClientOptions::OPTION_TIMEOUT       => 5,
     //ClientOptions::OPTION_TRACE           => $traceFunc,              // tracer function, can be used for debugging
-    ClientOptions::OPTION_CREATE        => false,
+
     // do not create unknown collections automatically
-    ClientOptions::OPTION_UPDATE_POLICY => UpdatePolicy::LAST,
+    ClientOptions::OPTION_CREATE        => false,
     // last update wins
-    ClientOptions::OPTION_UPDATE_POLICY => array(
-        ClientOptions::OPTION_TIMEOUT => 5,
-    )
-);
+    ClientOptions::OPTION_UPDATE_POLICY => UpdatePolicy::LAST,
+];

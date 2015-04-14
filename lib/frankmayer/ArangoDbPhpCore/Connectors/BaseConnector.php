@@ -1,10 +1,11 @@
 <?php
 /**
- * 
+ *
  * File: BaseConnector.php
  *
- * @package 
+ * @package   frankmayer\ArangoDbPhpCore
  * @author Frank Mayer
+ * @copyright Copyright 2013, FRANKMAYER.NET, Athens, Greece
  */
 
 namespace frankmayer\ArangoDbPhpCore\Connectors;
@@ -13,7 +14,8 @@ namespace frankmayer\ArangoDbPhpCore\Connectors;
 use frankmayer\ArangoDbPhpCore\Protocols\Http\ConnectorInterface;
 
 abstract class BaseConnector implements
-    ConnectorInterface {
+    ConnectorInterface
+{
 
     const HTTP_EOL = "\r\n";
 

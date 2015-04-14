@@ -32,7 +32,7 @@ class ConnectionOptions implements
      *
      * @var array
      */
-    private $_values = array();
+    private $_values = [];
 
     /**
      * The client endpoint object
@@ -182,7 +182,7 @@ class ConnectionOptions implements
      *
      * @param array $options - initial options
      *
-     * @return \frankmayer\ArangoDbPhpCore\Config\ClientOptions
+     * @throws ClientException
      */
     public function __construct(array $options)
     {
@@ -284,7 +284,7 @@ class ConnectionOptions implements
      */
     private static function getDefaults()
     {
-        return array(
+        return [
             self::OPTION_ENDPOINT           => null,
             self::OPTION_HOST               => null,
             self::OPTION_PORT               => DefaultValues::DEFAULT_PORT,
@@ -309,7 +309,7 @@ class ConnectionOptions implements
             self::OPTION_BATCH              => false,
             self::OPTION_BATCHPART          => false,
             self::OPTION_CHECK_UTF8_CONFORM => DefaultValues::DEFAULT_CHECK_UTF8_CONFORM,
-        );
+        ];
     }
 
     /**
@@ -319,7 +319,7 @@ class ConnectionOptions implements
      */
     private static function getSupportedAuthTypes()
     {
-        return array('Basic');
+        return ['Basic'];
     }
 
     /**
@@ -329,7 +329,7 @@ class ConnectionOptions implements
      */
     private static function getSupportedClientTypes()
     {
-        return array('Close', 'Keep-Alive');
+        return ['Close', 'Keep-Alive'];
     }
 
     /**
@@ -380,9 +380,9 @@ class ConnectionOptions implements
             )
         ) {
             throw new ClientException(sprintf(
-                                          "unsupported client value '%s'",
-                                          $this->_values[self::OPTION_CLIENT]
-                                      ));
+                "unsupported client value '%s'",
+                $this->_values[self::OPTION_CLIENT]
+            ));
         }
 
         UpdatePolicy::validate($this->_values[self::OPTION_UPDATE_POLICY]);

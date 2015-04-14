@@ -129,7 +129,7 @@ class Request extends
 
 
     /**
-     * @param Response $responseObject
+     * @param Response     $responseObject
      * @param Array        $batchParts
      * @param              $boundary
      */

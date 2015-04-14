@@ -39,12 +39,12 @@ class PluginManager
      * @param array $plugins
      * @param array $options
      */
-    public function __construct($client, $plugins = array(), $options = array('notificationsEnabled' => true))
+    public function __construct($client, $plugins = [], $options = ['notificationsEnabled' => true])
     {
         $options['notificationsEnabled'] = true;
 
         $this->client        = $client;
-        $this->pluginStorage = array();
+        $this->pluginStorage = [];
         $this->options       = $options;
         $this->setPluginsFromPluginArray($plugins);
     }
@@ -68,7 +68,7 @@ class PluginManager
                 }
             }
         }
-        uksort($this->pluginStorage, array($this, 'comparePluginPriorities'));
+        uksort($this->pluginStorage, [$this, 'comparePluginPriorities']);
 
         return true;
     }
@@ -78,7 +78,7 @@ class PluginManager
      * @param       $eventName
      * @param array $eventData
      */
-    public function notifyPlugins($eventName, $eventData = array())
+    public function notifyPlugins($eventName, $eventData = [])
     {
         if ($this->options['notificationsEnabled'] === true) {
             if (count($this->pluginStorage) > 0) {

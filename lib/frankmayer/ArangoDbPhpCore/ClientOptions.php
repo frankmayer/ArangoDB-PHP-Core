@@ -10,6 +10,8 @@
 
 namespace frankmayer\ArangoDbPhpCore;
 
+use frankmayer\ArangoDbPhpCore\Config\UpdatePolicy;
+
 
 /**
  * Class ClientOptions
@@ -54,6 +56,21 @@ class ClientOptions
     const OPTION_BATCHPART = 'BatchPart';
 
     /**
+     * Client close or keepalive strategy constant
+     */
+    const OPTION_CLIENT = 'Close';
+
+    /**
+     * option to create unknown collections automatically
+     */
+    const OPTION_CREATE = false;
+
+    /**
+     * Update strategy
+     */
+    const OPTION_UPDATE_POLICY = UpdatePolicy::LAST;
+
+    /**
      * UTF-8 CHeck Flag
      */
     const OPTION_CHECK_UTF8_CONFORM = 'CheckUtf8Conform';
@@ -92,4 +109,5 @@ class ClientOptions
      * ResponseClass index constant
      */
     const OPTION_ARANGODB_API_VERSION = 'arangodbApiVersion';
+
 }
