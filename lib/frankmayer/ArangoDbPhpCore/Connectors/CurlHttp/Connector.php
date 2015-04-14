@@ -11,7 +11,9 @@
 namespace frankmayer\ArangoDbPhpCore\Connectors\CurlHttp;
 
 use frankmayer\ArangoDbPhpCore\ClientOptions;
+use frankmayer\ArangoDbPhpCore\Connectors\BaseConnector;
 use frankmayer\ArangoDbPhpCore\Protocols\Http\ConnectorInterface;
+use frankmayer\ArangoDbPhpCore\Protocols\Http\Request;
 use frankmayer\ArangoDbPhpCore\Protocols\Http\RequestInterface;
 use frankmayer\ArangoDbPhpCore\ServerException;
 
@@ -22,27 +24,11 @@ use frankmayer\ArangoDbPhpCore\ServerException;
  *
  * @package frankmayer\ArangoDbPhpCore
  */
-class Connector implements
+class Connector extends BaseConnector implements
     ConnectorInterface
 {
-    const HTTP_EOL = "\r\n";
-
     /**
-     * @var bool switch for turning on curl verbose logging
-     */
-    protected $verboseLogging;
-
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->verboseLogging = false;
-    }
-
-
-    /**
-     * @param RequestInterface $request
+     * @param RequestInterface|Request $request
      *
      * @throws \frankmayer\ArangoDbPhpCore\ServerException
      * @return mixed
@@ -63,12 +49,12 @@ class Connector implements
         curl_setopt_array(
             $ch,
             [
-                 CURLOPT_CUSTOMREQUEST  => $request->method,
-                 CURLOPT_VERBOSE        => $this->verboseLogging,
-                 CURLOPT_RETURNTRANSFER => true,
-                 CURLOPT_HEADER         => true,
-                 CURLOPT_POSTFIELDS     => $body,
-                 CURLOPT_HTTPHEADER     => $curlHeaders
+                CURLOPT_CUSTOMREQUEST  => $request->method,
+                CURLOPT_VERBOSE        => $this->verboseLogging,
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_HEADER         => true,
+                CURLOPT_POSTFIELDS     => $body,
+                CURLOPT_HTTPHEADER     => $curlHeaders,
             ]
         );
 
@@ -91,24 +77,6 @@ class Connector implements
             throw new ServerException(curl_error($ch), curl_errno($ch));
         }
 
-
         return $response;
-    }
-
-
-    /**
-     * @param boolean $verbose
-     */
-    public function setVerboseLogging($verbose)
-    {
-        $this->verboseLogging = $verbose;
-    }
-
-    /**
-     * @return boolean
-     */
-    public function getVerboseLogging()
-    {
-        return $this->verboseLogging;
     }
 }

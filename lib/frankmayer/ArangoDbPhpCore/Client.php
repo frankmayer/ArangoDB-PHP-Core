@@ -10,8 +10,9 @@
 
 namespace frankmayer\ArangoDbPhpCore;
 
-use frankmayer\ArangoDbPhpCore\Connectors\Http\Response;
+use frankmayer\ArangoDbPhpCore\Connectors\BaseConnector;
 use frankmayer\ArangoDbPhpCore\Plugins\PluginManager;
+use frankmayer\ArangoDbPhpCore\Protocols\Http\Response;
 
 /**
  * The Client class.
@@ -29,7 +30,7 @@ class Client
      */
     public $pluginManager;
     /**
-     * @var ConnectorInterface|HttpConnectorInterface
+     * @var ConnectorInterface
      */
     public $connector;
     /**
@@ -59,25 +60,28 @@ class Client
 
 
     /**
-     * @param ConnectorInterface|HttpConnectorInterface $connector
+     * @param ConnectorInterface|BaseConnector $connector
      *
-     * @param null                                      $clientOptions
+     * @param null                             $clientOptions
      */
     public function __construct(ConnectorInterface $connector, $clientOptions = null)
     {
-        $this->connector     = $connector;
-        $this->clientOptions = $clientOptions;
-        $this->endpoint      = $this->clientOptions[ClientOptions::OPTION_ENDPOINT];
-        $this->database      = $this->clientOptions[ClientOptions::OPTION_DEFAULT_DATABASE];
-        $this->requestClass  = $this->clientOptions[ClientOptions::OPTION_REQUEST_CLASS];
-        $this->responseClass = $this->clientOptions[ClientOptions::OPTION_RESPONSE_CLASS];
+        $this->connector         = $connector;
+        $this->connector->client = $this;
+        $this->clientOptions     = $clientOptions;
+        $this->endpoint          = $this->clientOptions[ClientOptions::OPTION_ENDPOINT];
+        $this->database          = $this->clientOptions[ClientOptions::OPTION_DEFAULT_DATABASE];
+        $this->requestClass      = $this->clientOptions[ClientOptions::OPTION_REQUEST_CLASS];
+        $this->responseClass     = $this->clientOptions[ClientOptions::OPTION_RESPONSE_CLASS];
 
         if (isset($this->clientOptions[ClientOptions::OPTION_ARANGODB_API_VERSION])) {
 
             $this->arangoDBApiVersion = $this->clientOptions[ClientOptions::OPTION_ARANGODB_API_VERSION];
         }
         if (isset($this->clientOptions['plugins'])) {
-            $this->pluginManager = new PluginManager($this, isset($this->clientOptions['plugins']) ? $this->clientOptions['plugins'] : null, isset($this->clientOptions['PluginManager']['options']) ? $this->clientOptions['PluginManager']['options'] : null);
+            $this->pluginManager = new PluginManager($this,
+                isset($this->clientOptions['plugins']) ? $this->clientOptions['plugins'] : null,
+                isset($this->clientOptions['PluginManager']['options']) ? $this->clientOptions['PluginManager']['options'] : null);
         };
     }
 
@@ -106,20 +110,18 @@ class Client
 
 
     /**
-     * @param $requestObject
+     * @param $request
      *
      * @return mixed
      */
-    public function doRequest($requestObject)
+    public function doRequest($request)
     {
-
-
         $responseClass = $this->responseClass;
-        $response      = new $responseClass();
-
-        $response->request = $requestObject;
         /** @var $response Response */
-        $response->doConstruct();
+        $response = new $responseClass();
+
+        //        $response->request = $request;
+        $response->doConstruct($request->response);
 
         return $response;
     }
@@ -201,7 +203,7 @@ class Client
 
 
     /**
-     * @param \frankmayer\ArangoDbPhpCore\ConnectorInterface|\frankmayer\ArangoDbPhpCore\HttpConnectorInterface $connector
+     * @param \frankmayer\ArangoDbPhpCore\ConnectorInterface|\frankmayer\ArangoDbPhpCore\ConnectorInterface $connector
      *
      * @return $this
      */
@@ -214,7 +216,7 @@ class Client
 
 
     /**
-     * @return \frankmayer\ArangoDbPhpCore\ConnectorInterface|\frankmayer\ArangoDbPhpCore\HttpConnectorInterface
+     * @return \frankmayer\ArangoDbPhpCore\ConnectorInterface|\frankmayer\ArangoDbPhpCore\ConnectorInterface
      */
     public function getConnector()
     {

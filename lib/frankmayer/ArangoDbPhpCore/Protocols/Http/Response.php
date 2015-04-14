@@ -20,8 +20,6 @@ use frankmayer\ArangoDbPhpCore\ServerException;
  */
 class Response
 {
-
-
     /**
      * @var array An array with the http status codes of the ones, that we want to raise an exception for.
      *
@@ -50,10 +48,13 @@ class Response
     }
 
     /**
+     * @param $response
+     *
+     * @throws ServerException
      */
-    public function doConstruct()
+    public function doConstruct($response)
     {
-        $this->splitResponseToHeadersArrayAndBody();
+        $this->splitResponseToHeadersArrayAndBody($response);
         $statusLineArray = explode(" ", $this->headers['status']);
 
         $this->status = $statusLineArray[1];
@@ -99,10 +100,12 @@ class Response
      * It expects the response data to be in $this->request->response
      * It puts the headers into $this->headers and
      * the body into $this->body
+     *
+     * @param $response
      */
-    protected function splitResponseToHeadersArrayAndBody()
+    protected function splitResponseToHeadersArrayAndBody($response)
     {
-        list($headers, $this->body) = explode("\r\n\r\n", $this->request->response, 2);
+        list($headers, $this->body) = explode("\r\n\r\n", $response, 2);
 
         $headersArray = explode("\r\n", $headers);
         foreach ($headersArray as $line => $header) {

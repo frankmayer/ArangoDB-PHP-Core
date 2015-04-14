@@ -115,7 +115,7 @@ class IocTest extends
 
 
         $testValue = $this->request->getHeaders();
-        $this->assertNull($testValue);
+        $this->assertEmpty($testValue);
 
         $this->request->setHeaders('testHeaders');
 
@@ -133,7 +133,7 @@ class IocTest extends
 
 
         $testValue1 = $this->request->getOptions();
-        $this->assertNull($testValue1);
+        $this->assertEmpty($testValue1);
 
         $this->request->setOptions(['testOption' => 'testVal']);
 
@@ -207,7 +207,7 @@ class IocTest extends
         // And here's how one gets an HttpRequest object through the IOC.
         // Note that the type-name 'httpRequest' is the name we bound our HttpRequest class creation-closure to. (see above)
         $this->response = Client::make('httpResponse');
-        $this->response->doConstruct();
+        $this->response->doConstruct($this->request->response);
 
         //        echo get_class($this->request);
         $this->assertInstanceOf('frankmayer\ArangoDbPhpCore\Protocols\Http\Response', $this->response);
@@ -219,7 +219,7 @@ class IocTest extends
         // test verboseExtractStatusLine
         $this->response                           = Client::make('httpResponse');
         $this->response->verboseExtractStatusLine = true;
-        $this->response->doConstruct();
+        $this->response->doConstruct($this->request->response);
         $this->assertAttributeNotEmpty('protocol', $this->response);
 
         $testValue = $this->response->getAsync();
