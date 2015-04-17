@@ -23,13 +23,11 @@ class Batch extends
     Api implements
     RestApiInterface
 {
-
-
-    public function send($batchParts)
+    public static function send($client, $batchParts)
     {
         /** @var Request $request */
-        $request         = new $this->client->requestClass();
-        $request->client = $this->client;
+        $request         = new $client->requestClass();
+        $request->client = $client;
 
         return $request->sendBatch($batchParts);
     }

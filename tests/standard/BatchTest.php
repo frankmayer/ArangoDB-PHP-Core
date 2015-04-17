@@ -58,9 +58,6 @@ class BatchTest extends
         $batchParts = [];
 
         foreach ($this->collectionNames as $collectionName) {
-            $collection         = new Collection();
-            $collection->client = $this->client;
-
             $batchPart = Collection::create($this->client, $collectionName, $collectionOptions,
                 ['isBatchPart' => true]);
 
@@ -69,11 +66,8 @@ class BatchTest extends
         }
 
 
-        $batch         = new Batch();
-        $batch->client = $this->client;
-
         /** @var Response $responseObject */
-        $responseObject = $batch->send($batchParts);
+        $responseObject = Batch::send($this->client, $batchParts);
         $this->assertEquals(200, $responseObject->status);
 
         $batchResponseParts = $responseObject->batch;
@@ -89,16 +83,10 @@ class BatchTest extends
         $batchParts = [];
 
         foreach ($this->collectionNames as $collectionName) {
-            $collection         = new Collection();
-            $collection->client = $this->client;
-
             $batchParts[] = Collection::delete($this->client, $collectionName, ['isBatchPart' => true]);
         }
 
-        $batch         = new Batch();
-        $batch->client = $this->client;
-
-        $responseObject = $batch->send($batchParts);
+        $responseObject = Batch::send($this->client, $batchParts);
 
         $batchResponseParts = $responseObject->batch;
 
@@ -116,8 +104,10 @@ class BatchTest extends
      */
     public function tearDown()
     {
+        $batchParts = [];
         foreach ($this->collectionNames as $collectionName) {
             $batchParts[] = Collection::delete($this->client, $collectionName, ['isBatchPart' => true]);
         }
+        Batch::send($this->client, $batchParts);
     }
 }

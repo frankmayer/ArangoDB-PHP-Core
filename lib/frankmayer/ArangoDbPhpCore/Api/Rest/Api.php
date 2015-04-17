@@ -21,7 +21,6 @@ use HttpRequest;
  */
 class Api
 {
-
     const METHOD_GET     = 'GET';
     const METHOD_POST    = 'POST';
     const METHOD_PUT     = 'PUT';
@@ -29,27 +28,6 @@ class Api
     const METHOD_DELETE  = 'DELETE';
     const METHOD_HEAD    = 'HEAD';
     const METHOD_OPTIONS = 'OPTIONS';
-
-    public $address;
-
-    /**
-     * @var Client
-     */
-    public $client;
-    public $headers;
-    public $body;
-    public $path;
-    public $options;
-    public $method;
-
-    /**
-     * @var HTTPRequest
-     */
-    public $request;
-    /**
-     * @var HTTPRequest
-     */
-    public $requestClass;
 
 
     /**
