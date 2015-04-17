@@ -22,7 +22,7 @@ function getClientOptions()
     //    $plugins = array('TracerPlugin' => new TracerPlugin());
 
     return array(
-        ClientOptions::OPTION_ENDPOINT             => 'http://localhost:8529',
+        ClientOptions::OPTION_ENDPOINT             => 'http://db-link:8529',
         ClientOptions::OPTION_DEFAULT_DATABASE     => '_system',
         // endpoint to connect to
         /*

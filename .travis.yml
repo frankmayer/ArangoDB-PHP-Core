@@ -31,3 +31,6 @@ script:
  - mkdir -p build/logs
  - phpunit --testsuite ArangoDB-PHP-Core --coverage-clover build/logs/clover.xml
 
+addons:
+  hosts:
+    - db-link
