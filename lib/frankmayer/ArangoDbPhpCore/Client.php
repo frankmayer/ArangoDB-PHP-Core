@@ -117,13 +117,11 @@ class Client
     public function doRequest($request)
     {
         $responseClass = $this->responseClass;
+
         /** @var $response Response */
-        $response = new $responseClass();
+        $responseObject = new $responseClass();
 
-        //        $response->request = $request;
-        $response->doConstruct($request->response);
-
-        return $response;
+        return $responseObject->build($request);
     }
 
 

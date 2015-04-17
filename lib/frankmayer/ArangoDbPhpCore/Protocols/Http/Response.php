@@ -48,12 +48,15 @@ class Response
     }
 
     /**
-     * @param $response
+     * @param $request
      *
+     * @return $this
      * @throws ServerException
+     *
      */
-    public function doConstruct($response)
+    public function build($request)
     {
+        $response = $request->response;
         $this->splitResponseToHeadersArrayAndBody($response);
         $statusLineArray = explode(" ", $this->headers['status']);
 
@@ -73,6 +76,8 @@ class Response
             throw new ServerException($this->statusPhrase, $this->status);
             // @codeCoverageIgnoreEnd
         }
+
+        return $this;
     }
 
     /**

@@ -147,7 +147,7 @@ class Request extends
 
             /** @var $batchPart Response */
             $batchPart->request->response = $batchPartHeaders[1];
-            $batchPart->doConstruct($batchPart->request);
+            $batchPart->build($batchPart->request);
             $i++;
         }
         $responseObject->batch = $batchParts;
