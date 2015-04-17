@@ -158,6 +158,7 @@ class DocumentTest extends
         $this->assertEquals(200, $decodedJsonBody['code']);
     }
 
+
     /**
      * Test if we can get the server version
      */
@@ -202,7 +203,7 @@ class DocumentTest extends
         // Try to delete a second time .. should throw an error
         $responseObject = Document::delete($this->client, $collectionName . '/1');
 
-        $responseBody   = $responseObject->body;
+        $responseBody = $responseObject->body;
 
         $this->assertArrayHasKey('error', json_decode($responseBody, true));
 
@@ -227,7 +228,7 @@ class DocumentTest extends
         /** @var Response $responseObject */
         $responseObject = Document::create($this->client, $collectionName, $requestBody);
 
-        $responseBody   = $responseObject->body;
+        $responseBody = $responseObject->body;
 
         $this->assertArrayHasKey('error', json_decode($responseBody, true));
         $decodedJsonBody = json_decode($responseBody, true);
@@ -237,7 +238,7 @@ class DocumentTest extends
 
         $requestBody = ['name' => 'Mike'];
 
-        $responseObject = Document::replace($this->client, $collectionName. '/1', $requestBody);
+        $responseObject = Document::replace($this->client, $collectionName . '/1', $requestBody);
         $responseBody   = $responseObject->body;
 
         $this->assertArrayHasKey('error', json_decode($responseBody, true));
@@ -248,7 +249,7 @@ class DocumentTest extends
 
         $this->assertEquals($collectionName . '/1', $decodedJsonBody['_id']);
 
-        $responseObject = Document::get($this->client, $collectionName. '/1', $requestBody);
+        $responseObject = Document::get($this->client, $collectionName . '/1', $requestBody);
         $responseBody   = $responseObject->body;
 
         $this->assertArrayNotHasKey('bike', json_decode($responseBody, true));
@@ -259,7 +260,7 @@ class DocumentTest extends
 
         $this->assertEquals($collectionName . '/1', $decodedJsonBody['_id']);
 
-        $responseObject = Document::delete($this->client, $collectionName. '/1');
+        $responseObject = Document::delete($this->client, $collectionName . '/1');
         $responseBody   = $responseObject->body;
 
         $this->assertArrayHasKey('error', json_decode($responseBody, true));
@@ -269,7 +270,7 @@ class DocumentTest extends
         $this->assertEquals(false, $decodedJsonBody['error']);
 
         // Try to delete a second time .. should throw an error
-        $responseObject = Document::delete($this->client, $collectionName. '/1');
+        $responseObject = Document::delete($this->client, $collectionName . '/1');
         $responseBody   = $responseObject->body;
 
         $this->assertArrayHasKey('error', json_decode($responseBody, true));
@@ -282,6 +283,7 @@ class DocumentTest extends
 
         $this->assertEquals(1202, $decodedJsonBody['errorNum']);
     }
+
 
     /**
      * Test if we can get the server version
@@ -314,7 +316,7 @@ class DocumentTest extends
 
         $this->assertEquals($collectionName . '/1', $decodedJsonBody['_id']);
 
-        $responseObject = Document::get($this->client, $collectionName. '/1', $requestBody);
+        $responseObject = Document::get($this->client, $collectionName . '/1', $requestBody);
         $responseBody   = $responseObject->body;
 
         $this->assertArrayHasKey('bike', json_decode($responseBody, true));
@@ -325,7 +327,7 @@ class DocumentTest extends
 
         $this->assertEquals($collectionName . '/1', $decodedJsonBody['_id']);
 
-        $responseObject = Document::delete($this->client, $collectionName. '/1');
+        $responseObject = Document::delete($this->client, $collectionName . '/1');
         $responseBody   = $responseObject->body;
 
         $this->assertArrayHasKey('error', json_decode($responseBody, true));
@@ -335,7 +337,7 @@ class DocumentTest extends
         $this->assertEquals(false, $decodedJsonBody['error']);
 
         // Try to delete a second time .. should throw an error
-        $responseObject = Document::delete($this->client, $collectionName. '/1');
+        $responseObject = Document::delete($this->client, $collectionName . '/1');
         $responseBody   = $responseObject->body;
 
         $this->assertArrayHasKey('error', json_decode($responseBody, true));

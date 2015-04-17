@@ -25,7 +25,6 @@ class Document extends
 {
     public $urlQuery;
 
-
     /**
      *
      */
@@ -53,7 +52,7 @@ class Document extends
             $request->body = json_encode($request->body);
         }
 
-        $request->path = $request->getDatabasePath() . self::API_DOCUMENT;
+        $request->path = $request->getDatabasePath() . static::API_DOCUMENT;
 
         if (isset($collection)) {
             $urlQuery = array_merge(
@@ -66,7 +65,7 @@ class Document extends
 
         $request->path .= $urlQuery;
 
-        $request->method = self::METHOD_POST;
+        $request->method = static::METHOD_POST;
 
         $responseObject = $request->send();
 
@@ -95,18 +94,19 @@ class Document extends
             $request->body = json_encode($request->body);
         }
 
-        $request->path = $request->getDatabasePath() . self::API_DOCUMENT . '/' . $handle;
+        $request->path = $request->getDatabasePath() . static::API_DOCUMENT . '/' . $handle;
 
         $urlQuery = $request->buildUrlQuery($urlQuery);
 
         $request->path .= $urlQuery;
 
-        $request->method = self::METHOD_PUT;
+        $request->method = static::METHOD_PUT;
 
         $responseObject = $request->send();
 
         return $responseObject;
     }
+
 
     /**
      * @param       $client
@@ -129,13 +129,13 @@ class Document extends
             $request->body = json_encode($request->body);
         }
 
-        $request->path = $request->getDatabasePath() . self::API_DOCUMENT . '/' . $handle;
+        $request->path = $request->getDatabasePath() . static::API_DOCUMENT . '/' . $handle;
 
         $urlQuery = $request->buildUrlQuery($urlQuery);
 
         $request->path .= $urlQuery;
 
-        $request->method = self::METHOD_PATCH;
+        $request->method = static::METHOD_PATCH;
 
         $responseObject = $request->send();
 
@@ -156,9 +156,9 @@ class Document extends
         $request          = new $client->requestClass();
         $request->client  = $client;
         $request->options = $options;
-        $request->path    = $request->getDatabasePath() . self::API_DOCUMENT;
+        $request->path    = $request->getDatabasePath() . static::API_DOCUMENT;
         $request->path .= '?collection=' . $collection;
-        $request->method = self::METHOD_GET;
+        $request->method = static::METHOD_GET;
 
         $responseObject = $request->send();
 
@@ -179,8 +179,8 @@ class Document extends
         $request          = new $client->requestClass();
         $request->client  = $client;
         $request->options = $options;
-        $request->path    = $request->getDatabasePath() . self::API_DOCUMENT . '/' . $handle;
-        $request->method  = self::METHOD_GET;
+        $request->path    = $request->getDatabasePath() . static::API_DOCUMENT . '/' . $handle;
+        $request->method  = static::METHOD_GET;
 
         $responseObject = $request->send();
 
@@ -201,8 +201,8 @@ class Document extends
         $request          = new $client->requestClass();
         $request->client  = $client;
         $request->options = $options;
-        $request->path    = $request->getDatabasePath() . self::API_DOCUMENT . '/' . $handle;
-        $request->method  = self::METHOD_DELETE;
+        $request->path    = $request->getDatabasePath() . static::API_DOCUMENT . '/' . $handle;
+        $request->method  = static::METHOD_DELETE;
 
         $responseObject = $request->send();
 

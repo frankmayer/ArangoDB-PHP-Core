@@ -29,6 +29,7 @@ class CollectionTest extends
      */
     public $client;
 
+    
     /**
      *
      */
@@ -37,6 +38,7 @@ class CollectionTest extends
         $connector    = new Connector();
         $this->client = $this->client = getClient($connector);
     }
+
 
     /**
      * Test if we can get the server version
@@ -86,7 +88,6 @@ class CollectionTest extends
      */
     public function testDeleteCollectionWithoutApiClasses()
     {
-
         $collectionName = 'ArangoDB-PHP-Core-CollectionTestSuite-Collection';
 
         $collectionOptions = ["waitForSync" => true];
@@ -124,7 +125,6 @@ class CollectionTest extends
         $collectionName = 'ArangoDB-PHP-Core-CollectionTestSuite-Collection';
 
         $collectionOptions = ["waitForSync" => true];
-
 
         // Here's how a binding for the HttpRequest should take place in the IOC container.
         // The actual binding should only happen once in the client construction, though. This is only for testing...
@@ -201,6 +201,7 @@ class CollectionTest extends
         $this->assertObjectHasAttribute('_graphs', $response->names);
     }
 
+
     /**
      * Test if we can get all collections
      */
@@ -213,6 +214,10 @@ class CollectionTest extends
         $this->assertObjectNotHasAttribute('_graphs', $response->names);
     }
 
+
+    /**
+     *
+     */
     public function tearDown()
     {
         $collectionName = 'ArangoDB-PHP-Core-CollectionTestSuite-CollectionViaIocContainer';

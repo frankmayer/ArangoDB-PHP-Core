@@ -10,7 +10,6 @@
 
 namespace frankmayer\ArangoDbPhpCore;
 
-
 use frankmayer\ArangoDbPhpCore\Api\Rest\Collection;
 use frankmayer\ArangoDbPhpCore\Connectors\CurlHttp\Connector;
 use frankmayer\ArangoDbPhpCore\Plugins\PluginManager;
@@ -46,6 +45,7 @@ class PluginTest extends
     }
 
     // todo 1 Frank Complete plugin tests
+
     /**
      *
      */

@@ -10,9 +10,6 @@
 
 namespace frankmayer\ArangoDbPhpCore\Api\Rest;
 
-use frankmayer\ArangoDbPhpCore\Client;
-use HttpRequest;
-
 
 /**
  * A base API class for testing and demonstration purposes
@@ -65,7 +62,7 @@ class Api
 
         foreach ($array2 as $key => &$value) {
             if (is_array($value) && isset ($merged [$key]) && is_array($merged [$key])) {
-                $merged [$key] = self::array_merge_recursive_distinct($merged [$key], $value);
+                $merged [$key] = static::array_merge_recursive_distinct($merged [$key], $value);
             } else {
                 $merged [$key] = $value;
             }

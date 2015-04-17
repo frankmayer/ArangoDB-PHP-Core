@@ -23,8 +23,8 @@ class Async extends
     Api implements
     RestApiInterface
 {
-
     const API_JOB = '/_api/job';
+
 
     /**
      * @param        $client
@@ -39,8 +39,8 @@ class Async extends
         $request          = new $client->requestClass();
         $request->client  = $client;
         $request->options = $options;
-        $request->path    = $request->getDatabasePath() . self::API_JOB . '/' . $handle;
-        $request->method  = self::METHOD_PUT;
+        $request->path    = $request->getDatabasePath() . static::API_JOB . '/' . $handle;
+        $request->method  = static::METHOD_PUT;
 
         $responseObject = $request->send();
 
@@ -49,6 +49,7 @@ class Async extends
 
 
     /**
+     * @param         $client
      * @param string  $type The type of jobs to return. Might be `done` or `pending`. Example: 'pending'
      * @param integer $count
      * @param array   $options
@@ -63,7 +64,7 @@ class Async extends
         $request          = new $client->requestClass();
         $request->client  = $client;
         $request->options = $options;
-        $request->path    = $request->getDatabasePath() . self::API_JOB . '/' . $type;
+        $request->path    = $request->getDatabasePath() . static::API_JOB . '/' . $type;
 
         if ($count) {
             $urlQuery = ['count' => $count];
@@ -72,12 +73,13 @@ class Async extends
 
         $request->path .= $urlQuery;
 
-        $request->method = self::METHOD_GET;
+        $request->method = static::METHOD_GET;
 
         $responseObject = $request->send();
 
         return $responseObject;
     }
+
 
     /**
      * @param         $client
@@ -95,7 +97,7 @@ class Async extends
         $request          = new $client->requestClass();
         $request->client  = $client;
         $request->options = $options;
-        $request->path    = $request->getDatabasePath() . self::API_JOB . '/' . $type;
+        $request->path    = $request->getDatabasePath() . static::API_JOB . '/' . $type;
 
         if ($stamp) {
             $urlQuery = ['stamp' => $stamp];
@@ -103,7 +105,7 @@ class Async extends
         }
         $request->path .= $urlQuery;
 
-        $request->method = self::METHOD_DELETE;
+        $request->method = static::METHOD_DELETE;
 
         $responseObject = $request->send();
 

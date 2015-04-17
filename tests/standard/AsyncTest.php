@@ -64,7 +64,6 @@ class AsyncTest extends
 
         $requestBody = ['name' => 'frank', '_key' => '1'];
 
-
         $responseObject = Document::create($this->client, $collectionName, $requestBody, null, ['async' => true]);
 
         $this->assertEquals(202, $responseObject->status);
@@ -72,7 +71,6 @@ class AsyncTest extends
         sleep(1);
 
         $responseObject = Document::get($this->client, $collectionName . '/1', $requestBody);
-
 
         $responseBody    = $responseObject->body;
         $decodedJsonBody = json_decode($responseBody, true);
@@ -89,7 +87,6 @@ class AsyncTest extends
 
         // todo 1 Frank Write real test for deleting job results with stamp
         $jobDeleteResponse = Async::deleteJobResult($this->client, 'all', time());
-
 
         $collectionName = 'ArangoDB-PHP-Core-CollectionTestSuite-Collection';
 

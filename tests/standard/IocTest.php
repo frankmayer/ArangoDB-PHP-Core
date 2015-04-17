@@ -10,7 +10,6 @@
 
 namespace frankmayer\ArangoDbPhpCore;
 
-
 use frankmayer\ArangoDbPhpCore\Connectors\CurlHttp\Connector;
 use frankmayer\ArangoDbPhpCore\Protocols\Http\Request;
 use frankmayer\ArangoDbPhpCore\Protocols\Http\Response;

@@ -24,7 +24,6 @@ class Collection extends
     Api implements
     RestApiInterface
 {
-
     /**
      *
      */
@@ -63,40 +62,17 @@ class Collection extends
         $request->options = $options;
         $request->body    = ['name' => $collectionName];
 
-        $request->body = self::array_merge_recursive_distinct($request->body, $collectionParameters);
+        $request->body = static::array_merge_recursive_distinct($request->body, $collectionParameters);
         $request->body = json_encode($request->body);
 
-        $request->path   = $request->getDatabasePath() . self::API_COLLECTION;
-        $request->method = self::METHOD_POST;
+        $request->path   = $request->getDatabasePath() . static::API_COLLECTION;
+        $request->method = static::METHOD_POST;
 
         $responseObject = $request->send();
 
         return $responseObject;
     }
 
-
-    //    /**
-    //     * @param       $collectionName
-    //     * @param array $options
-    //     *
-    //     * @return \frankmayer\ArangoDbPhpCore\Protocols\Http\Response
-    //     */
-    //    public function delete(
-    //        $collectionName,
-    //        $options = []
-    //    ) {
-    //        /** @var Request $request */
-    //        $request         = new $this->client->requestClass();
-    //        $request->client = $this->client;
-    //
-    //        $request->options = $options;
-    //        $request->path    = $request->getDatabasePath() . self::API_COLLECTION . '/' . $collectionName;
-    //        $request->method  = self::METHOD_DELETE;
-    //
-    //        $responseObject = $request->send();
-    //
-    //        return $responseObject;
-    //    }
 
     /**
      * @param client $client
@@ -111,8 +87,8 @@ class Collection extends
         $request          = new $client->requestClass();
         $request->client  = $client;
         $request->options = $options;
-        $request->path    = $request->getDatabasePath() . self::API_COLLECTION . '/' . $collectionName;
-        $request->method  = self::METHOD_DELETE;
+        $request->path    = $request->getDatabasePath() . static::API_COLLECTION . '/' . $collectionName;
+        $request->method  = static::METHOD_DELETE;
 
         $responseObject = $request->send();
 
@@ -135,8 +111,8 @@ class Collection extends
 
         $request->options = $options;
 
-        $request->path   = $request->getDatabasePath() . self::API_COLLECTION . '/' . $collectionName . '/truncate';
-        $request->method = self::METHOD_PUT;
+        $request->path   = $request->getDatabasePath() . static::API_COLLECTION . '/' . $collectionName . '/truncate';
+        $request->method = static::METHOD_PUT;
 
         $responseObject = $request->send();
 
@@ -157,11 +133,11 @@ class Collection extends
         $request->client  = $client;
         $request->options = $options;
 
-        $request->path = $request->getDatabasePath() . self::API_COLLECTION;
+        $request->path = $request->getDatabasePath() . static::API_COLLECTION;
         if (isset($request->options['excludeSystem']) && $request->options['excludeSystem'] === true) {
             $request->path .= '?excludeSystem=true';
         }
-        $request->method = self::METHOD_GET;
+        $request->method = static::METHOD_GET;
 
         $responseObject = $request->send();
 
