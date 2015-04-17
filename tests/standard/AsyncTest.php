@@ -62,21 +62,17 @@ class AsyncTest extends
 
         $collectionName = 'ArangoDB-PHP-Core-CollectionTestSuite-Collection';
 
-        $requestBody      = ['name' => 'frank', '_key' => '1'];
-        $document         = new Document();
-        $document->client = $this->client;
+        $requestBody = ['name' => 'frank', '_key' => '1'];
 
 
-        $responseObject = $document->create($collectionName, $requestBody, null, ['async' => true]);
+        $responseObject = Document::create($this->client, $collectionName, $requestBody, null, ['async' => true]);
 
         $this->assertEquals(202, $responseObject->status);
 
         sleep(1);
 
-        $document         = new Document();
-        $document->client = $this->client;
+        $responseObject = Document::get($this->client, $collectionName . '/1', $requestBody);
 
-        $responseObject = $document->get($collectionName . '/1', $requestBody);
 
         $responseBody    = $responseObject->body;
         $decodedJsonBody = json_decode($responseBody, true);
@@ -110,11 +106,9 @@ class AsyncTest extends
 
         $collectionName = 'ArangoDB-PHP-Core-CollectionTestSuite-Collection';
 
-        $requestBody      = ['name' => 'frank', '_key' => '1'];
-        $document         = new Document();
-        $document->client = $this->client;
+        $requestBody = ['name' => 'frank', '_key' => '1'];
 
-        $responseObject = $document->create($collectionName, $requestBody, null, ['async' => 'store']);
+        $responseObject = Document::create($this->client, $collectionName, $requestBody, null, ['async' => 'store']);
 
         $this->assertEquals(202, $responseObject->status);
 
@@ -127,17 +121,12 @@ class AsyncTest extends
 
         $this->assertTrue(in_array($jobId, $jobArray));
 
-
         $jobResult = Async::fetchJobResult($this->client, $responseObject->headers['x-arango-async-id']);
 
         $this->assertTrue($jobResult->headers['x-arango-async-id'] == $responseObject->headers['x-arango-async-id']);
         $this->assertArrayHasKey('x-arango-async-id', $jobResult->headers);
 
-
-        $document         = new Document();
-        $document->client = $this->client;
-
-        $responseObject = $document->get($collectionName . '/1', $requestBody);
+        $responseObject = Document::get($this->client, $collectionName . '/1', $requestBody);
 
         $responseBody    = $responseObject->body;
         $decodedJsonBody = json_decode($responseBody, true);

@@ -135,11 +135,8 @@ class DocumentTest extends
         $documentParameters = ['createCollection' => true];
         $requestBody        = ['name' => 'frank', '_key' => '1'];
 
-        $document         = new Document();
-        $document->client = $this->client;
-
         /** @var Response $responseObject */
-        $responseObject = $document->create($collectionName, $requestBody, $documentParameters);
+        $responseObject = Document::create($this->client, $collectionName, $requestBody, $documentParameters);
         $responseBody   = $responseObject->body;
 
         $this->assertArrayHasKey('error', json_decode($responseBody, true));
@@ -166,13 +163,11 @@ class DocumentTest extends
      */
     public function testCreateGetListGetDocumentAndDeleteDocumentInExistingCollection()
     {
-        $collectionName   = 'ArangoDB-PHP-Core-CollectionTestSuite-Collection';
-        $requestBody      = ['name' => 'frank', '_key' => '1'];
-        $document         = new Document();
-        $document->client = $this->client;
+        $collectionName = 'ArangoDB-PHP-Core-CollectionTestSuite-Collection';
+        $requestBody    = ['name' => 'frank', '_key' => '1'];
 
         /** @var Response $responseObject */
-        $responseObject = $document->create($collectionName, $requestBody);
+        $responseObject = Document::create($this->client, $collectionName, $requestBody);
         $responseBody   = $responseObject->body;
 
         $this->assertArrayHasKey('error', json_decode($responseBody, true));
@@ -183,7 +178,7 @@ class DocumentTest extends
 
         $this->assertEquals($collectionName . '/1', $decodedJsonBody['_id']);
 
-        $responseObject = $document->getAllUri($collectionName);
+        $responseObject = Document::getAllUri($this->client, $collectionName);
         $responseBody   = $responseObject->body;
 
         $this->assertArrayHasKey('documents', json_decode($responseBody, true));
@@ -195,7 +190,7 @@ class DocumentTest extends
             $decodedJsonBody['documents'][0]
         );
 
-        $responseObject = $document->delete($collectionName . '/1');
+        $responseObject = Document::delete($this->client, $collectionName . '/1');
         $responseBody   = $responseObject->body;
 
         $this->assertArrayHasKey('error', json_decode($responseBody, true));
@@ -205,7 +200,8 @@ class DocumentTest extends
         $this->assertEquals(false, $decodedJsonBody['error']);
 
         // Try to delete a second time .. should throw an error
-        $responseObject = $document->delete($collectionName . '/1');
+        $responseObject = Document::delete($this->client, $collectionName . '/1');
+
         $responseBody   = $responseObject->body;
 
         $this->assertArrayHasKey('error', json_decode($responseBody, true));
@@ -228,11 +224,9 @@ class DocumentTest extends
         $collectionName = 'ArangoDB-PHP-Core-CollectionTestSuite-Collection';
         $requestBody    = ['name' => 'Frank', 'bike' => 'vfr', '_key' => '1'];
 
-        $document         = new Document();
-        $document->client = $this->client;
-
         /** @var Response $responseObject */
-        $responseObject = $document->create($collectionName, $requestBody);
+        $responseObject = Document::create($this->client, $collectionName, $requestBody);
+
         $responseBody   = $responseObject->body;
 
         $this->assertArrayHasKey('error', json_decode($responseBody, true));
@@ -243,10 +237,7 @@ class DocumentTest extends
 
         $requestBody = ['name' => 'Mike'];
 
-        $document         = new Document();
-        $document->client = $this->client;
-
-        $responseObject = $document->replace($collectionName . '/1', $requestBody);
+        $responseObject = Document::replace($this->client, $collectionName. '/1', $requestBody);
         $responseBody   = $responseObject->body;
 
         $this->assertArrayHasKey('error', json_decode($responseBody, true));
@@ -257,10 +248,7 @@ class DocumentTest extends
 
         $this->assertEquals($collectionName . '/1', $decodedJsonBody['_id']);
 
-        $document         = new Document();
-        $document->client = $this->client;
-
-        $responseObject = $document->get($collectionName . '/1', $requestBody);
+        $responseObject = Document::get($this->client, $collectionName. '/1', $requestBody);
         $responseBody   = $responseObject->body;
 
         $this->assertArrayNotHasKey('bike', json_decode($responseBody, true));
@@ -271,7 +259,7 @@ class DocumentTest extends
 
         $this->assertEquals($collectionName . '/1', $decodedJsonBody['_id']);
 
-        $responseObject = $document->delete($collectionName . '/1');
+        $responseObject = Document::delete($this->client, $collectionName. '/1');
         $responseBody   = $responseObject->body;
 
         $this->assertArrayHasKey('error', json_decode($responseBody, true));
@@ -281,7 +269,7 @@ class DocumentTest extends
         $this->assertEquals(false, $decodedJsonBody['error']);
 
         // Try to delete a second time .. should throw an error
-        $responseObject = $document->delete($collectionName . '/1');
+        $responseObject = Document::delete($this->client, $collectionName. '/1');
         $responseBody   = $responseObject->body;
 
         $this->assertArrayHasKey('error', json_decode($responseBody, true));
@@ -303,11 +291,8 @@ class DocumentTest extends
         $collectionName = 'ArangoDB-PHP-Core-CollectionTestSuite-Collection';
         $requestBody    = ['name' => 'Frank', 'bike' => 'vfr', '_key' => '1'];
 
-        $document         = new Document();
-        $document->client = $this->client;
-
         /** @var Response $responseObject */
-        $responseObject = $document->create($collectionName, $requestBody);
+        $responseObject = Document::create($this->client, $collectionName, $requestBody);
         $responseBody   = $responseObject->body;
 
         $this->assertArrayHasKey('error', json_decode($responseBody, true));
@@ -318,10 +303,7 @@ class DocumentTest extends
 
         $requestBody = ['name' => 'Mike'];
 
-        $document         = new Document();
-        $document->client = $this->client;
-
-        $responseObject = $document->update($collectionName . '/1', $requestBody);
+        $responseObject = Document::update($this->client, $collectionName . '/1', $requestBody);
         $responseBody   = $responseObject->body;
 
         $this->assertArrayHasKey('error', json_decode($responseBody, true));
@@ -332,10 +314,7 @@ class DocumentTest extends
 
         $this->assertEquals($collectionName . '/1', $decodedJsonBody['_id']);
 
-        $document         = new Document();
-        $document->client = $this->client;
-
-        $responseObject = $document->get($collectionName . '/1', $requestBody);
+        $responseObject = Document::get($this->client, $collectionName. '/1', $requestBody);
         $responseBody   = $responseObject->body;
 
         $this->assertArrayHasKey('bike', json_decode($responseBody, true));
@@ -346,7 +325,7 @@ class DocumentTest extends
 
         $this->assertEquals($collectionName . '/1', $decodedJsonBody['_id']);
 
-        $responseObject = $document->delete($collectionName . '/1');
+        $responseObject = Document::delete($this->client, $collectionName. '/1');
         $responseBody   = $responseObject->body;
 
         $this->assertArrayHasKey('error', json_decode($responseBody, true));
@@ -356,7 +335,7 @@ class DocumentTest extends
         $this->assertEquals(false, $decodedJsonBody['error']);
 
         // Try to delete a second time .. should throw an error
-        $responseObject = $document->delete($collectionName . '/1');
+        $responseObject = Document::delete($this->client, $collectionName. '/1');
         $responseBody   = $responseObject->body;
 
         $this->assertArrayHasKey('error', json_decode($responseBody, true));
