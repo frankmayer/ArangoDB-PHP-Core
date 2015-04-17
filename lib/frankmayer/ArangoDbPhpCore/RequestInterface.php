@@ -18,5 +18,11 @@ namespace frankmayer\ArangoDbPhpCore;
  */
 interface RequestInterface
 {
-
+    /**
+     * Method to send an HTTP request.
+     * All request should be done through this method. Any async or batch handling is done within this method.
+     *
+     * @return \frankmayer\ArangoDbPhpCore\ResponseInterface Http Response object
+     */
+    public function send();
 }

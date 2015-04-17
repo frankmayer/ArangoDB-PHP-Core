@@ -17,5 +17,12 @@ namespace frankmayer\ArangoDbPhpCore;
  */
 interface ResponseInterface
 {
-
+    /**
+     * Build a response-object from the request-object, which holds the result of the executed request
+     *
+     * @param $request
+     *
+     * @return mixed
+     */
+    public function build($request);
 }

@@ -170,7 +170,7 @@ class IocTest extends
         $this->request         = Client::make('httpRequest');
         $this->request->path   = '/_admin/version';
         $this->request->method = Request::METHOD_GET;
-        $this->request->request();
+        $this->request->send();
 
         if (version_compare(PHP_VERSION, '5.4.0') >= 0) {
             // This is the way to bind an HttpRequest in PHP 5.4+
@@ -181,8 +181,6 @@ class IocTest extends
                     $response = new Response();
 
                     $response->request = $this->request;
-
-                    //                          $response->doConstruct();
 
                     return $response;
                 }
@@ -198,8 +196,6 @@ class IocTest extends
 
                     $response->request = $me->request;
 
-                    //                          $response->doConstruct();
-
                     return $response;
                 }
             );
@@ -207,7 +203,7 @@ class IocTest extends
         // And here's how one gets an HttpRequest object through the IOC.
         // Note that the type-name 'httpRequest' is the name we bound our HttpRequest class creation-closure to. (see above)
         $this->response = Client::make('httpResponse');
-        $this->response->doConstruct($this->request->response);
+        $this->response->build($this->request);
 
         //        echo get_class($this->request);
         $this->assertInstanceOf('frankmayer\ArangoDbPhpCore\Protocols\Http\Response', $this->response);
@@ -219,7 +215,7 @@ class IocTest extends
         // test verboseExtractStatusLine
         $this->response                           = Client::make('httpResponse');
         $this->response->verboseExtractStatusLine = true;
-        $this->response->doConstruct($this->request->response);
+        $this->response->build($this->request);
         $this->assertAttributeNotEmpty('protocol', $this->response);
 
         $testValue = $this->response->getAsync();

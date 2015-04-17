@@ -43,7 +43,7 @@ class Response
 
     public function __construct()
     {
-        // 404 intentionally left out as a default, as not finding data shouldn't raise an exception
+        // 404 intentionally left out as a default, because not finding data, shouldn't raise an exception
         $this->enabledHttpServerExceptions = [400, 401, 403, 405, 412, 500, 600, 601];
     }
 

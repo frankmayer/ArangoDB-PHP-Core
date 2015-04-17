@@ -58,7 +58,7 @@ class DocumentTest extends
         $request->path   = $request->getDatabasePath() . self::API_COLLECTION;
         $request->method = self::METHOD_POST;
 
-        $responseObject = $request->request();
+        $responseObject = $request->send();
 
         //        return $responseObject;
         $body = $responseObject->body;
@@ -116,7 +116,7 @@ class DocumentTest extends
 
         $request->method = self::METHOD_POST;
 
-        $responseObject = $request->request();
+        $responseObject = $request->send();
 
         //        return $responseObject;
 
@@ -377,7 +377,7 @@ class DocumentTest extends
         $request->path    = $request->getDatabasePath() . self::API_COLLECTION . '/' . $collectionName;
         $request->method  = self::METHOD_DELETE;
 
-        $responseObject = $request->request();
+        $responseObject = $request->send();
         $body           = $responseObject->body;
 
         $this->assertArrayHasKey('code', json_decode($body, true));

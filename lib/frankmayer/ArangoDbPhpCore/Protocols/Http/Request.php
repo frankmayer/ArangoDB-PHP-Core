@@ -40,25 +40,26 @@ class Request extends
      */
     private function requestBatchPart()
     {
-        //todo: fix hardwired Connector to use injected one.
+        $connector = $this->client->connector;
+
         // Fake a result so we can move on.
-        $this->response = 'HTTP/1.1 202 Accepted' . Connector::HTTP_EOL;
-        $this->response .= 'location: /_api/document/0/0' . Connector::HTTP_EOL;
-        $this->response .= 'server: triagens GmbH High-Performance HTTP Server' . Connector::HTTP_EOL;
-        $this->response .= 'content-type: application/json; charset=utf-8' . Connector::HTTP_EOL;
-        $this->response .= 'etag: "0"' . Connector::HTTP_EOL;
-        $this->response .= 'client: Close' . Connector::HTTP_EOL . Connector::HTTP_EOL;
-        $this->response .= '{"error":false,"_id":"0/0","id":"0","_rev":0,"hasMore":0, "result":[{}], "documents":[{}]}' . Connector::HTTP_EOL . Connector::HTTP_EOL;
+        $this->response = 'HTTP/1.1 202 Accepted' . $connector::HTTP_EOL;
+        $this->response .= 'location: /_api/document/0/0' . $connector::HTTP_EOL;
+        $this->response .= 'server: triagens GmbH High-Performance HTTP Server' . $connector::HTTP_EOL;
+        $this->response .= 'content-type: application/json; charset=utf-8' . $connector::HTTP_EOL;
+        $this->response .= 'etag: "0"' . $connector::HTTP_EOL;
+        $this->response .= 'client: Close' . $connector::HTTP_EOL . $connector::HTTP_EOL;
+        $this->response .= '{"error":false,"_id":"0/0","id":"0","_rev":0,"hasMore":0, "result":[{}], "documents":[{}]}' . $connector::HTTP_EOL . $connector::HTTP_EOL;
     }
 
 
     /**
-     * Main HTTP Request method.
+     * Method to send an HTTP request.
      * All request should be done through this method. Any async or batch handling is done within this method.
      *
      * @return Response Http Response object
      */
-    public function request()
+    public function send()
     {
         $this->client->notifyPlugins('beforeRequest', $this);
         if (isset($this->options['async'])) {
@@ -121,7 +122,7 @@ class Request extends
 
         $this->method = 'post';
 
-        $this->responseObject = $this->request();
+        $this->responseObject = $this->send();
         $this->deconstructBatchResponseBody($this->responseObject, $batchParts, $boundary);
 
         return $this->responseObject;

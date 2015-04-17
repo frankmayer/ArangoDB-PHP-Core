@@ -19,4 +19,13 @@ namespace frankmayer\ArangoDbPhpCore\Protocols\Http;
 interface RequestInterface extends
     \frankmayer\ArangoDbPhpCore\RequestInterface
 {
+    /**
+     * Method to an HTTP batch request
+     *
+     * @param array  $batchParts
+     * @param string $boundary
+     *
+     * @return mixed
+     */
+    public function sendBatch($batchParts = [], $boundary = 'XXXbXXX');
 }
