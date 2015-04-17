@@ -16,6 +16,10 @@ use frankmayer\ArangoDbPhpCore\Connectors\CurlHttp\Connector;
 
 //todo: fix tests
 
+/**
+ * Class CollectionTest
+ * @package frankmayer\ArangoDbPhpCore
+ */
 class CollectionTest extends
     ArangoDbPhpCoreTestCase
 {
@@ -24,6 +28,9 @@ class CollectionTest extends
      */
     public $client;
 
+    /**
+     *
+     */
     public function setUp()
     {
         $connector    = new Connector();
@@ -83,7 +90,6 @@ class CollectionTest extends
         $collectionName = 'ArangoDB-PHP-Core-CollectionTestSuite-Collection';
 
         $collectionOptions    = ["waitForSync" => true];
-        $collectionParameters = [];
         $options              = $collectionOptions;
         Client::bind(
             'Request',

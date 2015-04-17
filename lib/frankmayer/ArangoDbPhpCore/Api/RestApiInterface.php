@@ -8,14 +8,13 @@
  * @copyright Copyright 2013, FRANKMAYER.NET, Athens, Greece
  */
 
-namespace frankmayer\ArangoDbPhpCore;
+namespace frankmayer\ArangoDbPhpCore\Api;
 
 /**
  * A REST API Interface
  *
  * @package frankmayer\ArangoDbPhpCore
  */
-interface  RestApiInterface extends
-    ApiInterface
+interface  RestApiInterface extends ApiInterface
 {
 }

@@ -15,12 +15,21 @@ use frankmayer\ArangoDbPhpCore\Connectors\CurlHttp\Connector;
 use frankmayer\ArangoDbPhpCore\Protocols\Http\Request;
 use frankmayer\ArangoDbPhpCore\Protocols\Http\Response;
 
-//todo: fix tests
 
+/**
+ * Class IocTest
+ * @package frankmayer\ArangoDbPhpCore
+ */
 class IocTest extends
     \PHPUnit_Framework_TestCase
 {
+    /**
+     * @var
+     */
     public $client;
+    /**
+     * @var
+     */
     public $collectionNames;
 
     /**
@@ -32,9 +41,15 @@ class IocTest extends
      * @var ResponseInterface
      */
     public $response;
+    /**
+     * @var
+     */
     public $connector;
 
 
+    /**
+     *
+     */
     public function setUp()
     {
         $connector       = new Connector();
@@ -44,6 +59,9 @@ class IocTest extends
     }
 
 
+    /**
+     * @throws ClientException
+     */
     public function testBindAndMakeHttpRequest()
     {
         if (version_compare(PHP_VERSION, '5.4.0') >= 0) {
@@ -165,6 +183,9 @@ class IocTest extends
     }
 
 
+    /**
+     * @throws ClientException
+     */
     public function testBindAndMakeHttpResponsePlusGettersSetters()
     {
         $this->request         = Client::make('httpRequest');
@@ -200,6 +221,7 @@ class IocTest extends
                 }
             );
         }
+
         // And here's how one gets an HttpRequest object through the IOC.
         // Note that the type-name 'httpRequest' is the name we bound our HttpRequest class creation-closure to. (see above)
         $this->response = Client::make('httpResponse');

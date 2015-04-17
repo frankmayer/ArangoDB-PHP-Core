@@ -8,10 +8,10 @@
  * @copyright Copyright 2013, FRANKMAYER.NET, Athens, Greece
  */
 
-namespace frankmayer\ArangoDbPhpCore;
+namespace frankmayer\ArangoDbPhpCore\Api;
 
 /**
- * An API Interface
+ * A generic API Interface
  *
  * @package frankmayer\ArangoDbPhpCoreCore
  */

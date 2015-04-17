@@ -118,7 +118,8 @@ class Client
     {
         $responseClass = $this->responseClass;
 
-        /** @var $response Response */
+
+        /** @var Response $responseObject */
         $responseObject = new $responseClass();
 
         return $responseObject->build($request);

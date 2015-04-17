@@ -10,12 +10,16 @@
 
 namespace frankmayer\ArangoDbPhpCore;
 
-
 use frankmayer\ArangoDbPhpCore\Connectors\CurlHttp\Connector;
 use frankmayer\ArangoDbPhpCore\Plugins\TracerPlugin;
 
 //todo: fix tests
 
+
+/**
+ * Class ClientTest
+ * @package frankmayer\ArangoDbPhpCore
+ */
 class ClientTest extends
     \PHPUnit_Framework_TestCase
 {
@@ -30,6 +34,9 @@ class ClientTest extends
     public $connector;
 
 
+    /**
+     *
+     */
     public function setUp()
     {
         $connector       = new Connector();
@@ -38,6 +45,9 @@ class ClientTest extends
     }
 
 
+    /**
+     * @return array
+     */
     function setupClientWithPluginConfiguration()
     {
 
@@ -56,6 +66,9 @@ class ClientTest extends
     }
 
 
+    /**
+     *
+     */
     function testClientWithPluginConfiguration()
     {
         $client = new Client($this->connector, $this->setupClientWithPluginConfiguration());
@@ -64,6 +77,9 @@ class ClientTest extends
     }
 
 
+    /**
+     * @return array
+     */
     function setupClientWithAuthenticationConfiguration()
     {
 
@@ -112,6 +128,9 @@ class ClientTest extends
 
 
     //    simple getter/setter tests nothing fancy, only checking if the properties get set and are readable.
+    /**
+     *
+     */
     public function testGettersSetters()
     {
         $testValue1 = $this->client->getArangoDBApiVersion();
@@ -275,6 +294,9 @@ class ClientTest extends
     //    }
     //
 
+    /**
+     *
+     */
     public function tearDown()
     {
     }

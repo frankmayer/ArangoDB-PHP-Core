@@ -10,7 +10,6 @@
 
 namespace frankmayer\ArangoDbPhpCore;
 
-use frankmayer\ArangoDbPhpCore\Connectors\ConnectorInterface;
 use frankmayer\ArangoDbPhpCore\Plugins\PluginManager;
 use frankmayer\ArangoDbPhpCore\TraitRepository\ClientLogger;
 
@@ -45,7 +44,9 @@ class TraitClient
         //        $clientOptions['PluginManager']['options']['notificationsEnabled'] = false;
         $this->endpoint      = $clientOptions[ClientOptions::OPTION_ENDPOINT];
         $this->database      = $clientOptions[ClientOptions::OPTION_DEFAULT_DATABASE];
-        $this->pluginManager = new PluginManager($this, isset($clientOptions['plugins']) ? $clientOptions['plugins'] : null, isset($clientOptions['PluginManager']['options']) ? $clientOptions['PluginManager']['options'] : null);
+        $this->pluginManager = new PluginManager($this,
+            isset($clientOptions['plugins']) ? $clientOptions['plugins'] : null,
+            isset($clientOptions['PluginManager']['options']) ? $clientOptions['PluginManager']['options'] : null);
         $this->connector     = $connector;
         $this->clientOptions = $clientOptions;
         $this->requestClass  = 'frankmayer\ArangoDbPhpCore\Connectors\Http\HttpRequest';;
@@ -65,14 +66,14 @@ class TraitClient
     ////            $this->notifyPlugins('core.client.traceThis', array('test1' => &$test1));
     //        }
 
-    public function notifyPlugins($eventName, $eventData = array())
+    public function notifyPlugins($eventName, $eventData = [])
     {
         $this->pluginManager->notifyPlugins($eventName, $eventData);
     }
 
 
     /**
-     * @param \frankmayer\ArangoDbPhpCore\Connectors\ConnectorInterface $connector
+     * @param \frankmayer\ArangoDbPhpCore\ConnectorInterface $connector
      */
     public function setConnector($connector)
     {
@@ -80,7 +81,7 @@ class TraitClient
     }
 
     /**
-     * @return \frankmayer\ArangoDbPhpCore\Connectors\ConnectorInterface
+     * @return \frankmayer\ArangoDbPhpCore\ConnectorInterface
      */
     public function getConnector()
     {

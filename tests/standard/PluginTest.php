@@ -11,21 +11,34 @@
 namespace frankmayer\ArangoDbPhpCore;
 
 
+use frankmayer\ArangoDbPhpCore\Api\Rest\Collection;
 use frankmayer\ArangoDbPhpCore\Connectors\CurlHttp\Connector;
 use frankmayer\ArangoDbPhpCore\Plugins\PluginManager;
 use frankmayer\ArangoDbPhpCore\Plugins\TestPlugin;
+use frankmayer\ArangoDbPhpCore\Protocols\Http\Response;
 
-//todo: fix tests
 
+/**
+ * Class PluginTest
+ * @package frankmayer\ArangoDbPhpCore
+ */
 class PluginTest extends
     \PHPUnit_Framework_TestCase
 {
+    /**
+     * @var ClientOptions $clientOptions
+     */
     public $clientOptions;
 
-    /* $client frankmayer\ArangoDbPhpCore\Connectors\Http\CurlHttpConnector */
+    /**
+     * @var Client $client
+     */
     public $client;
 
 
+    /**
+     *
+     */
     public function setUp()
     {
         $connector    = new Connector();
@@ -38,46 +51,48 @@ class PluginTest extends
      */
     public function testRegisterPluginsWithDifferentPrioritiesTestAndUnRegisterPlugin()
     {
-        //        $this->client->setPluginManager(new PluginManager($this->client));
-        //        $this->assertInstanceOf('\frankmayer\ArangoDbPhpCore\Plugins\PluginManager', $this->client->getPluginManager());
-        //
-        //
-        //        $tracer            = new TestPlugin();
-        //        $tracer->priority  = 0;
-        //        $tracer2           = new TestPlugin();
-        //        $tracer2->priority = 20;
-        //        $tracer3           = new TestPlugin();
-        //        $tracer3->priority = -30;
-        //        $tracer4           = new TestPlugin();
-        //        $tracer4->priority = 20;
-        //
-        //        $this->clientOptions['plugins'] = [
-        //            'tracer1' => $tracer,
-        //            'tracer2' => $tracer2,
-        //            'tracer3' => $tracer3,
-        //            'tracer4' => $tracer4,
-        //        ];
-        //
-        //        $this->client->setPluginsFromPluginArray($this->clientOptions['plugins']);
-        //        $this->assertArrayHasKey('tracer3', $this->client->pluginManager->pluginStorage);
-        //
-        //        $e = null;
-        //        try {
-        //            $this->client->setPluginsFromPluginArray(['tracer5' => new \stdClass()]);
-        //        } catch (\Exception $e) {
-        //        }
-        //        $this->assertInstanceOf('\Exception', $e);
-        //
-        //
-        //        $collection         = new ArangoDbApi\Collection();
-        //        $collection->client = $this->client;
-        //        $responseObject     = $collection->getAll();
-        //        $response           = json_decode($responseObject->body);
-        //
-        //        $this->assertTrue($responseObject->request->pluginTest == 'plugin tested');
+        $this->client->setPluginManager(new PluginManager($this->client));
+        $this->assertInstanceOf('\frankmayer\ArangoDbPhpCore\Plugins\PluginManager', $this->client->getPluginManager());
+
+        $tracer            = new TestPlugin();
+        $tracer->priority  = 0;
+        $tracer2           = new TestPlugin();
+        $tracer2->priority = 20;
+        $tracer3           = new TestPlugin();
+        $tracer3->priority = -30;
+        $tracer4           = new TestPlugin();
+        $tracer4->priority = 20;
+
+        $this->clientOptions['plugins'] = [
+            'tracer1' => $tracer,
+            'tracer2' => $tracer2,
+            'tracer3' => $tracer3,
+            'tracer4' => $tracer4,
+        ];
+
+        $this->client->setPluginsFromPluginArray($this->clientOptions['plugins']);
+        $this->assertArrayHasKey('tracer3', $this->client->pluginManager->pluginStorage);
+
+        $e = null;
+        try {
+            $this->client->setPluginsFromPluginArray(['tracer5' => new \stdClass()]);
+        } catch (\Exception $e) {
+        }
+        $this->assertInstanceOf('\Exception', $e);
+
+        $collection         = new Collection();
+        $collection->client = $this->client;
+
+        /** @var $responseObject Response */
+        $responseObject = $collection->getAll();
+
+        $this->assertInstanceOf('frankmayer\ArangoDbPhpCore\Protocols\Http\Request', $responseObject->request);
     }
 
 
+    /**
+     *
+     */
     public function tearDown()
     {
     }

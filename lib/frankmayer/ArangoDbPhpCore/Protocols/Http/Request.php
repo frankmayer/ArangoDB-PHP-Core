@@ -77,6 +77,7 @@ class Request extends
         if (isset($this->options['isBatchPart']) && $this->options['isBatchPart'] === true) {
             $this->requestBatchPart();
             $this->address = $this->client->endpoint . $this->path;
+
         } else {
             if (isset($this->options) && (!array_key_exists(
                         'isBatchRequest',

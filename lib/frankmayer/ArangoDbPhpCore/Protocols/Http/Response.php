@@ -56,7 +56,9 @@ class Response
      */
     public function build($request)
     {
-        $response = $request->response;
+        $response      = $request->response;
+        $this->request = $request;
+
         $this->splitResponseToHeadersArrayAndBody($response);
         $statusLineArray = explode(" ", $this->headers['status']);
 

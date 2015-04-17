@@ -11,17 +11,32 @@
 namespace frankmayer\ArangoDbPhpCore;
 
 
+use frankmayer\ArangoDbPhpCore\Api\Rest\Batch;
+use frankmayer\ArangoDbPhpCore\Api\Rest\Collection;
 use frankmayer\ArangoDbPhpCore\Connectors\CurlHttp\Connector;
+use frankmayer\ArangoDbPhpCore\Protocols\Http\Response;
 
-//todo: fix tests
 
+/**
+ * Class BatchTest
+ * @package frankmayer\ArangoDbPhpCore
+ */
 class BatchTest extends
     \PHPUnit_Framework_TestCase
 {
+    /**
+     * @var
+     */
     public $client;
+    /**
+     * @var
+     */
     public $collectionNames;
 
 
+    /**
+     *
+     */
     public function setUp()
     {
         $connector    = new Connector();
@@ -38,67 +53,71 @@ class BatchTest extends
      */
     public function testCreateCollectionInBatchAndDeleteThemAgainInBatch()
     {
-        //        $collectionOptions = ["waitForSync" => true];
-        //
-        //        $batchParts = [];
-        //
-        //        foreach ($this->collectionNames as $collectionName) {
-        //            $collection         = new ArangoDbApi\Collection();
-        //            $collection->client = $this->client;
-        //
-        //            $batchPart = $collection->create(
-        //                                    $collectionName,
-        //                                    $collectionOptions,
-        //                                    ['isBatchPart' => true]
-        //            );
-        //            $this->assertEquals(202, $batchPart->status);
-        //            $batchParts[] = $batchPart;
-        //        }
-        //
-        //
-        //        $batch         = new ArangoDbApi\Batch();
-        //        $batch->client = $this->client;
-        //
-        //        $responseObject = $batch->send($batchParts);
-        //        $this->assertEquals(200, $responseObject->status);
-        //
-        //        $batchResponseParts = $responseObject->batch;
-        //
-        //        /** @var $batchPart HttpResponse */
-        //        foreach ($batchResponseParts as $batchPart) {
-        //            $body = $batchPart->body;
-        //            $this->assertArrayHasKey('code', json_decode($body, true));
-        //            $decodedJsonBody = json_decode($body, true);
-        //            $this->assertEquals(200, $decodedJsonBody['code']);
-        //        }
-        //
-        //        $batchParts = [];
-        //
-        //        foreach ($this->collectionNames as $collectionName) {
-        //            $collection         = new ArangoDbApi\Collection();
-        //            $collection->client = $this->client;
-        //            $batchParts[]       = $collection->delete(
-        //                                             $collectionName,
-        //                                             ['isBatchPart' => true]
-        //            );
-        //        }
-        //
-        //        $batch         = new ArangoDbApi\Batch();
-        //        $batch->client = $this->client;
-        //
-        //        $responseObject = $batch->send($batchParts);
-        //
-        //        $batchResponseParts = $responseObject->batch;
-        //
-        //        foreach ($batchResponseParts as $batchPart) {
-        //            $body = $batchPart->body;
-        //            $this->assertArrayHasKey('code', json_decode($body, true));
-        //            $decodedJsonBody = json_decode($body, true);
-        //            $this->assertEquals(200, $decodedJsonBody['code']);
-        //        }
+        $collectionOptions = ["waitForSync" => true];
+
+        $batchParts = [];
+
+        foreach ($this->collectionNames as $collectionName) {
+            $collection         = new Collection();
+            $collection->client = $this->client;
+
+            $batchPart = $collection->create(
+                $collectionName,
+                $collectionOptions,
+                ['isBatchPart' => true]
+            );
+            $this->assertEquals(202, $batchPart->status);
+            $batchParts[] = $batchPart;
+        }
+
+
+        $batch         = new Batch();
+        $batch->client = $this->client;
+
+        /** @var Response $responseObject */
+        $responseObject = $batch->send($batchParts);
+        $this->assertEquals(200, $responseObject->status);
+
+        $batchResponseParts = $responseObject->batch;
+
+        /** @var $batchPart Response */
+        foreach ($batchResponseParts as $batchPart) {
+            $body = $batchPart->body;
+            $this->assertArrayHasKey('code', json_decode($body, true));
+            $decodedJsonBody = json_decode($body, true);
+            $this->assertEquals(200, $decodedJsonBody['code']);
+        }
+
+        $batchParts = [];
+
+        foreach ($this->collectionNames as $collectionName) {
+            $collection         = new Collection();
+            $collection->client = $this->client;
+            $batchParts[]       = $collection->delete(
+                $collectionName,
+                ['isBatchPart' => true]
+            );
+        }
+
+        $batch         = new Batch();
+        $batch->client = $this->client;
+
+        $responseObject = $batch->send($batchParts);
+
+        $batchResponseParts = $responseObject->batch;
+
+        foreach ($batchResponseParts as $batchPart) {
+            $body = $batchPart->body;
+            $this->assertArrayHasKey('code', json_decode($body, true));
+            $decodedJsonBody = json_decode($body, true);
+            $this->assertEquals(200, $decodedJsonBody['code']);
+        }
     }
 
 
+    /**
+     *
+     */
     public function tearDown()
     {
         //        foreach ($this->collectionNames as $collectionName) {
