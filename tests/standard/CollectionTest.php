@@ -12,6 +12,7 @@ namespace frankmayer\ArangoDbPhpCore;
 
 require_once('ArangoDbPhpCoreTestCase.php');
 
+use frankmayer\ArangoDbPhpCore\Api\Rest\Collection;
 use frankmayer\ArangoDbPhpCore\Connectors\CurlHttp\Connector;
 
 //todo: fix tests
@@ -40,7 +41,7 @@ class CollectionTest extends
     /**
      * Test if we can get the server version
      */
-    public function testCreateCollection()
+    public function testCreateCollectionWithoutApiClasses()
     {
         $collectionName = 'ArangoDB-PHP-Core-CollectionTestSuite-Collection';
 
@@ -71,7 +72,6 @@ class CollectionTest extends
 
         $responseObject = $request->send();
 
-        //        return $responseObject;
         $body = $responseObject->body;
 
         $this->assertArrayHasKey('code', json_decode($body, true));
@@ -84,13 +84,13 @@ class CollectionTest extends
     /**
      * Test if we can get the server version
      */
-    public function testDeleteCollection()
+    public function testDeleteCollectionWithoutApiClasses()
     {
 
         $collectionName = 'ArangoDB-PHP-Core-CollectionTestSuite-Collection';
 
-        $collectionOptions    = ["waitForSync" => true];
-        $options              = $collectionOptions;
+        $collectionOptions = ["waitForSync" => true];
+        $options           = $collectionOptions;
         Client::bind(
             'Request',
             function () {
@@ -116,110 +116,107 @@ class CollectionTest extends
     }
 
 
+    /**
+     * Test if we can get the server version
+     */
+    public function testCreateCollectionViaIocContainer()
+    {
+        $collectionName = 'ArangoDB-PHP-Core-CollectionTestSuite-Collection';
 
-    //
-    //    /**
-    //     * Test if we can get the server version
-    //     */
-    //    public function testCreateCollectionViaIocContainer()
-    //    {
-    //        $collectionName = 'ArangoDB-PHP-Core-CollectionTestSuite-CollectionViaIocContainer';
-    //
-    //        $collectionOptions = ["waitForSync" => true];
-    //
-    //
-    //        // Here's how a binding for the HttpRequest should take place in the IOC container.
-    //        // The actual binding should only happen once in the client construction, though. This is only for testing...
-    //
-    //
-    //        // And here's how one gets an HttpRequest object through the IOC.
-    //        // Note that the type-name 'httpRequest' is the name we bound our HttpRequest class creation-closure to. (see above)
-    //        $collection = Client::make('ArangoCollection');
-    //
-    //        /** @var $collection Collection */
-    //        $responseObject = $collection->create($collectionName, $collectionOptions);
-    //        $body           = $responseObject->body;
-    //
-    //        $this->assertArrayHasKey('code', json_decode($body, true));
-    //        $decodedJsonBody = json_decode($body, true);
-    //        $this->assertEquals(200, $decodedJsonBody['code']);
-    //        $this->assertEquals($collectionName, $decodedJsonBody['name']);
-    //    }
-    //
-    //
-    //    /**
-    //     * Test if we can get the server version
-    //     */
-    //    public function testTruncateCollection()
-    //    {
-    //        $collectionName = 'ArangoDB-PHP-Core-CollectionTestSuite-Collection';
-    //
-    //
-    //        $collection         = new ArangoDbApi\Collection();
-    //        $collection->client = $this->client;
-    //        $responseObject     = $collection->truncate($collectionName);
-    //        $body               = $responseObject->body;
-    //
-    //        $this->assertArrayHasKey('code', json_decode($body, true));
-    //        $decodedJsonBody = json_decode($body, true);
-    //        $this->assertEquals(200, $decodedJsonBody['code']);
-    //        $this->assertEquals($collectionName, $decodedJsonBody['name']);
-    //    }
-    //
-    //
-    //    /**
-    //     * Test if we can get the server version
-    //     */
-    //    public function testDeleteCollection()
-    //    {
-    //
-    //        $collectionName = 'ArangoDB-PHP-Core-CollectionTestSuite-Collection';
-    //
-    //
-    //        $collection         = new ArangoDbApi\Collection();
-    //        $collection->client = $this->client;
-    //        $responseObject     = $collection->delete($collectionName);
-    //        $body               = $responseObject->body;
-    //
-    //        $this->assertArrayHasKey('code', json_decode($body, true));
-    //        $decodedJsonBody = json_decode($body, true);
-    //        $this->assertEquals(200, $decodedJsonBody['code']);
-    //    }
-    //
-    //
-    //    /**
-    //     * Test if we can get all collections
-    //     */
-    //    public function testGetCollections()
-    //    {
-    //        $collection         = new ArangoDbApi\Collection();
-    //        $collection->client = $this->client;
-    //        $responseObject     = $collection->getAll();
-    //        $response           = json_decode($responseObject->body);
-    //
-    //        $this->assertObjectHasAttribute('_graphs', $response->names);
-    //    }
-    //
-    //    /**
-    //     * Test if we can get all collections
-    //     */
-    //    public function testGetCollectionsExcludeSystem()
-    //    {
-    //        $collection         = new ArangoDbApi\Collection();
-    //        $collection->client = $this->client;
-    //        $responseObject     = $collection->getAll(['excludeSystem' => true]);
-    //        $response           = json_decode($responseObject->body);
-    //
-    //        $this->assertObjectNotHasAttribute('_graphs', $response->names);
-    //    }
-    //
-    //    public function tearDown()
-    //    {
-    //        $collectionName = 'ArangoDB-PHP-Core-CollectionTestSuite-CollectionViaIocContainer';
-    //
-    //        $collection = Client::make('ArangoCollection');
-    //        $collection->delete($collectionName);
-    //    }
+        $collectionOptions = ["waitForSync" => true];
 
 
+        // Here's how a binding for the HttpRequest should take place in the IOC container.
+        // The actual binding should only happen once in the client construction, though. This is only for testing...
+        Client::bind(
+            'Collection',
+            function () {
+                $object         = new Collection();
+                $object->client = $this->client;
+
+                return $object;
+            }
+        );
+
+        // And here's how one gets an HttpRequest object through the IOC.
+        // Note that the type-name 'httpRequest' is the name we bound our HttpRequest class creation-closure to. (see above)
+
+        /** @var $collection Collection */
+        $responseObject = Collection::create($this->client, $collectionName, $collectionOptions);
+
+        $body = $responseObject->body;
+
+        $this->assertArrayHasKey('code', json_decode($body, true));
+        $decodedJsonBody = json_decode($body, true);
+        $this->assertEquals(200, $decodedJsonBody['code']);
+        $this->assertEquals($collectionName, $decodedJsonBody['name']);
+    }
+
+
+    /**
+     * Test if we can get the server version
+     */
+    public function testTruncateCollection()
+    {
+        $collectionName = 'ArangoDB-PHP-Core-CollectionTestSuite-Collection';
+
+        $responseObject = Collection::truncate($this->client, $collectionName);
+
+        $body = $responseObject->body;
+
+        $this->assertArrayHasKey('code', json_decode($body, true));
+        $decodedJsonBody = json_decode($body, true);
+        $this->assertEquals(200, $decodedJsonBody['code']);
+        $this->assertEquals($collectionName, $decodedJsonBody['name']);
+    }
+
+
+    /**
+     * Test if we can get the server version
+     */
+    public function testDeleteCollection()
+    {
+
+        $collectionName = 'ArangoDB-PHP-Core-CollectionTestSuite-Collection';
+
+        $responseObject = Collection::delete($this->client, $collectionName);
+
+        $body = $responseObject->body;
+
+        $this->assertArrayHasKey('code', json_decode($body, true));
+        $decodedJsonBody = json_decode($body, true);
+        $this->assertEquals(200, $decodedJsonBody['code']);
+    }
+
+
+    /**
+     * Test if we can get all collections
+     */
+    public function testGetCollections()
+    {
+        $responseObject = Collection::getAll($this->client);
+
+        $response = json_decode($responseObject->body);
+
+        $this->assertObjectHasAttribute('_graphs', $response->names);
+    }
+
+    /**
+     * Test if we can get all collections
+     */
+    public function testGetCollectionsExcludeSystem()
+    {
+        $responseObject = Collection::getAll($this->client, ['excludeSystem' => true]);
+
+        $response = json_decode($responseObject->body);
+
+        $this->assertObjectNotHasAttribute('_graphs', $response->names);
+    }
+
+    public function tearDown()
+    {
+        $collectionName = 'ArangoDB-PHP-Core-CollectionTestSuite-CollectionViaIocContainer';
+
+        Collection::delete($this->client, $collectionName);
+    }
 }

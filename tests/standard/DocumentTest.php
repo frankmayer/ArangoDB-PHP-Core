@@ -150,11 +150,9 @@ class DocumentTest extends
 
         $this->assertEquals($collectionName . '/1', $decodedJsonBody['_id']);
 
-        $collection         = new Collection();
-        $collection->client = $this->client;
+        $responseObject = Collection::delete($this->client, $collectionName);
 
-        $responseObject = $collection->delete($collectionName);
-        $responseBody   = $responseObject->body;
+        $responseBody = $responseObject->body;
 
         $this->assertArrayHasKey('code', json_decode($responseBody, true));
 
@@ -406,5 +404,8 @@ class DocumentTest extends
         $decodedJsonBody = json_decode($body, true);
 
         $this->assertEquals(200, $decodedJsonBody['code']);
+
+        $collectionName = 'ArangoDB-PHP-Core-CollectionTestSuite-NonExistingCollection';
+        Collection::delete($this->client, $collectionName);
     }
 }

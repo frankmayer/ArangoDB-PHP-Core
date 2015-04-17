@@ -80,11 +80,8 @@ class PluginTest extends
         }
         $this->assertInstanceOf('\Exception', $e);
 
-        $collection         = new Collection();
-        $collection->client = $this->client;
-
         /** @var $responseObject Response */
-        $responseObject = $collection->getAll();
+        $responseObject = Collection::getAll($this->client);
 
         $this->assertInstanceOf('frankmayer\ArangoDbPhpCore\Protocols\Http\Request', $responseObject->request);
     }

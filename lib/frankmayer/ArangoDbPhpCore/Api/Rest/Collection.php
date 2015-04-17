@@ -32,26 +32,25 @@ class Collection extends
 
 
     /**
-     * @param       $collectionName
-     * @param array $collectionParameters
-     * @param array $options
+     * @param client $client
+     * @param        $collectionName
+     * @param array  $collectionParameters
+     * @param array  $options
      *
      * @return \frankmayer\ArangoDbPhpCore\Protocols\Http\Response
+     * @throws \frankmayer\ArangoDbPhpCore\ClientException
      */
-    public function create(
-        $collectionName,
-        $collectionParameters = [],
-        $options = []
-    ) {
+    public static function create($client, $collectionName, $collectionParameters = [], $options = [])
+    {
         // Here's how a binding for the HttpRequest should take place in the IOC container.
         // The actual binding should only happen once in the client construction, though. This is only for testing...
 
 
         Client::bind(
             'httpRequest',
-            function () {
-                $request         = new $this->client->requestClass();
-                $request->client = $this->client;
+            function () use ($client) {
+                $request         = new $client->requestClass();
+                $request->client = $client;
 
                 return $request;
             }
@@ -76,20 +75,41 @@ class Collection extends
     }
 
 
+    //    /**
+    //     * @param       $collectionName
+    //     * @param array $options
+    //     *
+    //     * @return \frankmayer\ArangoDbPhpCore\Protocols\Http\Response
+    //     */
+    //    public function delete(
+    //        $collectionName,
+    //        $options = []
+    //    ) {
+    //        /** @var Request $request */
+    //        $request         = new $this->client->requestClass();
+    //        $request->client = $this->client;
+    //
+    //        $request->options = $options;
+    //        $request->path    = $request->getDatabasePath() . self::API_COLLECTION . '/' . $collectionName;
+    //        $request->method  = self::METHOD_DELETE;
+    //
+    //        $responseObject = $request->send();
+    //
+    //        return $responseObject;
+    //    }
+
     /**
-     * @param       $collectionName
-     * @param array $options
+     * @param client $client
+     * @param        $collectionName
+     * @param array  $options
      *
      * @return \frankmayer\ArangoDbPhpCore\Protocols\Http\Response
      */
-    public function delete(
-        $collectionName,
-        $options = []
-    ) {
+    public static function delete($client, $collectionName, $options = [])
+    {
         /** @var Request $request */
-        $request         = new $this->client->requestClass();
-        $request->client = $this->client;
-
+        $request          = new $client->requestClass();
+        $request->client  = $client;
         $request->options = $options;
         $request->path    = $request->getDatabasePath() . self::API_COLLECTION . '/' . $collectionName;
         $request->method  = self::METHOD_DELETE;
@@ -101,18 +121,17 @@ class Collection extends
 
 
     /**
-     * @param       $collectionName
-     * @param array $options
+     * @param client $client
+     * @param        $collectionName
+     * @param array  $options
      *
      * @return \frankmayer\ArangoDbPhpCore\Protocols\Http\Response
      */
-    public function truncate(
-        $collectionName,
-        $options = []
-    ) {
+    public static function truncate($client, $collectionName, $options = [])
+    {
         /** @var Request $request */
-        $request         = new $this->client->requestClass();
-        $request->client = $this->client;
+        $request         = new $client->requestClass();
+        $request->client = $client;
 
         $request->options = $options;
 
@@ -126,17 +145,16 @@ class Collection extends
 
 
     /**
-     * @param array $options
+     * @param client $client
+     * @param array  $options
      *
      * @return \frankmayer\ArangoDbPhpCore\Protocols\Http\Response
      */
-    public function getAll(
-        $options = []
-    ) {
+    public static function getAll($client, $options = [])
+    {
         /** @var Request $request */
-        $request         = new $this->client->requestClass();
-        $request->client = $this->client;
-
+        $request          = new $client->requestClass();
+        $request->client  = $client;
         $request->options = $options;
 
         $request->path = $request->getDatabasePath() . self::API_COLLECTION;

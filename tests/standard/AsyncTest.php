@@ -47,16 +47,12 @@ class AsyncTest extends
      */
     public function testCreateCollectionAndSimpleAsyncDocumentCreation()
     {
-
         $collectionName = 'ArangoDB-PHP-Core-CollectionTestSuite-Collection';
 
         $collectionOptions = ["waitForSync" => true];
 
-        $collection         = new Collection();
-        $collection->client = $this->client;
-
         /** @var $responseObject Response */
-        $responseObject = $collection->create($collectionName, $collectionOptions);
+        $responseObject = Collection::create($this->client, $collectionName, $collectionOptions);
         $body           = $responseObject->body;
 
         $this->assertArrayHasKey('code', json_decode($body, true));
@@ -93,7 +89,6 @@ class AsyncTest extends
      */
     public function testCreateCollectionAndStoredAsyncDocumentCreation()
     {
-
         $job               = new Async();
         $job->client       = $this->client;
         $jobDeleteResponse = $job->deleteJobResult('all');
@@ -106,12 +101,10 @@ class AsyncTest extends
 
         $collectionOptions = ["waitForSync" => true];
 
-        $collection         = new Collection();
-        $collection->client = $this->client;
-
         /** @var $responseObject Response */
-        $responseObject = $collection->create($collectionName, $collectionOptions);
-        $body           = $responseObject->body;
+        $responseObject = Collection::create($this->client, $collectionName, $collectionOptions);
+
+        $body = $responseObject->body;
 
         $decodedJsonBody = json_decode($body, true);
         $this->assertEquals(200, $decodedJsonBody['code']);
@@ -159,10 +152,6 @@ class AsyncTest extends
     {
         $collectionName = 'ArangoDB-PHP-Core-CollectionTestSuite-Collection';
 
-
-        $collection         = new Collection();
-        $collection->client = $this->client;
-
-        $collection->delete($collectionName);
+        Collection::delete($this->client, $collectionName);
     }
 }

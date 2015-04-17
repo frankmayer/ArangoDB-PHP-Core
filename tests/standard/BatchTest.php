@@ -61,11 +61,9 @@ class BatchTest extends
             $collection         = new Collection();
             $collection->client = $this->client;
 
-            $batchPart = $collection->create(
-                $collectionName,
-                $collectionOptions,
-                ['isBatchPart' => true]
-            );
+            $batchPart = Collection::create($this->client, $collectionName, $collectionOptions,
+                ['isBatchPart' => true]);
+
             $this->assertEquals(202, $batchPart->status);
             $batchParts[] = $batchPart;
         }
@@ -93,10 +91,8 @@ class BatchTest extends
         foreach ($this->collectionNames as $collectionName) {
             $collection         = new Collection();
             $collection->client = $this->client;
-            $batchParts[]       = $collection->delete(
-                $collectionName,
-                ['isBatchPart' => true]
-            );
+
+            $batchParts[] = Collection::delete($this->client, $collectionName, ['isBatchPart' => true]);
         }
 
         $batch         = new Batch();
@@ -120,12 +116,8 @@ class BatchTest extends
      */
     public function tearDown()
     {
-        //        foreach ($this->collectionNames as $collectionName) {
-        //            $collection         = new ArangoDbApi\Collection();
-        //            $collection->client = $this->client;
-        //            $batchParts[]       = $collection->delete(
-        //                                             $collectionName
-        //            );
-        //        }
+        foreach ($this->collectionNames as $collectionName) {
+            $batchParts[] = Collection::delete($this->client, $collectionName, ['isBatchPart' => true]);
+        }
     }
 }
