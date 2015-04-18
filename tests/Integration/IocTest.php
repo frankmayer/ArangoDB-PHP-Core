@@ -10,6 +10,8 @@
 
 namespace frankmayer\ArangoDbPhpCore;
 
+require_once('ArangoDbPhpCoreIntegrationTestCase.php');
+
 use frankmayer\ArangoDbPhpCore\Connectors\CurlHttp\Connector;
 use frankmayer\ArangoDbPhpCore\Protocols\Http\Request;
 use frankmayer\ArangoDbPhpCore\Protocols\Http\Response;
@@ -19,8 +21,7 @@ use frankmayer\ArangoDbPhpCore\Protocols\Http\Response;
  * Class IocTest
  * @package frankmayer\ArangoDbPhpCore
  */
-class IocTest extends
-    \PHPUnit_Framework_TestCase
+class IocTest extends ArangoDbPhpCoreIntegrationTestCase
 {
     /**
      * @var

@@ -14,7 +14,7 @@ namespace frankmayer\ArangoDbPhpCore;
  * Class ArangoDbPhpCoreTestCase
  * @package frankmayer\ArangoDbPhpCore
  */
-class ArangoDbPhpCoreTestCase extends
+class ArangoDbPhpCoreIntegrationTestCase extends
     \PHPUnit_Framework_TestCase
 {
     /**

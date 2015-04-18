@@ -10,6 +10,8 @@
 
 namespace frankmayer\ArangoDbPhpCore;
 
+require_once('ArangoDbPhpCoreIntegrationTestCase.php');
+
 use frankmayer\ArangoDbPhpCore\Api\Rest\Collection;
 use frankmayer\ArangoDbPhpCore\Connectors\CurlHttp\Connector;
 use frankmayer\ArangoDbPhpCore\Plugins\PluginManager;
@@ -21,8 +23,7 @@ use frankmayer\ArangoDbPhpCore\Protocols\Http\Response;
  * Class PluginTest
  * @package frankmayer\ArangoDbPhpCore
  */
-class PluginTest extends
-    \PHPUnit_Framework_TestCase
+class PluginTest extends ArangoDbPhpCoreIntegrationTestCase
 {
     /**
      * @var ClientOptions $clientOptions

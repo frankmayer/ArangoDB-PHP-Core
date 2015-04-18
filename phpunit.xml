@@ -11,12 +11,14 @@
          syntaxCheck="false"
         >
     <testsuites>
-        <testsuite name="ArangoDB-PHP-Core">
-            <directory>./tests/standard</directory>
+        <testsuite name="ArangoDB-PHP-Core-Unit">
+            <directory>./tests/Unit/</directory>
         </testsuite>
-        <testsuite name="ArangoDB-PHP-Core-Performance">
-            <directory>./tests/performance</directory>
+        <testsuite name="ArangoDB-PHP-Core-Integration">
+            <directory>./tests/Integration/</directory>
         </testsuite>
+        <!--<testsuite name="ArangoDB-PHP-Core-Performance">-->
+            <!--<directory>./tests/Performance/</directory>-->
+        <!--</testsuite>-->
     </testsuites>
 </phpunit>
-

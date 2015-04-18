@@ -10,18 +10,18 @@
 
 namespace frankmayer\ArangoDbPhpCore;
 
+require_once('ArangoDbPhpCoreIntegrationTestCase.php');
+
 use frankmayer\ArangoDbPhpCore\Connectors\CurlHttp\Connector;
 use frankmayer\ArangoDbPhpCore\Plugins\TracerPlugin;
 
 //todo: fix tests
 
-
 /**
  * Class ClientTest
  * @package frankmayer\ArangoDbPhpCore
  */
-class ClientTest extends
-    \PHPUnit_Framework_TestCase
+class ClientTest extends ArangoDbPhpCoreIntegrationTestCase
 {
 
     /**

@@ -11,7 +11,7 @@
 namespace frankmayer\ArangoDbPhpCore;
 
 
-require_once('ArangoDbPhpCoreTestCase.php');
+require_once('ArangoDbPhpCoreIntegrationTestCase.php');
 
 use frankmayer\ArangoDbPhpCore\Api\Rest\Collection;
 use frankmayer\ArangoDbPhpCore\Api\Rest\Document;
@@ -23,8 +23,7 @@ use frankmayer\ArangoDbPhpCore\Protocols\Http\Response;
  * Class DocumentTest
  * @package frankmayer\ArangoDbPhpCore
  */
-class DocumentTest extends
-    ArangoDbPhpCoreTestCase
+class DocumentTest extends ArangoDbPhpCoreIntegrationTestCase
 {
     /**
      * @var Client

@@ -10,7 +10,7 @@
 
 namespace frankmayer\ArangoDbPhpCore;
 
-require_once('ArangoDbPhpCoreTestCase.php');
+require_once('ArangoDbPhpCoreIntegrationTestCase.php');
 
 use frankmayer\ArangoDbPhpCore\Api\Rest\Async;
 use frankmayer\ArangoDbPhpCore\Api\Rest\Collection;
@@ -23,8 +23,7 @@ use frankmayer\ArangoDbPhpCore\Protocols\Http\Response;
  * Class AsyncTest
  * @package frankmayer\ArangoDbPhpCore
  */
-class AsyncTest extends
-    ArangoDbPhpCoreTestCase
+class AsyncTest extends ArangoDbPhpCoreIntegrationTestCase
 {
     /**
      * @var Client $client

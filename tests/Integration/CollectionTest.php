@@ -10,7 +10,7 @@
 
 namespace frankmayer\ArangoDbPhpCore;
 
-require_once('ArangoDbPhpCoreTestCase.php');
+require_once('ArangoDbPhpCoreIntegrationTestCase.php');
 
 use frankmayer\ArangoDbPhpCore\Api\Rest\Collection;
 use frankmayer\ArangoDbPhpCore\Connectors\CurlHttp\Connector;
@@ -21,15 +21,14 @@ use frankmayer\ArangoDbPhpCore\Connectors\CurlHttp\Connector;
  * Class CollectionTest
  * @package frankmayer\ArangoDbPhpCore
  */
-class CollectionTest extends
-    ArangoDbPhpCoreTestCase
+class CollectionTest extends ArangoDbPhpCoreIntegrationTestCase
 {
     /**
      * @var Client
      */
     public $client;
 
-    
+
     /**
      *
      */

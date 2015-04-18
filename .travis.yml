@@ -1,8 +1,7 @@
 language: php
 
 php: 
-#  - 5.3
-#  - 5.4
+  - 5.4
 #  - 5.5
   - 5.6
 #  - 7
@@ -23,13 +22,11 @@ before_script:
 
 
 after_script:
-  # - php vendor/bin/coveralls
-  # or enable logging
  - php vendor/bin/coveralls -v
 
 script:
  - mkdir -p build/logs
- - phpunit --testsuite ArangoDB-PHP-Core --coverage-clover build/logs/clover.xml
+ - phpunit --coverage-clover build/logs/clover.xml
 
 addons:
   hosts:

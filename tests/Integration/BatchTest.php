@@ -10,6 +10,7 @@
 
 namespace frankmayer\ArangoDbPhpCore;
 
+require_once('ArangoDbPhpCoreIntegrationTestCase.php');
 
 use frankmayer\ArangoDbPhpCore\Api\Rest\Batch;
 use frankmayer\ArangoDbPhpCore\Api\Rest\Collection;
@@ -21,8 +22,7 @@ use frankmayer\ArangoDbPhpCore\Protocols\Http\Response;
  * Class BatchTest
  * @package frankmayer\ArangoDbPhpCore
  */
-class BatchTest extends
-    \PHPUnit_Framework_TestCase
+class BatchTest extends ArangoDbPhpCoreIntegrationTestCase
 {
     /**
      * @var
