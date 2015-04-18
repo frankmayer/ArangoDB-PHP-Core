@@ -38,7 +38,7 @@ class Request extends
     /**
      * This prepares the "fake" response for batch parts
      */
-    private function requestBatchPart()
+    protected function requestBatchPart()
     {
         $connector = $this->client->connector;
 

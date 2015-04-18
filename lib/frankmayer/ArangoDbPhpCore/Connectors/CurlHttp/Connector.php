@@ -33,7 +33,7 @@ class Connector extends BaseConnector implements
      * @throws \frankmayer\ArangoDbPhpCore\ServerException
      * @return mixed
      */
-    public function request(RequestInterface $request)
+    public function request(Request $request)
     {
         $curlHeaders = [];
 

@@ -20,5 +20,5 @@ interface  ConnectorInterface extends
     \frankmayer\ArangoDbPhpCore\ConnectorInterface
 
 {
-    public function request(RequestInterface $request);
+    public function request(Request $request);
 }

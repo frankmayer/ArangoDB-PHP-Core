@@ -110,7 +110,7 @@ class Response
      *
      * @param $response
      */
-    protected function splitResponseToHeadersArrayAndBody($response)
+    public function splitResponseToHeadersArrayAndBody($response)
     {
         list($headers, $this->body) = explode("\r\n\r\n", $response, 2);
 
@@ -121,6 +121,7 @@ class Response
                 $this->headers[$pair[0]][] = $pair[1];
             } else {
                 $this->headers['status'] = $header;
+                $this->status            = $header;
             }
         }
     }

@@ -80,4 +80,8 @@ abstract class RequestBase implements
      * @var ResponseInterface The response-object as a result of the request
      */
     public $responseObject;
+    /**
+     * @var object The wrapped handler of communications.
+     */
+    public $handler;
 }
