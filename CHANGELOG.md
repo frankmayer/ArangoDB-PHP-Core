@@ -1,6 +1,10 @@
 
 Experimental Phase
 ------------------
+* Adapted OO structure to better work with other custom connector middleware (like ArangoDB-PHP-Core-Guzzle for Guzzle 5)
+
+* The provided ArangoDB API calls are now static. No need to instantiate unnecessary Objects in order to do http requests. 
+  Objects can be provided from the higher level implementations, if needed.   
 
 * Made ServerExceptions more flexible.
   It's now configurable, which HTTP Response code triggers an exception.
