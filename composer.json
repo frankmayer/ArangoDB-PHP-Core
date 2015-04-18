@@ -9,6 +9,10 @@
       "email": "frank@frankmayer.net",
       "homepage": "https://github.com/frankmayer",
       "role": "Creator"
+    },
+    {
+      "name": "Contributors",
+      "homepage": "https://github.com/frankmayer/ArangoDB-PHP-Core-Guzzle/graphs/contributors"
     }
   ],
   "keywords": [
