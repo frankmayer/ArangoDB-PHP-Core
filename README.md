@@ -4,10 +4,11 @@
 
 A lightweight, and at the same time flexible "very"-low-level ArangoDB client for PHP.
 
-[![Build Status](https://travis-ci.org/frankmayer/ArangoDB-PHP-Core.png?branch=devel)](https://travis-ci.org/frankmayer/ArangoDB-PHP-Core)
+Master: [![Build Status](https://travis-ci.org/frankmayer/ArangoDB-PHP-Core.png?branch=master)](https://travis-ci.org/frankmayer/ArangoDB-PHP-Core)
+Devel: [![Build Status](https://travis-ci.org/frankmayer/ArangoDB-PHP-Core.png?branch=devel)](https://travis-ci.org/frankmayer/ArangoDB-PHP-Core)
 
 [![Coverage Status](https://coveralls.io/repos/frankmayer/ArangoDB-PHP-Core/badge.png)](https://coveralls.io/r/frankmayer/ArangoDB-PHP-Core)
-
+[![Hex.pm](https://img.shields.io/hexpm/l/plug.svg)](https://github.com/frankmayer/ArangoDB-PHP-Core/blob/devel/LICENSE.md)
 
 ####Purpose:
 
@@ -35,18 +36,8 @@ A basis that takes away the boilerplate code of setting up requests and managing
 
 ####PHP Versions:
 
-Supported: 5.4 (unless functionality requiring 5.5+ is to be implemented before release), 5.5, 5.6, HHVM 2.3.0+
+Supported: 5.4+ & HHVM 2.3.0+
 
-
-Notes: 
-
-~~While PHP 5.3 is still supported~~ PHP 5.3 support will be removed, because:
-- the core client runs faster and with a smaller memory footprint, when used with PHP 5.4 and newer. 
-- PHP 5.3 is EOL.
-- PHP 5.4 and up also have some handy new features, like traits or Class member access on instantiation.
-
-In other words... Do yourself a favor and upgrade to PHP 5.4 or even better to PHP 5.5.
- 
 
 #####Caution:
 This project is at the moment in a __highly experimental__ phase.
@@ -65,7 +56,7 @@ Thanks !!
 
 
 ###### Major Todo's:
-- [x] stabilize plugin API
+- [ ] stabilize plugin API
 - [x] implement ArangoDB authentication
 - [ ] implement basic tracer plugin
 - [ ] provide docs
