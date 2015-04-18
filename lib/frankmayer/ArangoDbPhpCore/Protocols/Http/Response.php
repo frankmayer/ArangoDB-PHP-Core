@@ -117,9 +117,8 @@ class Response
         $headersArray = explode("\r\n", $headers);
         foreach ($headersArray as $line => $header) {
             if ($line > 0) {
-                $pair = explode(": ", $header);
-
-                $this->headers[$pair[0]] = $pair[1];
+                $pair                      = explode(": ", $header);
+                $this->headers[$pair[0]][] = $pair[1];
             } else {
                 $this->headers['status'] = $header;
             }

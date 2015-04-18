@@ -111,14 +111,14 @@ class AsyncTest extends
 
         sleep(1);
 
-        $jobId   = $responseObject->headers['x-arango-async-id'];
+        $jobId   = $responseObject->headers['x-arango-async-id'][0];
         $jobList = Async::listJobResults($this->client, 'done', 1);
 
         $jobArray = json_decode($jobList->body, true);
 
         $this->assertTrue(in_array($jobId, $jobArray));
 
-        $jobResult = Async::fetchJobResult($this->client, $responseObject->headers['x-arango-async-id']);
+        $jobResult = Async::fetchJobResult($this->client, $responseObject->headers['x-arango-async-id'][0]);
 
         $this->assertTrue($jobResult->headers['x-arango-async-id'] == $responseObject->headers['x-arango-async-id']);
         $this->assertArrayHasKey('x-arango-async-id', $jobResult->headers);
