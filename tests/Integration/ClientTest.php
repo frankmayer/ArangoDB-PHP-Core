@@ -21,7 +21,7 @@ use frankmayer\ArangoDbPhpCore\Plugins\TracerPlugin;
  * Class ClientTest
  * @package frankmayer\ArangoDbPhpCore
  */
-class ClientTest extends ArangoDbPhpCoreIntegrationTestCase
+class ClientIntegrationTest extends ArangoDbPhpCoreIntegrationTestCase
 {
 
     /**

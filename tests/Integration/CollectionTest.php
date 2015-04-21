@@ -22,7 +22,7 @@ use frankmayer\ArangoDbPhpCore\Protocols\Http\Response;
  * Class CollectionTest
  * @package frankmayer\ArangoDbPhpCore
  */
-class CollectionTest extends ArangoDbPhpCoreIntegrationTestCase
+class CollectionIntegrationTest extends ArangoDbPhpCoreIntegrationTestCase
 {
     /**
      * @var Client

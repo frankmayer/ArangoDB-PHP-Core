@@ -21,7 +21,7 @@ use frankmayer\ArangoDbPhpCore\Protocols\Http\Response;
  * Class IocTest
  * @package frankmayer\ArangoDbPhpCore
  */
-class IocTest extends ArangoDbPhpCoreIntegrationTestCase
+class IocIntegrationTest extends ArangoDbPhpCoreIntegrationTestCase
 {
     /**
      * @var

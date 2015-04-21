@@ -10,7 +10,7 @@
 
 namespace frankmayer\ArangoDbPhpCore;
 
-require_once('ArangoDbPhpCoreIntegrationTestCase.php');
+require_once('ArangoDbPhpCoreUnitTestCase.php');
 
 use frankmayer\ArangoDbPhpCore\Api\Rest\Collection;
 use frankmayer\ArangoDbPhpCore\Connectors\CurlHttp\Connector;
@@ -23,7 +23,7 @@ use frankmayer\ArangoDbPhpCore\Protocols\Http\Response;
  * Class PluginTest
  * @package frankmayer\ArangoDbPhpCore
  */
-class PluginIntegrationTest extends ArangoDbPhpCoreIntegrationTestCase
+class PluginUnitTest extends ArangoDbPhpCoreUnitTestCase
 {
     /**
      * @var ClientOptions $clientOptions
@@ -47,10 +47,8 @@ class PluginIntegrationTest extends ArangoDbPhpCoreIntegrationTestCase
 
     // todo 1 Frank Complete plugin tests
 
-    /**
-     *
-     */
-    public function testRegisterPluginsWithDifferentPrioritiesTestAndUnRegisterPlugin()
+
+    public function testRegisterPluginsAndUnRegisterPlugins()
     {
         $this->client->setPluginManager(new PluginManager($this->client));
         $this->assertInstanceOf('\frankmayer\ArangoDbPhpCore\Plugins\PluginManager', $this->client->getPluginManager());
@@ -72,7 +70,31 @@ class PluginIntegrationTest extends ArangoDbPhpCoreIntegrationTestCase
         ];
 
         $this->client->setPluginsFromPluginArray($this->clientOptions['plugins']);
+        $this->assertArrayHasKey('tracer1', $this->client->pluginManager->pluginStorage);
+        $this->assertArrayHasKey('tracer2', $this->client->pluginManager->pluginStorage);
         $this->assertArrayHasKey('tracer3', $this->client->pluginManager->pluginStorage);
+        $this->assertArrayHasKey('tracer4', $this->client->pluginManager->pluginStorage);
+
+        $keys = array_keys($this->client->pluginManager->pluginStorage);
+        $this->assertTrue($this->client->pluginManager->pluginStorage[$keys[2]] === $this->client->pluginManager->pluginStorage['tracer1']);
+        $this->assertTrue($this->client->pluginManager->pluginStorage[$keys[3]] === $this->client->pluginManager->pluginStorage['tracer3']);
+
+
+        $this->client->pluginManager->removePluginInstance('tracer1');
+        $this->client->pluginManager->removePluginInstance('tracer2');
+        $this->client->pluginManager->removePluginInstance('tracer3');
+        $this->client->pluginManager->removePluginInstance('tracer4');
+
+        $this->assertArrayNotHasKey('tracer1', $this->client->pluginManager->pluginStorage);
+        $this->assertArrayNotHasKey('tracer2', $this->client->pluginManager->pluginStorage);
+        $this->assertArrayNotHasKey('tracer3', $this->client->pluginManager->pluginStorage);
+        $this->assertArrayNotHasKey('tracer4', $this->client->pluginManager->pluginStorage);
+    }
+
+
+    public function testFailureWhenRegisteringNonPlugin()
+    {
+        $this->client->setPluginManager(new PluginManager($this->client));
 
         $e = null;
         try {
@@ -80,15 +102,6 @@ class PluginIntegrationTest extends ArangoDbPhpCoreIntegrationTestCase
         } catch (\Exception $e) {
         }
         $this->assertInstanceOf('\Exception', $e);
-
-        /** @var $responseObject Response */
-        $collection         = new Collection();
-        $collection->client = $this->client;
-
-        /** @var $responseObject Response */
-        $responseObject = $collection->getAll();
-
-        $this->assertInstanceOf('frankmayer\ArangoDbPhpCore\Protocols\Http\Request', $responseObject->request);
     }
 
 
