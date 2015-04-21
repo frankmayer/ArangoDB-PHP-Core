@@ -18,7 +18,7 @@ use frankmayer\ArangoDbPhpCore\ServerException;
  *
  * @package frankmayer\ArangoDbPhpCore
  */
-class Response
+class Response implements ResponseInterface
 {
     /**
      * @var array An array with the http status codes of the ones, that we want to raise an exception for.

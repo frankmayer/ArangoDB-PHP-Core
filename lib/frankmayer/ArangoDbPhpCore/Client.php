@@ -12,7 +12,6 @@ namespace frankmayer\ArangoDbPhpCore;
 
 use frankmayer\ArangoDbPhpCore\Connectors\BaseConnector;
 use frankmayer\ArangoDbPhpCore\Plugins\PluginManager;
-use frankmayer\ArangoDbPhpCore\Protocols\Http\Response;
 
 /**
  * The Client class.
@@ -34,7 +33,7 @@ class Client
      */
     public $connector;
     /**
-     * @var null The client options. An array of client options.
+     * @var array The client options. An array of client options.
      */
     public $clientOptions;
     /**
@@ -62,7 +61,7 @@ class Client
     /**
      * @param ConnectorInterface|BaseConnector $connector
      *
-     * @param null                             $clientOptions
+     * @param array                            $clientOptions
      */
     public function __construct(ConnectorInterface $connector, $clientOptions = null)
     {
@@ -118,8 +117,7 @@ class Client
     {
         $responseClass = $this->responseClass;
 
-
-        /** @var Response $responseObject */
+        /** @var ResponseInterface $responseObject */
         $responseObject = new $responseClass();
 
         return $responseObject->build($request);
@@ -180,7 +178,8 @@ class Client
 
 
     /**
-     * @param null $clientOptions
+     * Set complete Client Options
+     * @param array $clientOptions
      *
      * @return $this
      */
@@ -193,7 +192,7 @@ class Client
 
 
     /**
-     * @return null
+     * @return array
      */
     public function getClientOptions()
     {
@@ -202,7 +201,7 @@ class Client
 
 
     /**
-     * @param \frankmayer\ArangoDbPhpCore\ConnectorInterface|\frankmayer\ArangoDbPhpCore\ConnectorInterface $connector
+     * @param \frankmayer\ArangoDbPhpCore\ConnectorInterface $connector
      *
      * @return $this
      */
@@ -215,7 +214,7 @@ class Client
 
 
     /**
-     * @return \frankmayer\ArangoDbPhpCore\ConnectorInterface|\frankmayer\ArangoDbPhpCore\ConnectorInterface
+     * @return \frankmayer\ArangoDbPhpCore\ConnectorInterface
      */
     public function getConnector()
     {
@@ -224,7 +223,7 @@ class Client
 
 
     /**
-     * @param mixed $database
+     * @param string $database
      *
      * @return $this
      */
@@ -237,7 +236,7 @@ class Client
 
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getDatabase()
     {
@@ -246,7 +245,7 @@ class Client
 
 
     /**
-     * @param mixed $endpoint
+     * @param string $endpoint
      *
      * @return $this
      */
@@ -259,7 +258,7 @@ class Client
 
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getEndpoint()
     {
@@ -290,7 +289,7 @@ class Client
 
 
     /**
-     * @param mixed $requestClass
+     * @param RequestInterface $requestClass
      *
      * @return $this
      */
@@ -303,7 +302,7 @@ class Client
 
 
     /**
-     * @return mixed
+     * @return RequestInterface
      */
     public function getRequestClass()
     {
@@ -312,7 +311,7 @@ class Client
 
 
     /**
-     * @param mixed $responseClass
+     * @param ResponseInterface $responseClass
      *
      * @return $this
      */
@@ -325,7 +324,7 @@ class Client
 
 
     /**
-     * @return mixed
+     * @return ResponseInterface
      */
     public function getResponseClass()
     {

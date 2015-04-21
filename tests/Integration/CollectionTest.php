@@ -14,6 +14,7 @@ require_once('ArangoDbPhpCoreIntegrationTestCase.php');
 
 use frankmayer\ArangoDbPhpCore\Api\Rest\Collection;
 use frankmayer\ArangoDbPhpCore\Connectors\CurlHttp\Connector;
+use frankmayer\ArangoDbPhpCore\Protocols\Http\Response;
 
 //todo: fix tests
 
@@ -140,8 +141,11 @@ class CollectionTest extends ArangoDbPhpCoreIntegrationTestCase
         // And here's how one gets an HttpRequest object through the IOC.
         // Note that the type-name 'httpRequest' is the name we bound our HttpRequest class creation-closure to. (see above)
 
-        /** @var $collection Collection */
-        $responseObject = Collection::create($this->client, $collectionName, $collectionOptions);
+        $collection         = new Collection();
+        $collection->client = $this->client;
+
+        /** @var $responseObject Response */
+        $responseObject = $collection->create($collectionName, $collectionOptions);
 
         $body = $responseObject->body;
 
@@ -159,7 +163,11 @@ class CollectionTest extends ArangoDbPhpCoreIntegrationTestCase
     {
         $collectionName = 'ArangoDB-PHP-Core-CollectionTestSuite-Collection';
 
-        $responseObject = Collection::truncate($this->client, $collectionName);
+        $collection         = new Collection();
+        $collection->client = $this->client;
+
+        /** @var $responseObject Response */
+        $responseObject = $collection->truncate($collectionName);
 
         $body = $responseObject->body;
 
@@ -178,7 +186,11 @@ class CollectionTest extends ArangoDbPhpCoreIntegrationTestCase
 
         $collectionName = 'ArangoDB-PHP-Core-CollectionTestSuite-Collection';
 
-        $responseObject = Collection::delete($this->client, $collectionName);
+        $collection         = new Collection();
+        $collection->client = $this->client;
+
+        /** @var $responseObject Response */
+        $responseObject = $collection->delete($collectionName);
 
         $body = $responseObject->body;
 
@@ -193,7 +205,11 @@ class CollectionTest extends ArangoDbPhpCoreIntegrationTestCase
      */
     public function testGetCollections()
     {
-        $responseObject = Collection::getAll($this->client);
+        $collection         = new Collection();
+        $collection->client = $this->client;
+
+        /** @var $responseObject Response */
+        $responseObject = $collection->getAll();
 
         $response = json_decode($responseObject->body);
 
@@ -206,7 +222,11 @@ class CollectionTest extends ArangoDbPhpCoreIntegrationTestCase
      */
     public function testGetCollectionsExcludeSystem()
     {
-        $responseObject = Collection::getAll($this->client, ['excludeSystem' => true]);
+        $collection         = new Collection();
+        $collection->client = $this->client;
+
+        /** @var $responseObject Response */
+        $responseObject = $collection->getAll(['excludeSystem' => true]);
 
         $response = json_decode($responseObject->body);
 
@@ -219,8 +239,11 @@ class CollectionTest extends ArangoDbPhpCoreIntegrationTestCase
      */
     public function tearDown()
     {
-        $collectionName = 'ArangoDB-PHP-Core-CollectionTestSuite-CollectionViaIocContainer';
+        $collectionName     = 'ArangoDB-PHP-Core-CollectionTestSuite-CollectionViaIocContainer';
+        $collection         = new Collection();
+        $collection->client = $this->client;
 
-        Collection::delete($this->client, $collectionName);
+        /** @var $responseObject Response */
+        $collection->delete($collectionName);
     }
 }

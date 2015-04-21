@@ -23,7 +23,7 @@ use frankmayer\ArangoDbPhpCore\Protocols\Http\Response;
  * Class AsyncTest
  * @package frankmayer\ArangoDbPhpCore
  */
-class AsyncTest extends ArangoDbPhpCoreIntegrationTestCase
+class AsyncIntegrationTest extends ArangoDbPhpCoreIntegrationTestCase
 {
     /**
      * @var Client $client
@@ -50,9 +50,13 @@ class AsyncTest extends ArangoDbPhpCoreIntegrationTestCase
 
         $collectionOptions = ["waitForSync" => true];
 
+        $collection         = new Collection();
+        $collection->client = $this->client;
+
         /** @var $responseObject Response */
-        $responseObject = Collection::create($this->client, $collectionName, $collectionOptions);
-        $body           = $responseObject->body;
+        $responseObject = $collection->create($collectionName, $collectionOptions);
+        /** @var $responseObject Response */
+        $body = $responseObject->body;
 
         $this->assertArrayHasKey('code', json_decode($body, true));
         $decodedJsonBody = json_decode($body, true);
@@ -61,15 +65,21 @@ class AsyncTest extends ArangoDbPhpCoreIntegrationTestCase
 
         $collectionName = 'ArangoDB-PHP-Core-CollectionTestSuite-Collection';
 
-        $requestBody = ['name' => 'frank', '_key' => '1'];
+        $requestBody      = ['name' => 'frank', '_key' => '1'];
+        $document         = new Document();
+        $document->client = $this->client;
 
-        $responseObject = Document::create($this->client, $collectionName, $requestBody, null, ['async' => true]);
+
+        $responseObject = $document->create($collectionName, $requestBody, null, ['async' => true]);
 
         $this->assertEquals(202, $responseObject->status);
 
         sleep(1);
 
-        $responseObject = Document::get($this->client, $collectionName . '/1', $requestBody);
+        $document         = new Document();
+        $document->client = $this->client;
+
+        $responseObject = $document->get($collectionName . '/1', $requestBody);
 
         $responseBody    = $responseObject->body;
         $decodedJsonBody = json_decode($responseBody, true);
@@ -82,17 +92,23 @@ class AsyncTest extends ArangoDbPhpCoreIntegrationTestCase
      */
     public function testCreateCollectionAndStoredAsyncDocumentCreation()
     {
-        $jobDeleteResponse = Async::deleteJobResult($this->client, 'all');
+
+        $job               = new Async();
+        $job->client       = $this->client;
+        $jobDeleteResponse = $job->deleteJobResult('all');
 
         // todo 1 Frank Write real test for deleting job results with stamp
-        $jobDeleteResponse = Async::deleteJobResult($this->client, 'all', time());
+        $jobDeleteResponse = $job->deleteJobResult('all', time());
+
 
         $collectionName = 'ArangoDB-PHP-Core-CollectionTestSuite-Collection';
 
-        $collectionOptions = ["waitForSync" => true];
+        $collectionOptions  = ["waitForSync" => true];
+        $collection         = new Collection();
+        $collection->client = $this->client;
 
         /** @var $responseObject Response */
-        $responseObject = Collection::create($this->client, $collectionName, $collectionOptions);
+        $responseObject = $collection->create($collectionName, $collectionOptions);
 
         $body = $responseObject->body;
 
@@ -102,27 +118,31 @@ class AsyncTest extends ArangoDbPhpCoreIntegrationTestCase
 
         $collectionName = 'ArangoDB-PHP-Core-CollectionTestSuite-Collection';
 
-        $requestBody = ['name' => 'frank', '_key' => '1'];
+        $requestBody      = ['name' => 'frank', '_key' => '1'];
+        $document         = new Document();
+        $document->client = $this->client;
 
-        $responseObject = Document::create($this->client, $collectionName, $requestBody, null, ['async' => 'store']);
+        $responseObject = $document->create($collectionName, $requestBody, null, ['async' => 'store']);
 
         $this->assertEquals(202, $responseObject->status);
 
         sleep(1);
 
-        $jobId   = $responseObject->headers['x-arango-async-id'][0];
-        $jobList = Async::listJobResults($this->client, 'done', 1);
-
+        $jobId    = $responseObject->headers['x-arango-async-id'][0];
+        $jobList  = $job->listJobResults('done', 1);
         $jobArray = json_decode($jobList->body, true);
 
         $this->assertTrue(in_array($jobId, $jobArray));
 
-        $jobResult = Async::fetchJobResult($this->client, $responseObject->headers['x-arango-async-id'][0]);
-
+        $jobResult = $job->fetchJobResult($responseObject->headers['x-arango-async-id'][0]);
         $this->assertTrue($jobResult->headers['x-arango-async-id'] == $responseObject->headers['x-arango-async-id']);
         $this->assertArrayHasKey('x-arango-async-id', $jobResult->headers);
 
-        $responseObject = Document::get($this->client, $collectionName . '/1', $requestBody);
+
+        $document         = new Document();
+        $document->client = $this->client;
+
+        $responseObject = $document->get($collectionName . '/1', $requestBody);
 
         $responseBody    = $responseObject->body;
         $decodedJsonBody = json_decode($responseBody, true);
@@ -137,6 +157,11 @@ class AsyncTest extends ArangoDbPhpCoreIntegrationTestCase
     {
         $collectionName = 'ArangoDB-PHP-Core-CollectionTestSuite-Collection';
 
-        Collection::delete($this->client, $collectionName);
+
+        $collection         = new Collection();
+        $collection->client = $this->client;
+
+        /** @var $responseObject Response */
+        $collection->delete($collectionName);
     }
 }

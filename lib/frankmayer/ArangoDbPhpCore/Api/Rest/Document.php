@@ -11,12 +11,15 @@
 namespace frankmayer\ArangoDbPhpCore\Api\Rest;
 
 use frankmayer\ArangoDbPhpCore\Api\RestApiInterface;
+use frankmayer\ArangoDbPhpCore\Client;
+use frankmayer\ArangoDbPhpCore\ClientInterface;
 use frankmayer\ArangoDbPhpCore\Protocols\Http\Request;
 
 
 /**
  * A document class for testing and demonstration purposes
  *
+ * @property  ClientInterface|Client $client
  * @package frankmayer\ArangoDbPhpCore
  */
 class Document extends
@@ -32,7 +35,6 @@ class Document extends
 
 
     /**
-     * @param       $client
      * @param       $collection
      * @param       $body
      * @param array $urlQuery
@@ -40,11 +42,16 @@ class Document extends
      *
      * @return \frankmayer\ArangoDbPhpCore\Protocols\Http\Response
      */
-    public static function create($client, $collection = null, $body = null, $urlQuery = [], $options = [])
-    {
+    public function create(
+        $collection = null,
+        $body = null,
+        $urlQuery = [],
+        $options = []
+    ) {
+
         /** @var Request $request */
-        $request          = new $client->requestClass();
-        $request->client  = $client;
+        $request          = new $this->client->requestClass();
+        $request->client  = $this->client;
         $request->options = $options;
         $request->body    = $body;
 
@@ -74,7 +81,6 @@ class Document extends
 
 
     /**
-     * @param       $client
      * @param       $handle
      * @param       $body
      * @param array $urlQuery
@@ -82,11 +88,15 @@ class Document extends
      *
      * @return \frankmayer\ArangoDbPhpCore\Protocols\Http\Response
      */
-    public static function replace($client, $handle, $body, $urlQuery = [], $options = [])
-    {
+    public function replace(
+        $handle,
+        $body,
+        $urlQuery = [],
+        $options = []
+    ) {
         /** @var Request $request */
-        $request          = new $client->requestClass();
-        $request->client  = $client;
+        $request          = new $this->client->requestClass();
+        $request->client  = $this->client;
         $request->options = $options;
         $request->body    = $body;
 
@@ -107,9 +117,7 @@ class Document extends
         return $responseObject;
     }
 
-
     /**
-     * @param       $client
      * @param       $handle
      * @param       $body
      * @param array $urlQuery
@@ -117,11 +125,15 @@ class Document extends
      *
      * @return \frankmayer\ArangoDbPhpCore\Protocols\Http\Response
      */
-    public static function update($client, $handle, $body, $urlQuery = [], $options = [])
-    {
+    public function update(
+        $handle,
+        $body,
+        $urlQuery = [],
+        $options = []
+    ) {
         /** @var Request $request */
-        $request          = new $client->requestClass();
-        $request->client  = $client;
+        $request          = new $this->client->requestClass();
+        $request->client  = $this->client;
         $request->options = $options;
         $request->body    = $body;
 
@@ -144,17 +156,18 @@ class Document extends
 
 
     /**
-     * @param       $client
      * @param       $collection
      * @param array $options
      *
      * @return \frankmayer\ArangoDbPhpCore\Protocols\Http\Response
      */
-    public static function getAllUri($client, $collection, $options = [])
-    {
+    public function getAllUri(
+        $collection,
+        $options = []
+    ) {
         /** @var Request $request */
-        $request          = new $client->requestClass();
-        $request->client  = $client;
+        $request          = new $this->client->requestClass();
+        $request->client  = $this->client;
         $request->options = $options;
         $request->path    = $request->getDatabasePath() . static::API_DOCUMENT;
         $request->path .= '?collection=' . $collection;
@@ -167,17 +180,18 @@ class Document extends
 
 
     /**
-     * @param        $client
      * @param string $handle The document handle of the document we want to get. Example: MyCollection/22334
      * @param array  $options
      *
      * @return \frankmayer\ArangoDbPhpCore\Protocols\Http\Response
      */
-    public static function get($client, $handle, $options = [])
-    {
+    public function get(
+        $handle,
+        $options = []
+    ) {
         /** @var Request $request */
-        $request          = new $client->requestClass();
-        $request->client  = $client;
+        $request          = new $this->client->requestClass();
+        $request->client  = $this->client;
         $request->options = $options;
         $request->path    = $request->getDatabasePath() . static::API_DOCUMENT . '/' . $handle;
         $request->method  = static::METHOD_GET;
@@ -189,17 +203,18 @@ class Document extends
 
 
     /**
-     * @param       $client
      * @param       $handle
      * @param array $options
      *
      * @return \frankmayer\ArangoDbPhpCore\Protocols\Http\Response
      */
-    public static function delete($client, $handle, $options = [])
-    {
+    public function delete(
+        $handle,
+        $options = []
+    ) {
         /** @var Request $request */
-        $request          = new $client->requestClass();
-        $request->client  = $client;
+        $request          = new $this->client->requestClass();
+        $request->client  = $this->client;
         $request->options = $options;
         $request->path    = $request->getDatabasePath() . static::API_DOCUMENT . '/' . $handle;
         $request->method  = static::METHOD_DELETE;

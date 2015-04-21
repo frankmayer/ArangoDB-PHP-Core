@@ -98,12 +98,19 @@ class PluginManager
      *
      * @return int
      */
-    function comparePluginPriorities($a, $b)
+    protected function comparePluginPriorities($a, $b)
     {
         if ($this->pluginStorage[$a]['priority'] === $this->pluginStorage[$b]['priority']) {
             return 0;
         }
 
         return ($this->pluginStorage[$a]['priority'] > $this->pluginStorage[$b]['priority']) ? -1 : 1;
+    }
+
+    public function removePluginInstance($instanceName)
+    {
+        unset ($this->pluginStorage[$instanceName]);
+
+        return;
     }
 }

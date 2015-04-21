@@ -58,8 +58,11 @@ class BatchTest extends ArangoDbPhpCoreIntegrationTestCase
         $batchParts = [];
 
         foreach ($this->collectionNames as $collectionName) {
-            $batchPart = Collection::create($this->client, $collectionName, $collectionOptions,
-                ['isBatchPart' => true]);
+            $collection         = new Collection();
+            $collection->client = $this->client;
+
+            /** @var $responseObject Response */
+            $batchPart = $collection->create($collectionName, $collectionOptions, ['isBatchPart' => true]);
 
             $this->assertEquals(202, $batchPart->status);
             $batchParts[] = $batchPart;
@@ -83,7 +86,11 @@ class BatchTest extends ArangoDbPhpCoreIntegrationTestCase
         $batchParts = [];
 
         foreach ($this->collectionNames as $collectionName) {
-            $batchParts[] = Collection::delete($this->client, $collectionName, ['isBatchPart' => true]);
+            $collection         = new Collection();
+            $collection->client = $this->client;
+
+            /** @var $responseObject Response */
+            $batchParts[] = $collection->delete($collectionName, ['isBatchPart' => true]);
         }
 
         $responseObject = Batch::send($this->client, $batchParts);
@@ -106,7 +113,11 @@ class BatchTest extends ArangoDbPhpCoreIntegrationTestCase
     {
         $batchParts = [];
         foreach ($this->collectionNames as $collectionName) {
-            $batchParts[] = Collection::delete($this->client, $collectionName, ['isBatchPart' => true]);
+            $collection         = new Collection();
+            $collection->client = $this->client;
+
+            /** @var $responseObject Response */
+            $batchParts[] = $collection->delete($collectionName, ['isBatchPart' => true]);
         }
         Batch::send($this->client, $batchParts);
     }

@@ -25,19 +25,22 @@ class Async extends
 {
     const API_JOB = '/_api/job';
 
+    public $client;
+
 
     /**
-     * @param        $client
      * @param string $handle The job handle of the job we want to get. Example: 1
      * @param array  $options
      *
      * @return \frankmayer\ArangoDbPhpCore\Protocols\Http\Response
      */
-    public static function fetchJobResult($client, $handle, $options = [])
-    {
+    public function fetchJobResult(
+        $handle,
+        $options = []
+    ) {
         /** @var Request $request */
-        $request          = new $client->requestClass();
-        $request->client  = $client;
+        $request          = new $this->client->requestClass();
+        $request->client  = $this->client;
         $request->options = $options;
         $request->path    = $request->getDatabasePath() . static::API_JOB . '/' . $handle;
         $request->method  = static::METHOD_PUT;
@@ -56,13 +59,16 @@ class Async extends
      *
      * @return \frankmayer\ArangoDbPhpCore\Protocols\Http\Response
      */
-    public static function listJobResults($client, $type, $count = null, $options = [])
-    {
+    public function listJobResults(
+        $type,
+        $count = null,
+        $options = []
+    ) {
         $urlQuery = null;
 
         /** @var Request $request */
-        $request          = new $client->requestClass();
-        $request->client  = $client;
+        $request          = new $this->client->requestClass();
+        $request->client  = $this->client;
         $request->options = $options;
         $request->path    = $request->getDatabasePath() . static::API_JOB . '/' . $type;
 
@@ -82,20 +88,22 @@ class Async extends
 
 
     /**
-     * @param         $client
      * @param mixed   $type The type or specific job id of jobs to delete. Example: 1 or `all` or `expired`
      * @param integer $stamp
      * @param array   $options
      *
      * @return \frankmayer\ArangoDbPhpCore\Protocols\Http\Response
      */
-    public static function deleteJobResult($client, $type, $stamp = null, $options = [])
-    {
+    public function deleteJobResult(
+        $type,
+        $stamp = null,
+        $options = []
+    ) {
         $urlQuery = null;
 
         /** @var Request $request */
-        $request          = new $client->requestClass();
-        $request->client  = $client;
+        $request          = new $this->client->requestClass();
+        $request->client  = $this->client;
         $request->options = $options;
         $request->path    = $request->getDatabasePath() . static::API_JOB . '/' . $type;
 

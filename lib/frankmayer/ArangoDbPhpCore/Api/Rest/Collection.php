@@ -29,27 +29,31 @@ class Collection extends
      */
     const API_COLLECTION = '/_api/collection';
 
+    public $client;
+
 
     /**
-     * @param client $client
-     * @param        $collectionName
-     * @param array  $collectionParameters
-     * @param array  $options
+     * @param       $collectionName
+     * @param array $collectionParameters
+     * @param array $options
      *
      * @return \frankmayer\ArangoDbPhpCore\Protocols\Http\Response
      * @throws \frankmayer\ArangoDbPhpCore\ClientException
      */
-    public static function create($client, $collectionName, $collectionParameters = [], $options = [])
-    {
+    public function create(
+        $collectionName,
+        $collectionParameters = [],
+        $options = []
+    ) {
         // Here's how a binding for the HttpRequest should take place in the IOC container.
         // The actual binding should only happen once in the client construction, though. This is only for testing...
 
 
         Client::bind(
             'httpRequest',
-            function () use ($client) {
-                $request         = new $client->requestClass();
-                $request->client = $client;
+            function () {
+                $request         = new $this->client->requestClass();
+                $request->client = $this->client;
 
                 return $request;
             }
@@ -75,17 +79,19 @@ class Collection extends
 
 
     /**
-     * @param client $client
-     * @param        $collectionName
-     * @param array  $options
+     * @param       $collectionName
+     * @param array $options
      *
      * @return \frankmayer\ArangoDbPhpCore\Protocols\Http\Response
      */
-    public static function delete($client, $collectionName, $options = [])
-    {
+    public function delete(
+        $collectionName,
+        $options = []
+    ) {
         /** @var Request $request */
-        $request          = new $client->requestClass();
-        $request->client  = $client;
+        $request         = new $this->client->requestClass();
+        $request->client = $this->client;
+
         $request->options = $options;
         $request->path    = $request->getDatabasePath() . static::API_COLLECTION . '/' . $collectionName;
         $request->method  = static::METHOD_DELETE;
@@ -97,17 +103,18 @@ class Collection extends
 
 
     /**
-     * @param client $client
-     * @param        $collectionName
-     * @param array  $options
+     * @param       $collectionName
+     * @param array $options
      *
      * @return \frankmayer\ArangoDbPhpCore\Protocols\Http\Response
      */
-    public static function truncate($client, $collectionName, $options = [])
-    {
+    public function truncate(
+        $collectionName,
+        $options = []
+    ) {
         /** @var Request $request */
-        $request         = new $client->requestClass();
-        $request->client = $client;
+        $request         = new $this->client->requestClass();
+        $request->client = $this->client;
 
         $request->options = $options;
 
@@ -121,25 +128,26 @@ class Collection extends
 
 
     /**
-     * @param client $client
-     * @param array  $options
+     * @param array $options
      *
      * @return \frankmayer\ArangoDbPhpCore\Protocols\Http\Response
      */
-    public static function getAll($client, $options = [])
-    {
+    public function getAll(
+        $options = []
+    ) {
         /** @var Request $request */
-        $request          = new $client->requestClass();
-        $request->client  = $client;
+        $request         = new $this->client->requestClass();
+        $request->client = $this->client;
+
         $request->options = $options;
 
         $request->path = $request->getDatabasePath() . static::API_COLLECTION;
         if (isset($request->options['excludeSystem']) && $request->options['excludeSystem'] === true) {
             $request->path .= '?excludeSystem=true';
         }
-        $request->method = static::METHOD_GET;
 
-        $responseObject = $request->send();
+        $request->method = static::METHOD_GET;
+        $responseObject  = $request->send();
 
         return $responseObject;
     }
