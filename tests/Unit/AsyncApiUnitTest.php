@@ -48,10 +48,9 @@ class AsyncApiUnitTest extends ArangoDbPhpCoreUnitTestCase
      */
     public function testCreateDocumentAsync()
     {
-        $createResponse = <<<'TAG'
+        $createResponse = <<<TAG
 HTTP/1.1 200 OK
 content-type: application/json; charset=utf-8
-
 
 [
   "270459873"
@@ -71,12 +70,13 @@ TAG;
         $this->assertInstanceOf('\frankmayer\ArangoDbPhpCore\Protocols\Http\HttpResponse', $response);
         $this->assertEquals(200, $response->status);
     }
+
     /**
      *
      */
     public function testFetchJobResult()
     {
-        $createCollectionResponse = <<<'TAG'
+        $createCollectionResponse = <<<TAG
 HTTP/1.1 200 OK
 content-type: application/json; charset=utf-8
 x-arango-async-id: 265413601
@@ -104,7 +104,7 @@ TAG;
      */
     public function testDeleteJobResult()
     {
-        $deleteCollectionResponse = <<<'TAG'
+        $deleteCollectionResponse = <<<TAG
 HTTP/1.1 200 OK
 content-type: application/json; charset=utf-8
 
@@ -131,7 +131,7 @@ TAG;
      */
     public function testListJobResults()
     {
-        $deleteCollectionResponse = <<<'TAG'
+        $deleteCollectionResponse = <<<TAG
 HTTP/1.1 200 OK
 content-type: application/json; charset=utf-8
 
