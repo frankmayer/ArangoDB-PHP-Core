@@ -15,8 +15,8 @@ matrix:
       - php: 7.0
     
 before_script:
-  - chmod 777 ./tests/travis/setup_arangodb.sh
-  - ./tests/travis/setup_arangodb.sh
+#  - chmod 777 ./tests/travis/setup_arangodb.sh
+#  - ./tests/travis/setup_arangodb.sh
   - bash tests/before.sh
   - composer install --prefer-source --no-interaction --dev
 
