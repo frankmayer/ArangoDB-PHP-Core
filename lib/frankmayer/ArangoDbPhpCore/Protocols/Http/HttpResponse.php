@@ -150,7 +150,7 @@ class HttpResponse implements HttpResponseInterface
      */
     protected function splitResponseToHeadersArrayAndBody($response)
     {
-        $tmp =explode("\r\n\r\n", $response, 2);
+        $tmp = explode("\r\n\r\n", $response, 2);
         var_export($tmp);
         list($headers, $this->body) = $tmp;
 
@@ -200,7 +200,7 @@ class HttpResponse implements HttpResponseInterface
      */
     public static function splitBatchPart($batchPart)
     {
-        $parts = explode("\r\n\r\n", $batchPart, 2);
+        $parts = explode("\r\n\r\n", trim($batchPart), 2);
 
         return $parts;
     }
@@ -326,7 +326,7 @@ class HttpResponse implements HttpResponseInterface
     protected function getHeaderArray($headers)
     {
         $headerArray  = [];
-        $headersArray = explode("\r\n", $headers);
+        $headersArray = explode("\r\n", trim($headers));
         foreach ($headersArray as $line => $header) {
             if ($line > 0) {
                 $pair                    = explode(": ", $header);

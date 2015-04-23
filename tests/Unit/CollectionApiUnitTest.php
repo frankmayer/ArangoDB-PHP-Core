@@ -62,12 +62,10 @@ class CollectionApiUnitTest extends ArangoDbPhpCoreUnitTestCase
      */
     public function testCreateCollection()
     {
-        $createCollectionResponse = <<<'TAG'
+        $createCollectionResponse = <<<TAG
 HTTP/1.1 200 OK
 content-type: application/json; charset=utf-8
-location: /_db/_system/_api/collection/testCollectionBasics
-
-{
+location: /_db/_system/_api/collection/testCollectionBasics\r\n\r\n{
   "id" : "1372591952",
   "name" : "testCollectionBasics",
   "waitForSync" : false,
@@ -97,11 +95,9 @@ TAG;
      */
     public function testDeleteCollection()
     {
-        $deleteCollectionResponse = <<<'TAG'
+        $deleteCollectionResponse = <<<TAG
 HTTP/1.1 200 OK
-content-type: application/json; charset=utf-8
-
-{
+content-type: application/json; charset=utf-8\r\n\r\n{
   "id" : "1398937424",
   "error" : false,
   "code" : 200
@@ -125,11 +121,9 @@ TAG;
      */
     public function testTruncateCollection()
     {
-        $deleteCollectionResponse = <<<'TAG'
+        $deleteCollectionResponse = <<<TAG
 HTTP/1.1 200 OK
-content-type: application/json; charset=utf-8
-
-{
+content-type: application/json; charset=utf-8\r\n\r\n{
   "id" : "1397167952",
   "name" : "products",
   "isSystem" : false,
@@ -157,11 +151,9 @@ TAG;
      */
     public function testGetAllCollection()
     {
-        $deleteCollectionResponse = <<<'TAG'
+        $deleteCollectionResponse = <<<TAG
 HTTP/1.1 200 OK
-content-type: application/json; charset=utf-8
-
-{
+content-type: application/json; charset=utf-8\r\n\r\n{
   "collections" : [
     {
       "id" : "5707600",

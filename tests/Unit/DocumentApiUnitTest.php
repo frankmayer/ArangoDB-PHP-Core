@@ -58,13 +58,11 @@ class DocumentApiUnitTest extends ArangoDbPhpCoreUnitTestCase
      */
     public function testCreateDocument()
     {
-        $createResponse = <<<'TAG'
+        $createResponse = <<<TAG
 HTTP/1.1 201 Created
 content-type: application/json; charset=utf-8
 etag: "1491343184"
-location: /_db/_system/_api/document/products/1491343184
-
-{
+location: /_db/_system/_api/document/products/1491343184\r\n\r\n{
   "error" : false,
   "_id" : "products/1491343184",
   "_rev" : "1491343184",
@@ -91,11 +89,9 @@ TAG;
      */
     public function testDeleteDocument()
     {
-        $deleteResponse = <<<'TAG'
+        $deleteResponse = <<<TAG
 HTTP/1.1 200 OK
-content-type: application/json; charset=utf-8
-
-{
+content-type: application/json; charset=utf-8\r\n\r\n{
   "error" : false,
   "_id" : "products/1506744144",
   "_rev" : "1506744144",
@@ -122,12 +118,10 @@ TAG;
      */
     public function testGetDocument()
     {
-        $deleteCollectionResponse = <<<'TAG'
+        $deleteCollectionResponse = <<<TAG
 HTTP/1.1 200 OK
 content-type: application/json; charset=utf-8
-etag: "1493440336"
-
-{
+etag: "1493440336"\r\n\r\n{
   "hello" : "world",
   "_id" : "products/1493440336",
   "_rev" : "1493440336",
@@ -154,13 +148,11 @@ TAG;
      */
     public function testPatchDocument()
     {
-        $deleteCollectionResponse = <<<'TAG'
+        $deleteCollectionResponse = <<<TAG
 HTTP/1.1 202 Accepted
 content-type: application/json; charset=utf-8
 etag: "1506154320"
-location: /_db/_system/_api/document/products/1505171280
-
-{
+location: /_db/_system/_api/document/products/1505171280\r\n\r\n{
   "error" : false,
   "_id" : "products/1505171280",
   "_rev" : "1506154320",
@@ -188,13 +180,11 @@ TAG;
      */
     public function testReplaceDocument()
     {
-        $deleteCollectionResponse = <<<'TAG'
+        $deleteCollectionResponse = <<<TAG
 HTTP/1.1 202 Accepted
 content-type: application/json; charset=utf-8
 etag: "1498093392"
-location: /_db/_system/_api/document/products/1497765712
-
-{
+location: /_db/_system/_api/document/products/1497765712\r\n\r\n{
   "error" : false,
   "_id" : "products/1497765712",
   "_rev" : "1498093392",
@@ -222,11 +212,9 @@ TAG;
      */
     public function testGetAllDocuments()
     {
-        $deleteCollectionResponse = <<<'TAG'
+        $deleteCollectionResponse = <<<TAG
 HTTP/1.1 200 OK
-content-type: application/json; charset=utf-8
-
-{
+content-type: application/json; charset=utf-8\r\n\r\n{
   "documents" : [
     "/_api/document/products/1495340880",
     "/_api/document/products/1494685520",
