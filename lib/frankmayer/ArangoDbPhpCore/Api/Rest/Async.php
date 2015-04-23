@@ -11,7 +11,7 @@
 namespace frankmayer\ArangoDbPhpCore\Api\Rest;
 
 use frankmayer\ArangoDbPhpCore\Api\RestApiInterface;
-use frankmayer\ArangoDbPhpCore\Protocols\Http\Request;
+use frankmayer\ArangoDbPhpCore\Protocols\Http\AbstractHttpRequest;
 
 
 /**
@@ -32,32 +32,29 @@ class Async extends
      * @param string $handle The job handle of the job we want to get. Example: 1
      * @param array  $options
      *
-     * @return \frankmayer\ArangoDbPhpCore\Protocols\Http\Response
+     * @return \frankmayer\ArangoDbPhpCore\Protocols\Http\HttpResponse
      */
     public function fetchJobResult(
         $handle,
         $options = []
     ) {
-        /** @var Request $request */
+        /** @var AbstractHttpRequest $request */
         $request          = new $this->client->requestClass();
         $request->client  = $this->client;
         $request->options = $options;
         $request->path    = $request->getDatabasePath() . static::API_JOB . '/' . $handle;
         $request->method  = static::METHOD_PUT;
 
-        $responseObject = $request->send();
-
-        return $responseObject;
+        return $this->getReturnObject($request);
     }
 
 
     /**
-     * @param         $client
      * @param string  $type The type of jobs to return. Might be `done` or `pending`. Example: 'pending'
      * @param integer $count
      * @param array   $options
      *
-     * @return \frankmayer\ArangoDbPhpCore\Protocols\Http\Response
+     * @return \frankmayer\ArangoDbPhpCore\Protocols\Http\HttpResponse
      */
     public function listJobResults(
         $type,
@@ -66,7 +63,7 @@ class Async extends
     ) {
         $urlQuery = null;
 
-        /** @var Request $request */
+        /** @var AbstractHttpRequest $request */
         $request          = new $this->client->requestClass();
         $request->client  = $this->client;
         $request->options = $options;
@@ -81,9 +78,7 @@ class Async extends
 
         $request->method = static::METHOD_GET;
 
-        $responseObject = $request->send();
-
-        return $responseObject;
+        return $this->getReturnObject($request);
     }
 
 
@@ -92,7 +87,7 @@ class Async extends
      * @param integer $stamp
      * @param array   $options
      *
-     * @return \frankmayer\ArangoDbPhpCore\Protocols\Http\Response
+     * @return \frankmayer\ArangoDbPhpCore\Protocols\Http\HttpResponse
      */
     public function deleteJobResult(
         $type,
@@ -101,7 +96,7 @@ class Async extends
     ) {
         $urlQuery = null;
 
-        /** @var Request $request */
+        /** @var AbstractHttpRequest $request */
         $request          = new $this->client->requestClass();
         $request->client  = $this->client;
         $request->options = $options;
@@ -115,8 +110,6 @@ class Async extends
 
         $request->method = static::METHOD_DELETE;
 
-        $responseObject = $request->send();
-
-        return $responseObject;
+        return $this->getReturnObject($request);
     }
 }

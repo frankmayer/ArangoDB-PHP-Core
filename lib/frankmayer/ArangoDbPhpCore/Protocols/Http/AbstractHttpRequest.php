@@ -17,10 +17,8 @@ namespace frankmayer\ArangoDbPhpCore\Protocols\Http;
  *
  * @package frankmayer\ArangoDbPhpCore
  */
-abstract class RequestBase implements
-    RequestInterface
+abstract class AbstractHttpRequest implements HttpRequestInterface
 {
-
     const METHOD_GET     = 'GET';
     const METHOD_POST    = 'POST';
     const METHOD_PUT     = 'PUT';
@@ -77,11 +75,60 @@ abstract class RequestBase implements
      */
     public $response;
     /**
-     * @var ResponseInterface The response-object as a result of the request
+     * @var HttpResponseInterface The response-object as a result of the request
      */
     public $responseObject;
     /**
      * @var object The wrapped handler of communications.
      */
     public $handler;
+    /**
+     * @var string The boundary string for batch operations with ArangoDB
+     */
+    public $batchBoundary;
+    /**
+     * @var object flag for if the request is a batch request (this does not include the batchpart requests)
+     */
+    public $batch;
+
+
+    /**
+     * Method to send an HTTP request.
+     * All request should be done through this method. Any async or batch handling is done within this method.
+     *
+     * @return HttpResponse Http Response object
+     */
+    public abstract function send();
+
+
+    /**
+     * Method to an HTTP batch request
+     *
+     * @param array  $batchParts
+     * @param string $boundary
+     *
+     * @return mixed
+     */
+
+
+    public abstract function sendBatch($batchParts = [], $boundary = 'XXXbXXX');
+
+
+    public function buildUrlQuery($urlQueryArray)
+    {
+        $params = [];
+        foreach ($urlQueryArray as $key => $value) {
+            $params[] = $key . '=' . $value;
+        }
+
+        return '?' . implode('&', $params);
+    }
+
+    /**
+     * @return string
+     */
+    public function getDatabasePath()
+    {
+        return '/_db/' . $this->client->database;
+    }
 }

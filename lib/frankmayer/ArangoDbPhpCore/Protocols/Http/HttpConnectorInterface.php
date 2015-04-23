@@ -10,15 +10,15 @@
 
 namespace frankmayer\ArangoDbPhpCore\Protocols\Http;
 
+use frankmayer\ArangoDbPhpCore\ConnectorInterface;
+
 
 /**
  * An HttpConnector Interface
  *
  * @package frankmayer\ArangoDbPhpCore
  */
-interface  ConnectorInterface extends
-    \frankmayer\ArangoDbPhpCore\ConnectorInterface
-
+interface  HttpConnectorInterface extends ConnectorInterface
 {
-    public function request(Request $request);
+    public function request(AbstractHttpRequest $request);
 }

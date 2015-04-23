@@ -27,6 +27,31 @@ class Api
     const METHOD_OPTIONS = 'OPTIONS';
 
 
+    function __construct($client)
+    {
+        $this->client = $client;
+    }
+
+
+    /**
+     * Returns the correct object, according to the 'isBatchPart' option.
+     * If it is a Batchpart, it returns the request, else the response.
+     *
+     * @param $request
+     *
+     * @return mixed
+     */
+    protected function getReturnObject($request)
+    {
+        if (array_key_exists('isBatchPart', $request->options) && $request->options['isBatchPart'] === true) {
+            return $request;
+        } else {
+            $responseObject = $request->send();
+
+            return $responseObject;
+        }
+    }
+
     /**
      * array_merge_recursive does indeed merge arrays, but it converts values with duplicate
      * keys to arrays rather than overwriting the value in the first array with the duplicate
@@ -52,6 +77,7 @@ class Api
      * @param array $array2
      *
      * @return array
+     *
      * @author Daniel <daniel (at) danielsmedegaardbuus (dot) dk>
      * @author Gabriel Sobrinho <gabriel (dot) sobrinho (at) gmail (dot) com>
      * @author Frank Mayer

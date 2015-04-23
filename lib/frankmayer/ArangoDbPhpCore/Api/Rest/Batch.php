@@ -11,7 +11,7 @@
 namespace frankmayer\ArangoDbPhpCore\Api\Rest;
 
 use frankmayer\ArangoDbPhpCore\Api\RestApiInterface;
-use frankmayer\ArangoDbPhpCore\Protocols\Http\Request;
+use frankmayer\ArangoDbPhpCore\Protocols\Http\AbstractHttpRequest;
 
 
 /**
@@ -25,7 +25,7 @@ class Batch extends
 {
     public static function send($client, $batchParts)
     {
-        /** @var Request $request */
+        /** @var AbstractHttpRequest $request */
         $request         = new $client->requestClass();
         $request->client = $client;
 

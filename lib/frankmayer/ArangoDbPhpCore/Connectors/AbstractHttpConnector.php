@@ -4,17 +4,18 @@
  * File: BaseConnector.php
  *
  * @package   frankmayer\ArangoDbPhpCore
- * @author Frank Mayer
+ * @author    Frank Mayer
  * @copyright Copyright 2013, FRANKMAYER.NET, Athens, Greece
  */
 
 namespace frankmayer\ArangoDbPhpCore\Connectors;
 
 
-use frankmayer\ArangoDbPhpCore\Protocols\Http\ConnectorInterface;
+use frankmayer\ArangoDbPhpCore\Protocols\Http\AbstractHttpRequest;
+use frankmayer\ArangoDbPhpCore\Protocols\Http\HttpConnectorInterface;
 
-abstract class BaseConnector implements
-    ConnectorInterface
+abstract class AbstractHttpConnector implements
+    HttpConnectorInterface
 {
 
     const HTTP_EOL = "\r\n";
@@ -35,6 +36,8 @@ abstract class BaseConnector implements
     {
         $this->verboseLogging = false;
     }
+
+    public abstract function request(AbstractHttpRequest $request);
 
     /**
      * @param boolean $verbose

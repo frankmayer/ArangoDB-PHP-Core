@@ -18,7 +18,7 @@ use frankmayer\ArangoDbPhpCore\ServerException;
  *
  * @package frankmayer\ArangoDbPhpCore
  */
-class Response implements ResponseInterface
+class HttpResponse implements HttpResponseInterface
 {
     /**
      * @var array An array with the http status codes of the ones, that we want to raise an exception for.
@@ -29,23 +29,52 @@ class Response implements ResponseInterface
 
 
     /**
-     * @var Request $request
+     * @var HttpRequest $request The request object
      */
     public $request;
-    public $headers                  = [];
+    /**
+     * @var array $headers The headers in form of an multidimensional array
+     */
+    public $headers = [];
+    /**
+     * @var string $body The body of the response
+     */
     public $body;
+    /**
+     * @var array $batch An array of batch parts
+     */
     public $batch;
-    public $async;
+    /**
+     * @var string $protocol The protocol used
+     */
     public $protocol;
+    /**
+     * @var int $status The http status code of the response
+     */
     public $status;
+    /**
+     * @var string $statusPhrase The associated text to the status code
+     */
     public $statusPhrase;
+    /**
+     * @var bool $verboseExtractStatusLine get only status code or also the accompanying text
+     */
     public $verboseExtractStatusLine = false;
+    /**
+     * @var bool This holds the Batchpart Content-Id of the response if one was supplied to ArangoDB in the request.
+     */
+    public $batchContentId;
 
+
+    /**
+     *
+     */
     public function __construct()
     {
         // 404 intentionally left out as a default, because not finding data, shouldn't raise an exception
         $this->enabledHttpServerExceptions = [400, 401, 403, 405, 412, 500, 600, 601];
     }
+
 
     /**
      * @param $request
@@ -56,13 +85,21 @@ class Response implements ResponseInterface
      */
     public function build($request)
     {
-        $response      = $request->response;
-        $this->request = $request;
+        if ($request instanceof AbstractHttpRequest) {
+            $response      = $request->response;
+            $this->request = $request;
 
+            if ($request->batch === true) {
+                $boundary    = $request->batchBoundary;
+                $this->batch = $this->deconstructBatchResponseBody($response, $boundary);
+            }
+        } else {
+            $response = $request;
+        }
         $this->splitResponseToHeadersArrayAndBody($response);
-        $statusLineArray = explode(" ", $this->headers['status']);
+        $statusLineArray = explode(" ", trim($this->headers['status'][0]));
 
-        $this->status = $statusLineArray[1];
+        $this->status = (int) $statusLineArray[1];
 
         if ($this->verboseExtractStatusLine === true) {
             $this->protocol = $statusLineArray[0];
@@ -82,12 +119,13 @@ class Response implements ResponseInterface
         return $this;
     }
 
+
     /**
      * @param $statusLineArray
      *
      * @return string
      */
-    public function decodeGetStatusPhrase($statusLineArray)
+    protected function decodeGetStatusPhrase($statusLineArray)
     {
         $phrase = '';
         foreach ($statusLineArray as $key => $part) {
@@ -110,37 +148,61 @@ class Response implements ResponseInterface
      *
      * @param $response
      */
-    public function splitResponseToHeadersArrayAndBody($response)
+    protected function splitResponseToHeadersArrayAndBody($response)
     {
         list($headers, $this->body) = explode("\r\n\r\n", $response, 2);
 
-        $headersArray = explode("\r\n", $headers);
-        foreach ($headersArray as $line => $header) {
-            if ($line > 0) {
-                $pair                      = explode(": ", $header);
-                $this->headers[$pair[0]][] = $pair[1];
-            } else {
-                $this->headers['status'] = $header;
-                $this->status            = $header;
+        $this->headers = $this->getHeaderArray($headers);
+    }
+
+
+    /**
+     * @param $batchResponseBody
+     * @param $boundary
+     *
+     * @return array
+     * @throws ServerException
+     */
+    public function deconstructBatchResponseBody($batchResponseBody, $boundary)
+    {
+        $connector         = $this->request->client->connector;
+        $batchObjects      = [];
+        $batchResponseBody = rtrim($batchResponseBody, '--' . $boundary . '--');
+
+        $batchParts = explode('--' . $boundary . $connector::HTTP_EOL, $batchResponseBody);
+        array_shift($batchParts);
+        $i = 0;
+        foreach ($batchParts as &$batchPart) {
+            /** @var $batchPart HttpResponse */
+            $batchPartHeaders = static::splitBatchPart($batchPart);
+
+            $batchObject = new static();
+            $batchObject->build($batchPartHeaders[1]);
+            //            $batchArangoHeader  = explode(PHP_EOL, $batchPartHeaders[0]);
+            $batchArangoHeaderArray = $this->getHeaderArray($batchPartHeaders[0]);
+            if (array_key_exists('Content-Id', $batchArangoHeaderArray)) {
+                $batchObject->batchContentId = $batchArangoHeaderArray['Content-Id'][0];
             }
+            $batchObjects[] = $batchObject;
+            $i++;
         }
+
+        return $batchObjects;
     }
 
-    /**
-     * @param mixed $async
-     */
-    public function setAsync($async)
-    {
-        $this->async = $async;
-    }
 
     /**
-     * @return mixed
+     * @param $batchPart
+     *
+     * @return array
      */
-    public function getAsync()
+    public static function splitBatchPart($batchPart)
     {
-        return $this->async;
+        $parts = explode("\r\n\r\n", $batchPart, 2);
+
+        return $parts;
     }
+
 
     /**
      * @param mixed $batch
@@ -191,7 +253,7 @@ class Response implements ResponseInterface
     }
 
     /**
-     * @param \frankmayer\ArangoDbPhpCore\Protocols\Http\Request $request
+     * @param \frankmayer\ArangoDbPhpCore\Protocols\Http\HttpRequest $request
      */
     public function setRequest($request)
     {
@@ -199,7 +261,7 @@ class Response implements ResponseInterface
     }
 
     /**
-     * @return \frankmayer\ArangoDbPhpCore\Protocols\Http\Request
+     * @return \frankmayer\ArangoDbPhpCore\Protocols\Http\HttpRequest
      */
     public function getRequest()
     {
@@ -252,5 +314,26 @@ class Response implements ResponseInterface
     public function getVerboseExtractStatusLine()
     {
         return $this->verboseExtractStatusLine;
+    }
+
+    /**
+     * @param $headers
+     *
+     * @return array
+     */
+    protected function getHeaderArray($headers)
+    {
+        $headerArray  = [];
+        $headersArray = explode("\r\n", $headers);
+        foreach ($headersArray as $line => $header) {
+            if ($line > 0) {
+                $pair                    = explode(": ", $header);
+                $headerArray[$pair[0]][] = $pair[1];
+            } else {
+                $headerArray['status'][] = $header;
+            }
+        }
+
+        return $headerArray;
     }
 }

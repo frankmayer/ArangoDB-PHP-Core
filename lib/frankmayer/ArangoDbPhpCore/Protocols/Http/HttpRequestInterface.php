@@ -10,15 +10,26 @@
 
 namespace frankmayer\ArangoDbPhpCore\Protocols\Http;
 
+use frankmayer\ArangoDbPhpCore\Protocols\RequestInterface;
+
 
 /**
  * An HttpRequest Interface
  *
  * @package frankmayer\ArangoDbPhpCoreCore
  */
-interface RequestInterface extends
-    \frankmayer\ArangoDbPhpCore\RequestInterface
+interface HttpRequestInterface extends
+    RequestInterface
 {
+    /**
+     * Method to send an HTTP request.
+     * All request should be done through this method. Any async or batch handling is done within this method.
+     *
+     * @return HttpResponse Http Response object
+     */
+    public function send();
+
+
     /**
      * Method to an HTTP batch request
      *

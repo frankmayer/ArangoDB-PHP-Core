@@ -8,10 +8,9 @@
  */
 namespace frankmayer\ArangoDbPhpCore;
 
-use frankmayer\ArangoDbPhpCore\Connectors\CurlHttp\Connector;
 use frankmayer\ArangoDbPhpCore\Plugins\PluginManager;
-use frankmayer\ArangoDbPhpCore\Protocols\Http\Request;
-use frankmayer\ArangoDbPhpCore\Protocols\Http\Response;
+use frankmayer\ArangoDbPhpCore\Protocols\Http\HttpRequest;
+use frankmayer\ArangoDbPhpCore\Protocols\Http\HttpResponse;
 
 require_once('ArangoDbPhpCoreUnitTestCase.php');
 
@@ -22,12 +21,16 @@ require_once('ArangoDbPhpCoreUnitTestCase.php');
  */
 class ClientUnitTest extends ArangoDbPhpCoreUnitTestCase
 {
-    /**
-     *
-     */
-    public function testRequest()
+    private $connector;
+    private $connector2;
+
+
+    public function setup()
     {
-        //todo: write test
+        $this->connector  = $this->getMockBuilder('TestConnector')
+                                 ->getMock();
+        $this->connector2 = $this->getMockBuilder('TestConnector')
+                                 ->getMock();
     }
 
 
@@ -36,8 +39,7 @@ class ClientUnitTest extends ArangoDbPhpCoreUnitTestCase
      */
     public function testIfClientInstantiable()
     {
-        $connector = new Connector();
-        $client    = new Client($connector);
+        $client = new Client($this->connector);
         $this->assertInstanceOf('\frankmayer\ArangoDbPhpCore\Client', $client);
     }
 
@@ -47,8 +49,7 @@ class ClientUnitTest extends ArangoDbPhpCoreUnitTestCase
      */
     public function testSetGetArangoDBVersion()
     {
-        $connector = new Connector();
-        $client    = new Client($connector);
+        $client = new Client($this->connector);
         $client->setArangoDBApiVersion('20502');
         $this->assertEquals('20502', $client->getArangoDBApiVersion());
     }
@@ -59,8 +60,7 @@ class ClientUnitTest extends ArangoDbPhpCoreUnitTestCase
      */
     public function testSetGetClientOptions()
     {
-        $connector = new Connector();
-        $client    = new Client($connector);
+        $client = new Client($this->connector);
         $client->setClientOptions(['someOption' => true]);
         $this->assertEquals(['someOption' => true], $client->getClientOptions());
     }
@@ -71,11 +71,10 @@ class ClientUnitTest extends ArangoDbPhpCoreUnitTestCase
      */
     public function testSetGetConnector()
     {
-        $connector1 = new Connector();
-        $client     = new Client($connector1, getClientOptions());
-        $connector2 = new Connector();
-        $client->setConnector($connector2);
-        $this->assertEquals($connector2, $client->getConnector());
+        $client = new Client($this->connector, getClientOptions());
+
+        $client->setConnector($this->connector2);
+        $this->assertEquals($this->connector2, $client->getConnector());
     }
 
 
@@ -84,8 +83,7 @@ class ClientUnitTest extends ArangoDbPhpCoreUnitTestCase
      */
     public function testSetGetDatabase()
     {
-        $connector = new Connector();
-        $client    = new Client($connector, getClientOptions());
+        $client = new Client($this->connector, getClientOptions());
         $client->setDatabase('testDb');
         $this->assertEquals('testDb', $client->getDatabase());
     }
@@ -96,8 +94,7 @@ class ClientUnitTest extends ArangoDbPhpCoreUnitTestCase
      */
     public function testSetGetEndPoint()
     {
-        $connector = new Connector();
-        $client    = new Client($connector, getClientOptions());
+        $client = new Client($this->connector, getClientOptions());
         $client->setEndpoint('http://db-link:8529');
         $this->assertEquals('http://db-link:8529', $client->getEndpoint());
     }
@@ -108,8 +105,7 @@ class ClientUnitTest extends ArangoDbPhpCoreUnitTestCase
      */
     public function testSetGetPluginManager()
     {
-        $connector = new Connector();
-        $client    = new Client($connector, getClientOptions());
+        $client        = new Client($this->connector, getClientOptions());
         $pluginManager = new PluginManager($client);
         $client->setPluginManager($pluginManager);
         $this->assertEquals($pluginManager, $client->getPluginManager());
@@ -121,9 +117,8 @@ class ClientUnitTest extends ArangoDbPhpCoreUnitTestCase
      */
     public function testSetGetRequestClass()
     {
-        $connector    = new Connector();
-        $client       = new Client($connector, getClientOptions());
-        $requestClass = new Request();
+        $client       = new Client($this->connector, getClientOptions());
+        $requestClass = new HttpRequest();
         $client->setRequestClass($requestClass);
         $this->assertEquals($requestClass, $client->getRequestClass());
     }
@@ -134,9 +129,8 @@ class ClientUnitTest extends ArangoDbPhpCoreUnitTestCase
      */
     public function testSetGetResponseClass()
     {
-        $connector     = new Connector();
-        $client        = new Client($connector, getClientOptions());
-        $responseClass = new Response();
+        $client        = new Client($this->connector, getClientOptions());
+        $responseClass = new HttpResponse();
         $client->setResponseClass($responseClass);
         $this->assertEquals($responseClass, $client->getResponseClass());
     }

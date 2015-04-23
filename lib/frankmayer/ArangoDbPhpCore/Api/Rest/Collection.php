@@ -12,7 +12,7 @@ namespace frankmayer\ArangoDbPhpCore\Api\Rest;
 
 use frankmayer\ArangoDbPhpCore\Api\RestApiInterface;
 use frankmayer\ArangoDbPhpCore\Client;
-use frankmayer\ArangoDbPhpCore\Protocols\Http\Request;
+use frankmayer\ArangoDbPhpCore\Protocols\Http\AbstractHttpRequest;
 
 
 /**
@@ -37,7 +37,7 @@ class Collection extends
      * @param array $collectionParameters
      * @param array $options
      *
-     * @return \frankmayer\ArangoDbPhpCore\Protocols\Http\Response
+     * @return \frankmayer\ArangoDbPhpCore\Protocols\Http\HttpResponse
      * @throws \frankmayer\ArangoDbPhpCore\ClientException
      */
     public function create(
@@ -72,9 +72,7 @@ class Collection extends
         $request->path   = $request->getDatabasePath() . static::API_COLLECTION;
         $request->method = static::METHOD_POST;
 
-        $responseObject = $request->send();
-
-        return $responseObject;
+        return $this->getReturnObject($request);
     }
 
 
@@ -82,13 +80,13 @@ class Collection extends
      * @param       $collectionName
      * @param array $options
      *
-     * @return \frankmayer\ArangoDbPhpCore\Protocols\Http\Response
+     * @return \frankmayer\ArangoDbPhpCore\Protocols\Http\HttpResponse
      */
     public function delete(
         $collectionName,
         $options = []
     ) {
-        /** @var Request $request */
+        /** @var AbstractHttpRequest $request */
         $request         = new $this->client->requestClass();
         $request->client = $this->client;
 
@@ -96,9 +94,7 @@ class Collection extends
         $request->path    = $request->getDatabasePath() . static::API_COLLECTION . '/' . $collectionName;
         $request->method  = static::METHOD_DELETE;
 
-        $responseObject = $request->send();
-
-        return $responseObject;
+        return $this->getReturnObject($request);
     }
 
 
@@ -106,13 +102,13 @@ class Collection extends
      * @param       $collectionName
      * @param array $options
      *
-     * @return \frankmayer\ArangoDbPhpCore\Protocols\Http\Response
+     * @return \frankmayer\ArangoDbPhpCore\Protocols\Http\HttpResponse
      */
     public function truncate(
         $collectionName,
         $options = []
     ) {
-        /** @var Request $request */
+        /** @var AbstractHttpRequest $request */
         $request         = new $this->client->requestClass();
         $request->client = $this->client;
 
@@ -121,21 +117,19 @@ class Collection extends
         $request->path   = $request->getDatabasePath() . static::API_COLLECTION . '/' . $collectionName . '/truncate';
         $request->method = static::METHOD_PUT;
 
-        $responseObject = $request->send();
-
-        return $responseObject;
+        return $this->getReturnObject($request);
     }
 
 
     /**
      * @param array $options
      *
-     * @return \frankmayer\ArangoDbPhpCore\Protocols\Http\Response
+     * @return \frankmayer\ArangoDbPhpCore\Protocols\Http\HttpResponse
      */
     public function getAll(
         $options = []
     ) {
-        /** @var Request $request */
+        /** @var AbstractHttpRequest $request */
         $request         = new $this->client->requestClass();
         $request->client = $this->client;
 
@@ -147,8 +141,7 @@ class Collection extends
         }
 
         $request->method = static::METHOD_GET;
-        $responseObject  = $request->send();
 
-        return $responseObject;
+        return $this->getReturnObject($request);
     }
 }

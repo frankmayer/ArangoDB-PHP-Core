@@ -8,11 +8,6 @@
  */
 namespace frankmayer\ArangoDbPhpCore;
 
-use frankmayer\ArangoDbPhpCore\Connectors\CurlHttp\Connector;
-use frankmayer\ArangoDbPhpCore\Plugins\PluginManager;
-use frankmayer\ArangoDbPhpCore\Protocols\Http\Request;
-use frankmayer\ArangoDbPhpCore\Protocols\Http\Response;
-
 require_once('ArangoDbPhpCoreUnitTestCase.php');
 
 
@@ -22,14 +17,35 @@ require_once('ArangoDbPhpCoreUnitTestCase.php');
  */
 class ConnectorUnitTest extends ArangoDbPhpCoreUnitTestCase
 {
+    private $connector;
+
+    public function setup()
+    {
+        $this->connector = $this->getMockBuilder('TestConnector')
+                                ->getMock();
+    }
+
 
     /**
      *
      */
     public function testIfCurlConnectorInstantiable()
     {
-        $connector = new Connector();
-        $this->assertInstanceOf('\frankmayer\ArangoDbPhpCore\Connectors\CurlHttp\Connector', $connector);
+
+        $this->assertInstanceOf('\frankmayer\ArangoDbPhpCore\Connectors\AbstractHttpConnector', $this->connector);
+    }
+
+
+    /**
+     *
+     */
+    public function testSetGetVerboseLogging()
+    {
+        $connector = new \TestConnector();
+        $connector->setVerboseLogging(true);
+        $res = $connector->getVerboseLogging();
+
+        $this->assertTrue($res);
     }
 
 

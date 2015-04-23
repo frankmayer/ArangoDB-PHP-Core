@@ -10,8 +10,6 @@
 
 namespace frankmayer\ArangoDbPhpCore\Protocols\Http;
 
-use frankmayer\ArangoDbPhpCore\Connectors\CurlHttp\Connector;
-
 
 /**
  * HTTP-Request object that holds a request. Requests are in some cases not directly passed to the server,
@@ -19,45 +17,20 @@ use frankmayer\ArangoDbPhpCore\Connectors\CurlHttp\Connector;
  *
  * @package frankmayer\ArangoDbPhpCore
  */
-class Request extends
-    RequestBase implements
-    RequestInterface
+class HttpRequest extends AbstractHttpRequest implements HttpRequestInterface
 {
-
-    const METHOD_GET     = 'GET';
-    const METHOD_POST    = 'POST';
-    const METHOD_PUT     = 'PUT';
-    const METHOD_PATCH   = 'PATCH';
-    const METHOD_DELETE  = 'DELETE';
-    const METHOD_HEAD    = 'HEAD';
-    const METHOD_OPTIONS = 'OPTIONS';
-
-    const API_BATCH = '/_api/batch';
-
-
-    /**
-     * This prepares the "fake" response for batch parts
-     */
-    protected function requestBatchPart()
-    {
-        $connector = $this->client->connector;
-
-        // Fake a result so we can move on.
-        $this->response = 'HTTP/1.1 202 Accepted' . $connector::HTTP_EOL;
-        $this->response .= 'location: /_api/document/0/0' . $connector::HTTP_EOL;
-        $this->response .= 'server: triagens GmbH High-Performance HTTP Server' . $connector::HTTP_EOL;
-        $this->response .= 'content-type: application/json; charset=utf-8' . $connector::HTTP_EOL;
-        $this->response .= 'etag: "0"' . $connector::HTTP_EOL;
-        $this->response .= 'client: Close' . $connector::HTTP_EOL . $connector::HTTP_EOL;
-        $this->response .= '{"error":false,"_id":"0/0","id":"0","_rev":0,"hasMore":0, "result":[{}], "documents":[{}]}' . $connector::HTTP_EOL . $connector::HTTP_EOL;
-    }
+    public $batchParts;
+    public $async;
+    public $batch;
+    public $batchBoundary;
+    public $isBatchPart202;
 
 
     /**
      * Method to send an HTTP request.
      * All request should be done through this method. Any async or batch handling is done within this method.
      *
-     * @return Response Http Response object
+     * @return HttpResponse Http Response object
      */
     public function send()
     {
@@ -75,9 +48,10 @@ class Request extends
         }
 
         if (isset($this->options['isBatchPart']) && $this->options['isBatchPart'] === true) {
-            $this->requestBatchPart();
+            //            $this->isBatchPart = true;
             $this->address = $this->client->endpoint . $this->path;
 
+            return true;
         } else {
             if (isset($this->options) && (!array_key_exists(
                         'isBatchRequest',
@@ -98,94 +72,37 @@ class Request extends
      * @param array  $batchParts
      * @param string $boundary
      *
-     * @return ResponseInterface
+     * @return HttpResponseInterface
      */
     public function sendBatch(
         $batchParts = [],
         $boundary = 'XXXbXXX'
     ) {
+        $connector  = $this->client->connector;
         $this->body = '';
-        /** @var $batchPart Response */
+        /** @var $batchPart HttpResponse */
         // Reminder... The reason, that at this time the batch-parts are HttpResponses is, because of the quasi "promise" that we have to return immediately
         foreach ($batchParts as $contentId => $batchPart) {
-            $this->body .= '--' . $boundary . Connector::HTTP_EOL;
-            $this->body .= 'Content-Type: application/x-arango-batchpart' . Connector::HTTP_EOL;
-            $this->body .= 'Content-Id: ' . ($contentId + 1) . Connector::HTTP_EOL;
+            $this->body .= '--' . $boundary . $connector::HTTP_EOL;
+            $this->body .= 'Content-Type: application/x-arango-batchpart' . $connector::HTTP_EOL;
+            $this->body .= 'Content-Id: ' . ($contentId + 1) . $connector::HTTP_EOL;
 
-            $this->body .= Connector::HTTP_EOL;
-            $this->body .= strtoupper($batchPart->request->method) . ' ' . $batchPart->request->path
-                . ' ' . 'HTTP/1.1' . Connector::HTTP_EOL . Connector::HTTP_EOL;
-            $this->body .= $batchPart->request->body . Connector::HTTP_EOL;
+            $this->body .= $connector::HTTP_EOL;
+            $this->body .= strtoupper($batchPart->method) . ' ' . $batchPart->path
+                . ' ' . 'HTTP/1.1' . $connector::HTTP_EOL . $connector::HTTP_EOL;
+            $this->body .= $batchPart->body . $connector::HTTP_EOL;
         }
-        $this->body .= '--' . $boundary . '--' . Connector::HTTP_EOL;
+        $this->body .= '--' . $boundary . '--' . $connector::HTTP_EOL;
         $this->path                    = $this->getDatabasePath() . self::API_BATCH;
-        $this->headers['Content-Type'] = 'multipart/form-data; boundary=XXXbXXX';
+        $this->headers['Content-Type'] = 'multipart/form-data; ' . $boundary;
 
-        $this->method = 'post';
-
+        $this->method         = 'post';
+        $this->batch          = true;
+        $this->batchBoundary  = $boundary;
+        $this->batchParts     = $batchParts;
         $this->responseObject = $this->send();
-        $this->deconstructBatchResponseBody($this->responseObject, $batchParts, $boundary);
 
         return $this->responseObject;
-    }
-
-
-    /**
-     * @param Response     $responseObject
-     * @param Array        $batchParts
-     * @param              $boundary
-     */
-    public function deconstructBatchResponseBody(Response $responseObject, $batchParts, $boundary)
-    {
-        $batchResponseBody = $responseObject->body;
-        $batchResponseBody = rtrim($batchResponseBody, '--' . $boundary . '--');
-
-        $parts = explode('--' . $boundary . Connector::HTTP_EOL, $batchResponseBody);
-        array_shift($parts);
-        $i = 0;
-        foreach ($batchParts as &$batchPart) {
-
-            $batchPartHeaders = self::splitBatchPart($parts[$i]);
-
-            /** @var $batchPart Response */
-            $batchPart->request->response = $batchPartHeaders[1];
-            $batchPart->build($batchPart->request);
-            $i++;
-        }
-        $responseObject->batch = $batchParts;
-    }
-
-
-    /**
-     * @param $batchPart
-     *
-     * @return array
-     */
-    public static function splitBatchPart($batchPart)
-    {
-        $parts = explode("\r\n\r\n", $batchPart, 2);
-
-        return $parts;
-    }
-
-
-    /**
-     * @return string
-     */
-    public function getDatabasePath()
-    {
-        return '/_db/' . $this->client->database;
-    }
-
-
-    public function buildUrlQuery($urlQueryArray)
-    {
-        $params = [];
-        foreach ($urlQueryArray as $key => $value) {
-            $params[] = $key . '=' . $value;
-        }
-
-        return '?' . implode('&', $params);
     }
 
 

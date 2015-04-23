@@ -10,8 +10,11 @@
 
 namespace frankmayer\ArangoDbPhpCore;
 
-use frankmayer\ArangoDbPhpCore\Connectors\BaseConnector;
+use frankmayer\ArangoDbPhpCore\Connectors\AbstractHttpConnector;
 use frankmayer\ArangoDbPhpCore\Plugins\PluginManager;
+use frankmayer\ArangoDbPhpCore\Protocols\Http\HttpRequestInterface;
+use frankmayer\ArangoDbPhpCore\Protocols\RequestInterface;
+use frankmayer\ArangoDbPhpCore\Protocols\ResponseInterface;
 
 /**
  * The Client class.
@@ -59,9 +62,9 @@ class Client
 
 
     /**
-     * @param ConnectorInterface|BaseConnector $connector
+     * @param ConnectorInterface|AbstractHttpConnector $connector
      *
-     * @param array                            $clientOptions
+     * @param array                                    $clientOptions
      */
     public function __construct(ConnectorInterface $connector, $clientOptions = null)
     {
@@ -179,6 +182,7 @@ class Client
 
     /**
      * Set complete Client Options
+     *
      * @param array $clientOptions
      *
      * @return $this
@@ -289,7 +293,7 @@ class Client
 
 
     /**
-     * @param RequestInterface $requestClass
+     * @param RequestInterface|HttpRequestInterface $requestClass
      *
      * @return $this
      */

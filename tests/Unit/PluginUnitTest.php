@@ -12,11 +12,8 @@ namespace frankmayer\ArangoDbPhpCore;
 
 require_once('ArangoDbPhpCoreUnitTestCase.php');
 
-use frankmayer\ArangoDbPhpCore\Api\Rest\Collection;
-use frankmayer\ArangoDbPhpCore\Connectors\CurlHttp\Connector;
 use frankmayer\ArangoDbPhpCore\Plugins\PluginManager;
 use frankmayer\ArangoDbPhpCore\Plugins\TestPlugin;
-use frankmayer\ArangoDbPhpCore\Protocols\Http\Response;
 
 
 /**
@@ -33,7 +30,8 @@ class PluginUnitTest extends ArangoDbPhpCoreUnitTestCase
     /**
      * @var Client $client
      */
-    public $client;
+    public  $client;
+    private $connector;
 
 
     /**
@@ -41,11 +39,10 @@ class PluginUnitTest extends ArangoDbPhpCoreUnitTestCase
      */
     public function setUp()
     {
-        $connector    = new Connector();
-        $this->client = getClient($connector);
+        $this->connector = $this->getMockBuilder('TestConnector')
+                                ->getMock();
+        $this->client    = getClient($this->connector);
     }
-
-    // todo 1 Frank Complete plugin tests
 
 
     public function testRegisterPluginsAndUnRegisterPlugins()

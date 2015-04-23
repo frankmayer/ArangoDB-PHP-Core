@@ -109,5 +109,4 @@ class ClientOptions
      * ResponseClass index constant
      */
     const OPTION_ARANGODB_API_VERSION = 'arangodbApiVersion';
-
 }

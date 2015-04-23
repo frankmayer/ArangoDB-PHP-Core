@@ -12,12 +12,6 @@ namespace frankmayer\ArangoDbPhpCore;
 
 require_once('ArangoDbPhpCoreUnitTestCase.php');
 
-use frankmayer\ArangoDbPhpCore\Api\Rest\Collection;
-use frankmayer\ArangoDbPhpCore\Connectors\CurlHttp\Connector;
-use frankmayer\ArangoDbPhpCore\Plugins\PluginManager;
-use frankmayer\ArangoDbPhpCore\Plugins\TestPlugin;
-use frankmayer\ArangoDbPhpCore\Protocols\Http\Response;
-
 
 /**
  * Class PluginTest
@@ -26,14 +20,10 @@ use frankmayer\ArangoDbPhpCore\Protocols\Http\Response;
 class TracerPluginUnitTest extends ArangoDbPhpCoreUnitTestCase
 {
     /**
-     * @var ClientOptions $clientOptions
-     */
-    public $clientOptions;
-
-    /**
      * @var Client $client
      */
-    public $client;
+    private $client;
+    private $connector;
 
 
     /**
@@ -41,8 +31,9 @@ class TracerPluginUnitTest extends ArangoDbPhpCoreUnitTestCase
      */
     public function setUp()
     {
-        $connector    = new Connector();
-        $this->client = getClient($connector);
+        $this->connector = $this->getMockBuilder('TestConnector')
+                                ->getMock();
+        $this->client    = getClient($this->connector);
     }
 
     // todo 1 Frank Complete tracer plugin tests
