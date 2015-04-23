@@ -50,12 +50,13 @@ class AsyncApiUnitTest extends ArangoDbPhpCoreUnitTestCase
     {
         $createResponse = <<<TAG
 HTTP/1.1 200 OK
-content-type: application/json; charset=utf-8
-
-[
+content-type: application/json; charset=utf-8\r\n\r\n[
   "270459873"
 ]
 TAG;
+        $createResponse = 'HTTP/1.1 200 OK'."\r\n".'content-type: application/json; charset=utf-8' . "\r\n\r\n" . '[
+  "270459873"
+]';
         $body           = '{ "Hello": "World" }';
 
         $options = ["async" => true];
@@ -78,11 +79,8 @@ TAG;
     {
         $createCollectionResponse = <<<TAG
 HTTP/1.1 200 OK
-content-type: application/json; charset=utf-8
-x-arango-async-id: 265413601
-
-
-{"server":"arango","version":"2.1.0"}
+content-type: application/json; charset=utf-8\r\n\r\n
+x-arango-async-id: \r\n{"server":"arango","version":"2.1.0"}
 TAG;
         $options                  = ["waitForSync" => true];
         $handle                   = 'products/1234567890';
@@ -107,7 +105,6 @@ TAG;
         $deleteCollectionResponse = <<<TAG
 HTTP/1.1 200 OK
 content-type: application/json; charset=utf-8
-
 
 {
   "result" : true
@@ -134,7 +131,6 @@ TAG;
         $deleteCollectionResponse = <<<TAG
 HTTP/1.1 200 OK
 content-type: application/json; charset=utf-8
-
 
 [
   "270459873"
