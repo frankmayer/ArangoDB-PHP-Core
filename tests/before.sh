@@ -5,7 +5,7 @@
 
 #echo -- Updating Composer
 #wget http://getcomposer.org/composer.phar
-composer.phar require satooshi/php-coveralls:dev-master --dev --no-progress --prefer-source
+composer require satooshi/php-coveralls:dev-master --dev --no-progress --prefer-source
 
 # composer self-update
 
