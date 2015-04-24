@@ -194,6 +194,26 @@ class Document extends
 
 
     /**
+     * @param string $handle The document handle of the document we want to get. Example: MyCollection/22334
+     * @param array  $options
+     *
+     * @return \frankmayer\ArangoDbPhpCore\Protocols\Http\HttpResponse
+     */
+    public function getHeader(
+        $handle,
+        $options = []
+    ) {
+        /** @var AbstractHttpRequest $request */
+        $request          = new $this->client->requestClass();
+        $request->client  = $this->client;
+        $request->options = $options;
+        $request->path    = $request->getDatabasePath() . static::API_DOCUMENT . '/' . $handle;
+        $request->method  = static::METHOD_HEAD;
+
+        return $this->getReturnObject($request);
+    }
+
+    /**
      * @param       $handle
      * @param array $options
      *

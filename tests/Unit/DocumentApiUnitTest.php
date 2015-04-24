@@ -146,6 +146,31 @@ TAG;
     /**
      *
      */
+    public function testGetDocumentHeader()
+    {
+        $deleteCollectionResponse = <<<TAG
+HTTP/1.1 200 OK
+content-type: application/json; charset=utf-8
+etag: "1493440336"\r\n\r\n
+TAG;
+        $handle                   = 'products/1234567890';
+
+        $options = ["waitForSync" => true];
+        $this->connector->method('request')
+                        ->willReturn($deleteCollectionResponse);
+
+        $object = new Document($this->client);
+
+        /** @var $responseObject HttpResponse */
+        $response = $object->get($handle, $options);
+
+        $this->assertInstanceOf('\frankmayer\ArangoDbPhpCore\Protocols\Http\HttpResponse', $response);
+        $this->assertEquals(200, $response->status);
+    }
+
+    /**
+     *
+     */
     public function testPatchDocument()
     {
         $deleteCollectionResponse = <<<TAG
