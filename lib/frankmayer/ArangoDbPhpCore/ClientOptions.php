@@ -109,4 +109,10 @@ class ClientOptions
      * ResponseClass index constant
      */
     const OPTION_ARANGODB_API_VERSION = 'arangodbApiVersion';
+
+    /**
+     * ResponseClass index constant
+     */
+    const OPTION_DATABASE_PATH_PREFIX = 'databasePathPrefix';
+
 }

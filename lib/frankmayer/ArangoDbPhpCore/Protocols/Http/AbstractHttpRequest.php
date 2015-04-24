@@ -123,12 +123,4 @@ abstract class AbstractHttpRequest implements HttpRequestInterface
 
         return '?' . implode('&', $params);
     }
-
-    /**
-     * @return string
-     */
-    public function getDatabasePath()
-    {
-        return '/_db/' . $this->client->database;
-    }
 }

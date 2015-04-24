@@ -23,6 +23,7 @@ function getClientOptions()
     return [
         ClientOptions::OPTION_ENDPOINT             => 'http://db-link:8529',
         ClientOptions::OPTION_DEFAULT_DATABASE     => '_system',
+        ClientOptions::OPTION_DATABASE_PATH_PREFIX => '/_db/',
         // endpoint to connect to
         /*
         ClientOptions::OPTION_AUTH_TYPE       => 'Basic',                 // use basic authorization

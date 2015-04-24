@@ -40,9 +40,16 @@ class Client
      */
     public $clientOptions;
     /**
+     * @var string The database path prefix to use. For example: '/_db/'. (defaults to '/_db/')
+     */  public $databasePathPrefix;
+    /**
      * @var string The database to use. For example: 'my_database'
      */
     public $database;
+    /**
+     * @var string The the full database path. This is a concatenation of $databasePathPrefix & $database that happens on instantiation.
+     */
+    public $fullDatabasePath;
     /**
      * @var string The endpoint to connect to. For example: 'http://localhost:8529'
      */
@@ -51,6 +58,7 @@ class Client
      * @var string The class name (including path) for example 'frankmayer\ArangoDbPhpCore\Connectors\Http\HttpRequest'
      */
     public $requestClass;
+
     /**
      * @var string The class name (including path) for example 'frankmayer\ArangoDbPhpCore\Connectors\Http\HttpResponse'
      */
@@ -68,13 +76,16 @@ class Client
      */
     public function __construct(ConnectorInterface $connector, $clientOptions = null)
     {
-        $this->connector         = $connector;
-        $this->connector->client = $this;
-        $this->clientOptions     = $clientOptions;
-        $this->endpoint          = $this->clientOptions[ClientOptions::OPTION_ENDPOINT];
-        $this->database          = $this->clientOptions[ClientOptions::OPTION_DEFAULT_DATABASE];
-        $this->requestClass      = $this->clientOptions[ClientOptions::OPTION_REQUEST_CLASS];
-        $this->responseClass     = $this->clientOptions[ClientOptions::OPTION_RESPONSE_CLASS];
+        $this->connector          = $connector;
+        $this->connector->client  = $this;
+        $this->clientOptions      = $clientOptions;
+        $this->endpoint           = $this->clientOptions[ClientOptions::OPTION_ENDPOINT];
+        $this->databasePathPrefix = $this->clientOptions[ClientOptions::OPTION_DATABASE_PATH_PREFIX];
+        $this->database           = $this->clientOptions[ClientOptions::OPTION_DEFAULT_DATABASE];
+        $this->fullDatabasePath   = $this->databasePathPrefix . $this->database;
+
+        $this->requestClass  = $this->clientOptions[ClientOptions::OPTION_REQUEST_CLASS];
+        $this->responseClass = $this->clientOptions[ClientOptions::OPTION_RESPONSE_CLASS];
 
         if (isset($this->clientOptions[ClientOptions::OPTION_ARANGODB_API_VERSION])) {
 

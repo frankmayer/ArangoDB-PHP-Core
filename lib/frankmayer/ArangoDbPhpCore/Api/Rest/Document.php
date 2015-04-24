@@ -60,7 +60,7 @@ class Document extends
             $request->body = json_encode($request->body);
         }
 
-        $request->path = $request->getDatabasePath() . static::API_DOCUMENT;
+        $request->path = $this->client->fullDatabasePath . static::API_DOCUMENT;
 
         if (isset($collection)) {
             $urlQuery = array_merge(
@@ -103,7 +103,7 @@ class Document extends
             $request->body = json_encode($request->body);
         }
 
-        $request->path = $request->getDatabasePath() . static::API_DOCUMENT . '/' . $handle;
+        $request->path = $this->client->fullDatabasePath . static::API_DOCUMENT . '/' . $handle;
 
         $urlQuery = $request->buildUrlQuery($urlQuery);
 
@@ -138,7 +138,7 @@ class Document extends
             $request->body = json_encode($request->body);
         }
 
-        $request->path = $request->getDatabasePath() . static::API_DOCUMENT . '/' . $handle;
+        $request->path = $this->client->fullDatabasePath . static::API_DOCUMENT . '/' . $handle;
 
         $urlQuery = $request->buildUrlQuery($urlQuery);
 
@@ -164,7 +164,7 @@ class Document extends
         $request          = new $this->client->requestClass();
         $request->client  = $this->client;
         $request->options = $options;
-        $request->path    = $request->getDatabasePath() . static::API_DOCUMENT;
+        $request->path    = $this->client->fullDatabasePath . static::API_DOCUMENT;
         $request->path .= '?collection=' . $collection;
         $request->method = static::METHOD_GET;
 
@@ -186,7 +186,7 @@ class Document extends
         $request          = new $this->client->requestClass();
         $request->client  = $this->client;
         $request->options = $options;
-        $request->path    = $request->getDatabasePath() . static::API_DOCUMENT . '/' . $handle;
+        $request->path    = $this->client->fullDatabasePath . static::API_DOCUMENT . '/' . $handle;
         $request->method  = static::METHOD_GET;
 
         return $this->getReturnObject($request);
@@ -207,7 +207,7 @@ class Document extends
         $request          = new $this->client->requestClass();
         $request->client  = $this->client;
         $request->options = $options;
-        $request->path    = $request->getDatabasePath() . static::API_DOCUMENT . '/' . $handle;
+        $request->path    = $this->client->fullDatabasePath . static::API_DOCUMENT . '/' . $handle;
         $request->method  = static::METHOD_HEAD;
 
         return $this->getReturnObject($request);
@@ -227,7 +227,7 @@ class Document extends
         $request          = new $this->client->requestClass();
         $request->client  = $this->client;
         $request->options = $options;
-        $request->path    = $request->getDatabasePath() . static::API_DOCUMENT . '/' . $handle;
+        $request->path    = $this->client->fullDatabasePath . static::API_DOCUMENT . '/' . $handle;
         $request->method  = static::METHOD_DELETE;
 
         return $this->getReturnObject($request);

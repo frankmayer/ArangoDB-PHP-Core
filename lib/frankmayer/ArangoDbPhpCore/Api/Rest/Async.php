@@ -42,7 +42,7 @@ class Async extends
         $request          = new $this->client->requestClass();
         $request->client  = $this->client;
         $request->options = $options;
-        $request->path    = $request->getDatabasePath() . static::API_JOB . '/' . $handle;
+        $request->path    = $this->client->fullDatabasePath . static::API_JOB . '/' . $handle;
         $request->method  = static::METHOD_PUT;
 
         return $this->getReturnObject($request);
@@ -67,7 +67,7 @@ class Async extends
         $request          = new $this->client->requestClass();
         $request->client  = $this->client;
         $request->options = $options;
-        $request->path    = $request->getDatabasePath() . static::API_JOB . '/' . $type;
+        $request->path    = $this->client->fullDatabasePath . static::API_JOB . '/' . $type;
 
         if ($count) {
             $urlQuery = ['count' => $count];
@@ -100,7 +100,7 @@ class Async extends
         $request          = new $this->client->requestClass();
         $request->client  = $this->client;
         $request->options = $options;
-        $request->path    = $request->getDatabasePath() . static::API_JOB . '/' . $type;
+        $request->path    = $this->client->fullDatabasePath . static::API_JOB . '/' . $type;
 
         if ($stamp) {
             $urlQuery = ['stamp' => $stamp];

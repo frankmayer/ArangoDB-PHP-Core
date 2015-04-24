@@ -93,7 +93,7 @@ class HttpRequest extends AbstractHttpRequest implements HttpRequestInterface
             $this->body .= $batchPart->body . $connector::HTTP_EOL;
         }
         $this->body .= '--' . $boundary . '--' . $connector::HTTP_EOL;
-        $this->path                    = $this->getDatabasePath() . self::API_BATCH;
+        $this->path                    = $this->client->fullDatabasePath . self::API_BATCH;
         $this->headers['Content-Type'] = 'multipart/form-data; ' . $boundary;
 
         $this->method         = 'post';
