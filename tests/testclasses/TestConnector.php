@@ -2,10 +2,10 @@
 use frankmayer\ArangoDbPhpCore\Connectors\AbstractHttpConnector;
 
 /**
- * 
+ *
  * File: TestConnector.php
  *
- * @package 
+ * @package
  * @author Frank Mayer
  */
 

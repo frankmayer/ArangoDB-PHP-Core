@@ -150,9 +150,9 @@ class HttpResponse implements HttpResponseInterface
      */
     protected function splitResponseToHeadersArrayAndBody($response)
     {
-        $tmp = explode("\r\n\r\n", $response, 2);
-        var_export($tmp);
-        list($headers, $this->body) = $tmp;
+        //        $tmp = explode("\r\n\r\n", $response, 2);
+        //        var_export($tmp);
+        list($headers, $this->body) = explode("\r\n\r\n", $response, 2);
 
         $this->headers = $this->getHeaderArray($headers);
     }
