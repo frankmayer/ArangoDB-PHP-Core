@@ -26,8 +26,6 @@ class Edge extends
     Document implements
     RestApiInterface
 {
-    public $urlQuery;
-
     /**
      *
      */
@@ -35,7 +33,9 @@ class Edge extends
 
 
     /**
-     * @param       $collection
+     * @param null  $collection
+     * @param null  $from
+     * @param array $to
      * @param       $body
      * @param array $urlQuery
      * @param array $options
@@ -43,15 +43,15 @@ class Edge extends
      * @return \frankmayer\ArangoDbPhpCore\Protocols\Http\HttpResponse
      */
     public function create(
-        $collection = null,
+        $collection,
+        $from,
+        $to,
         $body = null,
         $urlQuery = [],
         $options = []
     ) {
-
         /** @var AbstractHttpRequest $request */
-        $request          = new $this->client->requestClass();
-        $request->client  = $this->client;
+        $request          = new $this->client->requestClass($this->client);
         $request->options = $options;
         $request->body    = $body;
 
@@ -61,173 +61,15 @@ class Edge extends
 
         $request->path = $this->client->fullDatabasePath . static::API_PATH;
 
-        if (isset($collection)) {
-            $urlQuery = array_merge(
-                $urlQuery ? $urlQuery : [],
-                ['collection' => $collection]
-            );
-        }
+        $urlQuery = array_merge($urlQuery ? $urlQuery : [],
+            ['from' => $from, 'to' => $to],
+            ['collection' => $collection]);
 
         $urlQuery = $request->buildUrlQuery($urlQuery);
 
         $request->path .= $urlQuery;
 
         $request->method = static::METHOD_POST;
-
-        return $this->getReturnObject($request);
-    }
-
-
-    /**
-     * @param       $handle
-     * @param       $body
-     * @param array $urlQuery
-     * @param array $options
-     *
-     * @return \frankmayer\ArangoDbPhpCore\Protocols\Http\HttpResponse
-     */
-    public function replace(
-        $handle,
-        $body,
-        $urlQuery = [],
-        $options = []
-    ) {
-        /** @var AbstractHttpRequest $request */
-        $request          = new $this->client->requestClass();
-        $request->client  = $this->client;
-        $request->options = $options;
-        $request->body    = $body;
-
-        if (is_array($request->body)) {
-            $request->body = json_encode($request->body);
-        }
-
-        $request->path = $this->client->fullDatabasePath . static::API_PATH . '/' . $handle;
-
-        $urlQuery = $request->buildUrlQuery($urlQuery);
-
-        $request->path .= $urlQuery;
-
-        $request->method = static::METHOD_PUT;
-
-        return $this->getReturnObject($request);
-    }
-
-    /**
-     * @param       $handle
-     * @param       $body
-     * @param array $urlQuery
-     * @param array $options
-     *
-     * @return \frankmayer\ArangoDbPhpCore\Protocols\Http\HttpResponse
-     */
-    public function update(
-        $handle,
-        $body,
-        $urlQuery = [],
-        $options = []
-    ) {
-        /** @var AbstractHttpRequest $request */
-        $request          = new $this->client->requestClass();
-        $request->client  = $this->client;
-        $request->options = $options;
-        $request->body    = $body;
-
-        if (is_array($request->body)) {
-            $request->body = json_encode($request->body);
-        }
-
-        $request->path = $this->client->fullDatabasePath . static::API_PATH . '/' . $handle;
-
-        $urlQuery = $request->buildUrlQuery($urlQuery);
-
-        $request->path .= $urlQuery;
-
-        $request->method = static::METHOD_PATCH;
-
-        return $this->getReturnObject($request);
-    }
-
-
-    /**
-     * @param       $collection
-     * @param array $options
-     *
-     * @return \frankmayer\ArangoDbPhpCore\Protocols\Http\HttpResponse
-     */
-    public function getAll(
-        $collection,
-        $options = []
-    ) {
-        /** @var AbstractHttpRequest $request */
-        $request          = new $this->client->requestClass();
-        $request->client  = $this->client;
-        $request->options = $options;
-        $request->path    = $this->client->fullDatabasePath . static::API_PATH;
-        $request->path .= '?collection=' . $collection;
-        $request->method = static::METHOD_GET;
-
-        return $this->getReturnObject($request);
-    }
-
-
-    /**
-     * @param string $handle The edge handle of the edge we want to get. Example: MyCollection/22334
-     * @param array  $options
-     *
-     * @return \frankmayer\ArangoDbPhpCore\Protocols\Http\HttpResponse
-     */
-    public function get(
-        $handle,
-        $options = []
-    ) {
-        /** @var AbstractHttpRequest $request */
-        $request          = new $this->client->requestClass();
-        $request->client  = $this->client;
-        $request->options = $options;
-        $request->path    = $this->client->fullDatabasePath . static::API_PATH . '/' . $handle;
-        $request->method  = static::METHOD_GET;
-
-        return $this->getReturnObject($request);
-    }
-
-
-    /**
-     * @param string $handle The edge handle of the edge we want to get. Example: MyCollection/22334
-     * @param array  $options
-     *
-     * @return \frankmayer\ArangoDbPhpCore\Protocols\Http\HttpResponse
-     */
-    public function getHeader(
-        $handle,
-        $options = []
-    ) {
-        /** @var AbstractHttpRequest $request */
-        $request          = new $this->client->requestClass();
-        $request->client  = $this->client;
-        $request->options = $options;
-        $request->path    = $this->client->fullDatabasePath . static::API_PATH . '/' . $handle;
-        $request->method  = static::METHOD_HEAD;
-
-        return $this->getReturnObject($request);
-    }
-
-    /**
-     * @param       $handle
-     * @param array $options
-     *
-     * @return \frankmayer\ArangoDbPhpCore\Protocols\Http\HttpResponse
-     */
-    public function delete(
-        $handle,
-        $options = []
-    ) {
-        /** @var AbstractHttpRequest $request */
-        $request          = new $this->client->requestClass();
-        $request->client  = $this->client;
-        $request->options = $options;
-        $request->path    = $this->client->fullDatabasePath . static::API_PATH . '/' . $handle;
-        $request->method  = static::METHOD_DELETE;
 
         return $this->getReturnObject($request);
     }

@@ -26,8 +26,6 @@ class Document extends
     Api implements
     RestApiInterface
 {
-    public $urlQuery;
-
     /**
      *
      */
