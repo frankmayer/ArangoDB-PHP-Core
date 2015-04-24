@@ -170,7 +170,7 @@ TAG;
      */
     public function testBuildSplitHeadersAndBody()
     {
-        $request = new HttpRequest();
+        $request = new HttpRequest($this->client);
         $headers = $this->headers;
         $body    = $this->body;
 
@@ -188,7 +188,7 @@ TAG;
      */
     public function testBuildAndCheckForStatusAndBodyAttributesInResponse()
     {
-        $request = new HttpRequest();
+        $request = new HttpRequest($this->client);
         $headers = $this->headers;
         $body    = $this->body;
 
@@ -209,7 +209,7 @@ TAG;
      */
     public function testBuildWithVerboseExtractStatusLineEqualsTrue()
     {
-        $request = new HttpRequest();
+        $request = new HttpRequest($this->client);
         $headers = $this->headers;
         $body    = $this->body;
 

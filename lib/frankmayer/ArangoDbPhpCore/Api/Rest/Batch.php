@@ -26,7 +26,7 @@ class Batch extends
     public static function send($client, $batchParts)
     {
         /** @var AbstractHttpRequest $request */
-        $request         = new $client->requestClass();
+        $request         = new $client->requestClass($client);
         $request->client = $client;
 
         return $request->sendBatch($batchParts);

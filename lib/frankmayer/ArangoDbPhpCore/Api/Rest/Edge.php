@@ -17,13 +17,13 @@ use frankmayer\ArangoDbPhpCore\Protocols\Http\AbstractHttpRequest;
 
 
 /**
- * A document class for testing and demonstration purposes
+ * A edge class for testing and demonstration purposes
  *
  * @property  ClientInterface|Client $client
  * @package frankmayer\ArangoDbPhpCore
  */
-class Document extends
-    Api implements
+class Edge extends
+    Document implements
     RestApiInterface
 {
     public $urlQuery;
@@ -31,7 +31,7 @@ class Document extends
     /**
      *
      */
-    const API_PATH = '/_api/document';
+    const API_PATH = '/_api/edge';
 
 
     /**
@@ -50,7 +50,8 @@ class Document extends
     ) {
 
         /** @var AbstractHttpRequest $request */
-        $request          = new $this->client->requestClass($this->client);
+        $request          = new $this->client->requestClass();
+        $request->client  = $this->client;
         $request->options = $options;
         $request->body    = $body;
 
@@ -92,7 +93,8 @@ class Document extends
         $options = []
     ) {
         /** @var AbstractHttpRequest $request */
-        $request          = new $this->client->requestClass($this->client);
+        $request          = new $this->client->requestClass();
+        $request->client  = $this->client;
         $request->options = $options;
         $request->body    = $body;
 
@@ -126,7 +128,8 @@ class Document extends
         $options = []
     ) {
         /** @var AbstractHttpRequest $request */
-        $request          = new $this->client->requestClass($this->client);
+        $request          = new $this->client->requestClass();
+        $request->client  = $this->client;
         $request->options = $options;
         $request->body    = $body;
 
@@ -157,7 +160,8 @@ class Document extends
         $options = []
     ) {
         /** @var AbstractHttpRequest $request */
-        $request          = new $this->client->requestClass($this->client);
+        $request          = new $this->client->requestClass();
+        $request->client  = $this->client;
         $request->options = $options;
         $request->path    = $this->client->fullDatabasePath . static::API_PATH;
         $request->path .= '?collection=' . $collection;
@@ -168,7 +172,7 @@ class Document extends
 
 
     /**
-     * @param string $handle The document handle of the document we want to get. Example: MyCollection/22334
+     * @param string $handle The edge handle of the edge we want to get. Example: MyCollection/22334
      * @param array  $options
      *
      * @return \frankmayer\ArangoDbPhpCore\Protocols\Http\HttpResponse
@@ -178,7 +182,8 @@ class Document extends
         $options = []
     ) {
         /** @var AbstractHttpRequest $request */
-        $request          = new $this->client->requestClass($this->client);
+        $request          = new $this->client->requestClass();
+        $request->client  = $this->client;
         $request->options = $options;
         $request->path    = $this->client->fullDatabasePath . static::API_PATH . '/' . $handle;
         $request->method  = static::METHOD_GET;
@@ -188,7 +193,7 @@ class Document extends
 
 
     /**
-     * @param string $handle The document handle of the document we want to get. Example: MyCollection/22334
+     * @param string $handle The edge handle of the edge we want to get. Example: MyCollection/22334
      * @param array  $options
      *
      * @return \frankmayer\ArangoDbPhpCore\Protocols\Http\HttpResponse
@@ -198,7 +203,8 @@ class Document extends
         $options = []
     ) {
         /** @var AbstractHttpRequest $request */
-        $request          = new $this->client->requestClass($this->client);
+        $request          = new $this->client->requestClass();
+        $request->client  = $this->client;
         $request->options = $options;
         $request->path    = $this->client->fullDatabasePath . static::API_PATH . '/' . $handle;
         $request->method  = static::METHOD_HEAD;
@@ -217,7 +223,8 @@ class Document extends
         $options = []
     ) {
         /** @var AbstractHttpRequest $request */
-        $request          = new $this->client->requestClass($this->client);
+        $request          = new $this->client->requestClass();
+        $request->client  = $this->client;
         $request->options = $options;
         $request->path    = $this->client->fullDatabasePath . static::API_PATH . '/' . $handle;
         $request->method  = static::METHOD_DELETE;

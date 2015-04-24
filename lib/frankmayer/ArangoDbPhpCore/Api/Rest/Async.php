@@ -23,7 +23,7 @@ class Async extends
     Api implements
     RestApiInterface
 {
-    const API_JOB = '/_api/job';
+    const API_PATH = '/_api/job';
 
     public $client;
 
@@ -39,10 +39,9 @@ class Async extends
         $options = []
     ) {
         /** @var AbstractHttpRequest $request */
-        $request          = new $this->client->requestClass();
-        $request->client  = $this->client;
+        $request          = new $this->client->requestClass($this->client);
         $request->options = $options;
-        $request->path    = $this->client->fullDatabasePath . static::API_JOB . '/' . $handle;
+        $request->path    = $this->client->fullDatabasePath . static::API_PATH . '/' . $handle;
         $request->method  = static::METHOD_PUT;
 
         return $this->getReturnObject($request);
@@ -64,10 +63,9 @@ class Async extends
         $urlQuery = null;
 
         /** @var AbstractHttpRequest $request */
-        $request          = new $this->client->requestClass();
-        $request->client  = $this->client;
+        $request          = new $this->client->requestClass($this->client);
         $request->options = $options;
-        $request->path    = $this->client->fullDatabasePath . static::API_JOB . '/' . $type;
+        $request->path    = $this->client->fullDatabasePath . static::API_PATH . '/' . $type;
 
         if ($count) {
             $urlQuery = ['count' => $count];
@@ -97,10 +95,9 @@ class Async extends
         $urlQuery = null;
 
         /** @var AbstractHttpRequest $request */
-        $request          = new $this->client->requestClass();
-        $request->client  = $this->client;
+        $request          = new $this->client->requestClass($this->client);
         $request->options = $options;
-        $request->path    = $this->client->fullDatabasePath . static::API_JOB . '/' . $type;
+        $request->path    = $this->client->fullDatabasePath . static::API_PATH . '/' . $type;
 
         if ($stamp) {
             $urlQuery = ['stamp' => $stamp];

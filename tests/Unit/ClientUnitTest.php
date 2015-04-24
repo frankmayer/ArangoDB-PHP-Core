@@ -118,7 +118,7 @@ class ClientUnitTest extends ArangoDbPhpCoreUnitTestCase
     public function testSetGetRequestClass()
     {
         $client       = new Client($this->connector, getClientOptions());
-        $requestClass = new HttpRequest();
+        $requestClass = new HttpRequest($client);
         $client->setRequestClass($requestClass);
         $this->assertEquals($requestClass, $client->getRequestClass());
     }

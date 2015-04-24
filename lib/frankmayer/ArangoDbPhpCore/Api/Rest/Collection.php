@@ -26,7 +26,7 @@ class Collection extends
     /**
      *
      */
-    const API_COLLECTION = '/_api/collection';
+    const API_PATH = '/_api/collection';
 
     public $client;
 
@@ -50,7 +50,7 @@ class Collection extends
         //        Client::bind(
         //            'httpRequest',
         //            function () {
-        //                $request         = new $this->client->requestClass();
+        //                $request         = new $this->client->requestClass($this->client);
         //                $request->client = $this->client;
         //
         //                return $request;
@@ -63,8 +63,7 @@ class Collection extends
         //
         // We're not doing the above though, in Core, in order to keep a better performance
 
-        $request         = new $this->client->requestClass();
-        $request->client = $this->client;
+        $request         = new $this->client->requestClass($this->client);
 
         $request->options = $options;
         $request->body    = ['name' => $collectionName];
@@ -72,7 +71,7 @@ class Collection extends
         $request->body = static::array_merge_recursive_distinct($request->body, $collectionParameters);
         $request->body = json_encode($request->body);
 
-        $request->path   = $this->client->fullDatabasePath . static::API_COLLECTION;
+        $request->path   = $this->client->fullDatabasePath . static::API_PATH;
         $request->method = static::METHOD_POST;
 
         return $this->getReturnObject($request);
@@ -90,11 +89,10 @@ class Collection extends
         $options = []
     ) {
         /** @var AbstractHttpRequest $request */
-        $request         = new $this->client->requestClass();
-        $request->client = $this->client;
+        $request         = new $this->client->requestClass($this->client);
 
         $request->options = $options;
-        $request->path    = $this->client->fullDatabasePath . static::API_COLLECTION . '/' . $collectionName;
+        $request->path    = $this->client->fullDatabasePath . static::API_PATH . '/' . $collectionName;
         $request->method  = static::METHOD_DELETE;
 
         return $this->getReturnObject($request);
@@ -112,12 +110,11 @@ class Collection extends
         $options = []
     ) {
         /** @var AbstractHttpRequest $request */
-        $request         = new $this->client->requestClass();
-        $request->client = $this->client;
+        $request         = new $this->client->requestClass($this->client);
 
         $request->options = $options;
 
-        $request->path   = $this->client->fullDatabasePath . static::API_COLLECTION . '/' . $collectionName . '/truncate';
+        $request->path   = $this->client->fullDatabasePath . static::API_PATH . '/' . $collectionName . '/truncate';
         $request->method = static::METHOD_PUT;
 
         return $this->getReturnObject($request);
@@ -133,12 +130,11 @@ class Collection extends
         $options = []
     ) {
         /** @var AbstractHttpRequest $request */
-        $request         = new $this->client->requestClass();
-        $request->client = $this->client;
+        $request         = new $this->client->requestClass($this->client);
 
         $request->options = $options;
 
-        $request->path = $this->client->fullDatabasePath . static::API_COLLECTION;
+        $request->path = $this->client->fullDatabasePath . static::API_PATH;
         if (isset($request->options['excludeSystem']) && $request->options['excludeSystem'] === true) {
             $request->path .= '?excludeSystem=true';
         }

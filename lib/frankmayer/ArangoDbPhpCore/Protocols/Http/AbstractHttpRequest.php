@@ -10,6 +10,8 @@
 
 namespace frankmayer\ArangoDbPhpCore\Protocols\Http;
 
+use frankmayer\ArangoDbPhpCore\Client;
+
 
 /**
  * HTTP-Request object that holds a request. Requests are in some cases not directly passed to the server,
@@ -90,6 +92,11 @@ abstract class AbstractHttpRequest implements HttpRequestInterface
      * @var object flag for if the request is a batch request (this does not include the batchpart requests)
      */
     public $batch;
+
+    function __construct($client)
+    {
+        $this->client = $client;
+    }
 
 
     /**
