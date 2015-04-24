@@ -17,22 +17,22 @@ Devel: [![Build Status](https://travis-ci.org/frankmayer/ArangoDB-PHP-Core.png?b
 
 The core client should serve as a flexible low level base for higher level client implementations (AR,ODM,OGM) to be built on top of it.
 
-It does by itself not provide any direct abstraction of ArangoDB's API. Instead it provides a basis, that can be used by higher level drivers in order to provide that abstraction.
-A basis that takes away the boilerplate code of setting up requests and managing responses (headers, statuses, etc...)
+At this experimental stage, it does provide some abstraction of ArangoDB's API. It's still not quite clear if the api abstraction will in the end result in a different package or stay in the *Core*.
+The client should generally be seen as a basis that takes away the boilerplate code of setting up requests and managing responses (headers, statuses, etc...) with ArangoDB.
 
 
 ####Highlights:
 
 - Request / Response Objects
-- A wrapper around connectors (at the moment only cUrl is built in, there is a placeholder directory to also provide a wrapper to FSock). A Guzzle 5 Connector is in the works.
+- A wrapper around injectable connectors. Two packages are already available: https://github.com/frankmayer/ArangoDB-PHP-Core-Curl and https://github.com/frankmayer/ArangoDB-PHP-Core-Guzzle
 - Flexibility through dependency injection:
   - Inject your own connector, Request or Response Objects
      - directly
      - via configuration resolution
      - via the client class's own simple IOC container
 - Register your plugins (for example a trace plugin)
-- Extend the core's functionality through traits (This is not yet standardized because of the client not being stable yet)
-- supports ArangoDB's Async and Batch functionality (sort of. There are some more things to do)
+- Extend the core's functionality through traits *(This is still in the makings)*
+- supports ArangoDB's Async and Batch functionality
 - provides a toolbox for handling everything around communication with an ArangoDB server, such as url-, parameter- and header-building tools.
 - Includes a few test classes that provide basic testing functionality against the server and also a bit of insight on how to build a client on top of the core.
 
@@ -44,7 +44,7 @@ Supported: 5.4+ & HHVM 2.3.0+
 
 #####Caution:
 This project is at the moment in a __highly experimental__ phase.
-The API is not yet stable and there most probably will be significant changes to it.
+**The API is not yet stable and there most probably will be significant changes to it.**
 
 So, it's not recommended to build anything critical on top of it yet. ;)
 But... stay tuned...
@@ -52,13 +52,14 @@ But... stay tuned...
 
 #####Contributing
 
-As the project is very fresh and in a highly experimental state, it's not yet open to pull requests.
+As the project is still in a highly experimental state, it's not yet open to pull requests.
 But I'd love to see contributions after the initial experimental phase is over. :)
 I'll let you know via this readme and my Twitter-feed: https://twitter.com/frankmayer_
 Thanks !!
 
 
 ###### Major Todo's:
+- [ ] stabilize contracts for interoperability 
 - [ ] stabilize plugin API
 - [x] implement ArangoDB authentication
 - [ ] implement basic tracer plugin

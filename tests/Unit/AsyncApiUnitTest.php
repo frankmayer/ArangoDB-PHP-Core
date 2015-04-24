@@ -54,9 +54,6 @@ content-type: application/json; charset=utf-8\r\n\r\n[
   "270459873"
 ]
 TAG;
-        $createResponse = 'HTTP/1.1 200 OK'."\r\n".'content-type: application/json; charset=utf-8' . "\r\n\r\n" . '[
-  "270459873"
-]';
         $body           = '{ "Hello": "World" }';
 
         $options = ["async" => true];

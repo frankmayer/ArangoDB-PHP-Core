@@ -18,7 +18,7 @@
             <directory>./tests/Integration/</directory>
         </testsuite>
         <!--<testsuite name="ArangoDB-PHP-Core-Performance">-->
-            <!--<directory>./tests/Performance/</directory>-->
+        <!--<directory>./tests/Performance/</directory>-->
         <!--</testsuite>-->
     </testsuites>
 </phpunit>

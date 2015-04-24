@@ -71,7 +71,7 @@ location: /_db/_system/_api/document/products/1491343184\r\n\r\n{
 TAG;
         $body           = '{ "Hello": "World" }';
 
-        $collectionOptions = ["waitForSync" => true];
+        $options = ["waitForSync" => true];
         $this->connector->method('request')
                         ->willReturn($createResponse);
 

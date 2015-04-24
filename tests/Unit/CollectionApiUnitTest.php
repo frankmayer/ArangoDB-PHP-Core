@@ -110,7 +110,7 @@ TAG;
         $object = new Collection($this->client);
 
         /** @var $responseObject HttpResponse */
-        $response = $object->delete($this->collectionNames[0], $options);
+        $response = $object->drop($this->collectionNames[0], $options);
 
         $this->assertInstanceOf('\frankmayer\ArangoDbPhpCore\Protocols\Http\HttpResponse', $response);
         $this->assertEquals(200, $response->status);

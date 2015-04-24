@@ -11,7 +11,6 @@
 namespace frankmayer\ArangoDbPhpCore\Api\Rest;
 
 use frankmayer\ArangoDbPhpCore\Api\RestApiInterface;
-use frankmayer\ArangoDbPhpCore\Client;
 use frankmayer\ArangoDbPhpCore\Protocols\Http\AbstractHttpRequest;
 
 
@@ -47,21 +46,25 @@ class Collection extends
     ) {
         // Here's how a binding for the HttpRequest should take place in the IOC container.
         // The actual binding should only happen once in the client construction, though. This is only for testing...
-
-
-        Client::bind(
-            'httpRequest',
-            function () {
-                $request         = new $this->client->requestClass();
-                $request->client = $this->client;
-
-                return $request;
-            }
-        );
-
+        //
+        //        Client::bind(
+        //            'httpRequest',
+        //            function () {
+        //                $request         = new $this->client->requestClass();
+        //                $request->client = $this->client;
+        //
+        //                return $request;
+        //            }
+        //        );
+        //
         // And here's how one gets an HttpRequest object through the IOC.
         // Note that the type-name 'httpRequest' is the name we bound our HttpRequest class creation-closure to. (see above)
-        $request = Client::make('httpRequest');
+        //        $request = Client::make('httpRequest');
+        //
+        // We're not doing the above though, in Core, in order to keep a better performance
+
+        $request         = new $this->client->requestClass();
+        $request->client = $this->client;
 
         $request->options = $options;
         $request->body    = ['name' => $collectionName];
@@ -82,7 +85,7 @@ class Collection extends
      *
      * @return \frankmayer\ArangoDbPhpCore\Protocols\Http\HttpResponse
      */
-    public function delete(
+    public function drop(
         $collectionName,
         $options = []
     ) {
