@@ -36,7 +36,12 @@
   },
   "autoload": {
     "psr-0": {
-      "frankmayer\\ArangoDbPhpCore": "lib/"
+      "frankmayer\\ArangoDbPhpCore\\": "lib/"
+    }
+  },
+  "autoload-dev": {
+    "psr-0": {
+      "frankmayer\\ArangoDbPhpCore\\Tests": "tests/"
     }
   },
   "support": {
