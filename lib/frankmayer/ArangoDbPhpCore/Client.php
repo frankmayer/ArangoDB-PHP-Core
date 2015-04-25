@@ -25,7 +25,7 @@ use frankmayer\ArangoDbPhpCore\Protocols\ResponseInterface;
  */
 class Client
 {
-    protected static $iocContainerArray;
+    protected $iocContainerArray;
 
     /**
      * @var Plugins\PluginManager The plugin-manager for this client.
@@ -41,7 +41,8 @@ class Client
     public $clientOptions;
     /**
      * @var string The database path prefix to use. For example: '/_db/'. (defaults to '/_db/')
-     */  public $databasePathPrefix;
+     */
+    public $databasePathPrefix;
     /**
      * @var string The database to use. For example: 'my_database'
      */
@@ -144,9 +145,9 @@ class Client
      * @param $type
      * @param $closure
      */
-    public static function bind($type, \Closure $closure)
+    public function bind($type, \Closure $closure)
     {
-        static::$iocContainerArray[$type] = $closure;
+        $this->iocContainerArray[$type] = $closure;
     }
 
 
@@ -158,10 +159,10 @@ class Client
      * @throws ClientException
      * @return mixed
      */
-    public static function make($type)
+    public function make($type)
     {
-        if (isset(static::$iocContainerArray[$type])) {
-            $type = static::$iocContainerArray[$type];
+        if (isset($this->iocContainerArray[$type])) {
+            $type = $this->iocContainerArray[$type];
 
             return $type();
         }
