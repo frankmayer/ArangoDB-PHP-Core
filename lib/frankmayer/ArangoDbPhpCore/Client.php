@@ -1,11 +1,9 @@
 <?php
-
 /**
  * ArangoDB PHP Core Client: Client
  *
- * @package   frankmayer\ArangoDbPhpCore
  * @author    Frank Mayer
- * @copyright Copyright 2013, FRANKMAYER.NET, Athens, Greece
+ * @copyright Copyright 2013-2015, FRANKMAYER.NET, Athens, Greece
  */
 
 namespace frankmayer\ArangoDbPhpCore;
@@ -16,12 +14,13 @@ use frankmayer\ArangoDbPhpCore\Protocols\Http\HttpRequestInterface;
 use frankmayer\ArangoDbPhpCore\Protocols\RequestInterface;
 use frankmayer\ArangoDbPhpCore\Protocols\ResponseInterface;
 
+
 /**
  * The Client class.
  * This is the base operating class through which everything cooperates.
  * The class provides its own IOC Container for easy injection and instantiation of needed classes.
  *
- * @package frankmayer\ArangoDbPhpCore
+ * @package   frankmayer\ArangoDbPhpCore
  */
 class Client
 {
@@ -32,7 +31,7 @@ class Client
      */
     public $pluginManager;
     /**
-     * @var ConnectorInterface
+     * @var ConnectorInterface $connector The connector instance to use, in order to connect to the server
      */
     public $connector;
     /**

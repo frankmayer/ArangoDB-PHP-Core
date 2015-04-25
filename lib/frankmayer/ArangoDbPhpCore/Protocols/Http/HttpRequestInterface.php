@@ -3,9 +3,8 @@
 /**
  * ArangoDB PHP client: HTTP Request Interface
  *
- * @package   ArangoDbPhpClient
  * @author    Frank Mayer
- * @copyright Copyright 2013, FRANKMAYER.NET, Athens, Greece
+ * @copyright Copyright 2013-2015, FRANKMAYER.NET, Athens, Greece
  */
 
 namespace frankmayer\ArangoDbPhpCore\Protocols\Http;
@@ -16,7 +15,7 @@ use frankmayer\ArangoDbPhpCore\Protocols\RequestInterface;
 /**
  * An HttpRequest Interface
  *
- * @package frankmayer\ArangoDbPhpCoreCore
+ * @package frankmayer\ArangoDbPhpCore\Protocols\Http
  */
 interface HttpRequestInterface extends
     RequestInterface

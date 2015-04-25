@@ -1,11 +1,9 @@
 <?php
-
 /**
  * ArangoDB PHP Core Client: client
  *
- * @package   frankmayer\ArangoDbPhpCore
  * @author    Frank Mayer
- * @copyright Copyright 2013, FRANKMAYER.NET, Athens, Greece
+ * @copyright Copyright 2013-2015, FRANKMAYER.NET, Athens, Greece
  */
 
 namespace frankmayer\ArangoDbPhpCore\Api\Rest;
@@ -17,12 +15,18 @@ use frankmayer\ArangoDbPhpCore\Protocols\Http\AbstractHttpRequest;
 /**
  * A batch functionality class for testing and demonstration purposes
  *
- * @package frankmayer\ArangoDbPhpCore
+ * @package   frankmayer\ArangoDbPhpCore\Api\Rest
  */
 class Batch extends
     Api implements
     RestApiInterface
 {
+    /**
+     * @param $client
+     * @param $batchParts
+     *
+     * @return mixed
+     */
     public static function send($client, $batchParts)
     {
         /** @var AbstractHttpRequest $request */

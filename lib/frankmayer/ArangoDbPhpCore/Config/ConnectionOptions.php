@@ -5,10 +5,8 @@
  *
  * Taken from the original ArangoDB-Client, in order to maintain easy migration. Thanks Jan ;)
  *
- * @package   frankmayer\ArangoDbPhpCore
  * @author    Frank Mayer
- * @author    Frank Mayer
- * @copyright Copyright 2013, FRANKMAYER.NET, Athens, Greece
+ * @copyright Copyright 2013-2015, FRANKMAYER.NET, Athens, Greece
  */
 
 namespace frankmayer\ArangoDbPhpCore\Config;
@@ -22,7 +20,7 @@ use frankmayer\ArangoDbPhpCore\Exception;
  * options and will perform a simple validation of them.
  * It provides array access to its members.
  *
- * @package frankmayer\ArangoDbPhpCore
+ * @package   frankmayer\ArangoDbPhpCore\Config
  */
 class ConnectionOptions implements
     \ArrayAccess

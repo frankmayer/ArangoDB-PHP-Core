@@ -1,15 +1,19 @@
 <?php
 /**
- *
  * File: ClientInterface.php
  *
- * @package
- * @author Frank Mayer
+ * @author    Frank Mayer
+ * @copyright Copyright 2013-2015, FRANKMAYER.NET, Athens, Greece
  */
 
 namespace frankmayer\ArangoDbPhpCore;
 
 
+/**
+ * Interface ClientInterface
+ *
+ * @package frankmayer\ArangoDbPhpCore
+ */
 interface ClientInterface
 {
     /**

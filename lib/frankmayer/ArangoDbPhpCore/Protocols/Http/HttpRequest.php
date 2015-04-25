@@ -3,9 +3,8 @@
 /**
  * ArangoDB PHP Core Client: HTTP Request
  *
- * @package   frankmayer\ArangoDbPhpCore
  * @author    Frank Mayer
- * @copyright Copyright 2013, FRANKMAYER.NET, Athens, Greece
+ * @copyright Copyright 2013-2015, FRANKMAYER.NET, Athens, Greece
  */
 
 namespace frankmayer\ArangoDbPhpCore\Protocols\Http;
@@ -15,14 +14,35 @@ namespace frankmayer\ArangoDbPhpCore\Protocols\Http;
  * HTTP-Request object that holds a request. Requests are in some cases not directly passed to the server,
  * for instance when a request is destined for a batch.
  *
- * @package frankmayer\ArangoDbPhpCore
+ * @package frankmayer\ArangoDbPhpCore\Protocols\Http
+ */
+/**
+ * Class HttpRequest
+ *
+ * @package frankmayer\ArangoDbPhpCore\Protocols\Http
  */
 class HttpRequest extends AbstractHttpRequest implements HttpRequestInterface
 {
+    /**
+     * @var array $batchparts
+     */
     public $batchParts;
+    /**
+     * @var boolean $async
+     */
     public $async;
+    /**
+     * @var boolean $batch
+     */
     public $batch;
+    /**
+     * @var string $batchBoundary
+     */
     public $batchBoundary;
+    /**
+     * @var boolean
+     * todo: is this still needed?
+     */
     public $isBatchPart202;
 
 

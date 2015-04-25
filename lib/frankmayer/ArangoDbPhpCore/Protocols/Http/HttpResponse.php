@@ -3,9 +3,8 @@
 /**
  * ArangoDB PHP Core Client: HTTP Response
  *
- * @package   frankmayer\ArangoDbPhpCore
  * @author    Frank Mayer
- * @copyright Copyright 2013, FRANKMAYER.NET, Athens, Greece
+ * @copyright Copyright 2013-2015, FRANKMAYER.NET, Athens, Greece
  */
 
 namespace frankmayer\ArangoDbPhpCore\Protocols\Http;
@@ -16,7 +15,7 @@ use frankmayer\ArangoDbPhpCore\ServerException;
 /**
  * Http-Response object holding the raw and objectified Response data.
  *
- * @package frankmayer\ArangoDbPhpCore
+ * @package frankmayer\ArangoDbPhpCore\Protocols\Http
  */
 class HttpResponse implements HttpResponseInterface
 {

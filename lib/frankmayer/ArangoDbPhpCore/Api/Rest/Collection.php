@@ -1,11 +1,9 @@
 <?php
-
 /**
  * ArangoDB PHP Core Client: client
  *
- * @package   frankmayer\ArangoDbPhpCore
  * @author    Frank Mayer
- * @copyright Copyright 2013, FRANKMAYER.NET, Athens, Greece
+ * @copyright Copyright 2013-2015, FRANKMAYER.NET, Athens, Greece
  */
 
 namespace frankmayer\ArangoDbPhpCore\Api\Rest;
@@ -15,9 +13,9 @@ use frankmayer\ArangoDbPhpCore\Protocols\Http\AbstractHttpRequest;
 
 
 /**
- * A collection class for testing and demonstration purposes
+ * Class Collection
  *
- * @package frankmayer\ArangoDbPhpCore
+ * @package frankmayer\ArangoDbPhpCore\Api\Rest
  */
 class Collection extends
     Api implements
@@ -28,13 +26,10 @@ class Collection extends
      */
     const API_PATH = '/_api/collection';
 
-    public $client;
-
-
     /**
-     * @param       $collectionName
-     * @param array $collectionParameters
-     * @param array $options
+     * @param string $collectionName       The collection name
+     * @param array  $collectionParameters Collection parameters according to the HTTP API
+     * @param array  $options              Other options (not stable yet...)
      *
      * @return \frankmayer\ArangoDbPhpCore\Protocols\Http\HttpResponse
      * @throws \frankmayer\ArangoDbPhpCore\ClientException
@@ -44,26 +39,7 @@ class Collection extends
         $collectionParameters = [],
         $options = []
     ) {
-        // Here's how a binding for the HttpRequest should take place in the IOC container.
-        // The actual binding should only happen once in the client construction, though. This is only for testing...
-        //
-        //        Client::bind(
-        //            'httpRequest',
-        //            function () {
-        //                $request         = new $this->client->requestClass($this->client);
-        //                $request->client = $this->client;
-        //
-        //                return $request;
-        //            }
-        //        );
-        //
-        // And here's how one gets an HttpRequest object through the IOC.
-        // Note that the type-name 'httpRequest' is the name we bound our HttpRequest class creation-closure to. (see above)
-        //        $request = Client::make('httpRequest');
-        //
-        // We're not doing the above though, in Core, in order to keep a better performance
-
-        $request         = new $this->client->requestClass($this->client);
+        $request = new $this->client->requestClass($this->client);
 
         $request->options = $options;
         $request->body    = ['name' => $collectionName];
@@ -79,8 +55,8 @@ class Collection extends
 
 
     /**
-     * @param       $collectionName
-     * @param array $options
+     * @param string $collectionName
+     * @param array  $options
      *
      * @return \frankmayer\ArangoDbPhpCore\Protocols\Http\HttpResponse
      */
@@ -89,7 +65,7 @@ class Collection extends
         $options = []
     ) {
         /** @var AbstractHttpRequest $request */
-        $request         = new $this->client->requestClass($this->client);
+        $request = new $this->client->requestClass($this->client);
 
         $request->options = $options;
         $request->path    = $this->client->fullDatabasePath . static::API_PATH . '/' . $collectionName;
@@ -100,8 +76,8 @@ class Collection extends
 
 
     /**
-     * @param       $collectionName
-     * @param array $options
+     * @param string $collectionName
+     * @param array  $options
      *
      * @return \frankmayer\ArangoDbPhpCore\Protocols\Http\HttpResponse
      */
@@ -110,7 +86,7 @@ class Collection extends
         $options = []
     ) {
         /** @var AbstractHttpRequest $request */
-        $request         = new $this->client->requestClass($this->client);
+        $request = new $this->client->requestClass($this->client);
 
         $request->options = $options;
 
@@ -130,7 +106,7 @@ class Collection extends
         $options = []
     ) {
         /** @var AbstractHttpRequest $request */
-        $request         = new $this->client->requestClass($this->client);
+        $request = new $this->client->requestClass($this->client);
 
         $request->options = $options;
 

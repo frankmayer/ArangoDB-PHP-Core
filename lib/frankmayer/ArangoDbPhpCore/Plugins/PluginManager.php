@@ -3,13 +3,13 @@
 /**
  * ArangoDB PHP Core Client: Plugin Manager Class
  *
- * @package   frankmayer\ArangoDbPhpCore
  * @author    Frank Mayer
- * @copyright Copyright 2013, FRANKMAYER.NET, Athens, Greece
+ * @copyright Copyright 2013-2015, FRANKMAYER.NET, Athens, Greece
  */
 
 namespace frankmayer\ArangoDbPhpCore\Plugins;
 
+use frankmayer\ArangoDbPhpCore\Client;
 use frankmayer\ArangoDbPhpCore\ClientException;
 
 
@@ -21,15 +21,15 @@ use frankmayer\ArangoDbPhpCore\ClientException;
 class PluginManager
 {
     /**
-     * @var array
+     * @var array $pluginStorage The Storgate Array for the plugin instances. The array is already in the correct order.
      */
     public $pluginStorage;
     /**
-     * @var
+     * @var Client $client The instance of the client, for which this plugin-manager is doing its job.
      */
     public $client;
     /**
-     * @var array
+     * @var array $options Options passed to the plugin manager.
      */
     public $options;
 
@@ -107,6 +107,9 @@ class PluginManager
         return ($this->pluginStorage[$a]['priority'] > $this->pluginStorage[$b]['priority']) ? -1 : 1;
     }
 
+    /**
+     * @param $instanceName
+     */
     public function removePluginInstance($instanceName)
     {
         unset ($this->pluginStorage[$instanceName]);

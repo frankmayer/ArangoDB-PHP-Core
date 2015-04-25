@@ -1,21 +1,28 @@
 <?php
 /**
- * 
  * File: DocumentTrait.php
  *
- * @package 
- * @author Frank Mayer
+ * @author    Frank Mayer
+ * @copyright Copyright 2013-2015, FRANKMAYER.NET, Athens, Greece
  */
 
 namespace frankmayer\ArangoDbPhpCore\Api\Rest;
 
+use frankmayer\ArangoDbPhpCore\Protocols\Http\AbstractHttpRequest;
 
-trait DocumentTrait {
+
+/**
+ * Class DocumentTrait
+ *
+ * @package frankmayer\ArangoDbPhpCore\Api\Rest
+ */
+trait DocumentTrait
+{
     /**
-     * @param       $collection
-     * @param       $body
-     * @param array $urlQuery
-     * @param array $options
+     * @param string $collection
+     * @param string $body
+     * @param array  $urlQuery
+     * @param array  $options
      *
      * @return \frankmayer\ArangoDbPhpCore\Protocols\Http\HttpResponse
      */
@@ -52,6 +59,4 @@ trait DocumentTrait {
 
         return $this->getReturnObject($request);
     }
-
-
 }

@@ -1,20 +1,20 @@
 <?php
-
 /**
  * ArangoDB PHP Core Client: client
  *
- * @package   frankmayer\ArangoDbPhpCore
  * @author    Frank Mayer
- * @copyright Copyright 2013, FRANKMAYER.NET, Athens, Greece
+ * @copyright Copyright 2013-2015, FRANKMAYER.NET, Athens, Greece
  */
 
 namespace frankmayer\ArangoDbPhpCore\Api\Rest;
 
+use frankmayer\ArangoDbPhpCore\Client;
+
 
 /**
- * A base API class for testing and demonstration purposes
+ * Class Api
  *
- * @package frankmayer\ArangoDbPhpCore
+ * @package frankmayer\ArangoDbPhpCore\Api\Rest
  */
 class Api
 {
@@ -26,7 +26,17 @@ class Api
     const METHOD_HEAD    = 'HEAD';
     const METHOD_OPTIONS = 'OPTIONS';
 
+    /**
+     * @var Client The client instance of this api instance
+     */
+    public $client;
 
+    /**
+     * Constructs an api object through which commands can be issued against the server.
+     * For each API class, only one instance per Client is necessary.
+     *
+     * @param $client
+     */
     function __construct($client)
     {
         $this->client = $client;

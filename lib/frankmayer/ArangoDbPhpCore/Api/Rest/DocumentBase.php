@@ -1,22 +1,33 @@
 <?php
 /**
- *
  * File: DocumentBase.php
  *
- * @package
- * @author Frank Mayer
+ * @author    Frank Mayer
+ * @copyright Copyright 2013-2015, FRANKMAYER.NET, Athens, Greece
  */
 
 namespace frankmayer\ArangoDbPhpCore\Api\Rest;
 
+use frankmayer\ArangoDbPhpCore\Protocols\Http\AbstractHttpRequest;
 
-class DocumentBase extends Api{
+
+/**
+ * Class DocumentBase
+ *
+ * @package frankmayer\ArangoDbPhpCore\Api\Rest
+ */
+class DocumentBase extends Api
+{
+    /**
+     *
+     */
+    const API_PATH = '/_api/document';
 
     /**
-     * @param       $handle
-     * @param       $body
-     * @param array $urlQuery
-     * @param array $options
+     * @param string $handle
+     * @param string $body
+     * @param array  $urlQuery
+     * @param array  $options
      *
      * @return \frankmayer\ArangoDbPhpCore\Protocols\Http\HttpResponse
      */
@@ -47,10 +58,10 @@ class DocumentBase extends Api{
     }
 
     /**
-     * @param       $handle
-     * @param       $body
-     * @param array $urlQuery
-     * @param array $options
+     * @param string $handle
+     * @param string $body
+     * @param array  $urlQuery
+     * @param array  $options
      *
      * @return \frankmayer\ArangoDbPhpCore\Protocols\Http\HttpResponse
      */
@@ -82,8 +93,8 @@ class DocumentBase extends Api{
 
 
     /**
-     * @param       $collection
-     * @param array $options
+     * @param string $collection
+     * @param array  $options
      *
      * @return \frankmayer\ArangoDbPhpCore\Protocols\Http\HttpResponse
      */
@@ -142,8 +153,8 @@ class DocumentBase extends Api{
     }
 
     /**
-     * @param       $handle
-     * @param array $options
+     * @param string $handle
+     * @param array  $options
      *
      * @return \frankmayer\ArangoDbPhpCore\Protocols\Http\HttpResponse
      */

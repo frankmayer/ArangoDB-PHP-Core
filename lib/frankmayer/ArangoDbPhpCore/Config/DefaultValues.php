@@ -5,10 +5,8 @@
  *
  * Taken from the original ArangoDB-Client, in order to maintain easy migration. Thanks Jan ;)
  *
- * @package   frankmayer\ArangoDbPhpCore
  * @author    Frank Mayer
- * @author    Frank Mayer
- * @copyright Copyright 2013, FRANKMAYER.NET, Athens, Greece
+ * @copyright Copyright 2013-2015, FRANKMAYER.NET, Athens, Greece
  */
 
 namespace frankmayer\ArangoDbPhpCore\Config;
@@ -16,7 +14,7 @@ namespace frankmayer\ArangoDbPhpCore\Config;
 /**
  * Contains default values used by the client
  *
- * @package frankmayer\ArangoDbPhpCore
+ * @package   frankmayer\ArangoDbPhpCore\Config
  */
 abstract class DefaultValues
 {

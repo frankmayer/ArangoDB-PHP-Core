@@ -4,9 +4,9 @@
  *
  * Taken from the original ArangoDB-Client, in order to maintain easy migration. Thanks Jan ;)
  *
- * @package   frankmayer\ArangoDbPhpCore
+ * @package   frankmayer\ArangoDbPhpCore\Config
  * @author    Frank Mayer
- * @copyright Copyright 2013, FRANKMAYER.NET, Greece
+ * @copyright Copyright 2013-2015, FRANKMAYER.NET, Athens, Greece
  */
 
 namespace frankmayer\ArangoDbPhpCore\Config;

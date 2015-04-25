@@ -1,11 +1,9 @@
 <?php
-
 /**
  * ArangoDB PHP Core Client: client
  *
- * @package   frankmayer\ArangoDbPhpCore
  * @author    Frank Mayer
- * @copyright Copyright 2013, FRANKMAYER.NET, Athens, Greece
+ * @copyright Copyright 2013-2015, FRANKMAYER.NET, Athens, Greece
  */
 
 namespace frankmayer\ArangoDbPhpCore\Api\Rest;
@@ -15,18 +13,18 @@ use frankmayer\ArangoDbPhpCore\Protocols\Http\AbstractHttpRequest;
 
 
 /**
- * An async functionality class for testing and demonstration purposes
+ * Class Async
  *
- * @package frankmayer\ArangoDbPhpCore
+ * @package frankmayer\ArangoDbPhpCore\Api\Rest
  */
 class Async extends
     Api implements
     RestApiInterface
 {
+    /**
+     *
+     */
     const API_PATH = '/_api/job';
-
-    public $client;
-
 
     /**
      * @param string $handle The job handle of the job we want to get. Example: 1

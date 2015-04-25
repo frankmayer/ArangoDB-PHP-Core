@@ -3,9 +3,8 @@
 /**
  * ArangoDB PHP Core Client: Abstract Plugin Class
  *
- * @package   frankmayer\ArangoDbPhpCore
  * @author    Frank Mayer
- * @copyright Copyright 2013, FRANKMAYER.NET, Athens, Greece
+ * @copyright Copyright 2013-2015, FRANKMAYER.NET, Athens, Greece
  */
 
 namespace frankmayer\ArangoDbPhpCore\Plugins;
@@ -20,7 +19,7 @@ abstract class Plugin implements
     PluginInterface
 {
     /**
-     * @var
+     * @var int $priority The priority level of the plugin-instance 0 = standard negative = lower, positive = higher
      */
     public $priority;
 }

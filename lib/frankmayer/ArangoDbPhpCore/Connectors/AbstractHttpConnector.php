@@ -1,11 +1,7 @@
 <?php
 /**
- *
- * File: BaseConnector.php
- *
- * @package   frankmayer\ArangoDbPhpCore
  * @author    Frank Mayer
- * @copyright Copyright 2013, FRANKMAYER.NET, Athens, Greece
+ * @copyright Copyright 2013-2015, FRANKMAYER.NET, Athens, Greece
  */
 
 namespace frankmayer\ArangoDbPhpCore\Connectors;
@@ -14,6 +10,11 @@ namespace frankmayer\ArangoDbPhpCore\Connectors;
 use frankmayer\ArangoDbPhpCore\Protocols\Http\AbstractHttpRequest;
 use frankmayer\ArangoDbPhpCore\Protocols\Http\HttpConnectorInterface;
 
+/**
+ * Class AbstractHttpConnector
+ *
+ * @package frankmayer\ArangoDbPhpCore\Connectors
+ */
 abstract class AbstractHttpConnector implements
     HttpConnectorInterface
 {
@@ -37,6 +38,11 @@ abstract class AbstractHttpConnector implements
         $this->verboseLogging = false;
     }
 
+    /**
+     * @param AbstractHttpRequest $request
+     *
+     * @return mixed
+     */
     public abstract function request(AbstractHttpRequest $request);
 
     /**

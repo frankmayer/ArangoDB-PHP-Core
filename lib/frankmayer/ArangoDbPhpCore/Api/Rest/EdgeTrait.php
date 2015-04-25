@@ -1,26 +1,31 @@
 <?php
 /**
- *
  * File: DocumentTrait.php
  *
- * @package
- * @author Frank Mayer
+ * @package   frankmayer\ArangoDbPhpCore
+ * @author    Frank Mayer
+ * @copyright Copyright 2013-2015, FRANKMAYER.NET, Athens, Greece
  */
 
 namespace frankmayer\ArangoDbPhpCore\Api\Rest;
 
+use frankmayer\ArangoDbPhpCore\Protocols\Http\AbstractHttpRequest;
 
+
+/**
+ * Class EdgeTrait
+ *
+ * @package frankmayer\ArangoDbPhpCore\Api\Rest
+ */
 trait EdgeTrait
 {
-
-
     /**
-     * @param null  $collection
-     * @param null  $from
-     * @param array $to
-     * @param       $body
-     * @param array $urlQuery
-     * @param array $options
+     * @param string $collection
+     * @param string $from
+     * @param string $to
+     * @param string $body
+     * @param array  $urlQuery
+     * @param array  $options
      *
      * @return \frankmayer\ArangoDbPhpCore\Protocols\Http\HttpResponse
      */

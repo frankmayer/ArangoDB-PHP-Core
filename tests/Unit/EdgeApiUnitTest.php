@@ -3,8 +3,9 @@
  *
  * File: CoreTest.php
  *
- * @package
- * @author Frank Mayer
+ * @package   frankmayer\ArangoDbPhpCore
+ * @author    Frank Mayer
+ * @copyright Copyright 2013-2015, FRANKMAYER.NET, Athens, Greece
  */
 namespace frankmayer\ArangoDbPhpCore;
 
