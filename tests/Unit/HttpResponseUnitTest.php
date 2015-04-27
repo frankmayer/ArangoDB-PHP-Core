@@ -14,7 +14,7 @@ use frankmayer\ArangoDbPhpCore\Protocols\Http\HttpRequest;
 use frankmayer\ArangoDbPhpCore\Protocols\Http\HttpResponse;
 use phpDocumentor\Reflection\DocBlock\Tag;
 
-require_once('ArangoDbPhpCoreUnitTestCase.php');
+require_once 'ArangoDbPhpCoreUnitTestCase.php';
 
 
 /**
@@ -179,7 +179,7 @@ TAG;
 
         $response = $response->build($request);
         $this->assertEquals($response->getBody(), $body);
-        $this->assertEquals($response->status, explode(" ", explode("\r\n", $headers)[0])[1]);
+        $this->assertEquals($response->status, explode(' ', explode("\r\n", $headers)[0])[1]);
     }
 
 
@@ -197,7 +197,7 @@ TAG;
 
         $response = $response->build($request);
         $this->assertEquals($response->getBody(), $body);
-        $this->assertEquals($response->status, explode(" ", explode("\r\n", $headers)[0])[1]);
+        $this->assertEquals($response->status, explode(' ', explode("\r\n", $headers)[0])[1]);
         $this->assertEquals(json_decode($body, true)['code'], json_decode($response->body, true)['code']);
         $this->assertEquals(json_decode($body, true)['name'], json_decode($response->body, true)['name']);
         $this->assertEquals(json_decode($body, true)['keyOptions']['type'],
@@ -219,7 +219,7 @@ TAG;
 
         $response = $response->build($request);
         $this->assertEquals($response->getBody(), $body);
-        $this->assertEquals($response->status, explode(" ", explode("\r\n", $headers)[0])[1]);
+        $this->assertEquals($response->status, explode(' ', explode("\r\n", $headers)[0])[1]);
         $this->assertEquals(json_decode($body, true)['code'], json_decode($response->body, true)['code']);
         $this->assertEquals(json_decode($body, true)['name'], json_decode($response->body, true)['name']);
         $this->assertEquals(json_decode($body, true)['keyOptions']['type'],
@@ -232,7 +232,7 @@ TAG;
      */
     public function testBuildBatchResponseAndSplitHeadersAndBodies()
     {
-        $collectionOptions = ["waitForSync" => true];
+        $collectionOptions = ['waitForSync' => true];
 
         $batchRequests = [];
 

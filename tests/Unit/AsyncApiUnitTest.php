@@ -14,7 +14,7 @@ use frankmayer\ArangoDbPhpCore\Api\Rest\Document;
 use frankmayer\ArangoDbPhpCore\Protocols\Http\HttpResponse;
 use phpDocumentor\Reflection\DocBlock\Tag;
 
-require_once('ArangoDbPhpCoreUnitTestCase.php');
+require_once 'ArangoDbPhpCoreUnitTestCase.php';
 
 
 /**
@@ -56,7 +56,7 @@ content-type: application/json; charset=utf-8\r\n\r\n[
 TAG;
         $body           = '{ "Hello": "World" }';
 
-        $options = ["async" => true];
+        $options = ['async' => true];
         $this->connector->method('request')
                         ->willReturn($createResponse);
 
@@ -79,7 +79,7 @@ HTTP/1.1 200 OK
 content-type: application/json; charset=utf-8
 x-arango-async-id: 265413601\r\n\r\n{"server":"arango","version":"2.1.0"}
 TAG;
-        $options                  = ["waitForSync" => true];
+        $options                  = ['waitForSync' => true];
         $handle                   = 'products/1234567890';
 
         $this->connector->method('request')
@@ -105,7 +105,7 @@ content-type: application/json; charset=utf-8\r\n\r\n{
   "result" : true
 }
 TAG;
-        $options                  = ["waitForSync" => true];
+        $options                  = ['waitForSync' => true];
         $this->connector->method('request')
                         ->willReturn($deleteCollectionResponse);
 
@@ -129,7 +129,7 @@ content-type: application/json; charset=utf-8\r\n\r\n[
   "270459873"
 ]
 TAG;
-        $options                  = ["waitForSync" => true];
+        $options                  = ['waitForSync' => true];
         $this->connector->method('request')
                         ->willReturn($deleteCollectionResponse);
 

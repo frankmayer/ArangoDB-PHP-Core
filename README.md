@@ -39,7 +39,7 @@ The client should generally be seen as a basis that takes away the boilerplate c
 
 ####PHP Versions:
 
-Supported: 5.4+ & HHVM 2.3.0+
+Supported: 5.6+ & HHVM 2.3.0+
 
 
 #####Caution:
@@ -63,7 +63,7 @@ Thanks !!
 - [ ] stabilize plugin API
 - [x] implement ArangoDB authentication
 - [ ] implement basic tracer plugin
-- [ ] provide docs
+- [x] provide docs
 
 
 ######License:

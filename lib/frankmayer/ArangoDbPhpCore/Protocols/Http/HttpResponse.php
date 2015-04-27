@@ -96,7 +96,7 @@ class HttpResponse implements HttpResponseInterface
             $response = $request;
         }
         $this->splitResponseToHeadersArrayAndBody($response);
-        $statusLineArray = explode(" ", trim($this->headers['status'][0]));
+        $statusLineArray = explode(' ', trim($this->headers['status'][0]));
 
         $this->status = (int) $statusLineArray[1];
 
@@ -132,7 +132,7 @@ class HttpResponse implements HttpResponseInterface
                 $phrase .= $part . ' ';
             }
         }
-        $phrase = trim($phrase, " ");
+        $phrase = trim($phrase, ' ');
 
         return $phrase;
     }
@@ -328,7 +328,7 @@ class HttpResponse implements HttpResponseInterface
         $headersArray = explode("\r\n", trim($headers));
         foreach ($headersArray as $line => $header) {
             if ($line > 0) {
-                $pair                    = explode(": ", $header);
+                $pair                    = explode(': ', $header);
                 $headerArray[$pair[0]][] = $pair[1];
             } else {
                 $headerArray['status'][] = $header;

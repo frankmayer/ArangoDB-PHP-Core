@@ -10,7 +10,6 @@
 
 namespace frankmayer\ArangoDbPhpCore\Tests\Integration;
 
-require_once('ArangoDbPhpCoreIntegrationTestCase.php');
 
 use frankmayer\ArangoDbPhpCore\Api\Rest\Batch;
 use frankmayer\ArangoDbPhpCore\Api\Rest\Collection;
@@ -53,13 +52,12 @@ class BatchIntegrationTest extends
      */
     public function testCreateCollectionInBatchAndDeleteThemAgainInBatch()
     {
-        $collectionOptions = ["waitForSync" => true];
+        $collectionOptions = ['waitForSync' => true];
 
         $batchParts = [];
 
         foreach ($this->collectionNames as $collectionName) {
-            $collection         = new Collection($this->client);
-            $collection->client = $this->client;
+            $collection = new Collection($this->client);
 
             /** @var $responseObject HttpResponse */
             $batchPart = $collection->create($collectionName, $collectionOptions, ['isBatchPart' => true]);
@@ -85,8 +83,7 @@ class BatchIntegrationTest extends
         $batchParts = [];
 
         foreach ($this->collectionNames as $collectionName) {
-            $collection         = new Collection($this->client);
-            $collection->client = $this->client;
+            $collection = new Collection($this->client);
 
             /** @var $responseObject HttpResponse */
             $batchParts[] = $collection->drop($collectionName, ['isBatchPart' => true]);
@@ -113,8 +110,7 @@ class BatchIntegrationTest extends
     {
         $batchParts = [];
         foreach ($this->collectionNames as $collectionName) {
-            $collection         = new Collection($this->client);
-            $collection->client = $this->client;
+            $collection = new Collection($this->client);
 
             /** @var $responseObject HttpResponse */
             $batchParts[] = $collection->drop($collectionName, ['isBatchPart' => true]);

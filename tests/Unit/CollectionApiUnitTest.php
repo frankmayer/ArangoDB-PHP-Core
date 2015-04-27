@@ -13,7 +13,7 @@ use frankmayer\ArangoDbPhpCore\Api\Rest\Collection;
 use frankmayer\ArangoDbPhpCore\Protocols\Http\HttpResponse;
 use phpDocumentor\Reflection\DocBlock\Tag;
 
-require_once('ArangoDbPhpCoreUnitTestCase.php');
+require_once 'ArangoDbPhpCoreUnitTestCase.php';
 
 
 /**
@@ -77,7 +77,7 @@ location: /_db/_system/_api/collection/testCollectionBasics\r\n\r\n{
   "code" : 200
 }
 TAG;
-        $options        = ["waitForSync" => true];
+        $options                  = ['waitForSync' => true];
         $this->connector->method('request')
                         ->willReturn($createCollectionResponse);
 
@@ -103,7 +103,7 @@ content-type: application/json; charset=utf-8\r\n\r\n{
   "code" : 200
 }
 TAG;
-        $options        = ["waitForSync" => true];
+        $options                  = ['waitForSync' => true];
         $this->connector->method('request')
                         ->willReturn($deleteCollectionResponse);
 
@@ -133,7 +133,7 @@ content-type: application/json; charset=utf-8\r\n\r\n{
   "code" : 200
 }
 TAG;
-        $options        = ["waitForSync" => true];
+        $options                  = ['waitForSync' => true];
         $this->connector->method('request')
                         ->willReturn($deleteCollectionResponse);
 
@@ -171,7 +171,7 @@ content-type: application/json; charset=utf-8\r\n\r\n{
     }
 }
 TAG;
-        $options                  = ["excludeSystem" => true];
+        $options                  = ['excludeSystem' => true];
         $this->connector->method('request')
                         ->willReturn($deleteCollectionResponse);
 

@@ -9,7 +9,6 @@
 
 namespace frankmayer\ArangoDbPhpCore\Tests\Integration;
 
-require_once('ArangoDbPhpCoreIntegrationTestCase.php');
 
 use frankmayer\ArangoDbPhpCore\Client;
 

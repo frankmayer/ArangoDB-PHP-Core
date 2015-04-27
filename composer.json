@@ -28,7 +28,7 @@
     "Apache-2.0"
   ],
   "require": {
-    "php": ">=5.3.0",
+    "php": ">=7.0.0",
     "lib-curl": "*"
   },
   "require-dev": {

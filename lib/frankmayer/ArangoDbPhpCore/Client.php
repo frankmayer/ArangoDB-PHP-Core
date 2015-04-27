@@ -87,10 +87,6 @@ class Client
         $this->requestClass  = $this->clientOptions[ClientOptions::OPTION_REQUEST_CLASS];
         $this->responseClass = $this->clientOptions[ClientOptions::OPTION_RESPONSE_CLASS];
 
-        if (isset($this->clientOptions[ClientOptions::OPTION_ARANGODB_API_VERSION])) {
-
-            $this->arangoDBApiVersion = $this->clientOptions[ClientOptions::OPTION_ARANGODB_API_VERSION];
-        }
         if (isset($this->clientOptions['plugins'])) {
             $this->pluginManager = new PluginManager($this,
                 isset($this->clientOptions['plugins']) ? $this->clientOptions['plugins'] : null,
@@ -322,6 +318,24 @@ class Client
     public function getRequestClass()
     {
         return $this->requestClass;
+    }
+
+
+    /**
+     * @return RequestInterface
+     */
+    public function getRequest()
+    {
+        return new $this->requestClass($this);
+    }
+
+
+   /**
+     * @return ResponseInterface
+     */
+    public function getResponse()
+    {
+        return new $this->responseClass($this);
     }
 
 

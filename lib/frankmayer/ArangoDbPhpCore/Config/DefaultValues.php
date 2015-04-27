@@ -51,7 +51,7 @@ abstract class DefaultValues
     /**
      * Default value for HTTP Client header
      */
-    const DEFAULT_CLIENT = "Close";
+    const DEFAULT_CLIENT = 'Close';
 
     /**
      * Default update policy

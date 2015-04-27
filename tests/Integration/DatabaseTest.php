@@ -1,7 +1,7 @@
 <?php
 
 /**
- * ArangoDB PHP Core Client Test-Suite: Collection Test
+ * ArangoDB PHP Core Client Test-Suite: Database Test
  *
  * @package   frankmayer\ArangoDbPhpCore
  * @author    Frank Mayer
@@ -11,17 +11,17 @@
 namespace frankmayer\ArangoDbPhpCore\Tests\Integration;
 
 
-use frankmayer\ArangoDbPhpCore\Api\Rest\Collection;
+use frankmayer\ArangoDbPhpCore\Api\Rest\Database;
 use frankmayer\ArangoDbPhpCore\Client;
 use HttpResponse;
 
 //todo: fix tests
 
 /**
- * Class CollectionTest
+ * Class DatabaseTest
  * @package frankmayer\ArangoDbPhpCore
  */
-class CollectionIntegrationTest extends
+class DatabaseIntegrationTest extends
     ArangoDbPhpCoreIntegrationTestCase
 {
     /**
@@ -36,20 +36,20 @@ class CollectionIntegrationTest extends
     public function setUp()
     {
         $connector    = new Connector();
-        $this->client = getClient($connector);
+        $this->client = $this->client = getClient($connector);
     }
 
 
     /**
      * Test if we can get the server version
      */
-    public function testCreateCollectionWithoutApiClasses()
+    public function testCreateDatabaseWithoutApiClasses()
     {
-        $collectionName = 'ArangoDB-PHP-Core-CollectionTestSuite-Collection';
+        $databaseName = 'ArangoDB-PHP-Core-DatabaseTestSuite-Database';
 
-        $collectionOptions    = ['waitForSync' => true];
-        $collectionParameters = [];
-        $options              = $collectionOptions;
+        $databaseOptions    = ['waitForSync' => true];
+        $databaseParameters = [];
+        $options            = $databaseOptions;
         $this->client->bind(
             'Request',
             function () {
@@ -63,12 +63,12 @@ class CollectionIntegrationTest extends
         // Note that the type-name 'httpRequest' is the name we bound our HttpRequest class creation-closure to. (see above)
         $request          = $this->client->make('Request');
         $request->options = $options;
-        $request->body    = ['name' => $collectionName];
+        $request->body    = ['name' => $databaseName];
 
-        $request->body = self::array_merge_recursive_distinct($request->body, $collectionParameters);
+        $request->body = self::array_merge_recursive_distinct($request->body, $databaseParameters);
         $request->body = json_encode($request->body);
 
-        $request->path   = $this->client->fullDatabasePath . self::API_COLLECTION;
+        $request->path   = $this->client->fullDatabasePath . self::API_DATABASE;
         $request->method = self::METHOD_POST;
 
         $responseObject = $request->send();
@@ -78,19 +78,19 @@ class CollectionIntegrationTest extends
         $this->assertArrayHasKey('code', json_decode($body, true));
         $decodedJsonBody = json_decode($body, true);
         $this->assertEquals(200, $decodedJsonBody['code']);
-        $this->assertEquals($collectionName, $decodedJsonBody['name']);
+        $this->assertEquals($databaseName, $decodedJsonBody['name']);
     }
 
 
     /**
      * Test if we can get the server version
      */
-    public function testDeleteCollectionWithoutApiClasses()
+    public function testDeleteDatabaseWithoutApiClasses()
     {
-        $collectionName = 'ArangoDB-PHP-Core-CollectionTestSuite-Collection';
+        $databaseName = 'ArangoDB-PHP-Core-DatabaseTestSuite-Database';
 
-        $collectionOptions = ['waitForSync' => true];
-        $options           = $collectionOptions;
+        $databaseOptions = ['waitForSync' => true];
+        $options         = $databaseOptions;
         $this->client->bind(
             'Request',
             function () {
@@ -104,7 +104,7 @@ class CollectionIntegrationTest extends
         $request = $this->client->make('Request');
 
         $request->options = $options;
-        $request->path    = $this->client->fullDatabasePath . self::API_COLLECTION . '/' . $collectionName;
+        $request->path    = $this->client->fullDatabasePath . self::API_DATABASE . '/' . $databaseName;
         $request->method  = self::METHOD_DELETE;
 
         $responseObject = $request->send();
@@ -119,60 +119,60 @@ class CollectionIntegrationTest extends
     /**
      * Test if we can get the server version
      */
-    public function testCreateCollectionViaIocContainer()
+    public function testCreateDatabaseViaIocContainer()
     {
-        $collectionName = 'ArangoDB-PHP-Core-CollectionTestSuite-Collection';
+        $databaseName = 'ArangoDB-PHP-Core-DatabaseTestSuite-Database';
 
-        $collectionOptions = ['waitForSync' => true];
+        $databaseOptions = ['waitForSync' => true];
 
 
-        $collection = new Collection($this->client);
+        $database = new Database($this->client);
 
         /** @var $responseObject HttpResponse */
-        $responseObject = $collection->create($collectionName, $collectionOptions);
+        $responseObject = $database->create($databaseName, $databaseOptions);
 
         $body = $responseObject->body;
 
         $this->assertArrayHasKey('code', json_decode($body, true));
         $decodedJsonBody = json_decode($body, true);
         $this->assertEquals(200, $decodedJsonBody['code']);
-        $this->assertEquals($collectionName, $decodedJsonBody['name']);
+        $this->assertEquals($databaseName, $decodedJsonBody['name']);
     }
 
 
     /**
      * Test if we can get the server version
      */
-    public function testTruncateCollection()
+    public function testTruncateDatabase()
     {
-        $collectionName = 'ArangoDB-PHP-Core-CollectionTestSuite-Collection';
+        $databaseName = 'ArangoDB-PHP-Core-DatabaseTestSuite-Database';
 
-        $collection = new Collection($this->client);
+        $database = new Database($this->client);
 
         /** @var $responseObject HttpResponse */
-        $responseObject = $collection->truncate($collectionName);
+        $responseObject = $database->truncate($databaseName);
 
         $body = $responseObject->body;
 
         $this->assertArrayHasKey('code', json_decode($body, true));
         $decodedJsonBody = json_decode($body, true);
         $this->assertEquals(200, $decodedJsonBody['code']);
-        $this->assertEquals($collectionName, $decodedJsonBody['name']);
+        $this->assertEquals($databaseName, $decodedJsonBody['name']);
     }
 
 
     /**
      * Test if we can get the server version
      */
-    public function testDeleteCollection()
+    public function testDeleteDatabase()
     {
 
-        $collectionName = 'ArangoDB-PHP-Core-CollectionTestSuite-Collection';
+        $databaseName = 'ArangoDB-PHP-Core-DatabaseTestSuite-Database';
 
-        $collection = new Collection($this->client);
+        $database = new Database($this->client);
 
         /** @var $responseObject HttpResponse */
-        $responseObject = $collection->drop($collectionName);
+        $responseObject = $database->drop($databaseName);
 
         $body = $responseObject->body;
 
@@ -183,14 +183,14 @@ class CollectionIntegrationTest extends
 
 
     /**
-     * Test if we can get all collections
+     * Test if we can get all databases
      */
-    public function testGetCollections()
+    public function testGetDatabases()
     {
-        $collection = new Collection($this->client);
+        $database = new Database($this->client);
 
         /** @var $responseObject HttpResponse */
-        $responseObject = $collection->getAll();
+        $responseObject = $database->getAll();
 
         $response = json_decode($responseObject->body);
 
@@ -199,14 +199,14 @@ class CollectionIntegrationTest extends
 
 
     /**
-     * Test if we can get all collections
+     * Test if we can get all databases
      */
-    public function testGetCollectionsExcludeSystem()
+    public function testGetDatabasesExcludeSystem()
     {
-        $collection = new Collection($this->client);
+        $database = new Database($this->client);
 
         /** @var $responseObject HttpResponse */
-        $responseObject = $collection->getAll(['excludeSystem' => true]);
+        $responseObject = $database->getAll(['excludeSystem' => true]);
 
         $response = json_decode($responseObject->body);
 
@@ -219,10 +219,10 @@ class CollectionIntegrationTest extends
      */
     public function tearDown()
     {
-        $collectionName = 'ArangoDB-PHP-Core-CollectionTestSuite-CollectionViaIocContainer';
-        $collection     = new Collection($this->client);
+        $databaseName = 'ArangoDB-PHP-Core-DatabaseTestSuite-DatabaseViaIocContainer';
+        $database     = new Database($this->client);
 
         /** @var $responseObject HttpResponse */
-        $collection->drop($collectionName);
+        $database->drop($databaseName);
     }
 }

@@ -38,7 +38,7 @@ trait EdgeTrait
         $options = []
     ) {
         /** @var AbstractHttpRequest $request */
-        $request          = new $this->client->requestClass($this->client);
+        $request          = $this->getRequest();
         $request->options = $options;
         $request->body    = $body;
 

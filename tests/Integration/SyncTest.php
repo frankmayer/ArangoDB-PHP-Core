@@ -9,7 +9,6 @@
 
 namespace frankmayer\ArangoDbPhpCore\Tests\Integration;
 
-require_once('ArangoDbPhpCoreIntegrationTestCase.php');
 
 use frankmayer\ArangoDbPhpCore\Client;
 
@@ -54,15 +53,14 @@ class SyncIntegrationTest extends ArangoDbPhpCoreIntegrationTestCase
         $this->client->bind(
             'Request',
             function () {
-                $request         = new $this->client->requestClass($this);
-                $request->client = $this->client;
+                $request = $this->client->getRequest();
 
                 return $request;
             }
         );
         $query = 'RETURN SLEEP(1)';
 
-        $statement = ["query" => $query];
+        $statement = ['query' => $query];
 
         // And here's how one gets an HttpRequest object through the IOC.
         // Note that the type-name 'httpRequest' is the name we bound our HttpRequest class creation-closure to. (see above)

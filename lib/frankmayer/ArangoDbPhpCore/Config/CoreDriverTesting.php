@@ -15,7 +15,7 @@ use frankmayer\ArangoDbPhpCore\ClientOptions;
 
 return [
     // endpoint to connect to
-    ClientOptions::OPTION_ENDPOINT      => 'tcp://localhost:8529/',
+    ClientOptions::OPTION_ENDPOINT      => 'tcp://db-link:8529/',
     // can use either 'Close' (one-time clients) or 'Keep-Alive' (re-used clients)
     ClientOptions::OPTION_CLIENT        => 'Close',
     // use basic authorization

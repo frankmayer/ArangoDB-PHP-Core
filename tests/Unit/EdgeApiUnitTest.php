@@ -13,7 +13,7 @@ use frankmayer\ArangoDbPhpCore\Api\Rest\Batch;
 use frankmayer\ArangoDbPhpCore\Api\Rest\Edge;
 use frankmayer\ArangoDbPhpCore\Protocols\Http\HttpResponse;
 
-require_once('ArangoDbPhpCoreUnitTestCase.php');
+require_once 'ArangoDbPhpCoreUnitTestCase.php';
 
 
 /**
@@ -99,7 +99,7 @@ content-type: application/json; charset=utf-8\r\n\r\n{
 TAG;
         $handle         = 'edges/1234567890';
 
-        $options = ["waitForSync" => true];
+        $options = ['waitForSync' => true];
         $this->connector->method('request')
                         ->willReturn($deleteResponse);
 
@@ -129,7 +129,7 @@ etag: "1493440336"\r\n\r\n{
 TAG;
         $handle                   = 'edges/1234567890';
 
-        $options = ["waitForSync" => true];
+        $options = ['waitForSync' => true];
         $this->connector->method('request')
                         ->willReturn($deleteCollectionResponse);
 
@@ -154,7 +154,7 @@ etag: "1234567890"\r\n\r\n
 TAG;
         $handle                   = 'edges/1234567890';
 
-        $options = ["waitForSync" => true];
+        $options = ['waitForSync' => true];
         $this->connector->method('request')
                         ->willReturn($deleteCollectionResponse);
 
@@ -186,7 +186,7 @@ TAG;
         $handle                   = 'edges/1234567890';
         $body                     = '{ "Hello": "World" }';
 
-        $options = ["waitForSync" => true];
+        $options = ['waitForSync' => true];
         $this->connector->method('request')
                         ->willReturn($deleteCollectionResponse);
 
@@ -245,7 +245,7 @@ content-type: application/json; charset=utf-8\r\n\r\n{
   ]
 }
 TAG;
-        $options                  = ["excludeSystem" => true];
+        $options                  = ['excludeSystem' => true];
         $this->connector->method('request')
                         ->willReturn($deleteCollectionResponse);
 

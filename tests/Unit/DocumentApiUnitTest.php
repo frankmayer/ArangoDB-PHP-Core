@@ -13,7 +13,7 @@ use frankmayer\ArangoDbPhpCore\Api\Rest\Document;
 use frankmayer\ArangoDbPhpCore\Protocols\Http\HttpResponse;
 use phpDocumentor\Reflection\DocBlock\Tag;
 
-require_once('ArangoDbPhpCoreUnitTestCase.php');
+require_once 'ArangoDbPhpCoreUnitTestCase.php';
 
 
 /**
@@ -71,7 +71,7 @@ location: /_db/_system/_api/document/products/1491343184\r\n\r\n{
 TAG;
         $body           = '{ "Hello": "World" }';
 
-        $options = ["waitForSync" => true];
+        $options = ['waitForSync' => true];
         $this->connector->method('request')
                         ->willReturn($createResponse);
 
@@ -100,7 +100,7 @@ content-type: application/json; charset=utf-8\r\n\r\n{
 TAG;
         $handle         = 'products/1234567890';
 
-        $options = ["waitForSync" => true];
+        $options = ['waitForSync' => true];
         $this->connector->method('request')
                         ->willReturn($deleteResponse);
 
@@ -130,7 +130,7 @@ etag: "1493440336"\r\n\r\n{
 TAG;
         $handle                   = 'products/1234567890';
 
-        $options = ["waitForSync" => true];
+        $options = ['waitForSync' => true];
         $this->connector->method('request')
                         ->willReturn($deleteCollectionResponse);
 
@@ -155,7 +155,7 @@ etag: "1493440336"\r\n\r\n
 TAG;
         $handle                   = 'products/1234567890';
 
-        $options = ["waitForSync" => true];
+        $options = ['waitForSync' => true];
         $this->connector->method('request')
                         ->willReturn($deleteCollectionResponse);
 
@@ -187,7 +187,7 @@ TAG;
         $handle                   = 'products/1234567890';
         $body                     = '{ "Hello": "World" }';
 
-        $options = ["waitForSync" => true];
+        $options = ['waitForSync' => true];
         $this->connector->method('request')
                         ->willReturn($deleteCollectionResponse);
 
@@ -219,7 +219,7 @@ TAG;
         $handle                   = 'products/1234567890';
         $body                     = '{ "Hello": "World" }';
 
-        $options = ["waitForSync" => true];
+        $options = ['waitForSync' => true];
         $this->connector->method('request')
                         ->willReturn($deleteCollectionResponse);
 
@@ -247,7 +247,7 @@ content-type: application/json; charset=utf-8\r\n\r\n{
   ]
 }
 TAG;
-        $options                  = ["excludeSystem" => true];
+        $options                  = ['excludeSystem' => true];
         $this->connector->method('request')
                         ->willReturn($deleteCollectionResponse);
 

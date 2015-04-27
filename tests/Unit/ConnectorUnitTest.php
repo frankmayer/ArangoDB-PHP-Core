@@ -8,7 +8,7 @@
  */
 namespace frankmayer\ArangoDbPhpCore;
 
-require_once('ArangoDbPhpCoreUnitTestCase.php');
+require_once 'ArangoDbPhpCoreUnitTestCase.php';
 
 
 /**

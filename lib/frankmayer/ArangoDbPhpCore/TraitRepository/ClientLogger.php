@@ -24,7 +24,7 @@ trait ClientLogger
      */
     public function log($logData)
     {
-        echo "LOGGING: " . $logData;
+        echo 'LOGGING: ' . $logData;
 
         return true;
     }

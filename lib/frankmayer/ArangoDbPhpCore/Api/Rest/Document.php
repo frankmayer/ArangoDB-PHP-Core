@@ -21,5 +21,4 @@ class Document extends
     RestApiInterface
 {
     use DocumentTrait;
-
 }

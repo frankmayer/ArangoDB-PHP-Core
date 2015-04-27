@@ -13,7 +13,7 @@ namespace frankmayer\ArangoDbPhpCore;
 use frankmayer\ArangoDbPhpCore\Plugins\TracerPlugin;
 
 require dirname(__FILE__) . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'autoload.php';
-require_once('testclasses/TestConnector.php');
+require_once 'testclasses/TestConnector.php';
 
 function getClientOptions()
 {
@@ -35,7 +35,6 @@ function getClientOptions()
         // ClientOptions::OPTION_PLUGINS              => $plugins,
         ClientOptions::OPTION_REQUEST_CLASS        => 'frankmayer\ArangoDbPhpCore\Protocols\Http\HttpRequest',
         ClientOptions::OPTION_RESPONSE_CLASS       => 'frankmayer\ArangoDbPhpCore\Protocols\Http\HttpResponse',
-        ClientOptions::OPTION_ARANGODB_API_VERSION => '10400',
 
     ];
 }

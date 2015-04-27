@@ -12,7 +12,7 @@ use frankmayer\ArangoDbPhpCore\Plugins\PluginManager;
 use frankmayer\ArangoDbPhpCore\Protocols\Http\HttpRequest;
 use frankmayer\ArangoDbPhpCore\Protocols\Http\HttpResponse;
 
-require_once('ArangoDbPhpCoreUnitTestCase.php');
+require_once 'ArangoDbPhpCoreUnitTestCase.php';
 
 
 /**

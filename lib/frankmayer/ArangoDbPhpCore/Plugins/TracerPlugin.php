@@ -30,7 +30,7 @@ class TracerPlugin extends
     public function notify($eventName, $client, $eventData)
     {
         // todo 1 Frank Make basic tracer plugin
-        echo "tracing event (" . ($this->priority) . "):", $eventName, PHP_EOL;
+        echo 'tracing event (' . $this->priority . '):', $eventName, PHP_EOL;
     }
     // @codeCoverageIgnoreEnd
 }

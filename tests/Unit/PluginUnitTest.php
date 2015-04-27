@@ -10,7 +10,7 @@
 
 namespace frankmayer\ArangoDbPhpCore;
 
-require_once('ArangoDbPhpCoreUnitTestCase.php');
+require_once 'ArangoDbPhpCoreUnitTestCase.php';
 
 use frankmayer\ArangoDbPhpCore\Plugins\PluginManager;
 use frankmayer\ArangoDbPhpCore\Plugins\TestPlugin;
@@ -73,8 +73,10 @@ class PluginUnitTest extends ArangoDbPhpCoreUnitTestCase
         $this->assertArrayHasKey('tracer4', $this->client->pluginManager->pluginStorage);
 
         $keys = array_keys($this->client->pluginManager->pluginStorage);
-        $this->assertTrue($this->client->pluginManager->pluginStorage[$keys[2]] === $this->client->pluginManager->pluginStorage['tracer1']);
-        $this->assertTrue($this->client->pluginManager->pluginStorage[$keys[3]] === $this->client->pluginManager->pluginStorage['tracer3']);
+        $this->assertSame($this->client->pluginManager->pluginStorage[$keys[2]],
+            $this->client->pluginManager->pluginStorage['tracer1']);
+        $this->assertSame($this->client->pluginManager->pluginStorage[$keys[3]],
+            $this->client->pluginManager->pluginStorage['tracer3']);
 
 
         $this->client->pluginManager->removePluginInstance('tracer1');

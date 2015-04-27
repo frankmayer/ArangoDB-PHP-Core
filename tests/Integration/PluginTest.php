@@ -10,8 +10,6 @@
 
 namespace frankmayer\ArangoDbPhpCore\Tests\Integration;
 
-require_once('ArangoDbPhpCoreIntegrationTestCase.php');
-
 use frankmayer\ArangoDbPhpCore\Api\Rest\Collection;
 use frankmayer\ArangoDbPhpCore\Client;
 use frankmayer\ArangoDbPhpCore\ClientOptions;
@@ -83,8 +81,7 @@ class PluginIntegrationTest extends
         $this->assertInstanceOf('\Exception', $e);
 
         /** @var $responseObject HttpResponse */
-        $collection         = new Collection($this->client);
-        $collection->client = $this->client;
+        $collection = new Collection($this->client);
 
         /** @var $responseObject HttpResponse */
         $responseObject = $collection->getAll();

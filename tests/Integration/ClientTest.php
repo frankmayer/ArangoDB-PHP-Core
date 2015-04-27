@@ -10,11 +10,8 @@
 
 namespace frankmayer\ArangoDbPhpCore\Tests\Integration;
 
-require_once('ArangoDbPhpCoreIntegrationTestCase.php');
 
 use frankmayer\ArangoDbPhpCore\Client;
-use frankmayer\ArangoDbPhpCore\ClientOptions;
-use frankmayer\ArangoDbPhpCore\Plugins\TracerPlugin;
 
 //todo: fix tests
 
@@ -46,7 +43,6 @@ class ClientIntegrationTest extends
         $this->connector = $connector;
         $this->client    = getClient($connector);
     }
-
 
 
     /**

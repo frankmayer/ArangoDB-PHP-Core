@@ -44,7 +44,7 @@ class Autoloader
 
         spl_autoload_register(__NAMESPACE__ . '\Autoloader::load');
 
-        self::$rootDir = dirname(__FILE__) . DIRECTORY_SEPARATOR;
+        self::$rootDir = __DIR__ .'/';
     }
 
     /**
@@ -79,7 +79,7 @@ class Autoloader
      */
     private static function checkEnvironment()
     {
-        if (version_compare(PHP_MAJOR_VERSION . '.' . PHP_MINOR_VERSION . '.' . PHP_RELEASE_VERSION, "5.4.0", "<")) {
+        if (version_compare(PHP_MAJOR_VERSION . '.' . PHP_MINOR_VERSION . '.' . PHP_RELEASE_VERSION, '5.4.0', '<')) {
             throw new ClientException('Incompatible PHP environment. Expecting PHP 5.4 or higher');
         }
     }
