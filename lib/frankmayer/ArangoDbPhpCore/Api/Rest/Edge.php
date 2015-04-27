@@ -26,5 +26,4 @@ class Edge extends
      *
      */
     const API_PATH = '/_api/edge';
-
 }

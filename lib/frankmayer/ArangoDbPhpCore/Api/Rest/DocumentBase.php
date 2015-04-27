@@ -38,7 +38,7 @@ class DocumentBase extends Api
         $options = []
     ) {
         /** @var AbstractHttpRequest $request */
-        $request          = new $this->client->requestClass($this->client);
+        $request          = $this->getRequest();
         $request->options = $options;
         $request->body    = $body;
 
@@ -72,7 +72,7 @@ class DocumentBase extends Api
         $options = []
     ) {
         /** @var AbstractHttpRequest $request */
-        $request          = new $this->client->requestClass($this->client);
+        $request          = $this->getRequest();
         $request->options = $options;
         $request->body    = $body;
 
@@ -103,7 +103,7 @@ class DocumentBase extends Api
         $options = []
     ) {
         /** @var AbstractHttpRequest $request */
-        $request          = new $this->client->requestClass($this->client);
+        $request          = $this->getRequest();
         $request->options = $options;
         $request->path    = $this->client->fullDatabasePath . static::API_PATH;
         $request->path .= '?collection=' . $collection;
@@ -124,7 +124,7 @@ class DocumentBase extends Api
         $options = []
     ) {
         /** @var AbstractHttpRequest $request */
-        $request          = new $this->client->requestClass($this->client);
+        $request          = $this->getRequest();
         $request->options = $options;
         $request->path    = $this->client->fullDatabasePath . static::API_PATH . '/' . $handle;
         $request->method  = static::METHOD_GET;
@@ -144,7 +144,7 @@ class DocumentBase extends Api
         $options = []
     ) {
         /** @var AbstractHttpRequest $request */
-        $request          = new $this->client->requestClass($this->client);
+        $request          = $this->getRequest();
         $request->options = $options;
         $request->path    = $this->client->fullDatabasePath . static::API_PATH . '/' . $handle;
         $request->method  = static::METHOD_HEAD;
@@ -163,7 +163,7 @@ class DocumentBase extends Api
         $options = []
     ) {
         /** @var AbstractHttpRequest $request */
-        $request          = new $this->client->requestClass($this->client);
+        $request          = $this->getRequest();
         $request->options = $options;
         $request->path    = $this->client->fullDatabasePath . static::API_PATH . '/' . $handle;
         $request->method  = static::METHOD_DELETE;

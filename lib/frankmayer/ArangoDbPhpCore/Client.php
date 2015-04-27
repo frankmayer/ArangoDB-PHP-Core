@@ -326,6 +326,24 @@ class Client
 
 
     /**
+     * @return RequestInterface
+     */
+    public function getRequest()
+    {
+        return new $this->requestClass($this);
+    }
+
+
+   /**
+     * @return ResponseInterface
+     */
+    public function getResponse()
+    {
+        return new $this->responseClass($this);
+    }
+
+
+    /**
      * @param ResponseInterface $responseClass
      *
      * @return $this

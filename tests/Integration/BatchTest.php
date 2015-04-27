@@ -58,8 +58,7 @@ class BatchIntegrationTest extends
         $batchParts = [];
 
         foreach ($this->collectionNames as $collectionName) {
-            $collection         = new Collection($this->client);
-            $collection->client = $this->client;
+            $collection = new Collection($this->client);
 
             /** @var $responseObject HttpResponse */
             $batchPart = $collection->create($collectionName, $collectionOptions, ['isBatchPart' => true]);
@@ -85,8 +84,7 @@ class BatchIntegrationTest extends
         $batchParts = [];
 
         foreach ($this->collectionNames as $collectionName) {
-            $collection         = new Collection($this->client);
-            $collection->client = $this->client;
+            $collection = new Collection($this->client);
 
             /** @var $responseObject HttpResponse */
             $batchParts[] = $collection->drop($collectionName, ['isBatchPart' => true]);
@@ -113,8 +111,7 @@ class BatchIntegrationTest extends
     {
         $batchParts = [];
         foreach ($this->collectionNames as $collectionName) {
-            $collection         = new Collection($this->client);
-            $collection->client = $this->client;
+            $collection = new Collection($this->client);
 
             /** @var $responseObject HttpResponse */
             $batchParts[] = $collection->drop($collectionName, ['isBatchPart' => true]);

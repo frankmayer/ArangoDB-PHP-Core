@@ -48,7 +48,6 @@ class ClientIntegrationTest extends
     }
 
 
-
     /**
      *
      */

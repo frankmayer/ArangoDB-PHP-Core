@@ -37,7 +37,7 @@ class Async extends
         $options = []
     ) {
         /** @var AbstractHttpRequest $request */
-        $request          = new $this->client->requestClass($this->client);
+        $request          = $this->getRequest();
         $request->options = $options;
         $request->path    = $this->client->fullDatabasePath . static::API_PATH . '/' . $handle;
         $request->method  = static::METHOD_PUT;
@@ -61,7 +61,7 @@ class Async extends
         $urlQuery = null;
 
         /** @var AbstractHttpRequest $request */
-        $request          = new $this->client->requestClass($this->client);
+        $request          = $this->getRequest();
         $request->options = $options;
         $request->path    = $this->client->fullDatabasePath . static::API_PATH . '/' . $type;
 
@@ -93,7 +93,7 @@ class Async extends
         $urlQuery = null;
 
         /** @var AbstractHttpRequest $request */
-        $request          = new $this->client->requestClass($this->client);
+        $request          = $this->getRequest();
         $request->options = $options;
         $request->path    = $this->client->fullDatabasePath . static::API_PATH . '/' . $type;
 

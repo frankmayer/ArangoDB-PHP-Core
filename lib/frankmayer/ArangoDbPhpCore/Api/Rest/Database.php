@@ -13,38 +13,38 @@ use frankmayer\ArangoDbPhpCore\Protocols\Http\AbstractHttpRequest;
 
 
 /**
- * Class Collection
+ * Class Database
  *
  * @package frankmayer\ArangoDbPhpCore\Api\Rest
  */
-class Collection extends
+class Database extends
     Api implements
     RestApiInterface
 {
     /**
      *
      */
-    const API_PATH = '/_api/collection';
+    const API_PATH = '/_api/database';
 
     /**
-     * @param string $collectionName       The collection name
-     * @param array  $collectionParameters Collection parameters according to the HTTP API
-     * @param array  $options              Other options (not stable yet...)
+     * @param string $databaseName
+     * @param array  $databaseParameters
+     * @param array  $options
      *
      * @return \frankmayer\ArangoDbPhpCore\Protocols\Http\HttpResponse
      * @throws \frankmayer\ArangoDbPhpCore\ClientException
      */
     public function create(
-        $collectionName,
-        $collectionParameters = [],
+        $databaseName,
+        $databaseParameters = [],
         $options = []
     ) {
         $request = $this->getRequest();
 
         $request->options = $options;
-        $request->body    = ['name' => $collectionName];
+        $request->body    = ['name' => $databaseName];
 
-        $request->body = static::array_merge_recursive_distinct($request->body, $collectionParameters);
+        $request->body = static::array_merge_recursive_distinct($request->body, $databaseParameters);
         $request->body = json_encode($request->body);
 
         $request->path   = $this->client->fullDatabasePath . static::API_PATH;
@@ -55,20 +55,20 @@ class Collection extends
 
 
     /**
-     * @param string $collectionName
+     * @param string $databaseName
      * @param array  $options
      *
      * @return \frankmayer\ArangoDbPhpCore\Protocols\Http\HttpResponse
      */
     public function drop(
-        $collectionName,
+        $databaseName,
         $options = []
     ) {
         /** @var AbstractHttpRequest $request */
         $request = $this->getRequest();
 
         $request->options = $options;
-        $request->path    = $this->client->fullDatabasePath . static::API_PATH . '/' . $collectionName;
+        $request->path    = $this->client->fullDatabasePath . static::API_PATH . '/' . $databaseName;
         $request->method  = static::METHOD_DELETE;
 
         return $this->getReturnObject($request);
@@ -76,13 +76,13 @@ class Collection extends
 
 
     /**
-     * @param string $collectionName
+     * @param string $databaseName
      * @param array  $options
      *
      * @return \frankmayer\ArangoDbPhpCore\Protocols\Http\HttpResponse
      */
     public function truncate(
-        $collectionName,
+        $databaseName,
         $options = []
     ) {
         /** @var AbstractHttpRequest $request */
@@ -90,7 +90,7 @@ class Collection extends
 
         $request->options = $options;
 
-        $request->path   = $this->client->fullDatabasePath . static::API_PATH . '/' . $collectionName . '/truncate';
+        $request->path   = $this->client->fullDatabasePath . static::API_PATH . '/' . $databaseName . '/truncate';
         $request->method = static::METHOD_PUT;
 
         return $this->getReturnObject($request);

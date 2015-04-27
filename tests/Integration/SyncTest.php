@@ -54,8 +54,7 @@ class SyncIntegrationTest extends ArangoDbPhpCoreIntegrationTestCase
         $this->client->bind(
             'Request',
             function () {
-                $request         = new $this->client->requestClass($this);
-                $request->client = $this->client;
+                $request = $this->client->getRequest();
 
                 return $request;
             }

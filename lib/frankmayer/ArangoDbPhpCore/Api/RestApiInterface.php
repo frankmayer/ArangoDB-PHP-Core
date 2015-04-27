@@ -17,4 +17,13 @@ namespace frankmayer\ArangoDbPhpCore\Api;
  */
 interface  RestApiInterface extends ApiInterface
 {
+    /**
+     * @return RequestInterface
+     */
+    public function getRequest();
+
+    /**
+     * @return ResponseInterface
+     */
+    public function getResponse();
 }

@@ -9,6 +9,7 @@
 namespace frankmayer\ArangoDbPhpCore\Api\Rest;
 
 use frankmayer\ArangoDbPhpCore\Client;
+use frankmayer\ArangoDbPhpCore\Protocols\RequestInterface;
 
 
 /**
@@ -29,7 +30,8 @@ class Api
     /**
      * @var Client The client instance of this api instance
      */
-    public $client;
+    protected $client;
+
 
     /**
      * Constructs an api object through which commands can be issued against the server.
@@ -61,6 +63,25 @@ class Api
             return $responseObject;
         }
     }
+
+
+    /**
+     * @return RequestInterface
+     */
+    public function getRequest()
+    {
+        return $this->client->getRequest();
+    }
+
+
+   /**
+     * @return ResponseInterface
+     */
+    public function getResponse()
+    {
+        return $this->client->getResponse();
+    }
+
 
     /**
      * array_merge_recursive does indeed merge arrays, but it converts values with duplicate
@@ -106,4 +127,5 @@ class Api
 
         return $merged;
     }
+
 }

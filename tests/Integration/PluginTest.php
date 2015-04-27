@@ -83,8 +83,7 @@ class PluginIntegrationTest extends
         $this->assertInstanceOf('\Exception', $e);
 
         /** @var $responseObject HttpResponse */
-        $collection         = new Collection($this->client);
-        $collection->client = $this->client;
+        $collection = new Collection($this->client);
 
         /** @var $responseObject HttpResponse */
         $responseObject = $collection->getAll();

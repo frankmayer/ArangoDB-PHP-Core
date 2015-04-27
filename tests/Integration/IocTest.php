@@ -14,6 +14,7 @@ require_once('ArangoDbPhpCoreIntegrationTestCase.php');
 
 use frankmayer\ArangoDbPhpCore\Client;
 use frankmayer\ArangoDbPhpCore\ClientException;
+use frankmayer\ArangoDbPhpCore\Protocols\Http\HttpRequest;
 use frankmayer\ArangoDbPhpCore\Protocols\Http\HttpRequestInterface;
 use frankmayer\ArangoDbPhpCore\Protocols\ResponseInterface;
 
@@ -61,8 +62,7 @@ class IocIntegrationTest extends
         $this->client->bind(
             'Request',
             function () {
-                $request         = new $this->client->requestClass($this);
-                $request->client = $this->client;
+                $request = $this->client->getRequest();
 
                 return $request;
             }
@@ -78,8 +78,7 @@ class IocIntegrationTest extends
         $this->client->bind(
             'Request',
             function () {
-                $request         = new $this->client->requestClass($this);
-                $request->client = $this->client;
+                $request = $this->client->getRequest();
 
                 return $request;
             }
@@ -191,8 +190,7 @@ class IocIntegrationTest extends
         $this->client->bind(
             'Response',
             function () {
-                $request         = new $this->client->responseClass($this);
-                $request->client = $this->client;
+                $request = $this->client->getResponse();
 
                 return $request;
             }
