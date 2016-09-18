@@ -10,6 +10,7 @@
 
 namespace frankmayer\ArangoDbPhpCore\Tests\Integration;
 
+require_once __DIR__.'/ArangoDbPhpCoreIntegrationTestCase.php';
 
 use frankmayer\ArangoDbPhpCore\Client;
 use frankmayer\ArangoDbPhpCore\ClientException;

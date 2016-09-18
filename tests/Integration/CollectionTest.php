@@ -10,6 +10,7 @@
 
 namespace frankmayer\ArangoDbPhpCore\Tests\Integration;
 
+require_once __DIR__ . '/ArangoDbPhpCoreIntegrationTestCase.php';
 
 use frankmayer\ArangoDbPhpCore\Api\Rest\Collection;
 use frankmayer\ArangoDbPhpCore\Client;
@@ -193,8 +194,14 @@ class CollectionIntegrationTest extends
         $responseObject = $collection->getAll();
 
         $response = json_decode($responseObject->body);
+        $foundGraphs=false;
 
-        $this->assertObjectHasAttribute('_graphs', $response->names);
+        foreach ($response as $value) {
+            if (in_array($value)==='_graphs'){
+                $foundGraphs=true;
+            }
+        }
+        $this->assertTrue($foundGraphs);
     }
 
 
@@ -210,7 +217,15 @@ class CollectionIntegrationTest extends
 
         $response = json_decode($responseObject->body);
 
-        $this->assertObjectNotHasAttribute('_graphs', $response->names);
+        $foundGraphs=false;
+
+        foreach ($response as $value) {
+            if (in_array($value)==='_graphs'){
+                $foundGraphs=true;
+            }
+        }
+        $this->assertFalse($foundGraphs);
+
     }
 
 
