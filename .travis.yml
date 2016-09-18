@@ -4,13 +4,13 @@ php:
   - 5.6
   - 7.0
   - 7.1
-  - hhvm-3.12
-  - hhvm-nightly
+  - hhvm
+  #  - hhvm-nightly
 
 matrix:
     fast_finish: true
     allow_failures:
-      - php: hhvm-nightly
+#      - php: hhvm-nightly
       - php: 7.1
 
 before_script:
