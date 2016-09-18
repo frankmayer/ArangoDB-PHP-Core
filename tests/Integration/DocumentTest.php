@@ -139,8 +139,8 @@ class DocumentIntegrationTest extends
 
         $decodedJsonBody = json_decode($responseBody, true);
 
-        $this->assertArrayNotHasKey('error', $decodedJsonBody);
-
+        $this->assertArrayHasKey('error', $decodedJsonBody);
+        $this->assertEquals(true, $decodedJsonBody['error']);
 
         $this->assertEquals($collectionName . '/1', $decodedJsonBody['_id']);
 
@@ -200,8 +200,8 @@ class DocumentIntegrationTest extends
 
         $decodedJsonBody = json_decode($responseBody, true);
 
-        $this->assertArrayNotHasKey('error', $decodedJsonBody);
-
+        $this->assertArrayHasKey('error', $decodedJsonBody);
+        $this->assertEquals(true, $decodedJsonBody['error']);
 
         $decodedJsonBody = json_decode($responseBody, true);
 
@@ -272,7 +272,8 @@ class DocumentIntegrationTest extends
 
         $decodedJsonBody = json_decode($responseBody, true);
 
-        $this->assertArrayNotHasKey('error', $decodedJsonBody);
+        $this->assertArrayHasKey('error', $decodedJsonBody);
+        $this->assertEquals(true, $decodedJsonBody['error']);
 
         $this->assertEquals(true, $decodedJsonBody['error']);
 
@@ -341,7 +342,7 @@ class DocumentIntegrationTest extends
 
         $decodedJsonBody = json_decode($responseBody, true);
 
-        $this->assertArrayNotHasKey('error', $decodedJsonBody);
+        $this->assertArrayHasKey('error', $decodedJsonBody);
 
         $this->assertEquals(true, $decodedJsonBody['error']);
 
