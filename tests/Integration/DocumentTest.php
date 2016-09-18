@@ -114,11 +114,9 @@ class DocumentIntegrationTest extends
 
         $responseBody = $responseObject->body;
 
-        $this->assertArrayHasKey('error', json_decode($responseBody, true));
-
         $decodedJsonBody = json_decode($responseBody, true);
 
-        $this->assertEquals(false, $decodedJsonBody['error']);
+        $this->assertArrayNotHasKey('error', $decodedJsonBody);
 
         $this->assertEquals($collectionName . '/1', $decodedJsonBody['_id']);
     }
@@ -139,11 +137,10 @@ class DocumentIntegrationTest extends
         $responseObject = $document->create($collectionName, $requestBody, $documentParameters);
         $responseBody   = $responseObject->body;
 
-        $this->assertArrayHasKey('error', json_decode($responseBody, true));
-
         $decodedJsonBody = json_decode($responseBody, true);
 
-        $this->assertEquals(false, $decodedJsonBody['error']);
+        $this->assertArrayNotHasKey('error', $decodedJsonBody);
+
 
         $this->assertEquals($collectionName . '/1', $decodedJsonBody['_id']);
 
@@ -172,11 +169,9 @@ class DocumentIntegrationTest extends
         $responseObject = $document->create($collectionName, $requestBody);
         $responseBody   = $responseObject->body;
 
-        $this->assertArrayHasKey('error', json_decode($responseBody, true));
-
         $decodedJsonBody = json_decode($responseBody, true);
 
-        $this->assertEquals(false, $decodedJsonBody['error']);
+        $this->assertArrayNotHasKey('error', $decodedJsonBody);
 
         $this->assertEquals($collectionName . '/1', $decodedJsonBody['_id']);
 
@@ -195,17 +190,18 @@ class DocumentIntegrationTest extends
         $responseObject = $document->delete($collectionName . '/1');
         $responseBody   = $responseObject->body;
 
-        $this->assertArrayHasKey('error', json_decode($responseBody, true));
-
         $decodedJsonBody = json_decode($responseBody, true);
 
-        $this->assertEquals(false, $decodedJsonBody['error']);
+        $this->assertArrayNotHasKey('error', $decodedJsonBody);
 
         // Try to delete a second time .. should throw an error
         $responseObject = $document->delete($collectionName . '/1');
         $responseBody   = $responseObject->body;
 
-        $this->assertArrayHasKey('error', json_decode($responseBody, true));
+        $decodedJsonBody = json_decode($responseBody, true);
+
+        $this->assertArrayNotHasKey('error', $decodedJsonBody);
+
 
         $decodedJsonBody = json_decode($responseBody, true);
 
@@ -231,10 +227,10 @@ class DocumentIntegrationTest extends
         $responseObject = $document->create($collectionName, $requestBody);
         $responseBody   = $responseObject->body;
 
-        $this->assertArrayHasKey('error', json_decode($responseBody, true));
         $decodedJsonBody = json_decode($responseBody, true);
 
-        $this->assertEquals(false, $decodedJsonBody['error']);
+        $this->assertArrayNotHasKey('error', $decodedJsonBody);
+
         $this->assertEquals($collectionName . '/1', $decodedJsonBody['_id']);
 
         $requestBody = ['name' => 'Mike'];
@@ -244,11 +240,9 @@ class DocumentIntegrationTest extends
         $responseObject = $document->replace($collectionName . '/1', $requestBody);
         $responseBody   = $responseObject->body;
 
-        $this->assertArrayHasKey('error', json_decode($responseBody, true));
-
         $decodedJsonBody = json_decode($responseBody, true);
 
-        $this->assertEquals(false, $decodedJsonBody['error']);
+        $this->assertArrayNotHasKey('error', $decodedJsonBody);
 
         $this->assertEquals($collectionName . '/1', $decodedJsonBody['_id']);
 
@@ -268,19 +262,17 @@ class DocumentIntegrationTest extends
         $responseObject = $document->delete($collectionName . '/1');
         $responseBody   = $responseObject->body;
 
-        $this->assertArrayHasKey('error', json_decode($responseBody, true));
-
         $decodedJsonBody = json_decode($responseBody, true);
 
-        $this->assertEquals(false, $decodedJsonBody['error']);
+        $this->assertArrayNotHasKey('error', $decodedJsonBody);
 
         // Try to delete a second time .. should throw an error
         $responseObject = $document->delete($collectionName . '/1');
         $responseBody   = $responseObject->body;
 
-        $this->assertArrayHasKey('error', json_decode($responseBody, true));
-
         $decodedJsonBody = json_decode($responseBody, true);
+
+        $this->assertArrayNotHasKey('error', $decodedJsonBody);
 
         $this->assertEquals(true, $decodedJsonBody['error']);
 
@@ -304,10 +296,10 @@ class DocumentIntegrationTest extends
         $responseObject = $document->create($collectionName, $requestBody);
         $responseBody   = $responseObject->body;
 
-        $this->assertArrayHasKey('error', json_decode($responseBody, true));
         $decodedJsonBody = json_decode($responseBody, true);
 
-        $this->assertEquals(false, $decodedJsonBody['error']);
+        $this->assertArrayNotHasKey('error', $decodedJsonBody);
+
         $this->assertEquals($collectionName . '/1', $decodedJsonBody['_id']);
 
         $requestBody = ['name' => 'Mike'];
@@ -317,11 +309,9 @@ class DocumentIntegrationTest extends
         $responseObject = $document->update($collectionName . '/1', $requestBody);
         $responseBody   = $responseObject->body;
 
-        $this->assertArrayHasKey('error', json_decode($responseBody, true));
-
         $decodedJsonBody = json_decode($responseBody, true);
 
-        $this->assertEquals(false, $decodedJsonBody['error']);
+        $this->assertArrayNotHasKey('error', $decodedJsonBody);
 
         $this->assertEquals($collectionName . '/1', $decodedJsonBody['_id']);
 
@@ -341,19 +331,17 @@ class DocumentIntegrationTest extends
         $responseObject = $document->delete($collectionName . '/1');
         $responseBody   = $responseObject->body;
 
-        $this->assertArrayHasKey('error', json_decode($responseBody, true));
-
         $decodedJsonBody = json_decode($responseBody, true);
 
-        $this->assertEquals(false, $decodedJsonBody['error']);
+        $this->assertArrayNotHasKey('error', $decodedJsonBody);
 
         // Try to delete a second time .. should throw an error
         $responseObject = $document->delete($collectionName . '/1');
         $responseBody   = $responseObject->body;
 
-        $this->assertArrayHasKey('error', json_decode($responseBody, true));
-
         $decodedJsonBody = json_decode($responseBody, true);
+
+        $this->assertArrayNotHasKey('error', $decodedJsonBody);
 
         $this->assertEquals(true, $decodedJsonBody['error']);
 

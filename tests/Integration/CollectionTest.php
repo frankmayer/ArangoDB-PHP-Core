@@ -53,7 +53,8 @@ class CollectionIntegrationTest extends
         $options              = $collectionOptions;
         $this->client->bind(
             'Request',
-            function () {
+            function ()
+            {
                 $request = $this->client->getRequest();
 
                 return $request;
@@ -94,7 +95,8 @@ class CollectionIntegrationTest extends
         $options           = $collectionOptions;
         $this->client->bind(
             'Request',
-            function () {
+            function ()
+            {
                 $request = $this->client->getRequest();
 
                 return $request;
@@ -193,12 +195,14 @@ class CollectionIntegrationTest extends
         /** @var $responseObject HttpResponse */
         $responseObject = $collection->getAll();
 
-        $response = json_decode($responseObject->body);
-        $foundGraphs=false;
+        $response    = json_decode($responseObject->body);
+        $foundGraphs = false;
 
-        foreach ($response as $value) {
-            if (in_array($value)==='_graphs'){
-                $foundGraphs=true;
+        foreach ($response->result as $value)
+        {
+            if ($value->name === '_graphs')
+            {
+                $foundGraphs = true;
             }
         }
         $this->assertTrue($foundGraphs);
@@ -217,15 +221,16 @@ class CollectionIntegrationTest extends
 
         $response = json_decode($responseObject->body);
 
-        $foundGraphs=false;
+        $foundGraphs = false;
 
-        foreach ($response as $value) {
-            if (in_array($value)==='_graphs'){
-                $foundGraphs=true;
+        foreach ($response->result as $value)
+        {
+            if ($value->name === '_graphs')
+            {
+                $foundGraphs = true;
             }
         }
         $this->assertFalse($foundGraphs);
-
     }
 
 
