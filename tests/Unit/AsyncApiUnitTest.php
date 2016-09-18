@@ -77,7 +77,7 @@ TAG;
         $createCollectionResponse = <<<TAG
 HTTP/1.1 200 OK
 content-type: application/json; charset=utf-8
-x-arango-async-id: 265413601\r\n\r\n{"server":"arango","version":"2.1.0"}
+X-Arango-Async-Id: 265413601\r\n\r\n{"server":"arango","version":"2.1.0"}
 TAG;
         $options                  = ['waitForSync' => true];
         $handle                   = 'products/1234567890';

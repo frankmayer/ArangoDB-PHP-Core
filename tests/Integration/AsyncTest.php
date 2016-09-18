@@ -121,15 +121,15 @@ class AsyncIntegrationTest extends ArangoDbPhpCoreIntegrationTestCase
 
         sleep(1);
 
-        $jobId    = $responseObject->headers['x-arango-async-id'][0];
+        $jobId    = $responseObject->headers['X-Arango-Async-Id'][0];
         $jobList  = $job->listJobResults('done', 1);
         $jobArray = json_decode($jobList->body, true);
 
         $this->assertTrue(in_array($jobId, $jobArray));
 
-        $jobResult = $job->fetchJobResult($responseObject->headers['x-arango-async-id'][0]);
-        $this->assertSame($jobResult->headers['x-arango-async-id'], $responseObject->headers['x-arango-async-id']);
-        $this->assertArrayHasKey('x-arango-async-id', $jobResult->headers);
+        $jobResult = $job->fetchJobResult($responseObject->headers['X-Arango-Async-Id'][0]);
+        $this->assertSame($jobResult->headers['X-Arango-Async-Id'], $responseObject->headers['X-Arango-Async-Id']);
+        $this->assertArrayHasKey('X-Arango-Async-Id', $jobResult->headers);
 
 
         $document = new Document($this->client);
