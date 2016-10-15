@@ -60,7 +60,7 @@ class PluginManager
 	 */
     public function setPluginsFromPluginArray(array $plugins = [])
     {
-        if (count($plugins) > 0) {
+        if ((bool) $plugins === true) {
             foreach ($plugins as $key => $plugin) {
                 if (is_subclass_of($plugin, 'frankmayer\ArangoDbPhpCore\Plugins\Plugin')) {
                     $this->pluginStorage[$key]['plugin']   = $plugin;
@@ -82,7 +82,7 @@ class PluginManager
      */
     public function notifyPlugins($eventName, array $eventData = [])
     {
-        if ($this->options['notificationsEnabled'] === true && count($this->pluginStorage) > 0) {
+        if ((bool) $this->pluginStorage && $this->options['notificationsEnabled'] === true) {
             foreach ($this->pluginStorage as $key => $priority) {
                 $plugin = $this->pluginStorage[$key]['plugin'];
                 /** @var $plugin Plugin */
