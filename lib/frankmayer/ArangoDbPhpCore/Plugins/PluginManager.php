@@ -34,12 +34,14 @@ class PluginManager
     public $options;
 
 
-    /**
-     * @param       $client
-     * @param array $plugins
-     * @param array $options
-     */
-    public function __construct($client, $plugins = [], $options = ['notificationsEnabled' => true])
+	/**
+	 * @param       $client
+	 * @param array $plugins
+	 * @param array $options
+	 *
+	 * @throws \frankmayer\ArangoDbPhpCore\ClientException
+	 */
+    public function __construct($client, array $plugins = [], array $options = [])
     {
         $options['notificationsEnabled'] = true;
 
@@ -50,15 +52,15 @@ class PluginManager
     }
 
 
-    /**
-     * @param null $plugins
-     *
-     * @return bool
-     * @throws \frankmayer\ArangoDbPhpCore\ClientException
-     */
-    public function setPluginsFromPluginArray($plugins = null)
+	/**
+	 * @param array $plugins
+	 *
+	 * @return bool
+	 * @throws ClientException
+	 */
+    public function setPluginsFromPluginArray(array $plugins = [])
     {
-        if (is_array($plugins) && count($plugins) > 0) {
+        if (count($plugins) > 0) {
             foreach ($plugins as $key => $plugin) {
                 if (is_subclass_of($plugin, 'frankmayer\ArangoDbPhpCore\Plugins\Plugin')) {
                     $this->pluginStorage[$key]['plugin']   = $plugin;
@@ -78,15 +80,13 @@ class PluginManager
      * @param       $eventName
      * @param array $eventData
      */
-    public function notifyPlugins($eventName, $eventData = [])
+    public function notifyPlugins($eventName, array $eventData = [])
     {
-        if ($this->options['notificationsEnabled'] === true) {
-            if (count($this->pluginStorage) > 0) {
-                foreach ($this->pluginStorage as $key => $priority) {
-                    $plugin = $this->pluginStorage[$key]['plugin'];
-                    /** @var $plugin Plugin */
-                    $plugin->notify($eventName, $this->client, $eventData);
-                }
+        if ($this->options['notificationsEnabled'] === true && count($this->pluginStorage) > 0) {
+            foreach ($this->pluginStorage as $key => $priority) {
+                $plugin = $this->pluginStorage[$key]['plugin'];
+                /** @var $plugin Plugin */
+                $plugin->notify($eventName, $this->client, $eventData);
             }
         }
     }
@@ -113,7 +113,5 @@ class PluginManager
     public function removePluginInstance($instanceName)
     {
         unset ($this->pluginStorage[$instanceName]);
-
-        return;
     }
 }

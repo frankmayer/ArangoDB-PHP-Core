@@ -37,5 +37,5 @@ interface HttpRequestInterface extends
      *
      * @return mixed
      */
-    public function sendBatch($batchParts = [], $boundary = 'XXXbXXX');
+    public function sendBatch(array $batchParts = [], $boundary = 'XXXbXXX');
 }

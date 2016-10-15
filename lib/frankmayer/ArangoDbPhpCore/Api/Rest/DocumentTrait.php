@@ -18,45 +18,48 @@ use frankmayer\ArangoDbPhpCore\Protocols\Http\AbstractHttpRequest;
  */
 trait DocumentTrait
 {
-    /**
-     * @param string $collection
-     * @param string $body
-     * @param array  $urlQuery
-     * @param array  $options
-     *
-     * @return \frankmayer\ArangoDbPhpCore\Protocols\Http\HttpResponse
-     */
-    public function create(
-        $collection = null,
-        $body = null,
-        $urlQuery = [],
-        $options = []
-    ) {
+	/**
+	 * @param string $collection
+	 * @param string $body
+	 * @param array  $urlQuery
+	 * @param array  $options
+	 *
+	 * @return \frankmayer\ArangoDbPhpCore\Protocols\Http\HttpResponse
+	 */
+	public function create(
+		$collection = null,
+		$body = null,
+		array $urlQuery = [],
+		array $options = []
+	)
+	{
 
-        /** @var AbstractHttpRequest $request */
-        $request          = $this->getRequest();
-        $request->options = $options;
-        $request->body    = $body;
+		/** @var AbstractHttpRequest $request */
+		$request          = $this->getRequest();
+		$request->options = $options;
+		$request->body    = $body;
 
-        if (is_array($request->body)) {
-            $request->body = json_encode($request->body);
-        }
+		if (is_array($request->body))
+		{
+			$request->body = json_encode($request->body);
+		}
 
-        $request->path = $this->client->fullDatabasePath . static::API_PATH;
+		$request->path = $this->client->fullDatabasePath . static::API_PATH;
 
-        if (isset($collection)) {
-            $urlQuery = array_merge(
-                $urlQuery ? $urlQuery : [],
-                ['collection' => $collection]
-            );
-        }
+		if (null !== $collection)
+		{
+			$urlQuery = array_merge(
+				$urlQuery ?: [],
+				['collection' => $collection]
+			);
+		}
 
-        $urlQuery = $request->buildUrlQuery($urlQuery);
+		$urlQueryStr = $request->buildUrlQuery($urlQuery);
 
-        $request->path .= $urlQuery;
+		$request->path .= $urlQueryStr;
 
-        $request->method = static::METHOD_POST;
+		$request->method = static::METHOD_POST;
 
-        return $this->getReturnObject($request);
-    }
+		return $this->getReturnObject($request);
+	}
 }

@@ -9,6 +9,9 @@
 
 namespace frankmayer\ArangoDbPhpCore\Api;
 
+use frankmayer\ArangoDbPhpCore\Protocols\RequestInterface;
+use frankmayer\ArangoDbPhpCore\Protocols\ResponseInterface;
+
 
 /**
  * A REST API Interface

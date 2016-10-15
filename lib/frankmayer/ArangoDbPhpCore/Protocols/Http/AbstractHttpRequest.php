@@ -80,17 +80,21 @@ abstract class AbstractHttpRequest implements HttpRequestInterface
      */
     public $responseObject;
     /**
-     * @var object The wrapped handler of communications.
-     */
-    public $handler;
-    /**
      * @var string The boundary string for batch operations with ArangoDB
      */
     public $batchBoundary;
     /**
-     * @var object flag for if the request is a batch request (this does not include the batchpart requests)
+     * @var boolean flag for if the request is a batch request (this does not include the batchpart requests)
      */
     public $batch;
+    /**
+     * @var array $batchparts
+     */
+    public $batchParts;
+    /**
+     * @var boolean $async
+     */
+    public $async;
 
     /**
      * @param $client
@@ -120,11 +124,11 @@ abstract class AbstractHttpRequest implements HttpRequestInterface
      */
 
 
-    public abstract function sendBatch($batchParts = [], $boundary = 'XXXbXXX');
+    public abstract function sendBatch(array $batchParts = [], $boundary = 'XXXbXXX');
 
 
     /**
-     * @param $urlQueryArray
+     * @param array $urlQueryArray
      *
      * @return string
      */

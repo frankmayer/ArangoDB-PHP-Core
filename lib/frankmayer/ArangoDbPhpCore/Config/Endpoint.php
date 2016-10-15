@@ -71,7 +71,6 @@ class Endpoint
      * @param string $value - endpoint specification
      *
      * @throws ClientException
-     * @return \frankmayer\ArangoDbPhpCore\Config\Endpoint
      */
     public function __construct($value)
     {
@@ -150,10 +149,6 @@ class Endpoint
         }
 
         $type = self::getType($value);
-        if ($type === null) {
-            return false;
-        }
-
-        return true;
+        return !($type === null);
     }
 }

@@ -36,8 +36,8 @@ class Database extends
      */
     public function create(
         $databaseName,
-        $databaseParameters = [],
-        $options = []
+        array $databaseParameters = [],
+        array $options = []
     ) {
         $request = $this->getRequest();
 
@@ -62,7 +62,7 @@ class Database extends
      */
     public function drop(
         $databaseName,
-        $options = []
+        array $options = []
     ) {
         /** @var AbstractHttpRequest $request */
         $request = $this->getRequest();
@@ -83,7 +83,7 @@ class Database extends
      */
     public function truncate(
         $databaseName,
-        $options = []
+        array $options = []
     ) {
         /** @var AbstractHttpRequest $request */
         $request = $this->getRequest();
@@ -103,7 +103,7 @@ class Database extends
      * @return \frankmayer\ArangoDbPhpCore\Protocols\Http\HttpResponse
      */
     public function getAll(
-        $options = []
+        array $options = []
     ) {
         /** @var AbstractHttpRequest $request */
         $request = $this->getRequest();

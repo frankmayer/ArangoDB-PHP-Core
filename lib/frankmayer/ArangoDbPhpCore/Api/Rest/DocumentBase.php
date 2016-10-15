@@ -34,8 +34,8 @@ class DocumentBase extends Api
     public function replace(
         $handle,
         $body,
-        $urlQuery = [],
-        $options = []
+        array $urlQuery = [],
+        array $options = []
     ) {
         /** @var AbstractHttpRequest $request */
         $request          = $this->getRequest();
@@ -48,9 +48,9 @@ class DocumentBase extends Api
 
         $request->path = $this->client->fullDatabasePath . static::API_PATH . '/' . $handle;
 
-        $urlQuery = $request->buildUrlQuery($urlQuery);
+        $urlQueryStr = $request->buildUrlQuery($urlQuery);
 
-        $request->path .= $urlQuery;
+        $request->path .= $urlQueryStr;
 
         $request->method = static::METHOD_PUT;
 
@@ -68,8 +68,8 @@ class DocumentBase extends Api
     public function update(
         $handle,
         $body,
-        $urlQuery = [],
-        $options = []
+        array $urlQuery = [],
+        array $options = []
     ) {
         /** @var AbstractHttpRequest $request */
         $request          = $this->getRequest();
@@ -82,9 +82,9 @@ class DocumentBase extends Api
 
         $request->path = $this->client->fullDatabasePath . static::API_PATH . '/' . $handle;
 
-        $urlQuery = $request->buildUrlQuery($urlQuery);
+        $urlQueryStr = $request->buildUrlQuery($urlQuery);
 
-        $request->path .= $urlQuery;
+        $request->path .= $urlQueryStr;
 
         $request->method = static::METHOD_PATCH;
 
@@ -100,7 +100,7 @@ class DocumentBase extends Api
      */
     public function getAll(
         $collection,
-        $options = []
+        array $options = []
     ) {
         /** @var AbstractHttpRequest $request */
         $request          = $this->getRequest();
@@ -121,7 +121,7 @@ class DocumentBase extends Api
      */
     public function get(
         $handle,
-        $options = []
+        array $options = []
     ) {
         /** @var AbstractHttpRequest $request */
         $request          = $this->getRequest();
@@ -141,7 +141,7 @@ class DocumentBase extends Api
      */
     public function getHeader(
         $handle,
-        $options = []
+        array $options = []
     ) {
         /** @var AbstractHttpRequest $request */
         $request          = $this->getRequest();
@@ -160,7 +160,7 @@ class DocumentBase extends Api
      */
     public function delete(
         $handle,
-        $options = []
+        array $options = []
     ) {
         /** @var AbstractHttpRequest $request */
         $request          = $this->getRequest();

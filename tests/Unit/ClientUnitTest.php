@@ -47,17 +47,6 @@ class ClientUnitTest extends ArangoDbPhpCoreUnitTestCase
     /**
      *
      */
-    public function testSetGetArangoDBVersion()
-    {
-        $client = new Client($this->connector);
-        $client->setArangoDBApiVersion('20502');
-        $this->assertEquals('20502', $client->getArangoDBApiVersion());
-    }
-
-
-    /**
-     *
-     */
     public function testSetGetClientOptions()
     {
         $client = new Client($this->connector);

@@ -34,8 +34,8 @@ trait EdgeTrait
         $from,
         $to,
         $body = null,
-        $urlQuery = [],
-        $options = []
+        array $urlQuery = [],
+        array $options = []
     ) {
         /** @var AbstractHttpRequest $request */
         $request          = $this->getRequest();
@@ -48,13 +48,13 @@ trait EdgeTrait
 
         $request->path = $this->client->fullDatabasePath . static::API_PATH;
 
-        $urlQuery = array_merge($urlQuery ? $urlQuery : [],
+        $urlQuery = array_merge($urlQuery ?: [],
             ['from' => $from, 'to' => $to],
             ['collection' => $collection]);
 
-        $urlQuery = $request->buildUrlQuery($urlQuery);
+	    $urlQueryStr = $request->buildUrlQuery($urlQuery);
 
-        $request->path .= $urlQuery;
+        $request->path .= $urlQueryStr;
 
         $request->method = static::METHOD_POST;
 

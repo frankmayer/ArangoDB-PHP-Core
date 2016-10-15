@@ -64,5 +64,5 @@ interface ClientInterface
      * @param       $eventName
      * @param array $eventData
      */
-    public function notifyPlugins($eventName, $eventData = []);
+    public function notifyPlugins($eventName, array $eventData = []);
 }

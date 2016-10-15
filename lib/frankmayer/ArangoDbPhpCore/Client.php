@@ -10,6 +10,7 @@ namespace frankmayer\ArangoDbPhpCore;
 
 use frankmayer\ArangoDbPhpCore\Connectors\AbstractHttpConnector;
 use frankmayer\ArangoDbPhpCore\Plugins\PluginManager;
+use frankmayer\ArangoDbPhpCore\Protocols\Http\AbstractHttpRequest;
 use frankmayer\ArangoDbPhpCore\Protocols\Http\HttpRequestInterface;
 use frankmayer\ArangoDbPhpCore\Protocols\RequestInterface;
 use frankmayer\ArangoDbPhpCore\Protocols\ResponseInterface;
@@ -63,17 +64,15 @@ class Client
      * @var string The class name (including path) for example 'frankmayer\ArangoDbPhpCore\Connectors\Http\HttpResponse'
      */
     public $responseClass;
-    /**
-     * @var string The ArangoDB api version to signal
-     */
-    public $arangoDBApiVersion;
 
 
-    /**
-     * @param ConnectorInterface|AbstractHttpConnector $connector
-     *
-     * @param array                                    $clientOptions
-     */
+	/**
+	 * @param ConnectorInterface|AbstractHttpConnector $connector
+	 *
+	 * @param array                                    $clientOptions
+	 *
+	 * @throws \frankmayer\ArangoDbPhpCore\ClientException
+	 */
     public function __construct(ConnectorInterface $connector, $clientOptions = null)
     {
         $this->connector          = $connector;
@@ -91,7 +90,7 @@ class Client
             $this->pluginManager = new PluginManager($this,
                 isset($this->clientOptions['plugins']) ? $this->clientOptions['plugins'] : null,
                 isset($this->clientOptions['PluginManager']['options']) ? $this->clientOptions['PluginManager']['options'] : null);
-        };
+        }
     }
 
 
@@ -99,6 +98,7 @@ class Client
      * @param null $plugins
      *
      * @return bool
+     * @throws ClientException
      */
     public function setPluginsFromPluginArray($plugins = null)
     {
@@ -110,7 +110,7 @@ class Client
      * @param       $eventName
      * @param array $eventData
      */
-    public function notifyPlugins($eventName, $eventData = [])
+    public function notifyPlugins($eventName, array $eventData = [])
     {
         if ($this->pluginManager) {
             $this->pluginManager->notifyPlugins($eventName, $eventData);
@@ -162,28 +162,6 @@ class Client
             return $type();
         }
         throw new ClientException('No type registered with that name');
-    }
-
-
-    /**
-     * @param string $version
-     *
-     * @return $this
-     */
-    public function setArangoDBApiVersion($version)
-    {
-        $this->arangoDBApiVersion = $version;
-
-        return $this;
-    }
-
-
-    /**
-     * @return string
-     */
-    public function getArangoDBApiVersion()
-    {
-        return $this->arangoDBApiVersion;
     }
 
 
@@ -322,7 +300,7 @@ class Client
 
 
     /**
-     * @return RequestInterface
+     * @return AbstractHttpRequest
      */
     public function getRequest()
     {

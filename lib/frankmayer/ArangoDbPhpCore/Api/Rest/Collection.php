@@ -36,8 +36,8 @@ class Collection extends
      */
     public function create(
         $collectionName,
-        $collectionParameters = [],
-        $options = []
+        array $collectionParameters = [],
+        array $options = []
     ) {
         $request = $this->getRequest();
 
@@ -62,7 +62,7 @@ class Collection extends
      */
     public function drop(
         $collectionName,
-        $options = []
+        array $options = []
     ) {
         /** @var AbstractHttpRequest $request */
         $request = $this->getRequest();
@@ -83,7 +83,7 @@ class Collection extends
      */
     public function truncate(
         $collectionName,
-        $options = []
+        array $options = []
     ) {
         /** @var AbstractHttpRequest $request */
         $request = $this->getRequest();
@@ -103,7 +103,7 @@ class Collection extends
      * @return \frankmayer\ArangoDbPhpCore\Protocols\Http\HttpResponse
      */
     public function getAll(
-        $options = []
+        array $options = []
     ) {
         /** @var AbstractHttpRequest $request */
         $request = $this->getRequest();

@@ -106,7 +106,7 @@ class HttpResponse implements HttpResponseInterface
             $this->statusPhrase = $this->decodeGetStatusPhrase($statusLineArray);
         }
 
-        if (in_array(intval($this->status), $this->enabledHttpServerExceptions)) {
+        if (in_array((int) $this->status, $this->enabledHttpServerExceptions, true)) {
             // Ignoring this, as the server needs to have authentication enabled in order to run through this.
             // @codeCoverageIgnoreStart
             $this->protocol     = $statusLineArray[0];
@@ -120,7 +120,7 @@ class HttpResponse implements HttpResponseInterface
 
 
     /**
-     * @param $statusLineArray
+     * @param array $statusLineArray
      *
      * @return string
      */
@@ -199,9 +199,7 @@ class HttpResponse implements HttpResponseInterface
      */
     public static function splitBatchPart($batchPart)
     {
-        $parts = explode("\r\n\r\n", trim($batchPart), 2);
-
-        return $parts;
+        return explode("\r\n\r\n", trim($batchPart), 2);
     }
 
 
