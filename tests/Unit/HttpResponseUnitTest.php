@@ -14,7 +14,7 @@ use frankmayer\ArangoDbPhpCore\Protocols\Http\HttpRequest;
 use frankmayer\ArangoDbPhpCore\Protocols\Http\HttpResponse;
 use phpDocumentor\Reflection\DocBlock\Tag;
 
-require_once 'ArangoDbPhpCoreUnitTestCase.php';
+require_once __DIR__ . '/ArangoDbPhpCoreUnitTestCase.php';
 
 
 /**
@@ -77,7 +77,7 @@ content-length: 53\r\n\r\n
 TAG;
 
 
-        $this->connector = $this->getMockBuilder('TestConnector')
+        $this->connector = $this->getMockBuilder(\TestConnector::class)
             ->getMock();
         $this->connector->method('request')
             ->willReturn($this->batchResponseBody);
@@ -97,8 +97,7 @@ content-type: application/json; charset=utf-8
 location: /_db/_system/_api/collection/products/properties\r\n\r\n
 TAG;
 
-        $this->body = <<<TAG
-{
+        $this->body = '{
   "id" : "1373247312",
   "name" : "products",
   "isSystem" : false,
@@ -114,8 +113,7 @@ TAG;
   "type" : 2,
   "error" : false,
   "code" : 200
-}
-TAG;
+}';
 
         $this->batch = <<<TAG
 HTTP/1.1 200 OK
@@ -162,7 +160,7 @@ TAG;
     public function testIfHttpResponseInstantiable()
     {
         $response = new HttpResponse();
-        $this->assertInstanceOf('\frankmayer\ArangoDbPhpCore\Protocols\Http\HttpResponse', $response);
+        $this->assertInstanceOf(HttpResponse::class, $response);
     }
 
 

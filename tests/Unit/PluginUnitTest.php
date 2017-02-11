@@ -10,7 +10,7 @@
 
 namespace frankmayer\ArangoDbPhpCore;
 
-require_once 'ArangoDbPhpCoreUnitTestCase.php';
+require_once __DIR__ . '/ArangoDbPhpCoreUnitTestCase.php';
 
 use frankmayer\ArangoDbPhpCore\Plugins\PluginManager;
 use frankmayer\ArangoDbPhpCore\Plugins\TestPlugin;
@@ -40,7 +40,7 @@ class PluginUnitTest extends ArangoDbPhpCoreUnitTestCase
      */
     public function setUp()
     {
-        $this->connector = $this->getMockBuilder('TestConnector')
+        $this->connector = $this->getMockBuilder(\TestConnector::class)
             ->getMock();
         $this->client    = getClient($this->connector);
     }
@@ -49,7 +49,7 @@ class PluginUnitTest extends ArangoDbPhpCoreUnitTestCase
     public function testRegisterPluginsAndUnRegisterPlugins()
     {
         $this->client->setPluginManager(new PluginManager($this->client));
-        $this->assertInstanceOf('\frankmayer\ArangoDbPhpCore\Plugins\PluginManager', $this->client->getPluginManager());
+        $this->assertInstanceOf(PluginManager::class, $this->client->getPluginManager());
 
         $tracer            = new TestPlugin();
         $tracer->priority  = 0;
@@ -101,7 +101,7 @@ class PluginUnitTest extends ArangoDbPhpCoreUnitTestCase
             $this->client->setPluginsFromPluginArray(['tracer5' => new \stdClass()]);
         } catch (\Exception $e) {
         }
-        $this->assertInstanceOf('\Exception', $e);
+        $this->assertInstanceOf(\Exception::class, $e);
     }
 
 

@@ -12,8 +12,8 @@ namespace frankmayer\ArangoDbPhpCore;
 
 use frankmayer\ArangoDbPhpCore\Plugins\TracerPlugin;
 
-require dirname(__FILE__) . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'autoload.php';
-require_once 'testclasses/TestConnector.php';
+require __DIR__ .'/../autoload.php';
+require_once __DIR__ .'/testclasses/TestConnector.php';
 
 function getClientOptions()
 {
@@ -33,8 +33,8 @@ function getClientOptions()
         // timeout in seconds
         ClientOptions::OPTION_TIMEOUT              => 5,
         // ClientOptions::OPTION_PLUGINS              => $plugins,
-        ClientOptions::OPTION_REQUEST_CLASS        => 'frankmayer\ArangoDbPhpCore\Protocols\Http\HttpRequest',
-        ClientOptions::OPTION_RESPONSE_CLASS       => 'frankmayer\ArangoDbPhpCore\Protocols\Http\HttpResponse',
+        ClientOptions::OPTION_REQUEST_CLASS        => Protocols\Http\HttpRequest::class,
+        ClientOptions::OPTION_RESPONSE_CLASS       => Protocols\Http\HttpResponse::class,
 
     ];
 }

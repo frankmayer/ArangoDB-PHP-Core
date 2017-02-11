@@ -54,9 +54,7 @@ class SyncIntegrationTest extends ArangoDbPhpCoreIntegrationTestCase
         $this->client->bind(
             'Request',
             function () {
-                $request = $this->client->getRequest();
-
-                return $request;
+                return $this->client->getRequest();
             }
         );
         $query = 'RETURN SLEEP(1)';

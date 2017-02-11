@@ -48,9 +48,7 @@ class DocumentIntegrationTest extends ArangoDbPhpCoreIntegrationTestCase
         $this->client->bind(
             'Request',
             function () {
-                $request = $this->client->getRequest();
-
-                return $request;
+                return $this->client->getRequest();
             }
         );
 
@@ -99,7 +97,7 @@ class DocumentIntegrationTest extends ArangoDbPhpCoreIntegrationTestCase
 
         if (isset($collectionName)) {
             $urlQuery = array_merge(
-                $urlQuery ? $urlQuery : [],
+                $urlQuery ?: [],
                 ['collection' => $collectionName]
             );
         }
@@ -364,9 +362,7 @@ class DocumentIntegrationTest extends ArangoDbPhpCoreIntegrationTestCase
         $this->client->bind(
             'Request',
             function () {
-                $request = $this->client->getRequest();
-
-                return $request;
+                return $this->client->getRequest();
             }
         );
 

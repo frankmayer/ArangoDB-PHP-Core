@@ -54,9 +54,7 @@ class CollectionIntegrationTest extends ArangoDbPhpCoreIntegrationTestCase
         $this->client->bind(
             'Request',
             function () {
-                $request = $this->client->getRequest();
-
-                return $request;
+                return $this->client->getRequest();
             }
         );
 
@@ -95,9 +93,7 @@ class CollectionIntegrationTest extends ArangoDbPhpCoreIntegrationTestCase
         $this->client->bind(
             'Request',
             function () {
-                $request = $this->client->getRequest();
-
-                return $request;
+                return $this->client->getRequest();
             }
         );
 

@@ -10,7 +10,7 @@
 
 namespace frankmayer\ArangoDbPhpCore;
 
-require_once 'ArangoDbPhpCoreUnitTestCase.php';
+require_once __DIR__ . '/ArangoDbPhpCoreUnitTestCase.php';
 
 
 /**
@@ -32,7 +32,7 @@ class TracerPluginUnitTest extends ArangoDbPhpCoreUnitTestCase
      */
     public function setUp()
     {
-        $this->connector = $this->getMockBuilder('TestConnector')
+        $this->connector = $this->getMockBuilder(\TestConnector::class)
             ->getMock();
         $this->client    = getClient($this->connector);
     }

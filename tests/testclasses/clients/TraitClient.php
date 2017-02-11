@@ -45,12 +45,12 @@ class TraitClient
         $this->endpoint      = $clientOptions[ClientOptions::OPTION_ENDPOINT];
         $this->database      = $clientOptions[ClientOptions::OPTION_DEFAULT_DATABASE];
         $this->pluginManager = new PluginManager($this,
-            isset($clientOptions['plugins']) ? $clientOptions['plugins'] : null,
-            isset($clientOptions['PluginManager']['options']) ? $clientOptions['PluginManager']['options'] : null);
+            $clientOptions['plugins'] ?? null,
+            $clientOptions['PluginManager']['options'] ?? null);
         $this->connector     = $connector;
         $this->clientOptions = $clientOptions;
-        $this->requestClass  = 'frankmayer\ArangoDbPhpCore\Connectors\Http\HttpRequest';;
-        $this->responseClass = 'frankmayer\ArangoDbPhpCore\Connectors\Http\HttpResponse';;
+        $this->requestClass  = 'frankmayer\ArangoDbPhpCore\Connectors\Http\HttpRequest';
+        $this->responseClass = 'frankmayer\ArangoDbPhpCore\Connectors\Http\HttpResponse';
     }
 
     public function setPluginsFromPluginArray($plugins = null)
@@ -66,7 +66,7 @@ class TraitClient
     ////            $this->notifyPlugins('core.client.traceThis', array('test1' => &$test1));
     //        }
 
-    public function notifyPlugins($eventName, $eventData = [])
+    public function notifyPlugins($eventName, array $eventData = [])
     {
         $this->pluginManager->notifyPlugins($eventName, $eventData);
     }

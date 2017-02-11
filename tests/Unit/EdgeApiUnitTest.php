@@ -13,7 +13,7 @@ use frankmayer\ArangoDbPhpCore\Api\Rest\Batch;
 use frankmayer\ArangoDbPhpCore\Api\Rest\Edge;
 use frankmayer\ArangoDbPhpCore\Protocols\Http\HttpResponse;
 
-require_once 'ArangoDbPhpCoreUnitTestCase.php';
+require_once __DIR__ . '/ArangoDbPhpCoreUnitTestCase.php';
 
 
 /**
@@ -31,7 +31,7 @@ class EdgeApiUnitTest extends ArangoDbPhpCoreUnitTestCase
 
     public function setup()
     {
-        $this->connector = $this->getMockBuilder('TestConnector')
+        $this->connector = $this->getMockBuilder(\TestConnector::class)
             ->getMock();
 
         $this->client = new Client($this->connector, getClientOptions());
@@ -50,7 +50,7 @@ class EdgeApiUnitTest extends ArangoDbPhpCoreUnitTestCase
     public function testIfHttpResponseInstantiable()
     {
         $response = new HttpResponse();
-        $this->assertInstanceOf('\frankmayer\ArangoDbPhpCore\Protocols\Http\HttpResponse', $response);
+        $this->assertInstanceOf(HttpResponse::class, $response);
     }
 
 
@@ -80,7 +80,7 @@ TAG;
         /** @var $responseObject HttpResponse */
         $response = $object->create('edges', $body, 'vertices/1', 'vertices/2');
 
-        $this->assertInstanceOf('\frankmayer\ArangoDbPhpCore\Protocols\Http\HttpResponse', $response);
+        $this->assertInstanceOf(HttpResponse::class, $response);
         $this->assertEquals(202, $response->status);
     }
 
@@ -109,7 +109,7 @@ TAG;
         /** @var $responseObject HttpResponse */
         $response = $object->delete($handle, $options);
 
-        $this->assertInstanceOf('\frankmayer\ArangoDbPhpCore\Protocols\Http\HttpResponse', $response);
+        $this->assertInstanceOf(HttpResponse::class, $response);
         $this->assertEquals(200, $response->status);
     }
 
@@ -139,7 +139,7 @@ TAG;
         /** @var $responseObject HttpResponse */
         $response = $object->get($handle, $options);
 
-        $this->assertInstanceOf('\frankmayer\ArangoDbPhpCore\Protocols\Http\HttpResponse', $response);
+        $this->assertInstanceOf(HttpResponse::class, $response);
         $this->assertEquals(200, $response->status);
     }
 
@@ -164,7 +164,7 @@ TAG;
         /** @var $responseObject HttpResponse */
         $response = $object->get($handle, $options);
 
-        $this->assertInstanceOf('\frankmayer\ArangoDbPhpCore\Protocols\Http\HttpResponse', $response);
+        $this->assertInstanceOf(HttpResponse::class, $response);
         $this->assertEquals(200, $response->status);
     }
 
@@ -196,7 +196,7 @@ TAG;
         /** @var $responseObject HttpResponse */
         $response = $object->update($handle, $body, $options);
 
-        $this->assertInstanceOf('\frankmayer\ArangoDbPhpCore\Protocols\Http\HttpResponse', $response);
+        $this->assertInstanceOf(HttpResponse::class, $response);
         $this->assertEquals(202, $response->status);
     }
 
@@ -227,7 +227,7 @@ TAG;
         /** @var $responseObject HttpResponse */
         $response = $object->replace($handle, $body);
 
-        $this->assertInstanceOf('\frankmayer\ArangoDbPhpCore\Protocols\Http\HttpResponse', $response);
+        $this->assertInstanceOf(HttpResponse::class, $response);
         $this->assertEquals(202, $response->status);
     }
 
@@ -255,7 +255,7 @@ TAG;
         /** @var $responseObject HttpResponse */
         $response = $object->getAll('edges', $options);
 
-        $this->assertInstanceOf('\frankmayer\ArangoDbPhpCore\Protocols\Http\HttpResponse', $response);
+        $this->assertInstanceOf(HttpResponse::class, $response);
         $this->assertEquals(200, $response->status);
     }
 }

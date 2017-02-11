@@ -8,7 +8,7 @@
  */
 namespace frankmayer\ArangoDbPhpCore;
 
-require_once 'ArangoDbPhpCoreUnitTestCase.php';
+require_once __DIR__ . '/ArangoDbPhpCoreUnitTestCase.php';
 
 
 /**
@@ -22,7 +22,7 @@ class ConnectorUnitTest extends ArangoDbPhpCoreUnitTestCase
 
     public function setup()
     {
-        $this->connector = $this->getMockBuilder('TestConnector')
+        $this->connector = $this->getMockBuilder(\TestConnector::class)
             ->getMock();
     }
 
@@ -33,7 +33,7 @@ class ConnectorUnitTest extends ArangoDbPhpCoreUnitTestCase
     public function testIfCurlConnectorInstantiable()
     {
 
-        $this->assertInstanceOf('\frankmayer\ArangoDbPhpCore\Connectors\AbstractHttpConnector', $this->connector);
+        $this->assertInstanceOf(Connectors\AbstractHttpConnector::class, $this->connector);
     }
 
 

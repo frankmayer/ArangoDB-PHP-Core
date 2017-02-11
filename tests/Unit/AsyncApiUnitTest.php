@@ -14,7 +14,7 @@ use frankmayer\ArangoDbPhpCore\Api\Rest\Document;
 use frankmayer\ArangoDbPhpCore\Protocols\Http\HttpResponse;
 use phpDocumentor\Reflection\DocBlock\Tag;
 
-require_once 'ArangoDbPhpCoreUnitTestCase.php';
+require_once __DIR__ . '/ArangoDbPhpCoreUnitTestCase.php';
 
 
 /**
@@ -31,7 +31,7 @@ class AsyncApiUnitTest extends ArangoDbPhpCoreUnitTestCase
 
     public function setup()
     {
-        $this->connector = $this->getMockBuilder('TestConnector')
+        $this->connector = $this->getMockBuilder(\TestConnector::class)
             ->getMock();
 
         $this->client = new Client($this->connector, getClientOptions());
@@ -66,7 +66,7 @@ TAG;
         /** @var $responseObject HttpResponse */
         $response = $object->create($this->collectionNames[0], $body);
 
-        $this->assertInstanceOf('\frankmayer\ArangoDbPhpCore\Protocols\Http\HttpResponse', $response);
+        $this->assertInstanceOf(HttpResponse::class, $response);
         $this->assertEquals(200, $response->status);
     }
 
@@ -91,7 +91,7 @@ TAG;
         /** @var $responseObject HttpResponse */
         $response = $object->fetchJobResult($handle, $options);
 
-        $this->assertInstanceOf('\frankmayer\ArangoDbPhpCore\Protocols\Http\HttpResponse', $response);
+        $this->assertInstanceOf(HttpResponse::class, $response);
         $this->assertEquals(200, $response->status);
     }
 
@@ -115,7 +115,7 @@ TAG;
         /** @var $responseObject HttpResponse */
         $response = $object->deleteJobResult('all');
 
-        $this->assertInstanceOf('\frankmayer\ArangoDbPhpCore\Protocols\Http\HttpResponse', $response);
+        $this->assertInstanceOf(HttpResponse::class, $response);
         $this->assertEquals(200, $response->status);
     }
 
@@ -139,7 +139,7 @@ TAG;
         /** @var $responseObject HttpResponse */
         $response = $object->listJobResults('done');
 
-        $this->assertInstanceOf('\frankmayer\ArangoDbPhpCore\Protocols\Http\HttpResponse', $response);
+        $this->assertInstanceOf(HttpResponse::class, $response);
         $this->assertEquals(200, $response->status);
     }
 }

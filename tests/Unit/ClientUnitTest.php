@@ -12,7 +12,7 @@ use frankmayer\ArangoDbPhpCore\Plugins\PluginManager;
 use frankmayer\ArangoDbPhpCore\Protocols\Http\HttpRequest;
 use frankmayer\ArangoDbPhpCore\Protocols\Http\HttpResponse;
 
-require_once 'ArangoDbPhpCoreUnitTestCase.php';
+require_once __DIR__ . '/ArangoDbPhpCoreUnitTestCase.php';
 
 
 /**
@@ -28,9 +28,9 @@ class ClientUnitTest extends ArangoDbPhpCoreUnitTestCase
 
     public function setup()
     {
-        $this->connector  = $this->getMockBuilder('TestConnector')
+        $this->connector  = $this->getMockBuilder(\TestConnector::class)
             ->getMock();
-        $this->connector2 = $this->getMockBuilder('TestConnector')
+        $this->connector2 = $this->getMockBuilder(\TestConnector::class)
             ->getMock();
     }
 
@@ -41,7 +41,7 @@ class ClientUnitTest extends ArangoDbPhpCoreUnitTestCase
     public function testIfClientInstantiable()
     {
         $client = new Client($this->connector);
-        $this->assertInstanceOf('\frankmayer\ArangoDbPhpCore\Client', $client);
+        $this->assertInstanceOf(Client::class, $client);
     }
 
 
