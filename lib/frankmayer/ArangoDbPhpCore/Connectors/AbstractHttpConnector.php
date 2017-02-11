@@ -1,7 +1,7 @@
 <?php
 /**
  * @author    Frank Mayer
- * @copyright Copyright 2013-2015, FRANKMAYER.NET, Athens, Greece
+ * @copyright Copyright 2013-2017, FRANKMAYER.NET, Athens, Greece
  */
 
 namespace frankmayer\ArangoDbPhpCore\Connectors;

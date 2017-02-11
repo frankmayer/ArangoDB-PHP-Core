@@ -6,7 +6,7 @@
  * Taken from the original ArangoDB-Client, in order to maintain easy migration. Thanks Jan ;)
  *
  * @author    Frank Mayer
- * @copyright Copyright 2013-2015, FRANKMAYER.NET, Athens, Greece
+ * @copyright Copyright 2013-2017, FRANKMAYER.NET, Athens, Greece
  */
 // todo 1 Frank Revisit Endpoints Not sure how to handle this in the core level...
 namespace frankmayer\ArangoDbPhpCore\Config;

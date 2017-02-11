@@ -4,7 +4,7 @@
  * ArangoDB-PHP-Core client: HTTP Connector Interface
  *
  * @author    Frank Mayer
- * @copyright Copyright 2013-2015, FRANKMAYER.NET, Athens, Greece
+ * @copyright Copyright 2013-2017, FRANKMAYER.NET, Athens, Greece
  */
 
 namespace frankmayer\ArangoDbPhpCore\Protocols\Http;
