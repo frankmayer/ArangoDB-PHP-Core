@@ -39,7 +39,7 @@ The client should generally be seen as a basis that takes away the boilerplate c
 
 ####PHP Versions:
 
-Supported: 5.6+ & HHVM 2.3.0+
+Supported: PHP 7.0+ & HHVM 3.11.0+
 
 
 #####Caution:
