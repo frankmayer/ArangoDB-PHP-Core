@@ -6,7 +6,7 @@ php:
   - hhvm-3.15
   #  - hhvm-nightly
 
-dist: trusty
+dist: xenial
 
 matrix:
     fast_finish: true
