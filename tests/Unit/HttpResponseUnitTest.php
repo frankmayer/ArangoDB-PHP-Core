@@ -19,6 +19,7 @@ require_once 'ArangoDbPhpCoreUnitTestCase.php';
 
 /**
  * Class CoreTest
+ *
  * @package frankmayer\ArangoDbPhpCore
  */
 class HttpResponseUnitTest extends ArangoDbPhpCoreUnitTestCase
@@ -77,9 +78,9 @@ TAG;
 
 
         $this->connector = $this->getMockBuilder('TestConnector')
-                                ->getMock();
+            ->getMock();
         $this->connector->method('request')
-                        ->willReturn($this->batchResponseBody);
+            ->willReturn($this->batchResponseBody);
 
 
         $this->client = new Client($this->connector, getClientOptions());

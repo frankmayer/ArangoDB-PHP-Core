@@ -149,6 +149,7 @@ class Endpoint
         }
 
         $type = self::getType($value);
+
         return !($type === null);
     }
 }

@@ -9,7 +9,7 @@
  */
 
 namespace frankmayer\ArangoDbPhpCore\Tests\Integration;
-require_once __DIR__.'/ArangoDbPhpCoreIntegrationTestCase.php';
+require_once __DIR__ . '/ArangoDbPhpCoreIntegrationTestCase.php';
 
 use frankmayer\ArangoDbPhpCore\Api\Rest\Async;
 use frankmayer\ArangoDbPhpCore\Api\Rest\Collection;
@@ -20,6 +20,7 @@ use HttpResponse;
 
 /**
  * Class AsyncTest
+ *
  * @package frankmayer\ArangoDbPhpCore
  */
 class AsyncIntegrationTest extends ArangoDbPhpCoreIntegrationTestCase

@@ -16,9 +16,7 @@ use frankmayer\ArangoDbPhpCore\Api\RestApiInterface;
  *
  * @package frankmayer\ArangoDbPhpCore\Api\Rest
  */
-class Edge extends
-    DocumentBase implements
-    RestApiInterface
+class Edge extends DocumentBase implements RestApiInterface
 {
     use EdgeTrait;
 

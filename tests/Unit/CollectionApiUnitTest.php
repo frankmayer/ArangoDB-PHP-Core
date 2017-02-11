@@ -18,6 +18,7 @@ require_once 'ArangoDbPhpCoreUnitTestCase.php';
 
 /**
  * Class CoreTest
+ *
  * @package frankmayer\ArangoDbPhpCore
  */
 class CollectionApiUnitTest extends ArangoDbPhpCoreUnitTestCase
@@ -30,7 +31,7 @@ class CollectionApiUnitTest extends ArangoDbPhpCoreUnitTestCase
     public function setup()
     {
         $this->connector = $this->getMockBuilder('TestConnector')
-                                ->getMock();
+            ->getMock();
 
         $this->client = new Client($this->connector, getClientOptions());
 
@@ -79,7 +80,7 @@ location: /_db/_system/_api/collection/testCollectionBasics\r\n\r\n{
 TAG;
         $options                  = ['waitForSync' => true];
         $this->connector->method('request')
-                        ->willReturn($createCollectionResponse);
+            ->willReturn($createCollectionResponse);
 
         $object = new Collection($this->client);
 
@@ -105,7 +106,7 @@ content-type: application/json; charset=utf-8\r\n\r\n{
 TAG;
         $options                  = ['waitForSync' => true];
         $this->connector->method('request')
-                        ->willReturn($deleteCollectionResponse);
+            ->willReturn($deleteCollectionResponse);
 
         $object = new Collection($this->client);
 
@@ -135,7 +136,7 @@ content-type: application/json; charset=utf-8\r\n\r\n{
 TAG;
         $options                  = ['waitForSync' => true];
         $this->connector->method('request')
-                        ->willReturn($deleteCollectionResponse);
+            ->willReturn($deleteCollectionResponse);
 
         $object = new Collection($this->client);
 
@@ -173,7 +174,7 @@ content-type: application/json; charset=utf-8\r\n\r\n{
 TAG;
         $options                  = ['excludeSystem' => true];
         $this->connector->method('request')
-                        ->willReturn($deleteCollectionResponse);
+            ->willReturn($deleteCollectionResponse);
 
         $object = new Collection($this->client);
 

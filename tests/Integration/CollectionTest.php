@@ -20,10 +20,10 @@ use HttpResponse;
 
 /**
  * Class CollectionTest
+ *
  * @package frankmayer\ArangoDbPhpCore
  */
-class CollectionIntegrationTest extends
-    ArangoDbPhpCoreIntegrationTestCase
+class CollectionIntegrationTest extends ArangoDbPhpCoreIntegrationTestCase
 {
     /**
      * @var Client
@@ -53,8 +53,7 @@ class CollectionIntegrationTest extends
         $options              = $collectionOptions;
         $this->client->bind(
             'Request',
-            function ()
-            {
+            function () {
                 $request = $this->client->getRequest();
 
                 return $request;
@@ -95,8 +94,7 @@ class CollectionIntegrationTest extends
         $options           = $collectionOptions;
         $this->client->bind(
             'Request',
-            function ()
-            {
+            function () {
                 $request = $this->client->getRequest();
 
                 return $request;
@@ -198,10 +196,8 @@ class CollectionIntegrationTest extends
         $response    = json_decode($responseObject->body);
         $foundGraphs = false;
 
-        foreach ($response->result as $value)
-        {
-            if ($value->name === '_graphs')
-            {
+        foreach ($response->result as $value) {
+            if ($value->name === '_graphs') {
                 $foundGraphs = true;
             }
         }
@@ -223,10 +219,8 @@ class CollectionIntegrationTest extends
 
         $foundGraphs = false;
 
-        foreach ($response->result as $value)
-        {
-            if ($value->name === '_graphs')
-            {
+        foreach ($response->result as $value) {
+            if ($value->name === '_graphs') {
                 $foundGraphs = true;
             }
         }

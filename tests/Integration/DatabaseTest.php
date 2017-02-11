@@ -10,7 +10,7 @@
 
 namespace frankmayer\ArangoDbPhpCore\Tests\Integration;
 
-require_once __DIR__.'/ArangoDbPhpCoreIntegrationTestCase.php';
+require_once __DIR__ . '/ArangoDbPhpCoreIntegrationTestCase.php';
 
 use frankmayer\ArangoDbPhpCore\Api\Rest\Database;
 use frankmayer\ArangoDbPhpCore\Client;
@@ -20,10 +20,10 @@ use HttpResponse;
 
 /**
  * Class DatabaseTest
+ *
  * @package frankmayer\ArangoDbPhpCore
  */
-class DatabaseIntegrationTest extends
-    ArangoDbPhpCoreIntegrationTestCase
+class DatabaseIntegrationTest extends ArangoDbPhpCoreIntegrationTestCase
 {
     /**
      * @var Client

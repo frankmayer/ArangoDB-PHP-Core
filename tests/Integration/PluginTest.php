@@ -10,7 +10,7 @@
 
 namespace frankmayer\ArangoDbPhpCore\Tests\Integration;
 
-require_once __DIR__.'/ArangoDbPhpCoreIntegrationTestCase.php';
+require_once __DIR__ . '/ArangoDbPhpCoreIntegrationTestCase.php';
 
 use frankmayer\ArangoDbPhpCore\Api\Rest\Collection;
 use frankmayer\ArangoDbPhpCore\Client;
@@ -21,10 +21,10 @@ use frankmayer\ArangoDbPhpCore\Plugins\TestPlugin;
 
 /**
  * Class PluginTest
+ *
  * @package frankmayer\ArangoDbPhpCore
  */
-class PluginIntegrationTest extends
-    ArangoDbPhpCoreIntegrationTestCase
+class PluginIntegrationTest extends ArangoDbPhpCoreIntegrationTestCase
 {
     /**
      * @var ClientOptions $clientOptions

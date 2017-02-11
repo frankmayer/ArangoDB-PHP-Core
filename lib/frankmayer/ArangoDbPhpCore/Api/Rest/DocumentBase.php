@@ -31,12 +31,8 @@ class DocumentBase extends Api
      *
      * @return \frankmayer\ArangoDbPhpCore\Protocols\Http\HttpResponse
      */
-    public function replace(
-        $handle,
-        $body,
-        array $urlQuery = [],
-        array $options = []
-    ) {
+    public function replace($handle, $body, array $urlQuery = [], array $options = [])
+    {
         /** @var AbstractHttpRequest $request */
         $request          = $this->getRequest();
         $request->options = $options;
@@ -65,12 +61,8 @@ class DocumentBase extends Api
      *
      * @return \frankmayer\ArangoDbPhpCore\Protocols\Http\HttpResponse
      */
-    public function update(
-        $handle,
-        $body,
-        array $urlQuery = [],
-        array $options = []
-    ) {
+    public function update($handle, $body, array $urlQuery = [], array $options = [])
+    {
         /** @var AbstractHttpRequest $request */
         $request          = $this->getRequest();
         $request->options = $options;
@@ -98,10 +90,8 @@ class DocumentBase extends Api
      *
      * @return \frankmayer\ArangoDbPhpCore\Protocols\Http\HttpResponse
      */
-    public function getAll(
-        $collection,
-        array $options = []
-    ) {
+    public function getAll($collection, array $options = [])
+    {
         /** @var AbstractHttpRequest $request */
         $request          = $this->getRequest();
         $request->options = $options;
@@ -119,10 +109,8 @@ class DocumentBase extends Api
      *
      * @return \frankmayer\ArangoDbPhpCore\Protocols\Http\HttpResponse
      */
-    public function get(
-        $handle,
-        array $options = []
-    ) {
+    public function get($handle, array $options = [])
+    {
         /** @var AbstractHttpRequest $request */
         $request          = $this->getRequest();
         $request->options = $options;
@@ -139,10 +127,8 @@ class DocumentBase extends Api
      *
      * @return \frankmayer\ArangoDbPhpCore\Protocols\Http\HttpResponse
      */
-    public function getHeader(
-        $handle,
-        array $options = []
-    ) {
+    public function getHeader($handle, array $options = [])
+    {
         /** @var AbstractHttpRequest $request */
         $request          = $this->getRequest();
         $request->options = $options;
@@ -158,10 +144,8 @@ class DocumentBase extends Api
      *
      * @return \frankmayer\ArangoDbPhpCore\Protocols\Http\HttpResponse
      */
-    public function delete(
-        $handle,
-        array $options = []
-    ) {
+    public function delete($handle, array $options = [])
+    {
         /** @var AbstractHttpRequest $request */
         $request          = $this->getRequest();
         $request->options = $options;

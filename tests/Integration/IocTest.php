@@ -10,7 +10,7 @@
 
 namespace frankmayer\ArangoDbPhpCore\Tests\Integration;
 
-require_once __DIR__.'/ArangoDbPhpCoreIntegrationTestCase.php';
+require_once __DIR__ . '/ArangoDbPhpCoreIntegrationTestCase.php';
 
 use frankmayer\ArangoDbPhpCore\Client;
 use frankmayer\ArangoDbPhpCore\ClientException;
@@ -21,10 +21,10 @@ use frankmayer\ArangoDbPhpCore\Protocols\ResponseInterface;
 
 /**
  * Class IocTest
+ *
  * @package frankmayer\ArangoDbPhpCore
  */
-class IocIntegrationTest extends
-    ArangoDbPhpCoreIntegrationTestCase
+class IocIntegrationTest extends ArangoDbPhpCoreIntegrationTestCase
 {
     /**
      * @var Client

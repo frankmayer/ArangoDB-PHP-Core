@@ -18,6 +18,7 @@ use frankmayer\ArangoDbPhpCore\Plugins\TestPlugin;
 
 /**
  * Class PluginTest
+ *
  * @package frankmayer\ArangoDbPhpCore
  */
 class PluginUnitTest extends ArangoDbPhpCoreUnitTestCase
@@ -30,7 +31,7 @@ class PluginUnitTest extends ArangoDbPhpCoreUnitTestCase
     /**
      * @var Client $client
      */
-    public  $client;
+    public $client;
     private $connector;
 
 
@@ -40,7 +41,7 @@ class PluginUnitTest extends ArangoDbPhpCoreUnitTestCase
     public function setUp()
     {
         $this->connector = $this->getMockBuilder('TestConnector')
-                                ->getMock();
+            ->getMock();
         $this->client    = getClient($this->connector);
     }
 

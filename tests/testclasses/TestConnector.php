@@ -8,8 +8,8 @@ use frankmayer\ArangoDbPhpCore\Connectors\AbstractHttpConnector;
  * @package
  * @author Frank Mayer
  */
-
-class TestConnector extends AbstractHttpConnector{
+class TestConnector extends AbstractHttpConnector
+{
 
     public function request(\frankmayer\ArangoDbPhpCore\Protocols\Http\AbstractHttpRequest $request)
     {

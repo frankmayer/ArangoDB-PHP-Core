@@ -16,9 +16,7 @@ use frankmayer\ArangoDbPhpCore\Api\RestApiInterface;
  *
  * @package frankmayer\ArangoDbPhpCore\Api\Rest
  */
-class Document extends
-    DocumentBase implements
-    RestApiInterface
+class Document extends DocumentBase implements RestApiInterface
 {
     use DocumentTrait;
 }

@@ -66,13 +66,13 @@ class Client
     public $responseClass;
 
 
-	/**
-	 * @param ConnectorInterface|AbstractHttpConnector $connector
-	 *
-	 * @param array                                    $clientOptions
-	 *
-	 * @throws \frankmayer\ArangoDbPhpCore\ClientException
-	 */
+    /**
+     * @param ConnectorInterface|AbstractHttpConnector $connector
+     *
+     * @param array                                    $clientOptions
+     *
+     * @throws \frankmayer\ArangoDbPhpCore\ClientException
+     */
     public function __construct(ConnectorInterface $connector, $clientOptions = null)
     {
         $this->connector          = $connector;
@@ -88,8 +88,8 @@ class Client
 
         if (isset($this->clientOptions['plugins'])) {
             $this->pluginManager = new PluginManager($this,
-                isset($this->clientOptions['plugins']) ? $this->clientOptions['plugins'] : null,
-                isset($this->clientOptions['PluginManager']['options']) ? $this->clientOptions['PluginManager']['options'] : null);
+                $this->clientOptions['plugins'] ?? null,
+                $this->clientOptions['PluginManager']['options'] ?? null);
         }
     }
 
@@ -308,7 +308,7 @@ class Client
     }
 
 
-   /**
+    /**
      * @return ResponseInterface
      */
     public function getResponse()

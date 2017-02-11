@@ -15,8 +15,7 @@ use frankmayer\ArangoDbPhpCore\Protocols\Http\HttpConnectorInterface;
  *
  * @package frankmayer\ArangoDbPhpCore\Connectors
  */
-abstract class AbstractHttpConnector implements
-    HttpConnectorInterface
+abstract class AbstractHttpConnector implements HttpConnectorInterface
 {
 
     const HTTP_EOL = "\r\n";

@@ -12,7 +12,7 @@ namespace frankmayer\ArangoDbPhpCore\Tests\Integration;
 
 use frankmayer\ArangoDbPhpCore\Client;
 
-require_once __DIR__.'/ArangoDbPhpCoreIntegrationTestCase.php';
+require_once __DIR__ . '/ArangoDbPhpCoreIntegrationTestCase.php';
 
 class ExceptionIntegrationTest extends ArangoDbPhpCoreIntegrationTestCase
 {

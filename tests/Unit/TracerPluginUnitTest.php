@@ -15,6 +15,7 @@ require_once 'ArangoDbPhpCoreUnitTestCase.php';
 
 /**
  * Class PluginTest
+ *
  * @package frankmayer\ArangoDbPhpCore
  */
 class TracerPluginUnitTest extends ArangoDbPhpCoreUnitTestCase
@@ -32,7 +33,7 @@ class TracerPluginUnitTest extends ArangoDbPhpCoreUnitTestCase
     public function setUp()
     {
         $this->connector = $this->getMockBuilder('TestConnector')
-                                ->getMock();
+            ->getMock();
         $this->client    = getClient($this->connector);
     }
 

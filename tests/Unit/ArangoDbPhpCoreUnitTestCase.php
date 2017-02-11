@@ -12,10 +12,10 @@ namespace frankmayer\ArangoDbPhpCore;
 
 /**
  * Class ArangoDbPhpCoreTestCase
+ *
  * @package frankmayer\ArangoDbPhpCore
  */
-class ArangoDbPhpCoreUnitTestCase extends
-    \PHPUnit_Framework_TestCase
+class ArangoDbPhpCoreUnitTestCase extends \PHPUnit_Framework_TestCase
 {
     /**
      *

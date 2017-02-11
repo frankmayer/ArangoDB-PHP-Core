@@ -14,7 +14,6 @@ namespace frankmayer\ArangoDbPhpCore;
  *
  * @package frankmayer\ArangoDbPhpCore
  */
-class Exception extends
-    \Exception
+class Exception extends \Exception
 {
 }

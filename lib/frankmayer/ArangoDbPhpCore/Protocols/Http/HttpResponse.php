@@ -172,12 +172,13 @@ class HttpResponse implements HttpResponseInterface
 
         $batchParts = explode('--' . $boundary . $connector::HTTP_EOL, $batchResponseBody);
         array_shift($batchParts);
-        $i = 0;
+        $i                   = 0;
+        $batchObjectTemplate = new static();
+
         foreach ($batchParts as &$batchPart) {
             /** @var $batchPart HttpResponse */
             $batchPartHeaders = static::splitBatchPart($batchPart);
-
-            $batchObject = new static();
+            $batchObject      = clone $batchObjectTemplate;
             $batchObject->build($batchPartHeaders[1]);
             //            $batchArangoHeader  = explode(PHP_EOL, $batchPartHeaders[0]);
             $batchArangoHeaderArray = $this->getHeaderArray($batchPartHeaders[0]);

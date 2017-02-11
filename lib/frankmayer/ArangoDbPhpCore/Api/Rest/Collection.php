@@ -17,9 +17,7 @@ use frankmayer\ArangoDbPhpCore\Protocols\Http\AbstractHttpRequest;
  *
  * @package frankmayer\ArangoDbPhpCore\Api\Rest
  */
-class Collection extends
-    Api implements
-    RestApiInterface
+class Collection extends Api implements RestApiInterface
 {
     /**
      *
@@ -34,11 +32,8 @@ class Collection extends
      * @return \frankmayer\ArangoDbPhpCore\Protocols\Http\HttpResponse
      * @throws \frankmayer\ArangoDbPhpCore\ClientException
      */
-    public function create(
-        $collectionName,
-        array $collectionParameters = [],
-        array $options = []
-    ) {
+    public function create($collectionName, array $collectionParameters = [], array $options = [])
+    {
         $request = $this->getRequest();
 
         $request->options = $options;
@@ -60,10 +55,8 @@ class Collection extends
      *
      * @return \frankmayer\ArangoDbPhpCore\Protocols\Http\HttpResponse
      */
-    public function drop(
-        $collectionName,
-        array $options = []
-    ) {
+    public function drop($collectionName, array $options = [])
+    {
         /** @var AbstractHttpRequest $request */
         $request = $this->getRequest();
 
@@ -81,10 +74,8 @@ class Collection extends
      *
      * @return \frankmayer\ArangoDbPhpCore\Protocols\Http\HttpResponse
      */
-    public function truncate(
-        $collectionName,
-        array $options = []
-    ) {
+    public function truncate($collectionName, array $options = [])
+    {
         /** @var AbstractHttpRequest $request */
         $request = $this->getRequest();
 
@@ -102,9 +93,8 @@ class Collection extends
      *
      * @return \frankmayer\ArangoDbPhpCore\Protocols\Http\HttpResponse
      */
-    public function getAll(
-        array $options = []
-    ) {
+    public function getAll(array $options = [])
+    {
         /** @var AbstractHttpRequest $request */
         $request = $this->getRequest();
 

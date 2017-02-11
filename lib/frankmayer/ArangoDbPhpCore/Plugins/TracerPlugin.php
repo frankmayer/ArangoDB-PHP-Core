@@ -12,10 +12,10 @@ namespace frankmayer\ArangoDbPhpCore\Plugins;
 
 /**
  * Class TracerPlugin
+ *
  * @package frankmayer\ArangoDbPhpCore\Plugins
  */
-class TracerPlugin extends
-    Plugin
+class TracerPlugin extends Plugin
 {
 
     // Ignoring this for now, as we will revisit this later...

@@ -14,7 +14,6 @@ namespace frankmayer\ArangoDbPhpCore;
  *
  * @package frankmayer\ArangoDbPhpCore
  */
-class ServerException extends
-    ConnectionException
+class ServerException extends ConnectionException
 {
 }

@@ -18,6 +18,7 @@ require_once 'ArangoDbPhpCoreUnitTestCase.php';
 
 /**
  * Class CoreTest
+ *
  * @package frankmayer\ArangoDbPhpCore
  */
 class EdgeApiUnitTest extends ArangoDbPhpCoreUnitTestCase
@@ -31,7 +32,7 @@ class EdgeApiUnitTest extends ArangoDbPhpCoreUnitTestCase
     public function setup()
     {
         $this->connector = $this->getMockBuilder('TestConnector')
-                                ->getMock();
+            ->getMock();
 
         $this->client = new Client($this->connector, getClientOptions());
 
@@ -72,7 +73,7 @@ TAG;
         $body           = '{ "Hello": "World" }';
 
         $this->connector->method('request')
-                        ->willReturn($createResponse);
+            ->willReturn($createResponse);
 
         $object = new Edge($this->client);
 
@@ -101,7 +102,7 @@ TAG;
 
         $options = ['waitForSync' => true];
         $this->connector->method('request')
-                        ->willReturn($deleteResponse);
+            ->willReturn($deleteResponse);
 
         $object = new Edge($this->client);
 
@@ -131,7 +132,7 @@ TAG;
 
         $options = ['waitForSync' => true];
         $this->connector->method('request')
-                        ->willReturn($deleteCollectionResponse);
+            ->willReturn($deleteCollectionResponse);
 
         $object = new Edge($this->client);
 
@@ -156,7 +157,7 @@ TAG;
 
         $options = ['waitForSync' => true];
         $this->connector->method('request')
-                        ->willReturn($deleteCollectionResponse);
+            ->willReturn($deleteCollectionResponse);
 
         $object = new Edge($this->client);
 
@@ -188,7 +189,7 @@ TAG;
 
         $options = ['waitForSync' => true];
         $this->connector->method('request')
-                        ->willReturn($deleteCollectionResponse);
+            ->willReturn($deleteCollectionResponse);
 
         $object = new Edge($this->client);
 
@@ -219,7 +220,7 @@ TAG;
         $body                     = '{ "Hello": "World" }';
 
         $this->connector->method('request')
-                        ->willReturn($deleteCollectionResponse);
+            ->willReturn($deleteCollectionResponse);
 
         $object = new Edge($this->client);
 
@@ -247,7 +248,7 @@ content-type: application/json; charset=utf-8\r\n\r\n{
 TAG;
         $options                  = ['excludeSystem' => true];
         $this->connector->method('request')
-                        ->willReturn($deleteCollectionResponse);
+            ->willReturn($deleteCollectionResponse);
 
         $object = new Edge($this->client);
 

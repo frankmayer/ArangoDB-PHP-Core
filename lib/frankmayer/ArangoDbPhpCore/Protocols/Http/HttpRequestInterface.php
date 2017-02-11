@@ -17,8 +17,7 @@ use frankmayer\ArangoDbPhpCore\Protocols\RequestInterface;
  *
  * @package frankmayer\ArangoDbPhpCore\Protocols\Http
  */
-interface HttpRequestInterface extends
-    RequestInterface
+interface HttpRequestInterface extends RequestInterface
 {
     /**
      * Method to send an HTTP request.

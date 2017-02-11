@@ -18,70 +18,68 @@ namespace frankmayer\ArangoDbPhpCore;
  */
 class Autoloader
 {
-	/**
-	 * Root directory for library files
-	 *
-	 * @var string
-	 */
-	private static $rootDir;
+    /**
+     * Root directory for library files
+     *
+     * @var string
+     */
+    private static $rootDir;
 
-	/**
-	 * Class file extension
-	 */
-	const EXTENSION = '.php';
+    /**
+     * Class file extension
+     */
+    const EXTENSION = '.php';
 
-	/**
-	 * Initialise the autoloader
-	 *
-	 * @throws Exception
-	 * @return void
-	 *
-	 * @codeCoverageIgnore
-	 */
-	public static function init()
-	{
-		self::checkEnvironment();
+    /**
+     * Initialise the autoloader
+     *
+     * @throws Exception
+     * @return void
+     *
+     * @codeCoverageIgnore
+     */
+    public static function init()
+    {
+        self::checkEnvironment();
 
-		spl_autoload_register(__NAMESPACE__ . '\Autoloader::load');
+        spl_autoload_register(__NAMESPACE__ . '\Autoloader::load');
 
-		self::$rootDir = __DIR__ . '/';
-	}
+        self::$rootDir = __DIR__ . '/';
+    }
 
-	/**
-	 * Handle loading of an unknown class
-	 *
-	 * This will only handle class from its own namespace and ignore all others.<br>
-	 * This allows multiple autoloaders to be used in a nested fashion.
-	 *
-	 * @param string $className - The name of class to be loaded
-	 *
-	 * @return void
-	 */
-	public static function load($className)
-	{
-		$className = str_replace([__NAMESPACE__, "\\"], ['', DIRECTORY_SEPARATOR], $className);
+    /**
+     * Handle loading of an unknown class
+     *
+     * This will only handle class from its own namespace and ignore all others.<br>
+     * This allows multiple autoloaders to be used in a nested fashion.
+     *
+     * @param string $className - The name of class to be loaded
+     *
+     * @return void
+     */
+    public static function load($className)
+    {
+        $className = str_replace([__NAMESPACE__, "\\"], ['', DIRECTORY_SEPARATOR], $className);
 
-		if (file_exists(self::$rootDir . $className . self::EXTENSION))
-		{
-			require_once self::$rootDir . $className . self::EXTENSION;
-		}
-	}
+        if (file_exists(self::$rootDir . $className . self::EXTENSION)) {
+            require_once self::$rootDir . $className . self::EXTENSION;
+        }
+    }
 
-	/**
-	 * Check the runtime environment
-	 *
-	 * This will check whether the runtime environment is compatible with this library
-	 *
-	 * @throws ClientException
-	 * @return void
-	 *
-	 * @codeCoverageIgnore
-	 */
-	private static function checkEnvironment()
-	{
-		if (version_compare(PHP_MAJOR_VERSION . '.' . PHP_MINOR_VERSION . '.' . PHP_RELEASE_VERSION, '5.4.0', '<'))
-		{
-			throw new ClientException('Incompatible PHP environment. Expecting PHP 5.4 or higher');
-		}
-	}
+    /**
+     * Check the runtime environment
+     *
+     * This will check whether the runtime environment is compatible with this library
+     *
+     * @throws ClientException
+     * @return void
+     *
+     * @codeCoverageIgnore
+     */
+    private static function checkEnvironment()
+    {
+        if (version_compare(PHP_MAJOR_VERSION . '.' . PHP_MINOR_VERSION . '.' . PHP_RELEASE_VERSION, '5.4.0', '<')) {
+            throw new ClientException('Incompatible PHP environment. Expecting PHP 5.4 or higher');
+        }
+    }
 }

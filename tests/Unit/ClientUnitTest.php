@@ -17,6 +17,7 @@ require_once 'ArangoDbPhpCoreUnitTestCase.php';
 
 /**
  * Class CoreTest
+ *
  * @package frankmayer\ArangoDbPhpCore
  */
 class ClientUnitTest extends ArangoDbPhpCoreUnitTestCase
@@ -28,9 +29,9 @@ class ClientUnitTest extends ArangoDbPhpCoreUnitTestCase
     public function setup()
     {
         $this->connector  = $this->getMockBuilder('TestConnector')
-                                 ->getMock();
+            ->getMock();
         $this->connector2 = $this->getMockBuilder('TestConnector')
-                                 ->getMock();
+            ->getMock();
     }
 
 

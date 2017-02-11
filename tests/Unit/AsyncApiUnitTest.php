@@ -19,6 +19,7 @@ require_once 'ArangoDbPhpCoreUnitTestCase.php';
 
 /**
  * Class CoreTest
+ *
  * @package frankmayer\ArangoDbPhpCore
  */
 class AsyncApiUnitTest extends ArangoDbPhpCoreUnitTestCase
@@ -31,7 +32,7 @@ class AsyncApiUnitTest extends ArangoDbPhpCoreUnitTestCase
     public function setup()
     {
         $this->connector = $this->getMockBuilder('TestConnector')
-                                ->getMock();
+            ->getMock();
 
         $this->client = new Client($this->connector, getClientOptions());
 
@@ -58,7 +59,7 @@ TAG;
 
         $options = ['async' => true];
         $this->connector->method('request')
-                        ->willReturn($createResponse);
+            ->willReturn($createResponse);
 
         $object = new Document($this->client);
 
@@ -83,7 +84,7 @@ TAG;
         $handle                   = 'products/1234567890';
 
         $this->connector->method('request')
-                        ->willReturn($createCollectionResponse);
+            ->willReturn($createCollectionResponse);
 
         $object = new Async($this->client);
 
@@ -107,7 +108,7 @@ content-type: application/json; charset=utf-8\r\n\r\n{
 TAG;
         $options                  = ['waitForSync' => true];
         $this->connector->method('request')
-                        ->willReturn($deleteCollectionResponse);
+            ->willReturn($deleteCollectionResponse);
 
         $object = new Async($this->client);
 
@@ -131,7 +132,7 @@ content-type: application/json; charset=utf-8\r\n\r\n[
 TAG;
         $options                  = ['waitForSync' => true];
         $this->connector->method('request')
-                        ->willReturn($deleteCollectionResponse);
+            ->willReturn($deleteCollectionResponse);
 
         $object = new Async($this->client);
 

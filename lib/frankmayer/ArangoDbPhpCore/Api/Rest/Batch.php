@@ -17,9 +17,7 @@ use frankmayer\ArangoDbPhpCore\Protocols\Http\AbstractHttpRequest;
  *
  * @package   frankmayer\ArangoDbPhpCore\Api\Rest
  */
-class Batch extends
-    Api implements
-    RestApiInterface
+class Batch extends Api implements RestApiInterface
 {
     /**
      * @param $client

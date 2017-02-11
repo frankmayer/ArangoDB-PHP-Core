@@ -9,7 +9,7 @@
 
 namespace frankmayer\ArangoDbPhpCore\Tests\Integration;
 
-require_once __DIR__.'/ArangoDbPhpCoreIntegrationTestCase.php';
+require_once __DIR__ . '/ArangoDbPhpCoreIntegrationTestCase.php';
 
 use frankmayer\ArangoDbPhpCore\Client;
 

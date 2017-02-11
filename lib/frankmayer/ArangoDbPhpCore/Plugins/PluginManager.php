@@ -34,13 +34,13 @@ class PluginManager
     public $options;
 
 
-	/**
-	 * @param       $client
-	 * @param array $plugins
-	 * @param array $options
-	 *
-	 * @throws \frankmayer\ArangoDbPhpCore\ClientException
-	 */
+    /**
+     * @param       $client
+     * @param array $plugins
+     * @param array $options
+     *
+     * @throws \frankmayer\ArangoDbPhpCore\ClientException
+     */
     public function __construct($client, array $plugins = [], array $options = [])
     {
         $options['notificationsEnabled'] = true;
@@ -52,17 +52,17 @@ class PluginManager
     }
 
 
-	/**
-	 * @param array $plugins
-	 *
-	 * @return bool
-	 * @throws ClientException
-	 */
+    /**
+     * @param array $plugins
+     *
+     * @return bool
+     * @throws ClientException
+     */
     public function setPluginsFromPluginArray(array $plugins = [])
     {
         if ((bool) $plugins === true) {
             foreach ($plugins as $key => $plugin) {
-                if (is_subclass_of($plugin, 'frankmayer\ArangoDbPhpCore\Plugins\Plugin')) {
+                if (is_subclass_of($plugin, Plugin::class)) {
                     $this->pluginStorage[$key]['plugin']   = $plugin;
                     $this->pluginStorage[$key]['priority'] = $plugin->priority;
                 } else {

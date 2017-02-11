@@ -15,8 +15,7 @@ namespace frankmayer\ArangoDbPhpCore\Plugins;
  *
  * @package frankmayer\ArangoDbPhpCore\Plugins
  */
-abstract class Plugin implements
-    PluginInterface
+abstract class Plugin implements PluginInterface
 {
     /**
      * @var int $priority The priority level of the plugin-instance 0 = standard negative = lower, positive = higher

@@ -29,14 +29,8 @@ trait EdgeTrait
      *
      * @return \frankmayer\ArangoDbPhpCore\Protocols\Http\HttpResponse
      */
-    public function create(
-        $collection,
-        $from,
-        $to,
-        $body = null,
-        array $urlQuery = [],
-        array $options = []
-    ) {
+    public function create($collection, $from, $to, $body = null, array $urlQuery = [], array $options = [])
+    {
         /** @var AbstractHttpRequest $request */
         $request          = $this->getRequest();
         $request->options = $options;
@@ -52,7 +46,7 @@ trait EdgeTrait
             ['from' => $from, 'to' => $to],
             ['collection' => $collection]);
 
-	    $urlQueryStr = $request->buildUrlQuery($urlQuery);
+        $urlQueryStr = $request->buildUrlQuery($urlQuery);
 
         $request->path .= $urlQueryStr;
 
