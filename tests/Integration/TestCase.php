@@ -17,8 +17,6 @@ namespace frankmayer\ArangoDbPhpCore\Tests\Integration;
  */
 class TestCase extends \PHPUnit_Framework_TestCase
 {
-    use TestCaseTrait;
-
     /**
      *
      */
