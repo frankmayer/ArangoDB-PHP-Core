@@ -36,7 +36,7 @@ class DatabaseTest extends TestCase
      */
     public function setUp()
     {
-        $this->connector    = new Connector();
+        $this->connector = new Connector();
 
         $this->setupProperties();
 

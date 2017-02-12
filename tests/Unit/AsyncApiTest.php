@@ -35,7 +35,7 @@ class AsyncApiTest extends TestCase
 
         $this->setupProperties();
 
-         $this->batch = new Batch($this->client);
+        $this->batch = new Batch($this->client);
 
         $this->collectionNames[0] = 'ArangoDB-PHP-Core-CollectionTestSuite-Collection-01';
         $this->collectionNames[1] = 'ArangoDB-PHP-Core-CollectionTestSuite-Collection-02';

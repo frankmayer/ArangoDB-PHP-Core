@@ -16,9 +16,9 @@ use frankmayer\ArangoDbPhpCore\Plugins\TracerPlugin;
 use frankmayer\ArangoDbPhpCore\Protocols\Http\HttpRequest;
 use frankmayer\ArangoDbPhpCore\Protocols\Http\HttpResponse;
 
-require __DIR__ .'/../autoload.php';
-require  __DIR__ .'/../vendor/autoload.php';
-require_once __DIR__ .'/testclasses/TestConnector.php';
+require __DIR__ . '/../autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__ . '/testclasses/TestConnector.php';
 
 function getClientOptions()
 {
@@ -30,9 +30,9 @@ function getClientOptions()
         ClientOptions::OPTION_DEFAULT_DATABASE     => '_system',
         ClientOptions::OPTION_DATABASE_PATH_PREFIX => '/_db/',
         // endpoint to connect to
-        ClientOptions::OPTION_AUTH_TYPE       => 'Basic',                 // use basic authorization
-        ClientOptions::OPTION_AUTH_USER       => 'root',                      // user for basic authorization
-        ClientOptions::OPTION_AUTH_PASSWD     => '',                      // password for basic authorization
+        ClientOptions::OPTION_AUTH_TYPE            => 'Basic',                 // use basic authorization
+        ClientOptions::OPTION_AUTH_USER            => 'root',                      // user for basic authorization
+        ClientOptions::OPTION_AUTH_PASSWD          => '',                      // password for basic authorization
         // timeout in seconds
         ClientOptions::OPTION_TIMEOUT              => 5,
         // ClientOptions::OPTION_PLUGINS              => $plugins,

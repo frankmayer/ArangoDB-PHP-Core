@@ -24,7 +24,7 @@ use frankmayer\ArangoDbPhpCore\Protocols\Http\HttpResponse;
  */
 class BatchTest extends TestCase
 {
-     /**
+    /**
      * @var
      */
     public $collectionNames;
@@ -35,7 +35,7 @@ class BatchTest extends TestCase
      */
     public function setUp()
     {
-        $this->connector    = new Connector();
+        $this->connector = new Connector();
 
         $this->setupProperties();
 

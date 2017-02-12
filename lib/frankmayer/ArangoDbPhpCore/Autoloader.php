@@ -80,7 +80,7 @@ class Autoloader
     {
         if (version_compare(PHP_MAJOR_VERSION . '.' . PHP_MINOR_VERSION . '.' . PHP_RELEASE_VERSION, '5.6.99', '<')) {
             echo PHP_MAJOR_VERSION . PHP_MINOR_VERSION . PHP_RELEASE_VERSION;
-            require __DIR__.'/ClientException.php';
+            require __DIR__ . '/ClientException.php';
             throw new ClientException('Incompatible PHP environment. Expecting PHP 7.0 or higher');
         }
     }
