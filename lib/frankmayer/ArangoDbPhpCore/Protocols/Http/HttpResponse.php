@@ -26,7 +26,6 @@ class HttpResponse implements HttpResponseInterface
      */
     public $enabledHttpServerExceptions;
 
-
     /**
      * @var HttpRequest $request The request object
      */
@@ -78,7 +77,7 @@ class HttpResponse implements HttpResponseInterface
     /**
      * @param $request
      *
-     * @return $this
+     * @return HttpResponse
      * @throws ServerException
      *
      */
@@ -107,7 +106,7 @@ class HttpResponse implements HttpResponseInterface
         }
 
         if (in_array((int) $this->status, $this->enabledHttpServerExceptions, true)) {
-            // Ignoring this, as the server needs to have authentication enabled in order to run through this.
+            // Ignoring this for now.
             // @codeCoverageIgnoreStart
             $this->protocol     = $statusLineArray[0];
             $this->statusPhrase = $this->decodeGetStatusPhrase($statusLineArray);
