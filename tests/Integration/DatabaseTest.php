@@ -46,7 +46,7 @@ class DatabaseIntegrationTest extends ArangoDbPhpCoreIntegrationTestCase
      */
     public function testCreateDatabaseWithoutApiClasses()
     {
-        $databaseName = 'ArangoDB-PHP-Core-DatabaseTestSuite-Database';
+        $databaseName = ArangoDbPhpCoreIntegrationTestCase::TESTNAMES_PREFIX . 'DatabaseTestSuite-Database';
 
         $databaseOptions    = ['waitForSync' => true];
         $databaseParameters = [];
@@ -86,7 +86,7 @@ class DatabaseIntegrationTest extends ArangoDbPhpCoreIntegrationTestCase
      */
     public function testDeleteDatabaseWithoutApiClasses()
     {
-        $databaseName = 'ArangoDB-PHP-Core-DatabaseTestSuite-Database';
+        $databaseName = ArangoDbPhpCoreIntegrationTestCase::TESTNAMES_PREFIX . 'DatabaseTestSuite-Database';
 
         $databaseOptions = ['waitForSync' => true];
         $options         = $databaseOptions;
@@ -118,7 +118,7 @@ class DatabaseIntegrationTest extends ArangoDbPhpCoreIntegrationTestCase
      */
     public function testCreateDatabaseViaIocContainer()
     {
-        $databaseName = 'ArangoDB-PHP-Core-DatabaseTestSuite-Database';
+        $databaseName = ArangoDbPhpCoreIntegrationTestCase::TESTNAMES_PREFIX . 'DatabaseTestSuite-Database';
 
         $databaseOptions = ['waitForSync' => true];
 
@@ -142,7 +142,7 @@ class DatabaseIntegrationTest extends ArangoDbPhpCoreIntegrationTestCase
      */
     public function testTruncateDatabase()
     {
-        $databaseName = 'ArangoDB-PHP-Core-DatabaseTestSuite-Database';
+        $databaseName = ArangoDbPhpCoreIntegrationTestCase::TESTNAMES_PREFIX . 'DatabaseTestSuite-Database';
 
         $database = new Database($this->client);
 
@@ -164,7 +164,7 @@ class DatabaseIntegrationTest extends ArangoDbPhpCoreIntegrationTestCase
     public function testDeleteDatabase()
     {
 
-        $databaseName = 'ArangoDB-PHP-Core-DatabaseTestSuite-Database';
+        $databaseName = ArangoDbPhpCoreIntegrationTestCase::TESTNAMES_PREFIX . 'DatabaseTestSuite-Database';
 
         $database = new Database($this->client);
 
@@ -216,7 +216,7 @@ class DatabaseIntegrationTest extends ArangoDbPhpCoreIntegrationTestCase
      */
     public function tearDown()
     {
-        $databaseName = 'ArangoDB-PHP-Core-DatabaseTestSuite-DatabaseViaIocContainer';
+        $databaseName = ArangoDbPhpCoreIntegrationTestCase::TESTNAMES_PREFIX . 'DatabaseTestSuite-DatabaseViaIocContainer';
         $database     = new Database($this->client);
 
         /** @var $responseObject HttpResponse */

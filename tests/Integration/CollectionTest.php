@@ -46,7 +46,7 @@ class CollectionIntegrationTest extends ArangoDbPhpCoreIntegrationTestCase
      */
     public function testCreateCollectionWithoutApiClasses()
     {
-        $collectionName = 'ArangoDB-PHP-Core-CollectionTestSuite-Collection';
+        $collectionName = ArangoDbPhpCoreIntegrationTestCase::TESTNAMES_PREFIX . 'CollectionTestSuite-Collection';
 
         $collectionOptions    = ['waitForSync' => true];
         $collectionParameters = [];
@@ -86,7 +86,7 @@ class CollectionIntegrationTest extends ArangoDbPhpCoreIntegrationTestCase
      */
     public function testDeleteCollectionWithoutApiClasses()
     {
-        $collectionName = 'ArangoDB-PHP-Core-CollectionTestSuite-Collection';
+        $collectionName = ArangoDbPhpCoreIntegrationTestCase::TESTNAMES_PREFIX . 'CollectionTestSuite-Collection';
 
         $collectionOptions = ['waitForSync' => true];
         $options           = $collectionOptions;
@@ -118,7 +118,7 @@ class CollectionIntegrationTest extends ArangoDbPhpCoreIntegrationTestCase
      */
     public function testCreateCollectionViaIocContainer()
     {
-        $collectionName = 'ArangoDB-PHP-Core-CollectionTestSuite-Collection';
+        $collectionName = ArangoDbPhpCoreIntegrationTestCase::TESTNAMES_PREFIX . 'CollectionTestSuite-Collection';
 
         $collectionOptions = ['waitForSync' => true];
 
@@ -142,7 +142,7 @@ class CollectionIntegrationTest extends ArangoDbPhpCoreIntegrationTestCase
      */
     public function testTruncateCollection()
     {
-        $collectionName = 'ArangoDB-PHP-Core-CollectionTestSuite-Collection';
+        $collectionName = ArangoDbPhpCoreIntegrationTestCase::TESTNAMES_PREFIX . 'CollectionTestSuite-Collection';
 
         $collection = new Collection($this->client);
 
@@ -164,7 +164,7 @@ class CollectionIntegrationTest extends ArangoDbPhpCoreIntegrationTestCase
     public function testDeleteCollection()
     {
 
-        $collectionName = 'ArangoDB-PHP-Core-CollectionTestSuite-Collection';
+        $collectionName = ArangoDbPhpCoreIntegrationTestCase::TESTNAMES_PREFIX . 'CollectionTestSuite-Collection';
 
         $collection = new Collection($this->client);
 
@@ -229,7 +229,7 @@ class CollectionIntegrationTest extends ArangoDbPhpCoreIntegrationTestCase
      */
     public function tearDown()
     {
-        $collectionName = 'ArangoDB-PHP-Core-CollectionTestSuite-CollectionViaIocContainer';
+        $collectionName = ArangoDbPhpCoreIntegrationTestCase::TESTNAMES_PREFIX . 'CollectionTestSuite-CollectionViaIocContainer';
         $collection     = new Collection($this->client);
 
         /** @var $responseObject HttpResponse */

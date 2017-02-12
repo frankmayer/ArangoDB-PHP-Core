@@ -42,9 +42,9 @@ class BatchIntegrationTest extends ArangoDbPhpCoreIntegrationTestCase
         $connector    = new Connector();
         $this->client = $this->client = getClient($connector);
 
-        $this->collectionNames[0] = 'ArangoDB-PHP-Core-CollectionTestSuite-Collection-01';
-        $this->collectionNames[1] = 'ArangoDB-PHP-Core-CollectionTestSuite-Collection-02';
-        $this->collectionNames[2] = 'ArangoDB-PHP-Core-CollectionTestSuite-Collection-03';
+        $this->collectionNames[0] = ArangoDbPhpCoreIntegrationTestCase::TESTNAMES_PREFIX . 'CollectionTestSuite-Collection-01';
+        $this->collectionNames[1] = ArangoDbPhpCoreIntegrationTestCase::TESTNAMES_PREFIX . 'CollectionTestSuite-Collection-02';
+        $this->collectionNames[2] = ArangoDbPhpCoreIntegrationTestCase::TESTNAMES_PREFIX . 'CollectionTestSuite-Collection-03';
     }
 
 

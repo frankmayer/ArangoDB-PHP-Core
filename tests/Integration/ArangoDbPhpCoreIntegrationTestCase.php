@@ -20,6 +20,10 @@ class ArangoDbPhpCoreIntegrationTestCase extends \PHPUnit_Framework_TestCase
     /**
      *
      */
+    const TESTNAMES_PREFIX = 'ArangoDB-PHP-Core-';
+    /**
+     *
+     */
     const API_COLLECTION = '/_api/collection';
     /**
      *
