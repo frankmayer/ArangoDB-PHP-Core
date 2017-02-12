@@ -7,20 +7,20 @@
  * @author Frank Mayer
  */
 
-namespace frankmayer\ArangoDbPhpCore\Tests\Integration;
+namespace frankmayer\ArangoDbPhpCore\Tests\Unit;
+
+use frankmayer\ArangoDbPhpCore\Client;
 
 
 /**
- * Class ArangoDbPhpCoreTestCase
+ * Class TestCase
  *
  * @package frankmayer\ArangoDbPhpCore
  */
-class ArangoDbPhpCoreIntegrationTestCase extends \PHPUnit_Framework_TestCase
+class TestCase extends \PHPUnit_Framework_TestCase
 {
-    /**
-     *
-     */
-    const TESTNAMES_PREFIX = 'ArangoDB-PHP-Core-';
+    use TestCaseTrait;
+
     /**
      *
      */
@@ -59,8 +59,15 @@ class ArangoDbPhpCoreIntegrationTestCase extends \PHPUnit_Framework_TestCase
      */
     const METHOD_OPTIONS = 'OPTIONS';
 
-    public function testEmpty()
+    protected $clientOptions;
+    protected $client;
+
+    public function setupProperties()
     {
+        $this->clientOptions = ($this->TESTS_NAMESPACE . 'getClientOptions')();
+
+        $this->client = new Client($this->connector, $this->clientOptions);
+
     }
 
     /**

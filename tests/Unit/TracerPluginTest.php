@@ -8,9 +8,7 @@
  * @copyright Copyright 2013-2017, FRANKMAYER.NET, Athens, Greece
  */
 
-namespace frankmayer\ArangoDbPhpCore;
-
-require_once __DIR__ . '/ArangoDbPhpCoreUnitTestCase.php';
+namespace frankmayer\ArangoDbPhpCore\Tests\Unit;
 
 
 /**
@@ -18,13 +16,12 @@ require_once __DIR__ . '/ArangoDbPhpCoreUnitTestCase.php';
  *
  * @package frankmayer\ArangoDbPhpCore
  */
-class TracerPluginUnitTest extends ArangoDbPhpCoreUnitTestCase
+class TracerPluginTest extends TestCase
 {
     /**
      * @var Client $client
      */
-    private $client;
-    private $connector;
+    protected $connector;
 
 
     /**
@@ -32,9 +29,11 @@ class TracerPluginUnitTest extends ArangoDbPhpCoreUnitTestCase
      */
     public function setUp()
     {
+
         $this->connector = $this->getMockBuilder(\TestConnector::class)
             ->getMock();
-        $this->client    = getClient($this->connector);
+
+        $this->setupProperties();
     }
 
     // todo 1 Frank Complete tracer plugin tests

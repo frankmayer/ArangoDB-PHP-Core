@@ -8,9 +8,9 @@
  * @copyright Copyright 2013-2017, FRANKMAYER.NET, Athens, Greece
  */
 
-namespace frankmayer\ArangoDbPhpCore;
+namespace frankmayer\ArangoDbPhpCore\Tests\Unit;
 
-require_once __DIR__ . '/ArangoDbPhpCoreUnitTestCase.php';
+require_once __DIR__ . '/TestCase.php';
 
 use frankmayer\ArangoDbPhpCore\Plugins\PluginManager;
 use frankmayer\ArangoDbPhpCore\Plugins\TestPlugin;
@@ -21,18 +21,12 @@ use frankmayer\ArangoDbPhpCore\Plugins\TestPlugin;
  *
  * @package frankmayer\ArangoDbPhpCore
  */
-class PluginUnitTest extends ArangoDbPhpCoreUnitTestCase
+class PluginTest extends TestCase
 {
-    /**
-     * @var ClientOptions $clientOptions
-     */
-    public $clientOptions;
-
     /**
      * @var Client $client
      */
-    public $client;
-    private $connector;
+    protected $connector;
 
 
     /**
@@ -40,9 +34,11 @@ class PluginUnitTest extends ArangoDbPhpCoreUnitTestCase
      */
     public function setUp()
     {
+
         $this->connector = $this->getMockBuilder(\TestConnector::class)
             ->getMock();
-        $this->client    = getClient($this->connector);
+
+        $this->setupProperties();
     }
 
 

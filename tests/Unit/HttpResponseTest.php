@@ -6,15 +6,16 @@
  * @package
  * @author Frank Mayer
  */
-namespace frankmayer\ArangoDbPhpCore;
+namespace frankmayer\ArangoDbPhpCore\Tests\Unit;
 
 use frankmayer\ArangoDbPhpCore\Api\Rest\Batch;
 use frankmayer\ArangoDbPhpCore\Api\Rest\Collection;
+use frankmayer\ArangoDbPhpCore\Client;
 use frankmayer\ArangoDbPhpCore\Protocols\Http\HttpRequest;
 use frankmayer\ArangoDbPhpCore\Protocols\Http\HttpResponse;
 use phpDocumentor\Reflection\DocBlock\Tag;
 
-require_once __DIR__ . '/ArangoDbPhpCoreUnitTestCase.php';
+require_once __DIR__ . '/TestCase.php';
 
 
 /**
@@ -22,14 +23,13 @@ require_once __DIR__ . '/ArangoDbPhpCoreUnitTestCase.php';
  *
  * @package frankmayer\ArangoDbPhpCore
  */
-class HttpResponseUnitTest extends ArangoDbPhpCoreUnitTestCase
+class HttpResponseTest extends TestCase
 {
-    private $connector;
-    private $headers;
-    private $body;
-    private $batch;
-    private $client;
-    private $collectionNames;
+    protected $connector;
+    protected $headers;
+    protected $body;
+    protected $batch;
+    protected $collectionNames;
 
 
     /**
@@ -43,7 +43,6 @@ class HttpResponseUnitTest extends ArangoDbPhpCoreUnitTestCase
 
     public function setup()
     {
-
         $this->batchResponseBody = <<<TAG
 HTTP/1.1 200 OK
 connection: Keep-Alive
@@ -82,12 +81,7 @@ TAG;
         $this->connector->method('request')
             ->willReturn($this->batchResponseBody);
 
-
-        $this->client = new Client($this->connector, getClientOptions());
-
-        //        $this->client = $this->getMockBuilder('frankmayer\ArangoDbPhpCore\Client')
-        //                             ->setConstructorArgs([$this->connector, getClientOptions()])
-        //                             ->getMock();
+        $this->setupProperties();
 
         $this->batch = new Batch($this->client);
 

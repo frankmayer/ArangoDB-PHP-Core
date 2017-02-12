@@ -6,9 +6,11 @@
  * @package
  * @author Frank Mayer
  */
-namespace frankmayer\ArangoDbPhpCore;
+namespace frankmayer\ArangoDbPhpCore\Tests\Unit;
 
-require_once __DIR__ . '/ArangoDbPhpCoreUnitTestCase.php';
+use frankmayer\ArangoDbPhpCore\Connectors\AbstractHttpConnector;
+
+require_once __DIR__ . '/TestCase.php';
 
 
 /**
@@ -16,14 +18,17 @@ require_once __DIR__ . '/ArangoDbPhpCoreUnitTestCase.php';
  *
  * @package frankmayer\ArangoDbPhpCore
  */
-class ConnectorUnitTest extends ArangoDbPhpCoreUnitTestCase
+class ConnectorTest extends TestCase
 {
-    private $connector;
+    protected $connector;
 
     public function setup()
     {
+
         $this->connector = $this->getMockBuilder(\TestConnector::class)
             ->getMock();
+
+        $this->setupProperties();
     }
 
 
@@ -33,7 +38,7 @@ class ConnectorUnitTest extends ArangoDbPhpCoreUnitTestCase
     public function testIfCurlConnectorInstantiable()
     {
 
-        $this->assertInstanceOf(Connectors\AbstractHttpConnector::class, $this->connector);
+        $this->assertInstanceOf(AbstractHttpConnector::class, $this->connector);
     }
 
 

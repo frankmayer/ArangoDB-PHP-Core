@@ -12,9 +12,9 @@ namespace frankmayer\ArangoDbPhpCore\Tests\Integration;
 
 use frankmayer\ArangoDbPhpCore\Client;
 
-require_once __DIR__ . '/ArangoDbPhpCoreIntegrationTestCase.php';
+require_once __DIR__ . '/TestCase.php';
 
-class ExceptionIntegrationTest extends ArangoDbPhpCoreIntegrationTestCase
+class ExceptionTest extends TestCase
 {
 
     /**
@@ -40,8 +40,9 @@ class ExceptionIntegrationTest extends ArangoDbPhpCoreIntegrationTestCase
 
     public function setUp()
     {
-        $connector    = new Connector();
-        $this->client = getClient($connector);
+        $this->connector    = new Connector();
+
+        $this->setupProperties();
     }
 
     public function testTimeoutException()

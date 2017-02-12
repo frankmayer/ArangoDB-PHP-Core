@@ -9,12 +9,12 @@
 
 namespace frankmayer\ArangoDbPhpCore\Tests\Integration;
 
-require_once __DIR__ . '/ArangoDbPhpCoreIntegrationTestCase.php';
+require_once __DIR__ . '/TestCase.php';
 
 use frankmayer\ArangoDbPhpCore\Client;
 
 
-class SyncIntegrationTest extends ArangoDbPhpCoreIntegrationTestCase
+class SyncTest extends TestCase
 {
     /**
      * base URL part for cursor related operations
@@ -39,8 +39,10 @@ class SyncIntegrationTest extends ArangoDbPhpCoreIntegrationTestCase
 
     public function setUp()
     {
-        $connector    = new Connector();
-        $this->client = getClient($connector);
+        $this->connector    = new Connector();
+
+        $this->setupProperties();
+
     }
 
 

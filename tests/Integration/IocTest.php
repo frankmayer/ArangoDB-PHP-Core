@@ -1,7 +1,7 @@
 <?php
 
 /**
- * ArangoDB PHP Core Client Test-Suite: Batch Test
+ * ArangoDB PHP Core Client Integration Test-Suite: Batch Test
  *
  * @package   frankmayer\ArangoDbPhpCore
  * @author    Frank Mayer
@@ -10,7 +10,7 @@
 
 namespace frankmayer\ArangoDbPhpCore\Tests\Integration;
 
-require_once __DIR__ . '/ArangoDbPhpCoreIntegrationTestCase.php';
+require_once __DIR__ . '/TestCase.php';
 
 use frankmayer\ArangoDbPhpCore\Client;
 use frankmayer\ArangoDbPhpCore\ClientException;
@@ -26,7 +26,7 @@ use frankmayer\ArangoDbPhpCore\Protocols\Http\AbstractHttpRequest;
  *
  * @package frankmayer\ArangoDbPhpCore
  */
-class IocIntegrationTest extends ArangoDbPhpCoreIntegrationTestCase
+class IocTest extends TestCase
 {
     /**
      * @var Client
@@ -57,10 +57,10 @@ class IocIntegrationTest extends ArangoDbPhpCoreIntegrationTestCase
      */
     public function setUp()
     {
-        $connector       = new Connector();
-        $this->connector = $connector;
+        $this->connector    = new Connector();
 
-        $this->client = $this->client = getClient($connector);
+        $this->setupProperties();
+
         $this->client->bind(
             'Request',
             function () {

@@ -6,15 +6,14 @@
  * @package
  * @author Frank Mayer
  */
-namespace frankmayer\ArangoDbPhpCore;
+namespace frankmayer\ArangoDbPhpCore\Tests\Unit;
 
 use frankmayer\ArangoDbPhpCore\Api\Rest\Async;
 use frankmayer\ArangoDbPhpCore\Api\Rest\Batch;
 use frankmayer\ArangoDbPhpCore\Api\Rest\Document;
+use frankmayer\ArangoDbPhpCore\Client;
 use frankmayer\ArangoDbPhpCore\Protocols\Http\HttpResponse;
 use phpDocumentor\Reflection\DocBlock\Tag;
-
-require_once __DIR__ . '/ArangoDbPhpCoreUnitTestCase.php';
 
 
 /**
@@ -22,21 +21,21 @@ require_once __DIR__ . '/ArangoDbPhpCoreUnitTestCase.php';
  *
  * @package frankmayer\ArangoDbPhpCore
  */
-class AsyncApiUnitTest extends ArangoDbPhpCoreUnitTestCase
+class AsyncApiTest extends TestCase
 {
-    private $connector;
-    private $batch;
-    private $client;
+    protected $connector;
+    protected $batch;
 
 
     public function setup()
     {
+
         $this->connector = $this->getMockBuilder(\TestConnector::class)
             ->getMock();
 
-        $this->client = new Client($this->connector, getClientOptions());
+        $this->setupProperties();
 
-        $this->batch = new Batch($this->client);
+         $this->batch = new Batch($this->client);
 
         $this->collectionNames[0] = 'ArangoDB-PHP-Core-CollectionTestSuite-Collection-01';
         $this->collectionNames[1] = 'ArangoDB-PHP-Core-CollectionTestSuite-Collection-02';

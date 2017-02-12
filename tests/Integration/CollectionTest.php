@@ -1,7 +1,7 @@
 <?php
 
 /**
- * ArangoDB PHP Core Client Test-Suite: Collection Test
+ * ArangoDB PHP Core Client Integration Test-Suite: Collection Test
  *
  * @package   frankmayer\ArangoDbPhpCore
  * @author    Frank Mayer
@@ -10,7 +10,7 @@
 
 namespace frankmayer\ArangoDbPhpCore\Tests\Integration;
 
-require_once __DIR__ . '/ArangoDbPhpCoreIntegrationTestCase.php';
+require_once __DIR__ . '/TestCase.php';
 
 use frankmayer\ArangoDbPhpCore\Api\Rest\Collection;
 use frankmayer\ArangoDbPhpCore\Client;
@@ -23,7 +23,7 @@ use HttpResponse;
  *
  * @package frankmayer\ArangoDbPhpCore
  */
-class CollectionIntegrationTest extends ArangoDbPhpCoreIntegrationTestCase
+class CollectionTest extends TestCase
 {
     /**
      * @var Client
@@ -36,8 +36,10 @@ class CollectionIntegrationTest extends ArangoDbPhpCoreIntegrationTestCase
      */
     public function setUp()
     {
-        $connector    = new Connector();
-        $this->client = getClient($connector);
+        $this->connector    = new Connector();
+
+        $this->setupProperties();
+
     }
 
 
@@ -46,7 +48,7 @@ class CollectionIntegrationTest extends ArangoDbPhpCoreIntegrationTestCase
      */
     public function testCreateCollectionWithoutApiClasses()
     {
-        $collectionName = ArangoDbPhpCoreIntegrationTestCase::TESTNAMES_PREFIX . 'CollectionTestSuite-Collection';
+        $collectionName = $this->TESTNAMES_PREFIX . 'CollectionTestSuite-Collection';
 
         $collectionOptions    = ['waitForSync' => true];
         $collectionParameters = [];
@@ -86,7 +88,7 @@ class CollectionIntegrationTest extends ArangoDbPhpCoreIntegrationTestCase
      */
     public function testDeleteCollectionWithoutApiClasses()
     {
-        $collectionName = ArangoDbPhpCoreIntegrationTestCase::TESTNAMES_PREFIX . 'CollectionTestSuite-Collection';
+        $collectionName = $this->TESTNAMES_PREFIX . 'CollectionTestSuite-Collection';
 
         $collectionOptions = ['waitForSync' => true];
         $options           = $collectionOptions;
@@ -118,7 +120,7 @@ class CollectionIntegrationTest extends ArangoDbPhpCoreIntegrationTestCase
      */
     public function testCreateCollectionViaIocContainer()
     {
-        $collectionName = ArangoDbPhpCoreIntegrationTestCase::TESTNAMES_PREFIX . 'CollectionTestSuite-Collection';
+        $collectionName = $this->TESTNAMES_PREFIX . 'CollectionTestSuite-Collection';
 
         $collectionOptions = ['waitForSync' => true];
 
@@ -142,7 +144,7 @@ class CollectionIntegrationTest extends ArangoDbPhpCoreIntegrationTestCase
      */
     public function testTruncateCollection()
     {
-        $collectionName = ArangoDbPhpCoreIntegrationTestCase::TESTNAMES_PREFIX . 'CollectionTestSuite-Collection';
+        $collectionName = $this->TESTNAMES_PREFIX . 'CollectionTestSuite-Collection';
 
         $collection = new Collection($this->client);
 
@@ -164,7 +166,7 @@ class CollectionIntegrationTest extends ArangoDbPhpCoreIntegrationTestCase
     public function testDeleteCollection()
     {
 
-        $collectionName = ArangoDbPhpCoreIntegrationTestCase::TESTNAMES_PREFIX . 'CollectionTestSuite-Collection';
+        $collectionName = $this->TESTNAMES_PREFIX . 'CollectionTestSuite-Collection';
 
         $collection = new Collection($this->client);
 
@@ -229,7 +231,7 @@ class CollectionIntegrationTest extends ArangoDbPhpCoreIntegrationTestCase
      */
     public function tearDown()
     {
-        $collectionName = ArangoDbPhpCoreIntegrationTestCase::TESTNAMES_PREFIX . 'CollectionTestSuite-CollectionViaIocContainer';
+        $collectionName = $this->TESTNAMES_PREFIX . 'CollectionTestSuite-CollectionViaIocContainer';
         $collection     = new Collection($this->client);
 
         /** @var $responseObject HttpResponse */

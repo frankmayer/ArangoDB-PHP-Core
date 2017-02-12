@@ -1,7 +1,7 @@
 <?php
 
 /**
- * ArangoDB PHP Core Client Test-Suite: Batch Test
+ * ArangoDB PHP Core Client Integration Test-Suite: Batch Test
  *
  * @package   frankmayer\ArangoDbPhpCore
  * @author    Frank Mayer
@@ -10,7 +10,7 @@
 
 namespace frankmayer\ArangoDbPhpCore\Tests\Integration;
 
-require_once __DIR__ . '/ArangoDbPhpCoreIntegrationTestCase.php';
+require_once __DIR__ . '/TestCase.php';
 
 use frankmayer\ArangoDbPhpCore\Api\Rest\Batch;
 use frankmayer\ArangoDbPhpCore\Api\Rest\Collection;
@@ -22,13 +22,9 @@ use frankmayer\ArangoDbPhpCore\Protocols\Http\HttpResponse;
  *
  * @package frankmayer\ArangoDbPhpCore
  */
-class BatchIntegrationTest extends ArangoDbPhpCoreIntegrationTestCase
+class BatchTest extends TestCase
 {
-    /**
-     * @var
-     */
-    public $client;
-    /**
+     /**
      * @var
      */
     public $collectionNames;
@@ -39,12 +35,13 @@ class BatchIntegrationTest extends ArangoDbPhpCoreIntegrationTestCase
      */
     public function setUp()
     {
-        $connector    = new Connector();
-        $this->client = $this->client = getClient($connector);
+        $this->connector    = new Connector();
 
-        $this->collectionNames[0] = ArangoDbPhpCoreIntegrationTestCase::TESTNAMES_PREFIX . 'CollectionTestSuite-Collection-01';
-        $this->collectionNames[1] = ArangoDbPhpCoreIntegrationTestCase::TESTNAMES_PREFIX . 'CollectionTestSuite-Collection-02';
-        $this->collectionNames[2] = ArangoDbPhpCoreIntegrationTestCase::TESTNAMES_PREFIX . 'CollectionTestSuite-Collection-03';
+        $this->setupProperties();
+
+        $this->collectionNames[0] = $this->TESTNAMES_PREFIX . 'CollectionTestSuite-Collection-01';
+        $this->collectionNames[1] = $this->TESTNAMES_PREFIX . 'CollectionTestSuite-Collection-02';
+        $this->collectionNames[2] = $this->TESTNAMES_PREFIX . 'CollectionTestSuite-Collection-03';
     }
 
 

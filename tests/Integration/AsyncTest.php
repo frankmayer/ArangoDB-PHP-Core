@@ -1,7 +1,7 @@
 <?php
 
 /**
- * ArangoDB PHP Core Client Test-Suite: Async Test
+ * ArangoDB PHP Core Client Integration Test-Suite: Async Test
  *
  * @package   frankmayer\ArangoDbPhpCore
  * @author    Frank Mayer
@@ -9,7 +9,7 @@
  */
 
 namespace frankmayer\ArangoDbPhpCore\Tests\Integration;
-require_once __DIR__ . '/ArangoDbPhpCoreIntegrationTestCase.php';
+require_once __DIR__ . '/TestCase.php';
 
 use frankmayer\ArangoDbPhpCore\Api\Rest\Async;
 use frankmayer\ArangoDbPhpCore\Api\Rest\Collection;
@@ -23,21 +23,16 @@ use HttpResponse;
  *
  * @package frankmayer\ArangoDbPhpCore
  */
-class AsyncIntegrationTest extends ArangoDbPhpCoreIntegrationTestCase
+class AsyncTest extends TestCase
 {
-    /**
-     * @var Client $client
-     */
-    public $client;
-
-
     /**
      *
      */
     public function setUp()
     {
-        $connector    = new Connector();
-        $this->client = getClient($connector);
+        $this->connector    = new Connector();
+
+        $this->setupProperties();
     }
 
 
@@ -46,7 +41,7 @@ class AsyncIntegrationTest extends ArangoDbPhpCoreIntegrationTestCase
      */
     public function testCreateCollectionAndSimpleAsyncDocumentCreation()
     {
-        $collectionName = ArangoDbPhpCoreIntegrationTestCase::TESTNAMES_PREFIX . 'CollectionTestSuite-Collection';
+        $collectionName = $this->TESTNAMES_PREFIX . 'CollectionTestSuite-Collection';
 
         $collectionOptions = ['waitForSync' => true];
 
@@ -62,7 +57,7 @@ class AsyncIntegrationTest extends ArangoDbPhpCoreIntegrationTestCase
         $this->assertEquals(200, $decodedJsonBody['code']);
         $this->assertEquals($collectionName, $decodedJsonBody['name']);
 
-        $collectionName = ArangoDbPhpCoreIntegrationTestCase::TESTNAMES_PREFIX . 'CollectionTestSuite-Collection';
+        $collectionName = $this->TESTNAMES_PREFIX . 'CollectionTestSuite-Collection';
 
         $requestBody = ['name' => 'frank', '_key' => '1'];
         $document    = new Document($this->client);
@@ -97,7 +92,7 @@ class AsyncIntegrationTest extends ArangoDbPhpCoreIntegrationTestCase
         $jobDeleteResponse = $job->deleteJobResult('all', time());
 
 
-        $collectionName = ArangoDbPhpCoreIntegrationTestCase::TESTNAMES_PREFIX . 'CollectionTestSuite-Collection';
+        $collectionName = $this->TESTNAMES_PREFIX . 'CollectionTestSuite-Collection';
 
         $collectionOptions = ['waitForSync' => true];
         $collection        = new Collection($this->client);
@@ -111,7 +106,7 @@ class AsyncIntegrationTest extends ArangoDbPhpCoreIntegrationTestCase
         $this->assertEquals(200, $decodedJsonBody['code']);
         $this->assertEquals($collectionName, $decodedJsonBody['name']);
 
-        $collectionName = ArangoDbPhpCoreIntegrationTestCase::TESTNAMES_PREFIX . 'CollectionTestSuite-Collection';
+        $collectionName = $this->TESTNAMES_PREFIX . 'CollectionTestSuite-Collection';
 
         $requestBody = ['name' => 'frank', '_key' => '1'];
         $document    = new Document($this->client);
@@ -148,7 +143,7 @@ class AsyncIntegrationTest extends ArangoDbPhpCoreIntegrationTestCase
      */
     public function tearDown()
     {
-        $collectionName = ArangoDbPhpCoreIntegrationTestCase::TESTNAMES_PREFIX . 'CollectionTestSuite-Collection';
+        $collectionName = $this->TESTNAMES_PREFIX . 'CollectionTestSuite-Collection';
 
 
         $collection = new Collection($this->client);

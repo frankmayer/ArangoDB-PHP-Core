@@ -3,17 +3,18 @@
  *
  * File: CoreTest.php
  *
- * @package
- * @author Frank Mayer
+ * @package   frankmayer\ArangoDbPhpCore
+ * @author    Frank Mayer
+ * @copyright Copyright 2013-2017, FRANKMAYER.NET, Athens, Greece
  */
-namespace frankmayer\ArangoDbPhpCore;
+namespace frankmayer\ArangoDbPhpCore\Tests\Unit;
 
 use frankmayer\ArangoDbPhpCore\Api\Rest\Batch;
-use frankmayer\ArangoDbPhpCore\Api\Rest\Document;
+use frankmayer\ArangoDbPhpCore\Api\Rest\Edge;
+use frankmayer\ArangoDbPhpCore\Client;
 use frankmayer\ArangoDbPhpCore\Protocols\Http\HttpResponse;
-use phpDocumentor\Reflection\DocBlock\Tag;
 
-require_once __DIR__ . '/ArangoDbPhpCoreUnitTestCase.php';
+require_once __DIR__ . '/TestCase.php';
 
 
 /**
@@ -21,20 +22,20 @@ require_once __DIR__ . '/ArangoDbPhpCoreUnitTestCase.php';
  *
  * @package frankmayer\ArangoDbPhpCore
  */
-class DocumentApiUnitTest extends ArangoDbPhpCoreUnitTestCase
+class EdgeApiTest extends TestCase
 {
-    private $connector;
-    private $batch;
-    private $client;
-    private $collectionNames;
+    protected $connector;
+    protected $batch;
+    protected $collectionNames;
 
 
     public function setup()
     {
+
         $this->connector = $this->getMockBuilder(\TestConnector::class)
             ->getMock();
 
-        $this->client = new Client($this->connector, getClientOptions());
+        $this->setupProperties();
 
         $this->batch = new Batch($this->client);
 
@@ -57,55 +58,54 @@ class DocumentApiUnitTest extends ArangoDbPhpCoreUnitTestCase
     /**
      *
      */
-    public function testCreateDocument()
+    public function testCreateEdge()
     {
         $createResponse = <<<TAG
-HTTP/1.1 201 Created
+HTTP/1.1 202 Accepted
 content-type: application/json; charset=utf-8
-etag: "1491343184"
-location: /_db/_system/_api/document/products/1491343184\r\n\r\n{
+etag: "1510938448"
+location: /_db/_system/_api/document/edges/1510938448\r\n\r\n{
   "error" : false,
-  "_id" : "products/1491343184",
-  "_rev" : "1491343184",
-  "_key" : "1491343184"
+  "_id" : "edges/1510938448",
+  "_rev" : "1510938448",
+  "_key" : "1510938448"
 }
 TAG;
         $body           = '{ "Hello": "World" }';
 
-        $options = ['waitForSync' => true];
         $this->connector->method('request')
             ->willReturn($createResponse);
 
-        $object = new Document($this->client);
+        $object = new Edge($this->client);
 
         /** @var $responseObject HttpResponse */
-        $response = $object->create($this->collectionNames[0], $body);
+        $response = $object->create('edges', $body, 'vertices/1', 'vertices/2');
 
         $this->assertInstanceOf(HttpResponse::class, $response);
-        $this->assertEquals(201, $response->status);
+        $this->assertEquals(202, $response->status);
     }
 
     /**
      *
      */
-    public function testDeleteDocument()
+    public function testDeleteEdge()
     {
         $deleteResponse = <<<TAG
 HTTP/1.1 200 OK
 content-type: application/json; charset=utf-8\r\n\r\n{
   "error" : false,
-  "_id" : "products/1506744144",
-  "_rev" : "1506744144",
-  "_key" : "1506744144"
+  "_id" : "edges/1234567890",
+  "_rev" : "1234567890",
+  "_key" : "1234567890"
 }
 TAG;
-        $handle         = 'products/1234567890';
+        $handle         = 'edges/1234567890';
 
         $options = ['waitForSync' => true];
         $this->connector->method('request')
             ->willReturn($deleteResponse);
 
-        $object = new Document($this->client);
+        $object = new Edge($this->client);
 
         /** @var $responseObject HttpResponse */
         $response = $object->delete($handle, $options);
@@ -117,25 +117,25 @@ TAG;
     /**
      *
      */
-    public function testGetDocument()
+    public function testGetEdge()
     {
         $deleteCollectionResponse = <<<TAG
 HTTP/1.1 200 OK
 content-type: application/json; charset=utf-8
 etag: "1493440336"\r\n\r\n{
   "hello" : "world",
-  "_id" : "products/1493440336",
-  "_rev" : "1493440336",
-  "_key" : "1493440336"
+  "_id" : "edges/1234567890",
+  "_rev" : "1234567890",
+  "_key" : "1234567890"
 }
 TAG;
-        $handle                   = 'products/1234567890';
+        $handle                   = 'edges/1234567890';
 
         $options = ['waitForSync' => true];
         $this->connector->method('request')
             ->willReturn($deleteCollectionResponse);
 
-        $object = new Document($this->client);
+        $object = new Edge($this->client);
 
         /** @var $responseObject HttpResponse */
         $response = $object->get($handle, $options);
@@ -147,20 +147,20 @@ TAG;
     /**
      *
      */
-    public function testGetDocumentHeader()
+    public function testGetEdgeHeader()
     {
         $deleteCollectionResponse = <<<TAG
 HTTP/1.1 200 OK
 content-type: application/json; charset=utf-8
-etag: "1493440336"\r\n\r\n
+etag: "1234567890"\r\n\r\n
 TAG;
-        $handle                   = 'products/1234567890';
+        $handle                   = 'edges/1234567890';
 
         $options = ['waitForSync' => true];
         $this->connector->method('request')
             ->willReturn($deleteCollectionResponse);
 
-        $object = new Document($this->client);
+        $object = new Edge($this->client);
 
         /** @var $responseObject HttpResponse */
         $response = $object->get($handle, $options);
@@ -172,27 +172,27 @@ TAG;
     /**
      *
      */
-    public function testPatchDocument()
+    public function testPatchEdge()
     {
         $deleteCollectionResponse = <<<TAG
 HTTP/1.1 202 Accepted
 content-type: application/json; charset=utf-8
 etag: "1506154320"
-location: /_db/_system/_api/document/products/1505171280\r\n\r\n{
+location: /_db/_system/_api/edge/products/1505171280\r\n\r\n{
   "error" : false,
-  "_id" : "products/1505171280",
-  "_rev" : "1506154320",
-  "_key" : "1505171280"
+  "_id" : "edges/1234567890",
+  "_rev" : "1234567890",
+  "_key" : "1234567890"
 }
 TAG;
-        $handle                   = 'products/1234567890';
+        $handle                   = 'edges/1234567890';
         $body                     = '{ "Hello": "World" }';
 
         $options = ['waitForSync' => true];
         $this->connector->method('request')
             ->willReturn($deleteCollectionResponse);
 
-        $object = new Document($this->client);
+        $object = new Edge($this->client);
 
         /** @var $responseObject HttpResponse */
         $response = $object->update($handle, $body, $options);
@@ -204,27 +204,26 @@ TAG;
     /**
      *
      */
-    public function testReplaceDocument()
+    public function testReplaceEdge()
     {
         $deleteCollectionResponse = <<<TAG
 HTTP/1.1 202 Accepted
 content-type: application/json; charset=utf-8
 etag: "1498093392"
-location: /_db/_system/_api/document/products/1497765712\r\n\r\n{
+location: /_db/_system/_api/edge/products/1497765712\r\n\r\n{
   "error" : false,
-  "_id" : "products/1497765712",
+  "_id" : "edges/1497765712",
   "_rev" : "1498093392",
   "_key" : "1497765712"
 }
 TAG;
-        $handle                   = 'products/1234567890';
+        $handle                   = 'edges/1234567890';
         $body                     = '{ "Hello": "World" }';
 
-        $options = ['waitForSync' => true];
         $this->connector->method('request')
             ->willReturn($deleteCollectionResponse);
 
-        $object = new Document($this->client);
+        $object = new Edge($this->client);
 
         /** @var $responseObject HttpResponse */
         $response = $object->replace($handle, $body);
@@ -236,15 +235,15 @@ TAG;
     /**
      *
      */
-    public function testGetAllDocuments()
+    public function testGetAllEdges()
     {
         $deleteCollectionResponse = <<<TAG
 HTTP/1.1 200 OK
 content-type: application/json; charset=utf-8\r\n\r\n{
-  "documents" : [
-    "/_api/document/products/1495340880",
-    "/_api/document/products/1494685520",
-    "/_api/document/products/1495013200"
+  "edges" : [
+    "/_api/edge/products/1495340880",
+    "/_api/edge/products/1494685520",
+    "/_api/edge/products/1495013200"
   ]
 }
 TAG;
@@ -252,10 +251,10 @@ TAG;
         $this->connector->method('request')
             ->willReturn($deleteCollectionResponse);
 
-        $object = new Document($this->client);
+        $object = new Edge($this->client);
 
         /** @var $responseObject HttpResponse */
-        $response = $object->getAll($this->collectionNames[0], $options);
+        $response = $object->getAll('edges', $options);
 
         $this->assertInstanceOf(HttpResponse::class, $response);
         $this->assertEquals(200, $response->status);

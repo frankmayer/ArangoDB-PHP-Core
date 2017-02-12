@@ -1,7 +1,7 @@
 <?php
 
 /**
- * ArangoDB PHP Core Client Test-Suite: Document Test
+ * ArangoDB PHP Core Client Integration Test-Suite: Document Test
  *
  * @package   frankmayer\ArangoDbPhpCore
  * @author    Frank Mayer
@@ -10,7 +10,7 @@
 
 namespace frankmayer\ArangoDbPhpCore\Tests\Integration;
 
-require_once __DIR__ . '/ArangoDbPhpCoreIntegrationTestCase.php';
+require_once __DIR__ . '/TestCase.php';
 
 use frankmayer\ArangoDbPhpCore\Api\Rest\Collection;
 use frankmayer\ArangoDbPhpCore\Api\Rest\Document;
@@ -24,8 +24,10 @@ use HttpResponse;
  *
  * @package frankmayer\ArangoDbPhpCore
  */
-class DocumentIntegrationTest extends ArangoDbPhpCoreIntegrationTestCase
+class DocumentTest extends TestCase
 {
+    use TestCaseTrait;
+
     /**
      * @var Client
      */
@@ -37,10 +39,11 @@ class DocumentIntegrationTest extends ArangoDbPhpCoreIntegrationTestCase
      */
     public function setUp()
     {
-        $connector    = new Connector($this->client);
-        $this->client = getClient($connector);
+        $this->connector    = new Connector();
 
-        $collectionName = ArangoDbPhpCoreIntegrationTestCase::TESTNAMES_PREFIX . 'CollectionTestSuite-Collection';
+        $this->setupProperties();
+
+        $collectionName = $this->TESTNAMES_PREFIX . 'CollectionTestSuite-Collection';
 
         $collectionOptions    = ['waitForSync' => true];
         $collectionParameters = [];
@@ -79,7 +82,7 @@ class DocumentIntegrationTest extends ArangoDbPhpCoreIntegrationTestCase
      */
     public function testCreateInExistingCollection()
     {
-        $collectionName       = ArangoDbPhpCoreIntegrationTestCase::TESTNAMES_PREFIX . 'CollectionTestSuite-Collection';
+        $collectionName       = $this->TESTNAMES_PREFIX . 'CollectionTestSuite-Collection';
         $urlQuery             = [];
         $collectionOptions    = ['waitForSync' => true];
         $collectionParameters = [];
@@ -125,7 +128,7 @@ class DocumentIntegrationTest extends ArangoDbPhpCoreIntegrationTestCase
      */
     public function testCreateAndDeleteDocumentInNonExistingCollection()
     {
-        $collectionName     = ArangoDbPhpCoreIntegrationTestCase::TESTNAMES_PREFIX . 'CollectionTestSuite-NonExistingCollection';
+        $collectionName     = $this->TESTNAMES_PREFIX . 'CollectionTestSuite-NonExistingCollection';
         $documentParameters = ['createCollection' => true];
         $requestBody        = ['name' => 'frank', '_key' => '1'];
 
@@ -159,7 +162,7 @@ class DocumentIntegrationTest extends ArangoDbPhpCoreIntegrationTestCase
      */
     public function testCreateGetListGetDocumentAndDeleteDocumentInExistingCollection()
     {
-        $collectionName = ArangoDbPhpCoreIntegrationTestCase::TESTNAMES_PREFIX . 'CollectionTestSuite-Collection';
+        $collectionName = $this->TESTNAMES_PREFIX . 'CollectionTestSuite-Collection';
         $requestBody    = ['name' => 'frank', '_key' => '1'];
         $document       = new Document($this->client);
 
@@ -216,7 +219,7 @@ class DocumentIntegrationTest extends ArangoDbPhpCoreIntegrationTestCase
      */
     public function testCreateReplaceDocumentAndDeleteDocumentInExistingCollection()
     {
-        $collectionName = ArangoDbPhpCoreIntegrationTestCase::TESTNAMES_PREFIX . 'CollectionTestSuite-Collection';
+        $collectionName = $this->TESTNAMES_PREFIX . 'CollectionTestSuite-Collection';
         $requestBody    = ['name' => 'Frank', 'bike' => 'vfr', '_key' => '1'];
 
         $document = new Document($this->client);
@@ -286,7 +289,7 @@ class DocumentIntegrationTest extends ArangoDbPhpCoreIntegrationTestCase
      */
     public function testCreateUpdateDocumentAndDeleteDocumentInExistingCollection()
     {
-        $collectionName = ArangoDbPhpCoreIntegrationTestCase::TESTNAMES_PREFIX . 'CollectionTestSuite-Collection';
+        $collectionName = $this->TESTNAMES_PREFIX . 'CollectionTestSuite-Collection';
         $requestBody    = ['name' => 'Frank', 'bike' => 'vfr', '_key' => '1'];
 
         $document = new Document($this->client);
@@ -355,7 +358,7 @@ class DocumentIntegrationTest extends ArangoDbPhpCoreIntegrationTestCase
      */
     public function tearDown()
     {
-        $collectionName = ArangoDbPhpCoreIntegrationTestCase::TESTNAMES_PREFIX . 'CollectionTestSuite-Collection';
+        $collectionName = $this->TESTNAMES_PREFIX . 'CollectionTestSuite-Collection';
 
         $collectionOptions = ['waitForSync' => true];
         $options           = $collectionOptions;
@@ -382,7 +385,7 @@ class DocumentIntegrationTest extends ArangoDbPhpCoreIntegrationTestCase
 
         $this->assertEquals(200, $decodedJsonBody['code']);
 
-        $collectionName = ArangoDbPhpCoreIntegrationTestCase::TESTNAMES_PREFIX . 'CollectionTestSuite-NonExistingCollection';
+        $collectionName = $this->TESTNAMES_PREFIX . 'CollectionTestSuite-NonExistingCollection';
         $collection     = new Collection($this->client);
 
         /** @var $responseObject HttpResponse */

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * ArangoDB PHP Core Client Test-Suite: Plugin Test
+ * ArangoDB PHP Core Client Integration Test-Suite: Plugin Test
  *
  * @package   frankmayer\ArangoDbPhpCore
  * @author    Frank Mayer
@@ -10,7 +10,7 @@
 
 namespace frankmayer\ArangoDbPhpCore\Tests\Integration;
 
-require_once __DIR__ . '/ArangoDbPhpCoreIntegrationTestCase.php';
+require_once __DIR__ . '/TestCase.php';
 
 use frankmayer\ArangoDbPhpCore\Api\Rest\Collection;
 use frankmayer\ArangoDbPhpCore\Client;
@@ -25,7 +25,7 @@ use frankmayer\ArangoDbPhpCore\Protocols\Http\HttpRequestInterface;
  *
  * @package frankmayer\ArangoDbPhpCore
  */
-class PluginIntegrationTest extends ArangoDbPhpCoreIntegrationTestCase
+class PluginTest extends TestCase
 {
     /**
      * @var ClientOptions $clientOptions
@@ -43,8 +43,10 @@ class PluginIntegrationTest extends ArangoDbPhpCoreIntegrationTestCase
      */
     public function setUp()
     {
-        $connector    = new Connector();
-        $this->client = getClient($connector);
+        $this->connector    = new Connector();
+
+        $this->setupProperties();
+
     }
 
     // todo 1 Frank Complete plugin tests
