@@ -46,6 +46,10 @@ class ClientTest extends TestCase
 
     }
 
+    public function testEmpty()
+    {
+
+    }
 
     /**
      *

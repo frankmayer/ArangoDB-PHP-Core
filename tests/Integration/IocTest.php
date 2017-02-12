@@ -75,6 +75,10 @@ class IocTest extends TestCase
      */
     public function testBindAndMakeHttpRequest()
     {
+        $this->markTestSkipped(
+            'The functionality needs to be implemented in the API first (IOC?).'
+        );
+
         $this->client->bind(
             'Request',
             function () {
@@ -180,6 +184,9 @@ class IocTest extends TestCase
      */
     public function testBindAndMakeHttpResponsePlusGettersSetters()
     {
+        $this->markTestSkipped(
+            'The functionality needs to be implemented in the API first (IOC?).'
+        );
         $this->request         = $this->client->make('Request');
         $this->request->path   = '/_admin/version';
         $this->request->method = HttpRequest::METHOD_GET;

@@ -63,7 +63,7 @@ class AsyncTest extends TestCase
         $document    = new Document($this->client);
 
 
-        $responseObject = $document->create($collectionName, $requestBody, null, ['async' => true]);
+        $responseObject = $document->create($collectionName, $requestBody, [], ['async' => true]);
 
         $this->assertEquals(202, $responseObject->status);
 
@@ -111,7 +111,7 @@ class AsyncTest extends TestCase
         $requestBody = ['name' => 'frank', '_key' => '1'];
         $document    = new Document($this->client);
 
-        $responseObject = $document->create($collectionName, $requestBody, null, ['async' => 'store']);
+        $responseObject = $document->create($collectionName, $requestBody, [], ['async' => 'store']);
 
         $this->assertEquals(202, $responseObject->status);
 
