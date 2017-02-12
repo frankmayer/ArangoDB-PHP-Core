@@ -35,13 +35,13 @@
     "satooshi/php-coveralls": "dev-master"
   },
   "autoload": {
-    "psr-0": {
-      "frankmayer\\ArangoDbPhpCore": "lib/"
+    "psr-4": {
+      "frankmayer\\ArangoDbPhpCore\\": "lib/"
     }
   },
   "autoload-dev": {
-    "psr-0": {
-      "frankmayer\\ArangoDbPhpCore\\Tests": "tests/"
+    "psr-4": {
+      "frankmayer\\ArangoDbPhpCore\\Tests\\": "tests/"
     }
   },
   "support": {
