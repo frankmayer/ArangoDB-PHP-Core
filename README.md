@@ -8,7 +8,7 @@ A lightweight, and at the same time flexible "very"-low-level ArangoDB client fo
 [![Latest Unstable Version](https://poser.pugx.org/frankmayer/arangodb-php-core/v/unstable)](https://packagist.org/packages/frankmayer/arangodb-php-core)
 [![License](https://poser.pugx.org/frankmayer/arangodb-php-core/license)](https://packagist.org/packages/frankmayer/arangodb-php-core)
 [![composer.lock](https://poser.pugx.org/frankmayer/arangodb-php-core/composerlock)](https://packagist.org/packages/frankmayer/arangodb-php-core)
-[![Coverage Status](https://coveralls.io/repos/frankmayer/ArangoDB-PHP-Core/badge.png)](https://coveralls.io/r/frankmayer/ArangoDB-PHP-Core)
+[![Coverage Status](https://coveralls.io/repos/frankmayer/ArangoDB-PHP-Core/badge.svg)](https://coveralls.io/r/frankmayer/ArangoDB-PHP-Core)
 
 Master: [![Build Status](https://travis-ci.org/frankmayer/ArangoDB-PHP-Core.png?branch=master)](https://travis-ci.org/frankmayer/ArangoDB-PHP-Core)
 Devel: [![Build Status](https://travis-ci.org/frankmayer/ArangoDB-PHP-Core.png?branch=devel)](https://travis-ci.org/frankmayer/ArangoDB-PHP-Core)
@@ -69,4 +69,4 @@ Thanks !!
 
 
 ######License:
-Apache V2 => see LICENSE.md file
+Apache V2, see https://github.com/frankmayer/ArangoDB-PHP-Core/blob/devel/LICENSE.md
