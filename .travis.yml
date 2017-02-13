@@ -14,6 +14,9 @@ matrix:
 #      - php: hhvm-nightly
 #      - php: 7.1
 
+before_install:
+  - if [[ ${TRAVIS_PHP_VERSION:0:1} == "5" ]]; then composer require --dev --no-update phpunit/phpunit ~5; else composer require --dev --no-update phpunit/phpunit ~6; fi
+
 before_script:
   - bash tests/before.sh
   - composer install --prefer-source --no-interaction --dev --ignore-platform-reqs
