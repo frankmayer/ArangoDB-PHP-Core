@@ -21,12 +21,12 @@ before_script:
   - composer install --prefer-source --no-interaction --dev --ignore-platform-reqs
   - composer dumpautoload -o
 
-after_script:
-  - php vendor/bin/coveralls -v
-
 script:
   - mkdir -p build/logs
-  - vendor/bin/phpunit --coverage-clover build/logs/clover.xml
+  - vendor/bin/phpunit --coverage-clover=coverage.xml
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
 
 addons:
   hosts:

@@ -8,7 +8,7 @@ A lightweight, and at the same time flexible low-level ArangoDB client for PHP.
 [![Latest Unstable Version](https://poser.pugx.org/frankmayer/arangodb-php-core/v/unstable)](https://packagist.org/packages/frankmayer/arangodb-php-core)
 [![License](https://poser.pugx.org/frankmayer/arangodb-php-core/license)](https://packagist.org/packages/frankmayer/arangodb-php-core)
 [![composer.lock](https://poser.pugx.org/frankmayer/arangodb-php-core/composerlock)](https://packagist.org/packages/frankmayer/arangodb-php-core)
-[![Coverage Status](https://coveralls.io/repos/frankmayer/ArangoDB-PHP-Core/badge.svg)](https://coveralls.io/r/frankmayer/ArangoDB-PHP-Core)
+[![codecov](https://codecov.io/gh/frankmayer/ArangoDB-PHP-Core/branch/devel/graph/badge.svg)](https://codecov.io/gh/frankmayer/ArangoDB-PHP-Core)
 
 
 ![PHP_Compatibility](https://img.shields.io/badge/php-7+-blue.svg)
