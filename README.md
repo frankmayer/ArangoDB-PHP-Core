@@ -10,6 +10,12 @@ A lightweight, and at the same time flexible "very"-low-level ArangoDB client fo
 [![composer.lock](https://poser.pugx.org/frankmayer/arangodb-php-core/composerlock)](https://packagist.org/packages/frankmayer/arangodb-php-core)
 [![Coverage Status](https://coveralls.io/repos/frankmayer/ArangoDB-PHP-Core/badge.svg)](https://coveralls.io/r/frankmayer/ArangoDB-PHP-Core)
 
+
+![Coverage Status](https://img.shields.io/badge/PHP_7+-yes-brightgreen.svg)
+![Coverage Status](https://img.shields.io/badge/HHVM_3.12+-yes-brightgreen.svg)
+![Coverage Status](https://img.shields.io/badge/PHP_5.x-no-red.svg)
+
+
 Master: [![Build Status](https://travis-ci.org/frankmayer/ArangoDB-PHP-Core.png?branch=master)](https://travis-ci.org/frankmayer/ArangoDB-PHP-Core)
 Devel: [![Build Status](https://travis-ci.org/frankmayer/ArangoDB-PHP-Core.png?branch=devel)](https://travis-ci.org/frankmayer/ArangoDB-PHP-Core)
 
