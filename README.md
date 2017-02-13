@@ -1,6 +1,6 @@
 ##ArangoDB-PHP-Core
 
-A lightweight, and at the same time flexible "very"-low-level ArangoDB client for PHP.
+A lightweight, and at the same time flexible low-level ArangoDB client for PHP.
 
 
 [![Latest Stable Version](https://poser.pugx.org/frankmayer/arangodb-php-core/v/stable)](https://packagist.org/packages/frankmayer/arangodb-php-core)
@@ -11,9 +11,9 @@ A lightweight, and at the same time flexible "very"-low-level ArangoDB client fo
 [![Coverage Status](https://coveralls.io/repos/frankmayer/ArangoDB-PHP-Core/badge.svg)](https://coveralls.io/r/frankmayer/ArangoDB-PHP-Core)
 
 
-![Coverage Status](https://img.shields.io/badge/PHP_7+-yes-brightgreen.svg)
-![Coverage Status](https://img.shields.io/badge/HHVM_3.12+-yes-brightgreen.svg)
-![Coverage Status](https://img.shields.io/badge/PHP_5.x-no-red.svg)
+![PHP7_Support](https://img.shields.io/badge/PHP_7+-yes-brightgreen.svg)
+![HHVM_Support](https://img.shields.io/badge/HHVM_3.12+-yes-brightgreen.svg)
+![PHP5 Support](https://img.shields.io/badge/PHP_5.x-no-red.svg)
 
 
 Master: [![Build Status](https://travis-ci.org/frankmayer/ArangoDB-PHP-Core.png?branch=master)](https://travis-ci.org/frankmayer/ArangoDB-PHP-Core)
@@ -32,7 +32,9 @@ The client should generally be seen as a basis that takes away the boilerplate c
 ####Highlights:
 
 - Request / Response Objects
-- A wrapper around injectable connectors. Two packages are already available: https://github.com/frankmayer/ArangoDB-PHP-Core-Curl and https://github.com/frankmayer/ArangoDB-PHP-Core-Guzzle
+- A wrapper around injectable connectors. Two packages are being worked on: 
+  - https://github.com/frankmayer/ArangoDB-PHP-Core-Curl (currently not up-todate)
+  - https://github.com/frankmayer/ArangoDB-PHP-Core-Guzzle
 - Flexibility through dependency injection:
   - Inject your own connector, Request or Response Objects
      - directly
