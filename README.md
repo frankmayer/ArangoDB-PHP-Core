@@ -11,9 +11,8 @@ A lightweight, and at the same time flexible low-level ArangoDB client for PHP.
 [![Coverage Status](https://coveralls.io/repos/frankmayer/ArangoDB-PHP-Core/badge.svg)](https://coveralls.io/r/frankmayer/ArangoDB-PHP-Core)
 
 
-![PHP7_Support](https://img.shields.io/badge/PHP_7+-yes-brightgreen.svg)
-![HHVM_Support](https://img.shields.io/badge/HHVM_3.12+-yes-brightgreen.svg)
-![PHP5 Support](https://img.shields.io/badge/PHP_5.x-no-red.svg)
+![PHP_Compatibility](https://img.shields.io/badge/PHP_compatibility-7+-brightgreen.svg)
+![HHVM_Compatibility](https://img.shields.io/badge/HHVM_compatibility-3.12+-brightgreen.svg)
 
 
 Master: [![Build Status](https://travis-ci.org/frankmayer/ArangoDB-PHP-Core.png?branch=master)](https://travis-ci.org/frankmayer/ArangoDB-PHP-Core)
