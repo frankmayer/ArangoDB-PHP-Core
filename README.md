@@ -11,8 +11,8 @@ A lightweight, and at the same time flexible low-level ArangoDB client for PHP.
 [![Coverage Status](https://coveralls.io/repos/frankmayer/ArangoDB-PHP-Core/badge.svg)](https://coveralls.io/r/frankmayer/ArangoDB-PHP-Core)
 
 
-![PHP_Compatibility](https://img.shields.io/badge/PHP_compatibility-7+-brightgreen.svg)
-![HHVM_Compatibility](https://img.shields.io/badge/HHVM_compatibility-3.12+-brightgreen.svg)
+![PHP_Compatibility](https://img.shields.io/badge/php-7+-blue.svg)
+![HHVM_Compatibility](https://img.shields.io/badge/hhvm-3.12+-blue.svg)
 
 
 Master: [![Build Status](https://travis-ci.org/frankmayer/ArangoDB-PHP-Core.png?branch=master)](https://travis-ci.org/frankmayer/ArangoDB-PHP-Core)
@@ -70,6 +70,7 @@ Thanks !!
 ###### Major Todo's:
 - [ ] stabilize contracts for interoperability 
 - [ ] stabilize plugin API
+- [x] Tests refactoring (+ upgrade to PHPUnit 6)
 - [x] implement ArangoDB authentication
 - [ ] implement basic tracer plugin
 - [x] provide docs
