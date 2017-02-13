@@ -15,7 +15,7 @@ matrix:
 #      - php: 7.1
 
 before_install:
-  - if [[ ${TRAVIS_PHP_VERSION:0:1} == "7" ]]; then composer require --dev --no-update phpunit/phpunit ~6; else composer require --dev --no-update phpunit/phpunit ~5; fi
+  - if [[ ${TRAVIS_PHP_VERSION:0:1} == "7" ]]; then composer require --dev --no-update phpunit/phpunit 6.*; else composer require --dev --no-update phpunit/phpunit ~5; fi
 
 install:
   - travis_retry composer install --prefer-source --no-interaction --dev --ignore-platform-reqs
