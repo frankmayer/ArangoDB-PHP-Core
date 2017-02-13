@@ -2,16 +2,18 @@
 
 A lightweight, and at the same time flexible "very"-low-level ArangoDB client for PHP.
 
-[![Join the chat at https://gitter.im/frankmayer/ArangoDB-PHP-Core](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/frankmayer/ArangoDB-PHP-Core?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
+[![Latest Stable Version](https://poser.pugx.org/frankmayer/arangodb-php-core/v/stable)](https://packagist.org/packages/frankmayer/arangodb-php-core)
+[![Total Downloads](https://poser.pugx.org/frankmayer/arangodb-php-core/downloads)](https://packagist.org/packages/frankmayer/arangodb-php-core)
+[![Latest Unstable Version](https://poser.pugx.org/frankmayer/arangodb-php-core/v/unstable)](https://packagist.org/packages/frankmayer/arangodb-php-core)
+[![License](https://poser.pugx.org/frankmayer/arangodb-php-core/license)](https://packagist.org/packages/frankmayer/arangodb-php-core)
+[![composer.lock](https://poser.pugx.org/frankmayer/arangodb-php-core/composerlock)](https://packagist.org/packages/frankmayer/arangodb-php-core)
+[![Coverage Status](https://coveralls.io/repos/frankmayer/ArangoDB-PHP-Core/badge.png)](https://coveralls.io/r/frankmayer/ArangoDB-PHP-Core)
 
 Master: [![Build Status](https://travis-ci.org/frankmayer/ArangoDB-PHP-Core.png?branch=master)](https://travis-ci.org/frankmayer/ArangoDB-PHP-Core)
 Devel: [![Build Status](https://travis-ci.org/frankmayer/ArangoDB-PHP-Core.png?branch=devel)](https://travis-ci.org/frankmayer/ArangoDB-PHP-Core)
 
-
-[![Coverage Status](https://coveralls.io/repos/frankmayer/ArangoDB-PHP-Core/badge.png)](https://coveralls.io/r/frankmayer/ArangoDB-PHP-Core)
-[![Hex.pm](https://img.shields.io/hexpm/l/plug.svg)](https://github.com/frankmayer/ArangoDB-PHP-Core/blob/devel/LICENSE.md)
-
+[![Join the chat at https://gitter.im/frankmayer/ArangoDB-PHP-Core](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/frankmayer/ArangoDB-PHP-Core?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 ####Purpose:
 
