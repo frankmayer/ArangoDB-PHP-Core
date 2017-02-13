@@ -12,7 +12,6 @@ matrix:
     fast_finish: true
 #    allow_failures:
 #      - php: hhvm-nightly
-#      - php: 7.1
 
 before_install:
   - if [[ ${TRAVIS_PHP_VERSION:0:1} == "7" ]]; then composer require --dev --no-update phpunit/phpunit 6.*; else composer require --dev --no-update phpunit/phpunit ~5; fi
