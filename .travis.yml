@@ -15,18 +15,16 @@ matrix:
 #      - php: 7.1
 
 before_script:
-#  - chmod 777 ./tests/travis/setup_arangodb.sh
-#  - ./tests/travis/setup_arangodb.sh
   - bash tests/before.sh
   - composer install --prefer-source --no-interaction --dev --ignore-platform-reqs
 
 
 after_script:
- - php vendor/bin/coveralls -v
+  - php vendor/bin/coveralls -v
 
 script:
- - mkdir -p build/logs
- - phpunit --coverage-clover build/logs/clover.xml
+  - mkdir -p build/logs
+  - phpunit --coverage-clover build/logs/clover.xml
 
 addons:
   hosts:
