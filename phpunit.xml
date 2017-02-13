@@ -21,4 +21,9 @@
         <!--<directory>./tests/Performance/</directory>-->
         <!--</testsuite>-->
     </testsuites>
+    <filter>
+        <whitelist>
+            <directory>./lib</directory>
+        </whitelist>
+    </filter>
 </phpunit>
