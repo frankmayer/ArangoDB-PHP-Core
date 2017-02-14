@@ -1,7 +1,7 @@
 language: php
 
 php: 
-#  - 7.0
+  - 7.0
   - 7.1
   - hhvm-3.15
   #  - hhvm-nightly
@@ -22,7 +22,6 @@ before_script:
   - composer dumpautoload -o
 
 script:
-  - mkdir -p build/logs
   - vendor/bin/phpunit --coverage-clover=coverage.xml
 
 after_success:
