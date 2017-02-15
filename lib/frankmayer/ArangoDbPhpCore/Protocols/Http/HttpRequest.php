@@ -106,10 +106,14 @@ class HttpRequest extends AbstractHttpRequest
 
     /**
      * @param string $address
+     *
+     * @return $this
      */
     public function setAddress($address)
     {
         $this->address = $address;
+
+        return $this;
     }
 
     /**
@@ -122,10 +126,14 @@ class HttpRequest extends AbstractHttpRequest
 
     /**
      * @param string $body
+     *
+     * @return $this
      */
     public function setBody($body)
     {
         $this->body = $body;
+
+        return $this;
     }
 
     /**
@@ -138,10 +146,14 @@ class HttpRequest extends AbstractHttpRequest
 
     /**
      * @param \frankmayer\ArangoDbPhpCore\Client $client
+     *
+     * @return $this
      */
     public function setClient($client)
     {
         $this->client = $client;
+
+        return $this;
     }
 
     /**
@@ -154,10 +166,14 @@ class HttpRequest extends AbstractHttpRequest
 
     /**
      * @param \frankmayer\ArangoDbPhpCore\ConnectorInterface $connector
+     *
+     * @return $this
      */
     public function setConnector($connector)
     {
         $this->connector = $connector;
+
+        return $this;
     }
 
     /**
@@ -170,10 +186,14 @@ class HttpRequest extends AbstractHttpRequest
 
     /**
      * @param array $headers
+     *
+     * @return $this
      */
     public function setHeaders($headers)
     {
         $this->headers = $headers;
+
+        return $this;
     }
 
     /**
@@ -186,10 +206,14 @@ class HttpRequest extends AbstractHttpRequest
 
     /**
      * @param string $method
+     *
+     * @return $this
      */
     public function setMethod($method)
     {
         $this->method = $method;
+
+        return $this;
     }
 
     /**
@@ -202,10 +226,14 @@ class HttpRequest extends AbstractHttpRequest
 
     /**
      * @param array $options
+     *
+     * @return $this
      */
     public function setOptions($options)
     {
         $this->options = $options;
+
+        return $this;
     }
 
     /**
@@ -218,10 +246,14 @@ class HttpRequest extends AbstractHttpRequest
 
     /**
      * @param string $path
+     *
+     * @return $this
      */
     public function setPath($path)
     {
         $this->path = $path;
+
+        return $this;
     }
 
     /**
@@ -234,10 +266,14 @@ class HttpRequest extends AbstractHttpRequest
 
     /**
      * @param string $response
+     *
+     * @return $this
      */
     public function setResponse($response)
     {
         $this->response = $response;
+
+        return $this;
     }
 
     /**

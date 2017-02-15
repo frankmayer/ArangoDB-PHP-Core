@@ -205,10 +205,14 @@ class HttpResponse implements HttpResponseInterface
 
     /**
      * @param mixed $batch
+     *
+     * @return $this
      */
     public function setBatch($batch)
     {
         $this->batch = $batch;
+
+        return $this;
     }
 
     /**
@@ -221,10 +225,14 @@ class HttpResponse implements HttpResponseInterface
 
     /**
      * @param mixed $body
+     *
+     * @return $this
      */
     public function setBody($body)
     {
         $this->body = $body;
+
+        return $this;
     }
 
     /**
@@ -237,10 +245,14 @@ class HttpResponse implements HttpResponseInterface
 
     /**
      * @param array $headers
+     *
+     * @return $this
      */
     public function setHeaders($headers)
     {
         $this->headers = $headers;
+
+        return $this;
     }
 
     /**
@@ -253,10 +265,14 @@ class HttpResponse implements HttpResponseInterface
 
     /**
      * @param \frankmayer\ArangoDbPhpCore\Protocols\Http\HttpRequest $request
+     *
+     * @return $this
      */
     public function setRequest($request)
     {
         $this->request = $request;
+
+        return $this;
     }
 
     /**
@@ -269,10 +285,14 @@ class HttpResponse implements HttpResponseInterface
 
     /**
      * @param mixed $status
+     *
+     * @return $this
      */
     public function setStatus($status)
     {
         $this->status = $status;
+
+        return $this;
     }
 
     /**
@@ -301,10 +321,14 @@ class HttpResponse implements HttpResponseInterface
 
     /**
      * @param boolean $verboseStatusLine
+     *
+     * @return $this
      */
     public function setVerboseExtractStatusLine($verboseStatusLine)
     {
         $this->verboseExtractStatusLine = $verboseStatusLine;
+
+        return $this;
     }
 
     /**
