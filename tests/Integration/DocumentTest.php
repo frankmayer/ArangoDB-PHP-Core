@@ -68,10 +68,10 @@ class DocumentTest extends TestCase
 
         $body = $responseObject->body;
 
-        $this->assertArrayHasKey('code', json_decode($body, true));
+        static::assertArrayHasKey('code', json_decode($body, true));
         $decodedJsonBody = json_decode($body, true);
-        $this->assertEquals(200, $decodedJsonBody['code']);
-        $this->assertEquals($collectionName, $decodedJsonBody['name']);
+        static::assertEquals(200, $decodedJsonBody['code']);
+        static::assertEquals($collectionName, $decodedJsonBody['name']);
     }
 
 
@@ -115,9 +115,9 @@ class DocumentTest extends TestCase
 
         $decodedJsonBody = json_decode($responseBody, true);
 
-        $this->assertArrayNotHasKey('error', $decodedJsonBody);
+        static::assertArrayNotHasKey('error', $decodedJsonBody);
 
-        $this->assertEquals($collectionName . '/1', $decodedJsonBody['_id']);
+        static::assertEquals($collectionName . '/1', $decodedJsonBody['_id']);
     }
 
 
@@ -136,14 +136,14 @@ class DocumentTest extends TestCase
 
         $decodedJsonBody = json_decode($responseBody, true);
 
-        $this->assertArrayNotHasKey('error', $decodedJsonBody);
+        static::assertArrayNotHasKey('error', $decodedJsonBody);
 
-        $this->assertEquals($collectionName . '/1', $decodedJsonBody['_id']);
+        static::assertEquals($collectionName . '/1', $decodedJsonBody['_id']);
 
         $responseObject = $document->getAll($collectionName);
         $responseBody   = $responseObject->body;
 
-        $this->markTestSkipped(
+        static::markTestSkipped(
             'The functionality needs to be implemented in the API first (simple queries API).'
         );
 
@@ -169,16 +169,16 @@ class DocumentTest extends TestCase
 
         $decodedJsonBody = json_decode($responseBody, true);
 
-        $this->assertArrayHasKey('error', $decodedJsonBody);
-        $this->assertEquals(true, $decodedJsonBody['error']);
+        static::assertArrayHasKey('error', $decodedJsonBody);
+        static::assertEquals(true, $decodedJsonBody['error']);
 
         $decodedJsonBody = json_decode($responseBody, true);
 
-        $this->assertEquals(true, $decodedJsonBody['error']);
+        static::assertEquals(true, $decodedJsonBody['error']);
 
-        $this->assertEquals(404, $decodedJsonBody['code']);
+        static::assertEquals(404, $decodedJsonBody['code']);
 
-        $this->assertEquals(1202, $decodedJsonBody['errorNum']);
+        static::assertEquals(1202, $decodedJsonBody['errorNum']);
     }
 
 
@@ -198,9 +198,9 @@ class DocumentTest extends TestCase
 
         $decodedJsonBody = json_decode($responseBody, true);
 
-        $this->assertArrayNotHasKey('error', $decodedJsonBody);
+        static::assertArrayNotHasKey('error', $decodedJsonBody);
 
-        $this->assertEquals($collectionName . '/1', $decodedJsonBody['_id']);
+        static::assertEquals($collectionName . '/1', $decodedJsonBody['_id']);
 
         $requestBody = ['name' => 'Mike'];
 
@@ -211,29 +211,29 @@ class DocumentTest extends TestCase
 
         $decodedJsonBody = json_decode($responseBody, true);
 
-        $this->assertArrayNotHasKey('error', $decodedJsonBody);
+        static::assertArrayNotHasKey('error', $decodedJsonBody);
 
-        $this->assertEquals($collectionName . '/1', $decodedJsonBody['_id']);
+        static::assertEquals($collectionName . '/1', $decodedJsonBody['_id']);
 
         $document = new Document($this->client);
 
         $responseObject = $document->get($collectionName . '/1', $requestBody);
         $responseBody   = $responseObject->body;
 
-        $this->assertArrayNotHasKey('bike', json_decode($responseBody, true));
+        static::assertArrayNotHasKey('bike', json_decode($responseBody, true));
 
         $decodedJsonBody = json_decode($responseBody, true);
 
-        $this->assertEquals('Mike', $decodedJsonBody['name']);
+        static::assertEquals('Mike', $decodedJsonBody['name']);
 
-        $this->assertEquals($collectionName . '/1', $decodedJsonBody['_id']);
+        static::assertEquals($collectionName . '/1', $decodedJsonBody['_id']);
 
         $responseObject = $document->delete($collectionName . '/1');
         $responseBody   = $responseObject->body;
 
         $decodedJsonBody = json_decode($responseBody, true);
 
-        $this->assertArrayNotHasKey('error', $decodedJsonBody);
+        static::assertArrayNotHasKey('error', $decodedJsonBody);
 
         // Try to delete a second time .. should throw an error
         $responseObject = $document->delete($collectionName . '/1');
@@ -241,14 +241,14 @@ class DocumentTest extends TestCase
 
         $decodedJsonBody = json_decode($responseBody, true);
 
-        $this->assertArrayHasKey('error', $decodedJsonBody);
-        $this->assertEquals(true, $decodedJsonBody['error']);
+        static::assertArrayHasKey('error', $decodedJsonBody);
+        static::assertEquals(true, $decodedJsonBody['error']);
 
-        $this->assertEquals(true, $decodedJsonBody['error']);
+        static::assertEquals(true, $decodedJsonBody['error']);
 
-        $this->assertEquals(404, $decodedJsonBody['code']);
+        static::assertEquals(404, $decodedJsonBody['code']);
 
-        $this->assertEquals(1202, $decodedJsonBody['errorNum']);
+        static::assertEquals(1202, $decodedJsonBody['errorNum']);
     }
 
 
@@ -268,9 +268,9 @@ class DocumentTest extends TestCase
 
         $decodedJsonBody = json_decode($responseBody, true);
 
-        $this->assertArrayNotHasKey('error', $decodedJsonBody);
+        static::assertArrayNotHasKey('error', $decodedJsonBody);
 
-        $this->assertEquals($collectionName . '/1', $decodedJsonBody['_id']);
+        static::assertEquals($collectionName . '/1', $decodedJsonBody['_id']);
 
         $requestBody = ['name' => 'Mike'];
 
@@ -281,29 +281,29 @@ class DocumentTest extends TestCase
 
         $decodedJsonBody = json_decode($responseBody, true);
 
-        $this->assertArrayNotHasKey('error', $decodedJsonBody);
+        static::assertArrayNotHasKey('error', $decodedJsonBody);
 
-        $this->assertEquals($collectionName . '/1', $decodedJsonBody['_id']);
+        static::assertEquals($collectionName . '/1', $decodedJsonBody['_id']);
 
         $document = new Document($this->client);
 
         $responseObject = $document->get($collectionName . '/1', $requestBody);
         $responseBody   = $responseObject->body;
 
-        $this->assertArrayHasKey('bike', json_decode($responseBody, true));
+        static::assertArrayHasKey('bike', json_decode($responseBody, true));
 
         $decodedJsonBody = json_decode($responseBody, true);
 
-        $this->assertEquals('Mike', $decodedJsonBody['name']);
+        static::assertEquals('Mike', $decodedJsonBody['name']);
 
-        $this->assertEquals($collectionName . '/1', $decodedJsonBody['_id']);
+        static::assertEquals($collectionName . '/1', $decodedJsonBody['_id']);
 
         $responseObject = $document->delete($collectionName . '/1');
         $responseBody   = $responseObject->body;
 
         $decodedJsonBody = json_decode($responseBody, true);
 
-        $this->assertArrayNotHasKey('error', $decodedJsonBody);
+        static::assertArrayNotHasKey('error', $decodedJsonBody);
 
         // Try to delete a second time .. should throw an error
         $responseObject = $document->delete($collectionName . '/1');
@@ -311,13 +311,13 @@ class DocumentTest extends TestCase
 
         $decodedJsonBody = json_decode($responseBody, true);
 
-        $this->assertArrayHasKey('error', $decodedJsonBody);
+        static::assertArrayHasKey('error', $decodedJsonBody);
 
-        $this->assertEquals(true, $decodedJsonBody['error']);
+        static::assertEquals(true, $decodedJsonBody['error']);
 
-        $this->assertEquals(404, $decodedJsonBody['code']);
+        static::assertEquals(404, $decodedJsonBody['code']);
 
-        $this->assertEquals(1202, $decodedJsonBody['errorNum']);
+        static::assertEquals(1202, $decodedJsonBody['errorNum']);
     }
 
 
@@ -347,11 +347,11 @@ class DocumentTest extends TestCase
         $responseObject = $request->send();
         $body           = $responseObject->body;
 
-        $this->assertArrayHasKey('code', json_decode($body, true));
+        static::assertArrayHasKey('code', json_decode($body, true));
 
         $decodedJsonBody = json_decode($body, true);
 
-        $this->assertEquals(200, $decodedJsonBody['code']);
+        static::assertEquals(200, $decodedJsonBody['code']);
 
         $collectionName = $this->TESTNAMES_PREFIX . 'CollectionTestSuite-NonExistingCollection';
         $collection     = new Collection($this->client);

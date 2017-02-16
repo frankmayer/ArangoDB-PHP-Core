@@ -65,8 +65,8 @@ TAG;
         /** @var $responseObject HttpResponse */
         $response = $object->create($this->collectionNames[0], $body);
 
-        $this->assertInstanceOf(HttpResponse::class, $response);
-        $this->assertEquals(200, $response->status);
+        static::assertInstanceOf(HttpResponse::class, $response);
+        static::assertEquals(200, $response->status);
     }
 
     /**
@@ -90,8 +90,8 @@ TAG;
         /** @var $responseObject HttpResponse */
         $response = $object->fetchJobResult($handle, $options);
 
-        $this->assertInstanceOf(HttpResponse::class, $response);
-        $this->assertEquals(200, $response->status);
+        static::assertInstanceOf(HttpResponse::class, $response);
+        static::assertEquals(200, $response->status);
     }
 
     /**
@@ -114,8 +114,8 @@ TAG;
         /** @var $responseObject HttpResponse */
         $response = $object->deleteJobResult('all');
 
-        $this->assertInstanceOf(HttpResponse::class, $response);
-        $this->assertEquals(200, $response->status);
+        static::assertInstanceOf(HttpResponse::class, $response);
+        static::assertEquals(200, $response->status);
     }
 
     /**
@@ -138,7 +138,7 @@ TAG;
         /** @var $responseObject HttpResponse */
         $response = $object->listJobResults('done');
 
-        $this->assertInstanceOf(HttpResponse::class, $response);
-        $this->assertEquals(200, $response->status);
+        static::assertInstanceOf(HttpResponse::class, $response);
+        static::assertEquals(200, $response->status);
     }
 }

@@ -75,7 +75,7 @@ class IocTest extends TestCase
      */
     public function testBindAndMakeHttpRequest()
     {
-        $this->markTestSkipped(
+        static::markTestSkipped(
             'The functionality needs to be implemented in the API first (IOC?).'
         );
 
@@ -89,93 +89,93 @@ class IocTest extends TestCase
         // And here's how one gets an HttpRequest object through the IOC.
         // Note that the type-name 'httpRequest' is the name we bound our HttpRequest class creation-closure to. (see above)
         $this->request = $this->client->make('Request');
-        $this->assertInstanceOf(AbstractHttpRequest::class, $this->request);
+        static::assertInstanceOf(AbstractHttpRequest::class, $this->request);
 
 
         $testValue = $this->request->getAddress();
-        $this->assertNull($testValue);
+        static::assertNull($testValue);
 
         $this->request->setAddress('testAddress');
 
         $testValue = $this->request->getAddress();
-        $this->assertEquals('testAddress', $testValue);
+        static::assertEquals('testAddress', $testValue);
 
 
         $testValue = $this->request->getBody();
-        $this->assertNull($testValue);
+        static::assertNull($testValue);
 
         $this->request->setBody('testBody');
 
         $testValue = $this->request->getBody();
-        $this->assertEquals('testBody', $testValue);
+        static::assertEquals('testBody', $testValue);
 
 
         $testValue1 = $this->request->getClient();
-        $this->assertInstanceOf(Client::class, $testValue1);
+        static::assertInstanceOf(Client::class, $testValue1);
 
         $this->request->setClient($this->client);
 
         $testValue1 = $this->request->getClient();
-        $this->assertEquals($this->client, $testValue1);
+        static::assertEquals($this->client, $testValue1);
 
 
         $testValue1 = $this->request->getConnector();
-        $this->assertNull($testValue1);
+        static::assertNull($testValue1);
 
         $this->request->setConnector($this->connector);
 
         $testValue1 = $this->request->getConnector();
-        $this->assertEquals($this->connector, $testValue1);
+        static::assertEquals($this->connector, $testValue1);
 
 
         $testValue = $this->request->getHeaders();
-        $this->assertEmpty($testValue);
+        static::assertEmpty($testValue);
 
         $this->request->setHeaders('testHeaders');
 
         $testValue = $this->request->getHeaders();
-        $this->assertEquals('testHeaders', $testValue);
+        static::assertEquals('testHeaders', $testValue);
 
 
         $testValue = $this->request->getMethod();
-        $this->assertNull($testValue);
+        static::assertNull($testValue);
 
         $this->request->setMethod('testMethod');
 
         $testValue = $this->request->getMethod();
-        $this->assertEquals('testMethod', $testValue);
+        static::assertEquals('testMethod', $testValue);
 
 
         $testValue1 = $this->request->getOptions();
-        $this->assertEmpty($testValue1);
+        static::assertEmpty($testValue1);
 
         $this->request->setOptions(['testOption' => 'testVal']);
 
         $testValue = $this->request->getOptions();
-        $this->assertArrayHasKey('testOption', $testValue);
+        static::assertArrayHasKey('testOption', $testValue);
 
         $this->request->setOptions($testValue1);
 
         $testValue = $this->request->getOptions();
-        $this->assertEquals($testValue1, $testValue);
+        static::assertEquals($testValue1, $testValue);
 
 
         $testValue = $this->request->getPath();
-        $this->assertNull($testValue);
+        static::assertNull($testValue);
 
         $this->request->setPath('testPath');
 
         $testValue = $this->request->getPath();
-        $this->assertEquals('testPath', $testValue);
+        static::assertEquals('testPath', $testValue);
 
 
         $testValue = $this->request->getResponse();
-        $this->assertNull($testValue);
+        static::assertNull($testValue);
 
         $this->request->setResponse('testResponse');
 
         $testValue = $this->request->getResponse();
-        $this->assertEquals('testResponse', $testValue);
+        static::assertEquals('testResponse', $testValue);
     }
 
 
@@ -184,7 +184,7 @@ class IocTest extends TestCase
      */
     public function testBindAndMakeHttpResponsePlusGettersSetters()
     {
-        $this->markTestSkipped(
+        static::markTestSkipped(
             'The functionality needs to be implemented in the API first (IOC?).'
         );
         $this->request         = $this->client->make('Request');
@@ -205,78 +205,78 @@ class IocTest extends TestCase
         $this->response->build($this->request);
 
         //        echo get_class($this->request);
-        $this->assertInstanceOf(HttpResponseInterface::class, $this->response);
+        static::assertInstanceOf(HttpResponseInterface::class, $this->response);
         $decodedBody = json_decode($this->response->body, true);
-        $this->assertSame($decodedBody['server'], 'arango');
-        $this->assertAttributeEmpty('protocol', $this->response);
+        static::assertSame($decodedBody['server'], 'arango');
+        static::assertAttributeEmpty('protocol', $this->response);
 
 
         // test verboseExtractStatusLine
         $this->response                           = $this->client->make('Response');
         $this->response->verboseExtractStatusLine = true;
         $this->response->build($this->request);
-        $this->assertAttributeNotEmpty('protocol', $this->response);
+        static::assertAttributeNotEmpty('protocol', $this->response);
 
 
         $testValue = $this->response->getBatch();
-        $this->assertEmpty($testValue);
+        static::assertEmpty($testValue);
 
         $this->response->setBatch(true);
 
         $testValue = $this->response->getBatch();
-        $this->assertTrue($testValue);
+        static::assertTrue($testValue);
 
 
         $testValue = $this->response->getBody();
-        $this->assertNotEmpty($testValue);
+        static::assertNotEmpty($testValue);
 
         $this->response->setBody('testBody');
 
         $testValue = $this->response->getBody();
-        $this->assertEquals('testBody', $testValue);
+        static::assertEquals('testBody', $testValue);
 
 
         $testValue = $this->response->getHeaders();
-        $this->assertNotEmpty($testValue);
+        static::assertNotEmpty($testValue);
 
         $this->response->setHeaders('testHeaders');
 
         $testValue = $this->response->getHeaders();
-        $this->assertEquals('testHeaders', $testValue);
+        static::assertEquals('testHeaders', $testValue);
 
 
         $testValue = $this->response->getRequest();
-        $this->assertInternalType('object', $testValue);
+        static::assertInternalType('object', $testValue);
 
         $this->response->setRequest($testValue);
 
         $testValue = $this->response->getRequest();
-        $this->assertInternalType('object', $testValue);
+        static::assertInternalType('object', $testValue);
 
 
         $testValue = $this->response->getStatus();
-        $this->assertNotEmpty($testValue);
+        static::assertNotEmpty($testValue);
 
         $this->response->setStatus(202);
 
         $testValue = $this->response->getStatus();
-        $this->assertEquals(202, $testValue);
+        static::assertEquals(202, $testValue);
 
 
         $testValue = $this->response->getProtocol();
-        $this->assertEquals('HTTP/1.1', $testValue);
+        static::assertEquals('HTTP/1.1', $testValue);
 
 
         $testValue = $this->response->getStatusPhrase();
-        $this->assertEquals('OK', $testValue);
+        static::assertEquals('OK', $testValue);
 
 
         $testValue = $this->response->getVerboseExtractStatusLine();
-        $this->assertEquals(true, $testValue);
+        static::assertEquals(true, $testValue);
 
         $this->response->setVerboseExtractStatusLine(false);
 
         $testValue = $this->response->getVerboseExtractStatusLine();
-        $this->assertEquals(false, $testValue);
+        static::assertEquals(false, $testValue);
     }
 }

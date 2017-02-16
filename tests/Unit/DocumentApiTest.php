@@ -51,7 +51,7 @@ class DocumentApiTest extends TestCase
     public function testIfHttpResponseInstantiable()
     {
         $response = new HttpResponse();
-        $this->assertInstanceOf(HttpResponse::class, $response);
+        static::assertInstanceOf(HttpResponse::class, $response);
     }
 
 
@@ -82,8 +82,8 @@ TAG;
         /** @var $responseObject HttpResponse */
         $response = $object->create($this->collectionNames[0], $body);
 
-        $this->assertInstanceOf(HttpResponse::class, $response);
-        $this->assertEquals(201, $response->status);
+        static::assertInstanceOf(HttpResponse::class, $response);
+        static::assertEquals(201, $response->status);
     }
 
     /**
@@ -111,8 +111,8 @@ TAG;
         /** @var $responseObject HttpResponse */
         $response = $object->delete($handle, $options);
 
-        $this->assertInstanceOf(HttpResponse::class, $response);
-        $this->assertEquals(200, $response->status);
+        static::assertInstanceOf(HttpResponse::class, $response);
+        static::assertEquals(200, $response->status);
     }
 
     /**
@@ -141,8 +141,8 @@ TAG;
         /** @var $responseObject HttpResponse */
         $response = $object->get($handle, $options);
 
-        $this->assertInstanceOf(HttpResponse::class, $response);
-        $this->assertEquals(200, $response->status);
+        static::assertInstanceOf(HttpResponse::class, $response);
+        static::assertEquals(200, $response->status);
     }
 
     /**
@@ -166,8 +166,8 @@ TAG;
         /** @var $responseObject HttpResponse */
         $response = $object->get($handle, $options);
 
-        $this->assertInstanceOf(HttpResponse::class, $response);
-        $this->assertEquals(200, $response->status);
+        static::assertInstanceOf(HttpResponse::class, $response);
+        static::assertEquals(200, $response->status);
     }
 
     /**
@@ -198,8 +198,8 @@ TAG;
         /** @var $responseObject HttpResponse */
         $response = $object->update($handle, $body, $options);
 
-        $this->assertInstanceOf(HttpResponse::class, $response);
-        $this->assertEquals(202, $response->status);
+        static::assertInstanceOf(HttpResponse::class, $response);
+        static::assertEquals(202, $response->status);
     }
 
     /**
@@ -230,8 +230,8 @@ TAG;
         /** @var $responseObject HttpResponse */
         $response = $object->replace($handle, $body);
 
-        $this->assertInstanceOf(HttpResponse::class, $response);
-        $this->assertEquals(202, $response->status);
+        static::assertInstanceOf(HttpResponse::class, $response);
+        static::assertEquals(202, $response->status);
     }
 
     /**
@@ -258,7 +258,7 @@ TAG;
         /** @var $responseObject HttpResponse */
         $response = $object->getAll($this->collectionNames[0], $options);
 
-        $this->assertInstanceOf(HttpResponse::class, $response);
-        $this->assertEquals(200, $response->status);
+        static::assertInstanceOf(HttpResponse::class, $response);
+        static::assertEquals(200, $response->status);
     }
 }

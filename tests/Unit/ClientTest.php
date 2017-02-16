@@ -45,7 +45,7 @@ class ClientTest extends TestCase
     public function testIfClientInstantiable()
     {
         $client = new Client($this->connector);
-        $this->assertInstanceOf(Client::class, $client);
+        static::assertInstanceOf(Client::class, $client);
     }
 
 
@@ -56,7 +56,7 @@ class ClientTest extends TestCase
     {
         $client = new Client($this->connector);
         $client->setClientOptions(['someOption' => true]);
-        $this->assertEquals(['someOption' => true], $client->getClientOptions());
+        static::assertEquals(['someOption' => true], $client->getClientOptions());
     }
 
 
@@ -68,7 +68,7 @@ class ClientTest extends TestCase
         $client = new Client($this->connector, $this->clientOptions);
 
         $client->setConnector($this->connector2);
-        $this->assertEquals($this->connector2, $client->getConnector());
+        static::assertEquals($this->connector2, $client->getConnector());
     }
 
 
@@ -79,7 +79,7 @@ class ClientTest extends TestCase
     {
         $client = new Client($this->connector, $this->clientOptions);
         $client->setDatabase('testDb');
-        $this->assertEquals('testDb', $client->getDatabase());
+        static::assertEquals('testDb', $client->getDatabase());
     }
 
 
@@ -90,7 +90,7 @@ class ClientTest extends TestCase
     {
         $client = new Client($this->connector, $this->clientOptions);
         $client->setEndpoint('http://db-link:8529');
-        $this->assertEquals('http://db-link:8529', $client->getEndpoint());
+        static::assertEquals('http://db-link:8529', $client->getEndpoint());
     }
 
 
@@ -102,7 +102,7 @@ class ClientTest extends TestCase
         $client        = new Client($this->connector, $this->clientOptions);
         $pluginManager = new PluginManager($client);
         $client->setPluginManager($pluginManager);
-        $this->assertEquals($pluginManager, $client->getPluginManager());
+        static::assertEquals($pluginManager, $client->getPluginManager());
     }
 
 
@@ -114,7 +114,7 @@ class ClientTest extends TestCase
         $client       = new Client($this->connector, $this->clientOptions);
         $requestClass = new HttpRequest($client);
         $client->setRequestClass($requestClass);
-        $this->assertEquals($requestClass, $client->getRequestClass());
+        static::assertEquals($requestClass, $client->getRequestClass());
     }
 
 
@@ -126,6 +126,6 @@ class ClientTest extends TestCase
         $client        = new Client($this->connector, $this->clientOptions);
         $responseClass = new HttpResponse();
         $client->setResponseClass($responseClass);
-        $this->assertEquals($responseClass, $client->getResponseClass());
+        static::assertEquals($responseClass, $client->getResponseClass());
     }
 }

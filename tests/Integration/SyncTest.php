@@ -80,8 +80,8 @@ class SyncTest extends TestCase
 
         $body = $responseObject->body;
 
-        $this->assertArrayHasKey('code', json_decode($body, true));
+        static::assertArrayHasKey('code', json_decode($body, true));
         $decodedJsonBody = json_decode($body, true);
-        $this->assertEquals(201, $decodedJsonBody['code']);
+        static::assertEquals(201, $decodedJsonBody['code']);
     }
 }

@@ -45,7 +45,7 @@ class PluginTest extends TestCase
     public function testRegisterPluginsAndUnRegisterPlugins()
     {
         $this->client->setPluginManager(new PluginManager($this->client));
-        $this->assertInstanceOf(PluginManager::class, $this->client->getPluginManager());
+        static::assertInstanceOf(PluginManager::class, $this->client->getPluginManager());
 
         $tracer            = new TestPlugin();
         $tracer->priority  = 0;
@@ -64,15 +64,15 @@ class PluginTest extends TestCase
         ];
 
         $this->client->setPluginsFromPluginArray($this->clientOptions['plugins']);
-        $this->assertArrayHasKey('tracer1', $this->client->pluginManager->pluginStorage);
-        $this->assertArrayHasKey('tracer2', $this->client->pluginManager->pluginStorage);
-        $this->assertArrayHasKey('tracer3', $this->client->pluginManager->pluginStorage);
-        $this->assertArrayHasKey('tracer4', $this->client->pluginManager->pluginStorage);
+        static::assertArrayHasKey('tracer1', $this->client->pluginManager->pluginStorage);
+        static::assertArrayHasKey('tracer2', $this->client->pluginManager->pluginStorage);
+        static::assertArrayHasKey('tracer3', $this->client->pluginManager->pluginStorage);
+        static::assertArrayHasKey('tracer4', $this->client->pluginManager->pluginStorage);
 
         $keys = array_keys($this->client->pluginManager->pluginStorage);
-        $this->assertSame($this->client->pluginManager->pluginStorage[$keys[2]],
+        static::assertSame($this->client->pluginManager->pluginStorage[$keys[2]],
             $this->client->pluginManager->pluginStorage['tracer1']);
-        $this->assertSame($this->client->pluginManager->pluginStorage[$keys[3]],
+        static::assertSame($this->client->pluginManager->pluginStorage[$keys[3]],
             $this->client->pluginManager->pluginStorage['tracer3']);
 
 
@@ -81,10 +81,10 @@ class PluginTest extends TestCase
         $this->client->pluginManager->removePluginInstance('tracer3');
         $this->client->pluginManager->removePluginInstance('tracer4');
 
-        $this->assertArrayNotHasKey('tracer1', $this->client->pluginManager->pluginStorage);
-        $this->assertArrayNotHasKey('tracer2', $this->client->pluginManager->pluginStorage);
-        $this->assertArrayNotHasKey('tracer3', $this->client->pluginManager->pluginStorage);
-        $this->assertArrayNotHasKey('tracer4', $this->client->pluginManager->pluginStorage);
+        static::assertArrayNotHasKey('tracer1', $this->client->pluginManager->pluginStorage);
+        static::assertArrayNotHasKey('tracer2', $this->client->pluginManager->pluginStorage);
+        static::assertArrayNotHasKey('tracer3', $this->client->pluginManager->pluginStorage);
+        static::assertArrayNotHasKey('tracer4', $this->client->pluginManager->pluginStorage);
     }
 
 
@@ -97,7 +97,7 @@ class PluginTest extends TestCase
             $this->client->setPluginsFromPluginArray(['tracer5' => new \stdClass()]);
         } catch (\Exception $e) {
         }
-        $this->assertInstanceOf(\Exception::class, $e);
+        static::assertInstanceOf(\Exception::class, $e);
     }
 
 

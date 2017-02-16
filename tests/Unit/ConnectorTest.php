@@ -38,7 +38,7 @@ class ConnectorTest extends TestCase
     public function testIfCurlConnectorInstantiable()
     {
 
-        $this->assertInstanceOf(AbstractHttpConnector::class, $this->connector);
+        static::assertInstanceOf(AbstractHttpConnector::class, $this->connector);
     }
 
 
@@ -51,30 +51,30 @@ class ConnectorTest extends TestCase
         $connector->setVerboseLogging(true);
         $res = $connector->getVerboseLogging();
 
-        $this->assertTrue($res);
+        static::assertTrue($res);
     }
 
 
     /**
      *
      */
-    public function testCurlRequest()
-    {
+//    public function testCurlRequest()
+//    {
         // todo: check if it's wise to abstract curl functions
         // Testing is not possible without abstracting the curl functions in another class.
         // This would mean introducing and instantiating another class.
         // I don't know if this makes sense... Maybe later...
-    }
+//    }
 
 
     /**
      *
      */
-    public function testFSockRequest()
-    {
+//    public function testFSockRequest()
+//    {
         // FSock Requests are not implemented in the core, yet (and maybe never)
         // The functionality to connect to sockets instead to tcp endpoints can be provided
         // by the ArangoDB-PHP-Core-Guzzle Provider.
         // todo: check if this actually works
-    }
+//    }
 }

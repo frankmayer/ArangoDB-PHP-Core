@@ -57,7 +57,7 @@ class PluginTest extends TestCase
     public function testRegisterPluginsWithDifferentPrioritiesTestAndUnRegisterPlugin()
     {
         $this->client->setPluginManager(new PluginManager($this->client));
-        $this->assertInstanceOf(PluginManager::class, $this->client->getPluginManager());
+        static::assertInstanceOf(PluginManager::class, $this->client->getPluginManager());
 
         $tracer            = new TestPlugin();
         $tracer->priority  = 0;
@@ -76,14 +76,14 @@ class PluginTest extends TestCase
         ];
 
         $this->client->setPluginsFromPluginArray($this->clientOptions['plugins']);
-        $this->assertArrayHasKey('tracer3', $this->client->pluginManager->pluginStorage);
+        static::assertArrayHasKey('tracer3', $this->client->pluginManager->pluginStorage);
 
         $e = null;
         try {
             $this->client->setPluginsFromPluginArray(['tracer5' => new \stdClass()]);
         } catch (\Exception $e) {
         }
-        $this->assertInstanceOf(\Exception::class, $e);
+        static::assertInstanceOf(\Exception::class, $e);
 
         /** @var $responseObject HttpResponse */
         $collection = new Collection($this->client);
@@ -91,7 +91,7 @@ class PluginTest extends TestCase
         /** @var $responseObject HttpResponse */
         $responseObject = $collection->getAll();
 
-        $this->assertInstanceOf(HttpRequestInterface::class,
+        static::assertInstanceOf(HttpRequestInterface::class,
             $responseObject->request);
     }
 

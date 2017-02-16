@@ -50,7 +50,7 @@ class CollectionApiTest extends TestCase
     public function testIfHttpResponseInstantiable()
     {
         $response = new HttpResponse();
-        $this->assertInstanceOf(HttpResponse::class, $response);
+        static::assertInstanceOf(HttpResponse::class, $response);
     }
 
 
@@ -83,8 +83,8 @@ TAG;
         /** @var $responseObject HttpResponse */
         $response = $object->create($this->collectionNames[0], $options);
 
-        $this->assertInstanceOf(HttpResponse::class, $response);
-        $this->assertEquals(200, $response->status);
+        static::assertInstanceOf(HttpResponse::class, $response);
+        static::assertEquals(200, $response->status);
     }
 
     /**
@@ -109,8 +109,8 @@ TAG;
         /** @var $responseObject HttpResponse */
         $response = $object->drop($this->collectionNames[0], $options);
 
-        $this->assertInstanceOf(HttpResponse::class, $response);
-        $this->assertEquals(200, $response->status);
+        static::assertInstanceOf(HttpResponse::class, $response);
+        static::assertEquals(200, $response->status);
     }
 
     /**
@@ -139,8 +139,8 @@ TAG;
         /** @var $responseObject HttpResponse */
         $response = $object->truncate($this->collectionNames[0], $options);
 
-        $this->assertInstanceOf(HttpResponse::class, $response);
-        $this->assertEquals(200, $response->status);
+        static::assertInstanceOf(HttpResponse::class, $response);
+        static::assertEquals(200, $response->status);
     }
 
     /**
@@ -177,7 +177,7 @@ TAG;
         /** @var $responseObject HttpResponse */
         $response = $object->getAll($options);
 
-        $this->assertInstanceOf(HttpResponse::class, $response);
-        $this->assertEquals(200, $response->status);
+        static::assertInstanceOf(HttpResponse::class, $response);
+        static::assertEquals(200, $response->status);
     }
 }
