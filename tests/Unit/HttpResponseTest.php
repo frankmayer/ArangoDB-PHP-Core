@@ -32,15 +32,6 @@ class HttpResponseTest extends TestCase
     protected $collectionNames;
 
 
-    /**
-     *
-     */
-    public function testRequest()
-    {
-        //todo: write test
-    }
-
-
     public function setup()
     {
         $this->batchResponseBody = <<<TAG
