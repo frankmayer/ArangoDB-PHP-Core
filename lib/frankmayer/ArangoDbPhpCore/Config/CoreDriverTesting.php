@@ -22,12 +22,10 @@ return [
     ClientOptions::OPTION_CLIENT        => 'Close',
     // use basic authorization
     ClientOptions::OPTION_AUTH_TYPE     => 'Basic',
-    /*
     ClientOptions::OPTION_AUTH_USER       => 'root',                      // user for basic authorization
     ClientOptions::OPTION_AUTH_PASSWD     => '',                      // password for basic authorization
     ClientOptions::OPTION_PORT            => 8529,                    // port to connect to (deprecated, should use endpoint instead)
-    ClientOptions::OPTION_HOST            => "localhost",             // host to connect to (deprecated, should use endpoint instead)
-    */
+    ClientOptions::OPTION_HOST            => 'db-link',             // host to connect to (deprecated, should use endpoint instead)
     // timeout in seconds
     ClientOptions::OPTION_TIMEOUT       => 5,
     //ClientOptions::OPTION_TRACE           => $traceFunc,              // tracer function, can be used for debugging

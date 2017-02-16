@@ -108,4 +108,13 @@ class ClientOptions
      */
     const OPTION_DATABASE_PATH_PREFIX = 'databasePathPrefix';
 
+    /**
+     * Server connection port
+     */
+    const OPTION_PORT = 8529;
+
+    /**
+     * server host address
+     */
+    const OPTION_HOST = 'localhost';
 }
