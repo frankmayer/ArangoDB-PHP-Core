@@ -12,6 +12,8 @@ namespace frankmayer\ArangoDbPhpCore\Config;
 
 use frankmayer\ArangoDbPhpCore\ClientOptions;
 
+// @codeCoverageIgnoreStart
+
 return [
     // endpoint to connect to
     ClientOptions::OPTION_ENDPOINT      => 'tcp://db-link:8529/',
@@ -20,7 +22,7 @@ return [
     // use basic authorization
     ClientOptions::OPTION_AUTH_TYPE     => 'Basic',
     /*
-    ClientOptions::OPTION_AUTH_USER       => '',                      // user for basic authorization
+    ClientOptions::OPTION_AUTH_USER       => 'root',                      // user for basic authorization
     ClientOptions::OPTION_AUTH_PASSWD     => '',                      // password for basic authorization
     ClientOptions::OPTION_PORT            => 8529,                    // port to connect to (deprecated, should use endpoint instead)
     ClientOptions::OPTION_HOST            => "localhost",             // host to connect to (deprecated, should use endpoint instead)
@@ -34,3 +36,5 @@ return [
     // last update wins
     ClientOptions::OPTION_UPDATE_POLICY => UpdatePolicy::LAST,
 ];
+
+// @codeCoverageIgnoreEnd
