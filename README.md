@@ -68,12 +68,13 @@ Thanks !!
 
 
 ###### Major Todo's:
+- [ ] Decision on whether ArangoDB's API abstraction should be in core or externally supplied
 - [ ] stabilize contracts for interoperability 
 - [ ] stabilize plugin API
 - [x] Tests refactoring (+ upgrade to PHPUnit 6)
 - [x] implement ArangoDB authentication
 - [ ] implement basic tracer plugin
-- [x] provide docs
+- [x] provide docs generation functionality
 
 
 ######License:
