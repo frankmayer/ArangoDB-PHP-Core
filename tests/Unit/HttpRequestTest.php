@@ -142,87 +142,92 @@ TAG;
     /**
      *
      */
-    public function testIfHttpResponseInstantiable()
-    {
-        $response = new HttpResponse();
-        static::assertInstanceOf(HttpResponse::class, $response);
-    }
-
-
-    /**
-     *
-     */
-    public function testBuildSplitHeadersAndBody()
+    public function testSettersGetters()
     {
         $request = new HttpRequest($this->client);
         $headers = $this->headers;
         $body    = $this->body;
 
-        $request->response = $headers . $body;
-        $response          = new HttpResponse();
 
-        $response = $response->build($request);
-        static::assertEquals($response->getBody(), $body);
-        static::assertEquals($response->status, explode(' ', explode("\r\n", $headers)[0])[1]);
-    }
+        $response = $headers . $body;
 
+        $testRequestObject = $request->setResponse($response);
+        static::assertEquals($request, $testRequestObject);
 
-    /**
-     *
-     */
-    public function testBuildAndCheckForStatusAndBodyAttributesInResponse()
-    {
-        $request = new HttpRequest($this->client);
-        $headers = $this->headers;
-        $body    = $this->body;
-
-        $request->response = $headers . $body;
-        $response          = new HttpResponse();
-
-        $response = $response->build($request);
-        static::assertEquals($response->getBody(), $body);
-        static::assertEquals($response->status, explode(' ', explode("\r\n", $headers)[0])[1]);
-        static::assertEquals(json_decode($body, true)['code'], json_decode($response->body, true)['code']);
-        static::assertEquals(json_decode($body, true)['name'], json_decode($response->body, true)['name']);
-        static::assertEquals(json_decode($body, true)['keyOptions']['type'],
-            json_decode($response->body, true)['keyOptions']['type']);
-    }
-
-    /**
-     *
-     */
-    public function testBuildWithVerboseExtractStatusLineEqualsTrue()
-    {
-        $request = new HttpRequest($this->client);
-        $headers = $this->headers;
-        $body    = $this->body;
-
-        $request->response                  = $headers . $body;
-        $response                           = new HttpResponse();
-        $response->verboseExtractStatusLine = true;
-
-        $response = $response->build($request);
-        static::assertEquals($response->getBody(), $body);
-        static::assertEquals($response->status, explode(' ', explode("\r\n", $headers)[0])[1]);
-        static::assertEquals(json_decode($body, true)['code'], json_decode($response->body, true)['code']);
-        static::assertEquals(json_decode($body, true)['name'], json_decode($response->body, true)['name']);
-        static::assertEquals(json_decode($body, true)['keyOptions']['type'],
-            json_decode($response->body, true)['keyOptions']['type']);
-    }
-
-   /**
-     *
-     */
-    public function testSetGetResponse()
-    {
-        $request = new HttpRequest($this->client);
-        $headers = $this->headers;
-        $body    = $this->body;
-
-        $testRequestObj = $request->setResponse($headers . $body);
-        static::assertEquals($request, $testRequestObj);
         $testResponseString = $request->getResponse();
-        static::assertEquals($headers . $body, $testResponseString);
+        static::assertEquals($response, $testResponseString);
+
+
+        $address = '127.0.0.1:8529';
+
+        $testRequestObject = $request->setAddress('127.0.0.1:8529');
+        static::assertEquals($request, $testRequestObject);
+
+        $testAddress = $request->getAddress();
+        static::assertEquals($address, $testAddress);
+
+
+        $body = '{}';
+
+        $testRequestObject = $request->setBody($body);
+        static::assertEquals($request, $testRequestObject);
+
+        $testBody = $request->getBody();
+        static::assertEquals($body, $testBody);
+
+
+        $client = $this->client;
+
+        $testRequestObject = $request->setClient($client);
+        static::assertEquals($request, $testRequestObject);
+
+        $testClientObject = $request->getClient();
+        static::assertEquals($client, $testClientObject);
+
+
+        $connector = $this->connector;
+
+        $testRequestObject = $request->setConnector($connector);
+        static::assertEquals($request, $testRequestObject);
+
+        $testConnectorObject = $request->getConnector();
+        static::assertEquals($connector, $testConnectorObject);
+
+
+        $headers = ['content-type' => 'application/json; charset=utf-8'];
+
+        $testRequestObject = $request->setHeaders($headers);
+        static::assertEquals($request, $testRequestObject);
+
+        $testHeaders = $request->getHeaders();
+        static::assertEquals($headers, $testHeaders);
+
+
+        $method = 'GET';
+
+        $testRequestObject = $request->setMethod($method);
+        static::assertEquals($request, $testRequestObject);
+
+        $testMethod = $request->getMethod();
+        static::assertEquals($method, $testMethod);
+
+
+        $options = ['testOption' => 'testValue'];
+
+        $testRequestObject = $request->setOptions($options);
+        static::assertEquals($request, $testRequestObject);
+
+        $testOptions = $request->getOptions();
+        static::assertEquals($options, $testOptions);
+
+
+        $path = '/testpath';
+
+        $testRequestObject = $request->setPath($path);
+        static::assertEquals($request, $testRequestObject);
+
+        $testPath = $request->getPath();
+        static::assertEquals($path, $testPath);
     }
 
 

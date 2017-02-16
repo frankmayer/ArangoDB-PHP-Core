@@ -12,6 +12,7 @@ use frankmayer\ArangoDbPhpCore\Api\Rest\Batch;
 use frankmayer\ArangoDbPhpCore\Api\Rest\Collection;
 use frankmayer\ArangoDbPhpCore\Client;
 use frankmayer\ArangoDbPhpCore\Protocols\Http\HttpRequest;
+use frankmayer\ArangoDbPhpCore\Protocols\Http\HttpResponseObject;
 use frankmayer\ArangoDbPhpCore\Protocols\Http\HttpResponse;
 use phpDocumentor\Reflection\DocBlock\Tag;
 
@@ -162,8 +163,8 @@ TAG;
         $response          = new HttpResponse();
 
         $response = $response->build($request);
-        static::assertEquals($response->getBody(), $body);
-        static::assertEquals($response->status, explode(' ', explode("\r\n", $headers)[0])[1]);
+        $this->assertEquals($response->getBody(), $body);
+        $this->assertEquals($response->status, explode(' ', explode("\r\n", $headers)[0])[1]);
     }
 
 
@@ -180,11 +181,11 @@ TAG;
         $response          = new HttpResponse();
 
         $response = $response->build($request);
-        static::assertEquals($response->getBody(), $body);
-        static::assertEquals($response->status, explode(' ', explode("\r\n", $headers)[0])[1]);
-        static::assertEquals(json_decode($body, true)['code'], json_decode($response->body, true)['code']);
-        static::assertEquals(json_decode($body, true)['name'], json_decode($response->body, true)['name']);
-        static::assertEquals(json_decode($body, true)['keyOptions']['type'],
+        $this->assertEquals($response->getBody(), $body);
+        $this->assertEquals($response->status, explode(' ', explode("\r\n", $headers)[0])[1]);
+        $this->assertEquals(json_decode($body, true)['code'], json_decode($response->body, true)['code']);
+        $this->assertEquals(json_decode($body, true)['name'], json_decode($response->body, true)['name']);
+        $this->assertEquals(json_decode($body, true)['keyOptions']['type'],
             json_decode($response->body, true)['keyOptions']['type']);
     }
 
@@ -202,11 +203,11 @@ TAG;
         $response->verboseExtractStatusLine = true;
 
         $response = $response->build($request);
-        static::assertEquals($response->getBody(), $body);
-        static::assertEquals($response->status, explode(' ', explode("\r\n", $headers)[0])[1]);
-        static::assertEquals(json_decode($body, true)['code'], json_decode($response->body, true)['code']);
-        static::assertEquals(json_decode($body, true)['name'], json_decode($response->body, true)['name']);
-        static::assertEquals(json_decode($body, true)['keyOptions']['type'],
+        $this->assertEquals($response->getBody(), $body);
+        $this->assertEquals($response->status, explode(' ', explode("\r\n", $headers)[0])[1]);
+        $this->assertEquals(json_decode($body, true)['code'], json_decode($response->body, true)['code']);
+        $this->assertEquals(json_decode($body, true)['name'], json_decode($response->body, true)['name']);
+        $this->assertEquals(json_decode($body, true)['keyOptions']['type'],
             json_decode($response->body, true)['keyOptions']['type']);
     }
 
@@ -242,4 +243,65 @@ TAG;
             static::assertEquals($key + 1, $batchPartResponseObject->batchContentId);
         }
     }
+
+    /**
+     *
+     */
+    public function testSettersGetters()
+    {
+        $responseObject = new HttpResponse($this->client);
+
+        $requestObject = new HttpRequest($this->client);
+
+        $testResponseObject = $responseObject->setRequest($requestObject);
+        static::assertEquals($responseObject, $testResponseObject);
+
+        $testRequestObject = $responseObject->getRequest();
+        static::assertEquals($requestObject, $testRequestObject);
+
+
+        $status = 200;
+
+        $testResponseObject = $responseObject->setStatus($status);
+        static::assertEquals($responseObject, $testResponseObject);
+
+        $testStatus = $responseObject->getStatus();
+        static::assertEquals($status, $testStatus);
+
+
+        $body = '{}';
+
+        $testResponseObject = $responseObject->setBody($body);
+        static::assertEquals($responseObject, $testResponseObject);
+
+        $testBody = $responseObject->getBody();
+        static::assertEquals($body, $testBody);
+
+
+        $verboseExtractStatusLine = false;
+
+        $testResponseObject = $responseObject->setVerboseExtractStatusLine($verboseExtractStatusLine);
+        static::assertEquals($responseObject, $testResponseObject);
+
+        $testVerboseExtractStatusLineObject = $responseObject->getVerboseExtractStatusLine();
+        static::assertEquals($verboseExtractStatusLine, $testVerboseExtractStatusLineObject);
+
+
+        $headers = ['content-type' => 'application/json; charset=utf-8'];
+
+        $testResponseObject = $responseObject->setHeaders($headers);
+        static::assertEquals($responseObject, $testResponseObject);
+
+        $testHeaders = $responseObject->getHeaders();
+        static::assertEquals($headers, $testHeaders);
+
+
+        $testProtocol = $responseObject->getProtocol();
+        static::assertEquals(null, $testProtocol);
+
+
+        $testStatusPhrase = $responseObject->getStatusPhrase();
+        static::assertEquals(null, $testStatusPhrase);
+    }
+
 }
