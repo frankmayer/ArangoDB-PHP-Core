@@ -163,8 +163,8 @@ TAG;
         $response          = new HttpResponse();
 
         $response = $response->build($request);
-        $this->assertEquals($response->getBody(), $body);
-        $this->assertEquals($response->status, explode(' ', explode("\r\n", $headers)[0])[1]);
+        static::assertEquals($response->getBody(), $body);
+        static::assertEquals($response->status, explode(' ', explode("\r\n", $headers)[0])[1]);
     }
 
 
@@ -181,11 +181,11 @@ TAG;
         $response          = new HttpResponse();
 
         $response = $response->build($request);
-        $this->assertEquals($response->getBody(), $body);
-        $this->assertEquals($response->status, explode(' ', explode("\r\n", $headers)[0])[1]);
-        $this->assertEquals(json_decode($body, true)['code'], json_decode($response->body, true)['code']);
-        $this->assertEquals(json_decode($body, true)['name'], json_decode($response->body, true)['name']);
-        $this->assertEquals(json_decode($body, true)['keyOptions']['type'],
+        static::assertEquals($response->getBody(), $body);
+        static::assertEquals($response->status, explode(' ', explode("\r\n", $headers)[0])[1]);
+        static::assertEquals(json_decode($body, true)['code'], json_decode($response->body, true)['code']);
+        static::assertEquals(json_decode($body, true)['name'], json_decode($response->body, true)['name']);
+        static::assertEquals(json_decode($body, true)['keyOptions']['type'],
             json_decode($response->body, true)['keyOptions']['type']);
     }
 
@@ -203,11 +203,11 @@ TAG;
         $response->verboseExtractStatusLine = true;
 
         $response = $response->build($request);
-        $this->assertEquals($response->getBody(), $body);
-        $this->assertEquals($response->status, explode(' ', explode("\r\n", $headers)[0])[1]);
-        $this->assertEquals(json_decode($body, true)['code'], json_decode($response->body, true)['code']);
-        $this->assertEquals(json_decode($body, true)['name'], json_decode($response->body, true)['name']);
-        $this->assertEquals(json_decode($body, true)['keyOptions']['type'],
+        static::assertEquals($response->getBody(), $body);
+        static::assertEquals($response->status, explode(' ', explode("\r\n", $headers)[0])[1]);
+        static::assertEquals(json_decode($body, true)['code'], json_decode($response->body, true)['code']);
+        static::assertEquals(json_decode($body, true)['name'], json_decode($response->body, true)['name']);
+        static::assertEquals(json_decode($body, true)['keyOptions']['type'],
             json_decode($response->body, true)['keyOptions']['type']);
     }
 
@@ -232,7 +232,7 @@ TAG;
             /** @var $responseObject HttpResponse */
             $batchRequest = $collection->create($collectionName, $collectionOptions, ['isBatchPart' => true]);
 
-            //            $this->assertEquals(202, $batchRequest->status);
+            //            static::assertEquals(202, $batchRequest->status);
             $batchRequests[] = $batchRequest;
         }
         $this->batch   = new Batch($this->client);

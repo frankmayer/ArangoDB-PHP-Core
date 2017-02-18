@@ -56,7 +56,7 @@ class TracerPluginTest extends TestCase
         //               ->willReturn('foo');
         //        $this->client = $client;
         //        $this->client->setPluginManager(new PluginManager($this->client));
-        //        $this->assertInstanceOf('\frankmayer\ArangoDbPhpCore\Plugins\PluginManager', $this->client->getPluginManager());
+        //        static::assertInstanceOf('\frankmayer\ArangoDbPhpCore\Plugins\PluginManager', $this->client->getPluginManager());
         //
         //        $tracer            = new TestPlugin();
         //        $tracer->priority  = 0;
@@ -75,14 +75,14 @@ class TracerPluginTest extends TestCase
         //        ];
         //
         //        $this->client->setPluginsFromPluginArray($this->clientOptions['plugins']);
-        //        $this->assertArrayHasKey('tracer3', $this->client->pluginManager->pluginStorage);
+        //        static::assertArrayHasKey('tracer3', $this->client->pluginManager->pluginStorage);
         //
         //        $e = null;
         //        try {
         //            $this->client->setPluginsFromPluginArray(['tracer5' => new \stdClass()]);
         //        } catch (\Exception $e) {
         //        }
-        //        $this->assertInstanceOf('\Exception', $e);
+        //        static::assertInstanceOf('\Exception', $e);
         //
         //
         //        $collection         = new Collection();
@@ -91,7 +91,7 @@ class TracerPluginTest extends TestCase
         //        /** @var $responseObject Response */
         //        $responseObject = $collection->getAll();
         //
-        //        $this->assertInstanceOf('frankmayer\ArangoDbPhpCore\Protocols\Http\Request', $responseObject->request);
+        //        static::assertInstanceOf('frankmayer\ArangoDbPhpCore\Protocols\Http\Request', $responseObject->request);
     }
 
 

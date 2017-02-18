@@ -251,7 +251,7 @@ TAG;
             /** @var $responseObject HttpResponse */
             $batchRequest = $collection->create($collectionName, $collectionOptions, ['isBatchPart' => true]);
 
-            //            $this->assertEquals(202, $batchRequest->status);
+            //            static::assertEquals(202, $batchRequest->status);
             $batchRequests[] = $batchRequest;
         }
         $this->batch   = new Batch($this->client);
