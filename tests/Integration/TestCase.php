@@ -9,6 +9,9 @@
 
 namespace frankmayer\ArangoDbPhpCore\Tests\Integration;
 
+use frankmayer\ArangoDbPhpCore\Client;
+use frankmayer\ArangoDbPhpCore\Protocols\Http\HttpResponse;
+
 
 /**
  * Class TestCase
@@ -17,10 +20,6 @@ namespace frankmayer\ArangoDbPhpCore\Tests\Integration;
  */
 class TestCase extends \PHPUnit\Framework\TestCase
 {
-    /**
-     *
-     */
-    const TESTNAMES_PREFIX = 'ArangoDB-PHP-Core-';
     /**
      *
      */
@@ -62,6 +61,27 @@ class TestCase extends \PHPUnit\Framework\TestCase
     protected $clientOptions;
     protected $client;
     protected $connector;
+
+    /**
+     * PHPUnit setup method for tests
+     */
+    public function setUp()
+    {
+        $this->setupConnector();
+
+        $this->setupProperties();
+
+        $this->collectionName = $this->TESTNAMES_PREFIX . 'CollectionTestSuite-Collection';
+    }
+
+
+    /**
+     * Override-able connector setup
+     */
+    protected function setupConnector()
+    {
+        $this->connector = new Connector();
+    }
 
     public function setupProperties()
     {
@@ -113,5 +133,20 @@ class TestCase extends \PHPUnit\Framework\TestCase
         }
 
         return $merged;
+    }
+
+
+    /**
+     * Returns a real HttpResponse object, in case of dealing with promises.
+     *
+     * Note: This must be overridden in any inheriting tests cases with an implementation, which resolves a pending promise
+     *
+     * @param HttpResponse $responseObject
+     *
+     * @return HttpResponse
+     */
+    protected function resolveResponse($responseObject)
+    {
+        return $responseObject;
     }
 }

@@ -66,16 +66,17 @@ class BatchTest extends TestCase
         /** @var HttpResponse $responseObject */
         $batch          = new Batch($this->client);
         $responseObject = $batch->send($this->client, $batchParts);
-        static::assertEquals(200, $responseObject->status);
+        $responseObject = $this->resolveResponse($responseObject);
+        $this->assertEquals(200, $responseObject->status);
 
         $batchResponseParts = $responseObject->batch;
 
         /** @var $batchPart HttpResponse */
         foreach ($batchResponseParts as $batchPart) {
             $body = $batchPart->body;
-            static::assertArrayHasKey('code', json_decode($body, true));
+            $this->assertArrayHasKey('code', json_decode($body, true));
             $decodedJsonBody = json_decode($body, true);
-            static::assertEquals(200, $decodedJsonBody['code']);
+            $this->assertEquals(200, $decodedJsonBody['code']);
         }
 
         $batchParts = [];
@@ -94,9 +95,9 @@ class BatchTest extends TestCase
 
         foreach ($batchResponseParts as $batchPart) {
             $body = $batchPart->body;
-            static::assertArrayHasKey('code', json_decode($body, true));
+            $this->assertArrayHasKey('code', json_decode($body, true));
             $decodedJsonBody = json_decode($body, true);
-            static::assertEquals(200, $decodedJsonBody['code']);
+            $this->assertEquals(200, $decodedJsonBody['code']);
         }
     }
 
@@ -114,6 +115,7 @@ class BatchTest extends TestCase
             $batchParts[] = $collection->drop($collectionName, ['isBatchPart' => true]);
         }
         $batch = new Batch($this->client);
-        $batch->send($this->client, $batchParts);
+        $result = $batch->send($this->client, $batchParts);
+        $result = $this->resolveResponse($result);
     }
 }

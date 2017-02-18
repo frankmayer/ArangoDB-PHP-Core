@@ -32,18 +32,6 @@ class CollectionTest extends TestCase
 
 
     /**
-     *
-     */
-    public function setUp()
-    {
-        $this->connector = new Connector();
-
-        $this->setupProperties();
-
-    }
-
-
-    /**
      * Test if we can get the server version
      */
     public function testCreateCollectionWithoutApiClasses()
@@ -73,13 +61,14 @@ class CollectionTest extends TestCase
         $request->method = self::METHOD_POST;
 
         $responseObject = $request->send();
+        $responseObject = $this->resolveResponse($responseObject);
 
         $body = $responseObject->body;
 
-        static::assertArrayHasKey('code', json_decode($body, true));
+        $this->assertArrayHasKey('code', json_decode($body, true));
         $decodedJsonBody = json_decode($body, true);
-        static::assertEquals(200, $decodedJsonBody['code']);
-        static::assertEquals($collectionName, $decodedJsonBody['name']);
+        $this->assertEquals(200, $decodedJsonBody['code']);
+        $this->assertEquals($collectionName, $decodedJsonBody['name']);
     }
 
 
@@ -107,11 +96,13 @@ class CollectionTest extends TestCase
         $request->method  = self::METHOD_DELETE;
 
         $responseObject = $request->send();
+        $responseObject = $this->resolveResponse($responseObject);
+
         $body           = $responseObject->body;
 
-        static::assertArrayHasKey('code', json_decode($body, true));
+        $this->assertArrayHasKey('code', json_decode($body, true));
         $decodedJsonBody = json_decode($body, true);
-        static::assertEquals(200, $decodedJsonBody['code']);
+        $this->assertEquals(200, $decodedJsonBody['code']);
     }
 
 
@@ -129,13 +120,14 @@ class CollectionTest extends TestCase
 
         /** @var $responseObject HttpResponse */
         $responseObject = $collection->create($collectionName, $collectionOptions);
+        $responseObject = $this->resolveResponse($responseObject);
 
         $body = $responseObject->body;
 
-        static::assertArrayHasKey('code', json_decode($body, true));
+        $this->assertArrayHasKey('code', json_decode($body, true));
         $decodedJsonBody = json_decode($body, true);
-        static::assertEquals(200, $decodedJsonBody['code']);
-        static::assertEquals($collectionName, $decodedJsonBody['name']);
+        $this->assertEquals(200, $decodedJsonBody['code']);
+        $this->assertEquals($collectionName, $decodedJsonBody['name']);
     }
 
 
@@ -150,13 +142,14 @@ class CollectionTest extends TestCase
 
         /** @var $responseObject HttpResponse */
         $responseObject = $collection->truncate($collectionName);
+        $responseObject = $this->resolveResponse($responseObject);
 
         $body = $responseObject->body;
 
-        static::assertArrayHasKey('code', json_decode($body, true));
+        $this->assertArrayHasKey('code', json_decode($body, true));
         $decodedJsonBody = json_decode($body, true);
-        static::assertEquals(200, $decodedJsonBody['code']);
-        static::assertEquals($collectionName, $decodedJsonBody['name']);
+        $this->assertEquals(200, $decodedJsonBody['code']);
+        $this->assertEquals($collectionName, $decodedJsonBody['name']);
     }
 
 
@@ -172,12 +165,13 @@ class CollectionTest extends TestCase
 
         /** @var $responseObject HttpResponse */
         $responseObject = $collection->drop($collectionName);
+        $responseObject = $this->resolveResponse($responseObject);
 
         $body = $responseObject->body;
 
-        static::assertArrayHasKey('code', json_decode($body, true));
+        $this->assertArrayHasKey('code', json_decode($body, true));
         $decodedJsonBody = json_decode($body, true);
-        static::assertEquals(200, $decodedJsonBody['code']);
+        $this->assertEquals(200, $decodedJsonBody['code']);
     }
 
 
@@ -190,6 +184,7 @@ class CollectionTest extends TestCase
 
         /** @var $responseObject HttpResponse */
         $responseObject = $collection->getAll();
+        $responseObject = $this->resolveResponse($responseObject);
 
         $response    = json_decode($responseObject->body);
         $foundGraphs = false;
@@ -199,7 +194,7 @@ class CollectionTest extends TestCase
                 $foundGraphs = true;
             }
         }
-        static::assertTrue($foundGraphs);
+        $this->assertTrue($foundGraphs);
     }
 
 
@@ -212,6 +207,7 @@ class CollectionTest extends TestCase
 
         /** @var $responseObject HttpResponse */
         $responseObject = $collection->getAll(['excludeSystem' => true]);
+        $responseObject = $this->resolveResponse($responseObject);
 
         $response = json_decode($responseObject->body);
 
@@ -222,7 +218,7 @@ class CollectionTest extends TestCase
                 $foundGraphs = true;
             }
         }
-        static::assertFalse($foundGraphs);
+        $this->assertFalse($foundGraphs);
     }
 
 
@@ -235,6 +231,7 @@ class CollectionTest extends TestCase
         $collection     = new Collection($this->client);
 
         /** @var $responseObject HttpResponse */
-        $collection->drop($collectionName);
+        $responseObject = $collection->drop($collectionName);
+        $responseObject = $this->resolveResponse($responseObject);
     }
 }

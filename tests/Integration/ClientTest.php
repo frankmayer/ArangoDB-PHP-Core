@@ -12,6 +12,7 @@ namespace frankmayer\ArangoDbPhpCore\Tests\Integration;
 
 require_once __DIR__ . '/TestCase.php';
 
+use frankmayer\ArangoDbPhpCore\Api\Rest\Collection;
 use frankmayer\ArangoDbPhpCore\Client;
 
 //todo: fix tests
@@ -36,25 +37,16 @@ class ClientTest extends TestCase
 
 
     /**
+     * Test if the client returns an HttpResponse by default.
      *
+     * Note: The behavior of this might be overridden, if a client is for example returning promises by default
      */
-    public function setUp()
+    public function testClientReturnsHttpResponseByDefault()
     {
-        $this->connector = new Connector();
+        $collection     = new Collection($this->client);
+        $responseObject = $collection->getAll();
+        $responseObject = $this->resolveResponse($responseObject);
 
-        $this->setupProperties();
-
-    }
-
-    public function testEmpty()
-    {
-
-    }
-
-    /**
-     *
-     */
-    public function tearDown()
-    {
+        static::assertInstanceOf('frankmayer\ArangoDbPhpCore\Protocols\Http\HttpResponse', $responseObject);
     }
 }

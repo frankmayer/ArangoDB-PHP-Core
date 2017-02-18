@@ -15,7 +15,7 @@ use frankmayer\ArangoDbPhpCore\Api\Rest\Async;
 use frankmayer\ArangoDbPhpCore\Api\Rest\Collection;
 use frankmayer\ArangoDbPhpCore\Api\Rest\Document;
 use frankmayer\ArangoDbPhpCore\Client;
-use HttpResponse;
+
 
 
 /**
@@ -25,17 +25,6 @@ use HttpResponse;
  */
 class AsyncTest extends TestCase
 {
-    /**
-     *
-     */
-    public function setUp()
-    {
-        $this->connector = new Connector();
-
-        $this->setupProperties();
-    }
-
-
     /**
      *
      */
@@ -49,34 +38,38 @@ class AsyncTest extends TestCase
 
         /** @var $responseObject HttpResponse */
         $responseObject = $collection->create($collectionName, $collectionOptions);
-        /** @var $responseObject HttpResponse */
-        $body = $responseObject->body;
 
-        static::assertArrayHasKey('code', json_decode($body, true));
+        $resolvedResponse = $this->resolveResponse($responseObject);
+
+        $body = $resolvedResponse->body;
+
+        $this->assertArrayHasKey('code', json_decode($body, true));
         $decodedJsonBody = json_decode($body, true);
-        static::assertEquals(200, $decodedJsonBody['code']);
-        static::assertEquals($collectionName, $decodedJsonBody['name']);
+        $this->assertEquals(200, $decodedJsonBody['code']);
+        $this->assertEquals($collectionName, $decodedJsonBody['name']);
 
-        $collectionName = $this->TESTNAMES_PREFIX . 'CollectionTestSuite-Collection';
+        $collectionName = $this->collectionName;
 
         $requestBody = ['name' => 'frank', '_key' => '1'];
         $document    = new Document($this->client);
 
 
         $responseObject = $document->create($collectionName, $requestBody, [], ['async' => true]);
+        $responseObject = $this->resolveResponse($responseObject);
 
-        static::assertEquals(202, $responseObject->status);
+        $this->assertEquals(202, $responseObject->status);
 
         sleep(1);
 
         $document = new Document($this->client);
 
         $responseObject = $document->get($collectionName . '/1', $requestBody);
+        $responseObject = $this->resolveResponse($responseObject);
 
         $responseBody    = $responseObject->body;
         $decodedJsonBody = json_decode($responseBody, true);
 
-        static::assertEquals($collectionName . '/1', $decodedJsonBody['_id']);
+        $this->assertEquals($collectionName . '/1', $decodedJsonBody['_id']);
     }
 
     /**
@@ -91,50 +84,55 @@ class AsyncTest extends TestCase
         // todo 1 Frank Write real test for deleting job results with stamp
         $jobDeleteResponse = $job->deleteJobResult('all', time());
 
-
-        $collectionName = $this->TESTNAMES_PREFIX . 'CollectionTestSuite-Collection';
+        $collectionName = $this->collectionName;
 
         $collectionOptions = ['waitForSync' => true];
         $collection        = new Collection($this->client);
 
         /** @var $responseObject HttpResponse */
         $responseObject = $collection->create($collectionName, $collectionOptions);
+        $responseObject = $this->resolveResponse($responseObject);
 
         $body = $responseObject->body;
 
         $decodedJsonBody = json_decode($body, true);
-        static::assertEquals(200, $decodedJsonBody['code']);
-        static::assertEquals($collectionName, $decodedJsonBody['name']);
+        $this->assertEquals(200, $decodedJsonBody['code']);
+        $this->assertEquals($collectionName, $decodedJsonBody['name']);
 
-        $collectionName = $this->TESTNAMES_PREFIX . 'CollectionTestSuite-Collection';
 
         $requestBody = ['name' => 'frank', '_key' => '1'];
         $document    = new Document($this->client);
 
         $responseObject = $document->create($collectionName, $requestBody, [], ['async' => 'store']);
+        $responseObject = $this->resolveResponse($responseObject);
 
-        static::assertEquals(202, $responseObject->status);
+        $this->assertEquals(202, $responseObject->status);
 
         sleep(1);
 
         $jobId    = $responseObject->headers['X-Arango-Async-Id'][0];
         $jobList  = $job->listJobResults('done', 1);
+        $jobList = $this->resolveResponse($jobList);
+
         $jobArray = json_decode($jobList->body, true);
 
-        static::assertTrue(in_array($jobId, $jobArray, true));
+        $this->assertTrue(in_array($jobId, $jobArray, true));
 
         $jobResult = $job->fetchJobResult($responseObject->headers['X-Arango-Async-Id'][0]);
-        static::assertSame($jobResult->headers['X-Arango-Async-Id'], $responseObject->headers['X-Arango-Async-Id']);
-        static::assertArrayHasKey('X-Arango-Async-Id', $jobResult->headers);
+        $jobResult = $this->resolveResponse($jobResult);
+
+        $this->assertSame($jobResult->headers['X-Arango-Async-Id'], $responseObject->headers['X-Arango-Async-Id']);
+        $this->assertArrayHasKey('X-Arango-Async-Id', $jobResult->headers);
 
 
         $document = new Document($this->client);
 
         $responseObject = $document->get($collectionName . '/1', $requestBody);
+        $responseObject = $this->resolveResponse($responseObject);
 
         $responseBody    = $responseObject->body;
         $decodedJsonBody = json_decode($responseBody, true);
-        static::assertEquals($collectionName . '/1', $decodedJsonBody['_id']);
+        $this->assertEquals($collectionName . '/1', $decodedJsonBody['_id']);
     }
 
 
@@ -143,12 +141,13 @@ class AsyncTest extends TestCase
      */
     public function tearDown()
     {
-        $collectionName = $this->TESTNAMES_PREFIX . 'CollectionTestSuite-Collection';
-
+        $collectionName = $this->collectionName;
 
         $collection = new Collection($this->client);
 
         /** @var $responseObject HttpResponse */
-        $collection->drop($collectionName);
+        $responseObject = $collection->drop($collectionName);
+        $resolvedResponse = $this->resolveResponse($responseObject);
+
     }
 }

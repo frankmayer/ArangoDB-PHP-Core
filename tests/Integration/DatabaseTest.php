@@ -73,13 +73,14 @@ class DatabaseTest extends TestCase
         $request->method = self::METHOD_POST;
 
         $responseObject = $request->send();
+        $responseObject = $this->resolveResponse($responseObject);
 
         $body = $responseObject->body;
 
-        static::assertArrayHasKey('code', json_decode($body, true));
+        $this->assertArrayHasKey('code', json_decode($body, true));
         $decodedJsonBody = json_decode($body, true);
-        static::assertEquals(200, $decodedJsonBody['code']);
-        static::assertEquals($databaseName, $decodedJsonBody['name']);
+        $this->assertEquals(200, $decodedJsonBody['code']);
+        $this->assertEquals($databaseName, $decodedJsonBody['name']);
     }
 
 
@@ -107,11 +108,12 @@ class DatabaseTest extends TestCase
         $request->method  = self::METHOD_DELETE;
 
         $responseObject = $request->send();
+        $responseObject = $this->resolveResponse($responseObject);
         $body           = $responseObject->body;
 
-        static::assertArrayHasKey('code', json_decode($body, true));
+        $this->assertArrayHasKey('code', json_decode($body, true));
         $decodedJsonBody = json_decode($body, true);
-        static::assertEquals(200, $decodedJsonBody['code']);
+        $this->assertEquals(200, $decodedJsonBody['code']);
     }
 
 
@@ -129,13 +131,14 @@ class DatabaseTest extends TestCase
 
         /** @var $responseObject HttpResponse */
         $responseObject = $database->create($databaseName, $databaseOptions);
+        $responseObject = $this->resolveResponse($responseObject);
 
         $body = $responseObject->body;
 
-        static::assertArrayHasKey('code', json_decode($body, true));
+        $this->assertArrayHasKey('code', json_decode($body, true));
         $decodedJsonBody = json_decode($body, true);
-        static::assertEquals(200, $decodedJsonBody['code']);
-        static::assertEquals($databaseName, $decodedJsonBody['name']);
+        $this->assertEquals(200, $decodedJsonBody['code']);
+        $this->assertEquals($databaseName, $decodedJsonBody['name']);
     }
 
 
@@ -150,13 +153,14 @@ class DatabaseTest extends TestCase
 
         /** @var $responseObject HttpResponse */
         $responseObject = $database->truncate($databaseName);
+        $responseObject = $this->resolveResponse($responseObject);
 
         $body = $responseObject->body;
 
-        static::assertArrayHasKey('code', json_decode($body, true));
+        $this->assertArrayHasKey('code', json_decode($body, true));
         $decodedJsonBody = json_decode($body, true);
-        static::assertEquals(200, $decodedJsonBody['code']);
-        static::assertEquals($databaseName, $decodedJsonBody['name']);
+        $this->assertEquals(200, $decodedJsonBody['code']);
+        $this->assertEquals($databaseName, $decodedJsonBody['name']);
     }
 
 
@@ -172,12 +176,13 @@ class DatabaseTest extends TestCase
 
         /** @var $responseObject HttpResponse */
         $responseObject = $database->drop($databaseName);
+        $responseObject = $this->resolveResponse($responseObject);
 
         $body = $responseObject->body;
 
-        static::assertArrayHasKey('code', json_decode($body, true));
+        $this->assertArrayHasKey('code', json_decode($body, true));
         $decodedJsonBody = json_decode($body, true);
-        static::assertEquals(200, $decodedJsonBody['code']);
+        $this->assertEquals(200, $decodedJsonBody['code']);
     }
 
 
@@ -190,10 +195,11 @@ class DatabaseTest extends TestCase
 
         /** @var $responseObject HttpResponse */
         $responseObject = $database->getAll();
+        $responseObject = $this->resolveResponse($responseObject);
 
         $response = json_decode($responseObject->body);
 
-        static::assertObjectHasAttribute('_graphs', $response->names);
+        $this->assertObjectHasAttribute('_graphs', $response->names);
     }
 
 
@@ -206,10 +212,11 @@ class DatabaseTest extends TestCase
 
         /** @var $responseObject HttpResponse */
         $responseObject = $database->getAll(['excludeSystem' => true]);
+        $responseObject = $this->resolveResponse($responseObject);
 
         $response = json_decode($responseObject->body);
 
-        static::assertObjectNotHasAttribute('_graphs', $response->names);
+        $this->assertObjectNotHasAttribute('_graphs', $response->names);
     }
 
 
@@ -222,6 +229,7 @@ class DatabaseTest extends TestCase
         $database     = new Database($this->client);
 
         /** @var $responseObject HttpResponse */
-        $database->drop($databaseName);
+        $responseObject = $database->drop($databaseName);
+        $responseObject = $this->resolveResponse($responseObject);
     }
 }

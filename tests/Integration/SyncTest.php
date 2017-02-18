@@ -23,27 +23,10 @@ class SyncTest extends TestCase
 
     const API_COLLECTION = '/_api/collection';
 
-    const METHOD_GET     = 'GET';
-    const METHOD_POST    = 'POST';
-    const METHOD_PUT     = 'PUT';
-    const METHOD_PATCH   = 'PATCH';
-    const METHOD_DELETE  = 'DELETE';
-    const METHOD_HEAD    = 'HEAD';
-    const METHOD_OPTIONS = 'OPTIONS';
-
     /**
      * @var Client
      */
     public $client;
-
-
-    public function setUp()
-    {
-        $this->connector = new Connector();
-
-        $this->setupProperties();
-
-    }
 
 
     /**
@@ -77,11 +60,12 @@ class SyncTest extends TestCase
         $request->method = self::METHOD_POST;
 
         $responseObject = $request->send();
+        $responseObject = $this->resolveResponse($responseObject);
 
         $body = $responseObject->body;
 
-        static::assertArrayHasKey('code', json_decode($body, true));
+        $this->assertArrayHasKey('code', json_decode($body, true));
         $decodedJsonBody = json_decode($body, true);
-        static::assertEquals(201, $decodedJsonBody['code']);
+        $this->assertEquals(201, $decodedJsonBody['code']);
     }
 }

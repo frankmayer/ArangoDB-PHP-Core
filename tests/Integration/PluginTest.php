@@ -38,17 +38,6 @@ class PluginTest extends TestCase
     public $client;
 
 
-    /**
-     *
-     */
-    public function setUp()
-    {
-        $this->connector = new Connector();
-
-        $this->setupProperties();
-
-    }
-
     // todo 1 Frank Complete plugin tests
 
     /**
@@ -57,7 +46,7 @@ class PluginTest extends TestCase
     public function testRegisterPluginsWithDifferentPrioritiesTestAndUnRegisterPlugin()
     {
         $this->client->setPluginManager(new PluginManager($this->client));
-        static::assertInstanceOf(PluginManager::class, $this->client->getPluginManager());
+        $this->assertInstanceOf(PluginManager::class, $this->client->getPluginManager());
 
         $tracer            = new TestPlugin();
         $tracer->priority  = 0;
@@ -76,30 +65,23 @@ class PluginTest extends TestCase
         ];
 
         $this->client->setPluginsFromPluginArray($this->clientOptions['plugins']);
-        static::assertArrayHasKey('tracer3', $this->client->pluginManager->pluginStorage);
+        $this->assertArrayHasKey('tracer3', $this->client->pluginManager->pluginStorage);
 
         $e = null;
         try {
             $this->client->setPluginsFromPluginArray(['tracer5' => new \stdClass()]);
         } catch (\Exception $e) {
         }
-        static::assertInstanceOf(\Exception::class, $e);
+        $this->assertInstanceOf(\Exception::class, $e);
 
         /** @var $responseObject HttpResponse */
         $collection = new Collection($this->client);
 
         /** @var $responseObject HttpResponse */
         $responseObject = $collection->getAll();
+        $responseObject = $this->resolveResponse($responseObject);
 
-        static::assertInstanceOf(HttpRequestInterface::class,
+        $this->assertInstanceOf(HttpRequestInterface::class,
             $responseObject->request);
-    }
-
-
-    /**
-     *
-     */
-    public function tearDown()
-    {
     }
 }
