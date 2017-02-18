@@ -117,4 +117,9 @@ class ClientOptions
      * server host address
      */
     const OPTION_HOST = 'localhost';
+
+    /**
+     * ResponseClass index constant
+     */
+    const OPTION_CLIENT_ASYNC_PROCESSING = 'clientAsyncProcessing';
 }

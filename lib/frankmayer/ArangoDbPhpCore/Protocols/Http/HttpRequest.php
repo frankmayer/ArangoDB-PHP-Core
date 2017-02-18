@@ -50,7 +50,7 @@ class HttpRequest extends AbstractHttpRequest
         if (isset($this->options['isBatchPart']) && $this->options['isBatchPart'] === true) {
             //            $this->isBatchPart = true;
             $this->address = $this->client->endpoint . $this->path;
-
+            //todo: Revisit this:
             return true;
         } else {
             if (null !== $this->options && (!array_key_exists(

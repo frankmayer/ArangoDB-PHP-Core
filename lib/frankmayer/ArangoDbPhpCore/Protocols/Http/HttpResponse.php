@@ -99,6 +99,7 @@ class HttpResponse implements HttpResponseInterface
 
         $this->status = (int) $statusLineArray[1];
 
+        //todo: Revisit this:
         if ($this->verboseExtractStatusLine === true) {
             $this->protocol = $statusLineArray[0];
 
@@ -113,6 +114,36 @@ class HttpResponse implements HttpResponseInterface
             throw new ServerException($this->statusPhrase, $this->status);
             // @codeCoverageIgnoreEnd
         }
+        //todo: End revisit this:
+
+        return $this;
+    }
+
+
+    public function buildBatch($responseMessage)
+    {
+        $response = $responseMessage;
+        $this->splitResponseToHeadersArrayAndBody($response);
+        $statusLineArray = explode(' ', trim($this->headers['status'][0]));
+
+        $this->status = (int) $statusLineArray[1];
+
+        //todo: Revisit this:
+        if ($this->verboseExtractStatusLine === true) {
+            $this->protocol = $statusLineArray[0];
+
+            $this->statusPhrase = $this->decodeGetStatusPhrase($statusLineArray);
+        }
+
+        if (in_array((int) $this->status, $this->enabledHttpServerExceptions, true)) {
+            // Ignoring this for now.
+            // @codeCoverageIgnoreStart
+            $this->protocol     = $statusLineArray[0];
+            $this->statusPhrase = $this->decodeGetStatusPhrase($statusLineArray);
+            throw new ServerException($this->statusPhrase, $this->status);
+            // @codeCoverageIgnoreEnd
+        }
+        //todo: End revisit this:
 
         return $this;
     }
@@ -178,7 +209,7 @@ class HttpResponse implements HttpResponseInterface
             /** @var $batchPart HttpResponse */
             $batchPartHeaders = static::splitBatchPart($batchPart);
             $batchObject      = clone $batchObjectTemplate;
-            $batchObject->build($batchPartHeaders[1]);
+            $batchObject->buildBatch($batchPartHeaders[1]);
             //            $batchArangoHeader  = explode(PHP_EOL, $batchPartHeaders[0]);
             $batchArangoHeaderArray = $this->getHeaderArray($batchPartHeaders[0]);
             if (array_key_exists('Content-Id', $batchArangoHeaderArray)) {

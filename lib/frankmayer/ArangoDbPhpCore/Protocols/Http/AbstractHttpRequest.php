@@ -99,7 +99,7 @@ abstract class AbstractHttpRequest implements HttpRequestInterface
     /**
      * @param $client
      */
-    function __construct($client)
+    public function __construct($client)
     {
         $this->client = $client;
     }
