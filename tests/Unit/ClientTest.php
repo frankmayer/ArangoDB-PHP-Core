@@ -9,6 +9,7 @@
 namespace frankmayer\ArangoDbPhpCore\Tests\Unit;
 
 use frankmayer\ArangoDbPhpCore\Client;
+use frankmayer\ArangoDbPhpCore\ClientException;
 use frankmayer\ArangoDbPhpCore\Plugins\PluginManager;
 use frankmayer\ArangoDbPhpCore\Protocols\Http\HttpRequest;
 use frankmayer\ArangoDbPhpCore\Protocols\Http\HttpResponse;
@@ -35,9 +36,33 @@ class ClientTest extends TestCase
         $this->connector2 = $this->getMockBuilder(\TestConnector::class)
             ->getMock();
 
+        $this->connector = new \TestConnector();
+
         $this->setupProperties();
     }
 
+    public function testBindClassToTypeAndMake(){
+        $this->client->bind(
+            'Request',
+            function () {
+                return $this->client->getRequest();
+            }
+        );
+        $request          = $this->client->make('Request');
+        static::assertInstanceOf('\frankmayer\ArangoDbPhpCore\Protocols\Http\HttpRequest', $request);
+
+    }
+
+    public function testMakeNonExistentClassType()
+    {
+        try{
+            $request          = $this->client->make('Some FakeRequestClass');
+        }catch (ClientException $e){
+
+        }
+        static::assertInstanceOf('\frankmayer\ArangoDbPhpCore\ClientException', $e);
+
+    }
 
     /**
      *
