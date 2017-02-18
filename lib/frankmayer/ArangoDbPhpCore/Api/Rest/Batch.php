@@ -24,6 +24,8 @@ class Batch extends Api implements RestApiInterface
      * @param $batchParts
      *
      * @return mixed
+     *
+     * @codeCoverageIgnore There is no unit-test for this ATM. However, the functionality is tested by integration tests from higher level clients like Core-Guzzle
      */
     public static function send($client, $batchParts)
     {

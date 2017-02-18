@@ -31,6 +31,8 @@ class Database extends Api implements RestApiInterface
      *
      * @return \frankmayer\ArangoDbPhpCore\Protocols\Http\HttpResponse
      * @throws \frankmayer\ArangoDbPhpCore\ClientException
+     *
+     * @codeCoverageIgnore There is no unit-test for this ATM. However, the functionality is tested by integration tests from higher level clients like Core-Guzzle
      */
     public function create($databaseName, array $databaseParameters = [], array $options = [])
     {
@@ -54,6 +56,8 @@ class Database extends Api implements RestApiInterface
      * @param array  $options
      *
      * @return \frankmayer\ArangoDbPhpCore\Protocols\Http\HttpResponse
+     *
+     * @codeCoverageIgnore There is no unit-test for this ATM. However, the functionality is tested by integration tests from higher level clients like Core-Guzzle
      */
     public function drop($databaseName, array $options = [])
     {
@@ -73,6 +77,8 @@ class Database extends Api implements RestApiInterface
      * @param array  $options
      *
      * @return \frankmayer\ArangoDbPhpCore\Protocols\Http\HttpResponse
+     *
+     * @codeCoverageIgnore There is no unit-test for this ATM. However, the functionality is tested by integration tests from higher level clients like Core-Guzzle
      */
     public function truncate($databaseName, array $options = [])
     {
@@ -92,6 +98,8 @@ class Database extends Api implements RestApiInterface
      * @param array $options
      *
      * @return \frankmayer\ArangoDbPhpCore\Protocols\Http\HttpResponse
+     *
+     * @codeCoverageIgnore There is no unit-test for this ATM. However, the functionality is tested by integration tests from higher level clients like Core-Guzzle
      */
     public function getAll(array $options = [])
     {
