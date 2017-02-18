@@ -56,6 +56,8 @@ class Autoloader
      * @param string $className - The name of class to be loaded
      *
      * @return void
+     *
+     * @codeCoverageIgnore
      */
     public static function load($className)
     {
