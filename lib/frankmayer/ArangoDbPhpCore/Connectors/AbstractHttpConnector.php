@@ -7,6 +7,7 @@
 namespace frankmayer\ArangoDbPhpCore\Connectors;
 
 
+use frankmayer\ArangoDbPhpCore\Client;
 use frankmayer\ArangoDbPhpCore\Protocols\Http\AbstractHttpRequest;
 use frankmayer\ArangoDbPhpCore\Protocols\Http\HttpConnectorInterface;
 
@@ -24,8 +25,9 @@ abstract class AbstractHttpConnector implements HttpConnectorInterface
      * @var bool switch for turning on curl verbose logging
      */
     protected $verboseLogging;
+
     /**
-     * @var null The client object in which this connector is used.
+     * @var Client The client object in which this connector is used.
      */
     public $client;
 
