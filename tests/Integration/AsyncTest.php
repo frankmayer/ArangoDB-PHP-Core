@@ -43,10 +43,10 @@ class AsyncTest extends TestCase
 
         $body = $resolvedResponse->body;
 
-        $this->assertArrayHasKey('code', json_decode($body, true));
+        static::assertArrayHasKey('code', json_decode($body, true));
         $decodedJsonBody = json_decode($body, true);
-        $this->assertEquals(200, $decodedJsonBody['code']);
-        $this->assertEquals($collectionName, $decodedJsonBody['name']);
+        static::assertEquals(200, $decodedJsonBody['code']);
+        static::assertEquals($collectionName, $decodedJsonBody['name']);
 
         $collectionName = $this->collectionName;
 
@@ -57,7 +57,7 @@ class AsyncTest extends TestCase
         $responseObject = $document->create($collectionName, $requestBody, [], ['async' => true]);
         $responseObject = $this->resolveResponse($responseObject);
 
-        $this->assertEquals(202, $responseObject->status);
+        static::assertEquals(202, $responseObject->status);
 
         sleep(1);
 
@@ -69,7 +69,7 @@ class AsyncTest extends TestCase
         $responseBody    = $responseObject->body;
         $decodedJsonBody = json_decode($responseBody, true);
 
-        $this->assertEquals($collectionName . '/1', $decodedJsonBody['_id']);
+        static::assertEquals($collectionName . '/1', $decodedJsonBody['_id']);
     }
 
     /**
@@ -96,8 +96,8 @@ class AsyncTest extends TestCase
         $body = $responseObject->body;
 
         $decodedJsonBody = json_decode($body, true);
-        $this->assertEquals(200, $decodedJsonBody['code']);
-        $this->assertEquals($collectionName, $decodedJsonBody['name']);
+        static::assertEquals(200, $decodedJsonBody['code']);
+        static::assertEquals($collectionName, $decodedJsonBody['name']);
 
 
         $requestBody = ['name' => 'frank', '_key' => '1'];
@@ -106,7 +106,7 @@ class AsyncTest extends TestCase
         $responseObject = $document->create($collectionName, $requestBody, [], ['async' => 'store']);
         $responseObject = $this->resolveResponse($responseObject);
 
-        $this->assertEquals(202, $responseObject->status);
+        static::assertEquals(202, $responseObject->status);
 
         sleep(1);
 
@@ -116,13 +116,13 @@ class AsyncTest extends TestCase
 
         $jobArray = json_decode($jobList->body, true);
 
-        $this->assertTrue(in_array($jobId, $jobArray, true));
+        static::assertTrue(in_array($jobId, $jobArray, true));
 
         $jobResult = $job->fetchJobResult($responseObject->headers['X-Arango-Async-Id'][0]);
         $jobResult = $this->resolveResponse($jobResult);
 
-        $this->assertSame($jobResult->headers['X-Arango-Async-Id'], $responseObject->headers['X-Arango-Async-Id']);
-        $this->assertArrayHasKey('X-Arango-Async-Id', $jobResult->headers);
+        static::assertSame($jobResult->headers['X-Arango-Async-Id'], $responseObject->headers['X-Arango-Async-Id']);
+        static::assertArrayHasKey('X-Arango-Async-Id', $jobResult->headers);
 
 
         $document = new Document($this->client);
@@ -132,7 +132,7 @@ class AsyncTest extends TestCase
 
         $responseBody    = $responseObject->body;
         $decodedJsonBody = json_decode($responseBody, true);
-        $this->assertEquals($collectionName . '/1', $decodedJsonBody['_id']);
+        static::assertEquals($collectionName . '/1', $decodedJsonBody['_id']);
     }
 
 

@@ -77,10 +77,10 @@ class DatabaseTest extends TestCase
 
         $body = $responseObject->body;
 
-        $this->assertArrayHasKey('code', json_decode($body, true));
+        static::assertArrayHasKey('code', json_decode($body, true));
         $decodedJsonBody = json_decode($body, true);
-        $this->assertEquals(200, $decodedJsonBody['code']);
-        $this->assertEquals($databaseName, $decodedJsonBody['name']);
+        static::assertEquals(200, $decodedJsonBody['code']);
+        static::assertEquals($databaseName, $decodedJsonBody['name']);
     }
 
 
@@ -111,9 +111,9 @@ class DatabaseTest extends TestCase
         $responseObject = $this->resolveResponse($responseObject);
         $body           = $responseObject->body;
 
-        $this->assertArrayHasKey('code', json_decode($body, true));
+        static::assertArrayHasKey('code', json_decode($body, true));
         $decodedJsonBody = json_decode($body, true);
-        $this->assertEquals(200, $decodedJsonBody['code']);
+        static::assertEquals(200, $decodedJsonBody['code']);
     }
 
 
@@ -135,10 +135,10 @@ class DatabaseTest extends TestCase
 
         $body = $responseObject->body;
 
-        $this->assertArrayHasKey('code', json_decode($body, true));
+        static::assertArrayHasKey('code', json_decode($body, true));
         $decodedJsonBody = json_decode($body, true);
-        $this->assertEquals(200, $decodedJsonBody['code']);
-        $this->assertEquals($databaseName, $decodedJsonBody['name']);
+        static::assertEquals(200, $decodedJsonBody['code']);
+        static::assertEquals($databaseName, $decodedJsonBody['name']);
     }
 
 
@@ -157,10 +157,10 @@ class DatabaseTest extends TestCase
 
         $body = $responseObject->body;
 
-        $this->assertArrayHasKey('code', json_decode($body, true));
+        static::assertArrayHasKey('code', json_decode($body, true));
         $decodedJsonBody = json_decode($body, true);
-        $this->assertEquals(200, $decodedJsonBody['code']);
-        $this->assertEquals($databaseName, $decodedJsonBody['name']);
+        static::assertEquals(200, $decodedJsonBody['code']);
+        static::assertEquals($databaseName, $decodedJsonBody['name']);
     }
 
 
@@ -180,9 +180,9 @@ class DatabaseTest extends TestCase
 
         $body = $responseObject->body;
 
-        $this->assertArrayHasKey('code', json_decode($body, true));
+        static::assertArrayHasKey('code', json_decode($body, true));
         $decodedJsonBody = json_decode($body, true);
-        $this->assertEquals(200, $decodedJsonBody['code']);
+        static::assertEquals(200, $decodedJsonBody['code']);
     }
 
 
@@ -199,7 +199,7 @@ class DatabaseTest extends TestCase
 
         $response = json_decode($responseObject->body);
 
-        $this->assertObjectHasAttribute('_graphs', $response->names);
+        static::assertObjectHasAttribute('_graphs', $response->names);
     }
 
 
@@ -216,7 +216,7 @@ class DatabaseTest extends TestCase
 
         $response = json_decode($responseObject->body);
 
-        $this->assertObjectNotHasAttribute('_graphs', $response->names);
+        static::assertObjectNotHasAttribute('_graphs', $response->names);
     }
 
 

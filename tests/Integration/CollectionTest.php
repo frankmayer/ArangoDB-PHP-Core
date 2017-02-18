@@ -65,10 +65,10 @@ class CollectionTest extends TestCase
 
         $body = $responseObject->body;
 
-        $this->assertArrayHasKey('code', json_decode($body, true));
+        static::assertArrayHasKey('code', json_decode($body, true));
         $decodedJsonBody = json_decode($body, true);
-        $this->assertEquals(200, $decodedJsonBody['code']);
-        $this->assertEquals($collectionName, $decodedJsonBody['name']);
+        static::assertEquals(200, $decodedJsonBody['code']);
+        static::assertEquals($collectionName, $decodedJsonBody['name']);
     }
 
 
@@ -100,9 +100,9 @@ class CollectionTest extends TestCase
 
         $body           = $responseObject->body;
 
-        $this->assertArrayHasKey('code', json_decode($body, true));
+        static::assertArrayHasKey('code', json_decode($body, true));
         $decodedJsonBody = json_decode($body, true);
-        $this->assertEquals(200, $decodedJsonBody['code']);
+        static::assertEquals(200, $decodedJsonBody['code']);
     }
 
 
@@ -124,10 +124,10 @@ class CollectionTest extends TestCase
 
         $body = $responseObject->body;
 
-        $this->assertArrayHasKey('code', json_decode($body, true));
+        static::assertArrayHasKey('code', json_decode($body, true));
         $decodedJsonBody = json_decode($body, true);
-        $this->assertEquals(200, $decodedJsonBody['code']);
-        $this->assertEquals($collectionName, $decodedJsonBody['name']);
+        static::assertEquals(200, $decodedJsonBody['code']);
+        static::assertEquals($collectionName, $decodedJsonBody['name']);
     }
 
 
@@ -146,10 +146,10 @@ class CollectionTest extends TestCase
 
         $body = $responseObject->body;
 
-        $this->assertArrayHasKey('code', json_decode($body, true));
+        static::assertArrayHasKey('code', json_decode($body, true));
         $decodedJsonBody = json_decode($body, true);
-        $this->assertEquals(200, $decodedJsonBody['code']);
-        $this->assertEquals($collectionName, $decodedJsonBody['name']);
+        static::assertEquals(200, $decodedJsonBody['code']);
+        static::assertEquals($collectionName, $decodedJsonBody['name']);
     }
 
 
@@ -169,9 +169,9 @@ class CollectionTest extends TestCase
 
         $body = $responseObject->body;
 
-        $this->assertArrayHasKey('code', json_decode($body, true));
+        static::assertArrayHasKey('code', json_decode($body, true));
         $decodedJsonBody = json_decode($body, true);
-        $this->assertEquals(200, $decodedJsonBody['code']);
+        static::assertEquals(200, $decodedJsonBody['code']);
     }
 
 
@@ -194,7 +194,7 @@ class CollectionTest extends TestCase
                 $foundGraphs = true;
             }
         }
-        $this->assertTrue($foundGraphs);
+        static::assertTrue($foundGraphs);
     }
 
 
@@ -218,7 +218,7 @@ class CollectionTest extends TestCase
                 $foundGraphs = true;
             }
         }
-        $this->assertFalse($foundGraphs);
+        static::assertFalse($foundGraphs);
     }
 
 
