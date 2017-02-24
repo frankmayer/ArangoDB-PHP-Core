@@ -23,9 +23,9 @@ interface HttpRequestInterface extends RequestInterface
      * Method to send an HTTP request.
      * All request should be done through this method. Any async or batch handling is done within this method.
      *
-     * @return HttpResponse Http Response object
+     * @return HttpResponseInterface Http Response object
      */
-    public function send();
+    public function send(): HttpResponseInterface;
 
 
     /**
@@ -34,7 +34,7 @@ interface HttpRequestInterface extends RequestInterface
      * @param array  $batchParts
      * @param string $boundary
      *
-     * @return mixed
+     * @return HttpResponseInterface
      */
-    public function sendBatch(array $batchParts = [], $boundary = 'XXXbXXX');
+    public function sendBatch(array $batchParts = [], string $boundary = 'XXXbXXX'): HttpResponseInterface;
 }

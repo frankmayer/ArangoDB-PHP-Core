@@ -9,6 +9,7 @@
 
 namespace frankmayer\ArangoDbPhpCore\Protocols;
 
+//todo: Revisit those base classes and solve strict typing issues in classes (type hinting on parameters. This vs HttpRequestInterface).
 
 /**
  * A Request Interface
@@ -21,7 +22,7 @@ interface RequestInterface
      * Method to send a request.
      * All request should be done through this method. Any async or batch handling is done within this method.
      *
-     * @return \frankmayer\ArangoDbPhpCore\Protocols\ResponseInterface Response object
+     * @return ResponseInterface Response object
      */
     public function send();
 }

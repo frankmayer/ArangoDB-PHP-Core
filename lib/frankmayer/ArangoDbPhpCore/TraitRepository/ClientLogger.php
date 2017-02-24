@@ -18,11 +18,11 @@ namespace frankmayer\ArangoDbPhpCore\TraitRepository;
 trait ClientLogger
 {
     /**
-     * @param $logData
+     * @param string $logData
      *
      * @return bool
      */
-    public function log($logData)
+    public function log(string $logData): bool
     {
         echo 'LOGGING: ' . $logData;
 

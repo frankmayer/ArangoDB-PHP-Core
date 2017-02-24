@@ -16,6 +16,9 @@ namespace frankmayer\ArangoDbPhpCore\Protocols\Http;
  *
  * @package frankmayer\ArangoDbPhpCore\Protocols\Http
  */
+use frankmayer\ArangoDbPhpCore\ClientInterface;
+use frankmayer\ArangoDbPhpCore\ConnectorInterface;
+
 /**
  * Class HttpRequest
  *
@@ -24,19 +27,12 @@ namespace frankmayer\ArangoDbPhpCore\Protocols\Http;
 class HttpRequest extends AbstractHttpRequest
 {
     /**
-     * @var boolean
-     * todo: is this still needed?
-     */
-    public $isBatchPart202;
-
-
-    /**
      * Method to send an HTTP request.
      * All request should be done through this method. Any async or batch handling is done within this method.
      *
-     * @return HttpResponse Http Response object
+     * @return HttpResponseInterface Http Response object
      */
-    public function send()
+    public function send(): HttpResponseInterface
     {
         $this->client->notifyPlugins('beforeRequest', [$this]);
         if (isset($this->options['async'])) {
@@ -50,6 +46,7 @@ class HttpRequest extends AbstractHttpRequest
         if (isset($this->options['isBatchPart']) && $this->options['isBatchPart'] === true) {
             //            $this->isBatchPart = true;
             $this->address = $this->client->endpoint . $this->path;
+
             //todo: Revisit this:
             return true;
         } else {
@@ -67,7 +64,7 @@ class HttpRequest extends AbstractHttpRequest
         return $this->client->doRequest($this);
     }
 
-
+// todo: Revisit batch functionality. Does it need to be coupled to the request?
     /**
      * @param array  $batchParts
      * @param string $boundary
@@ -76,7 +73,7 @@ class HttpRequest extends AbstractHttpRequest
      *
      * @codeCoverageIgnore There is no unit-test for this ATM. However, the functionality is tested by integration tests from higher level clients like Core-Guzzle
      */
-    public function sendBatch(array $batchParts = [], $boundary = 'XXXbXXX')
+    public function sendBatch(array $batchParts = [], string $boundary = 'XXXbXXX'): HttpResponseInterface
     {
         $connector  = $this->client->connector;
         $this->body = '';
@@ -109,9 +106,9 @@ class HttpRequest extends AbstractHttpRequest
     /**
      * @param string $address
      *
-     * @return $this
+     * @return HttpRequestInterface
      */
-    public function setAddress($address)
+    public function setAddress(string $address): HttpRequestInterface
     {
         $this->address = $address;
 
@@ -129,9 +126,9 @@ class HttpRequest extends AbstractHttpRequest
     /**
      * @param string $body
      *
-     * @return $this
+     * @return HttpRequestInterface
      */
-    public function setBody($body)
+    public function setBody(string $body): HttpRequestInterface
     {
         $this->body = $body;
 
@@ -147,11 +144,11 @@ class HttpRequest extends AbstractHttpRequest
     }
 
     /**
-     * @param \frankmayer\ArangoDbPhpCore\Client $client
+     * @param ClientInterface $client
      *
-     * @return $this
+     * @return HttpRequestInterface
      */
-    public function setClient($client)
+    public function setClient(ClientInterface $client): HttpRequestInterface
     {
         $this->client = $client;
 
@@ -159,19 +156,19 @@ class HttpRequest extends AbstractHttpRequest
     }
 
     /**
-     * @return \frankmayer\ArangoDbPhpCore\Client
+     * @return ClientInterface
      */
-    public function getClient()
+    public function getClient(): ClientInterface
     {
         return $this->client;
     }
 
     /**
-     * @param \frankmayer\ArangoDbPhpCore\ConnectorInterface $connector
+     * @param ConnectorInterface $connector
      *
-     * @return $this
+     * @return HttpRequestInterface
      */
-    public function setConnector($connector)
+    public function setConnector(ConnectorInterface $connector): HttpRequestInterface
     {
         $this->connector = $connector;
 
@@ -179,9 +176,9 @@ class HttpRequest extends AbstractHttpRequest
     }
 
     /**
-     * @return \frankmayer\ArangoDbPhpCore\ConnectorInterface
+     * @return ConnectorInterface
      */
-    public function getConnector()
+    public function getConnector(): ConnectorInterface
     {
         return $this->connector;
     }
@@ -189,9 +186,9 @@ class HttpRequest extends AbstractHttpRequest
     /**
      * @param array $headers
      *
-     * @return $this
+     * @return HttpRequestInterface
      */
-    public function setHeaders($headers)
+    public function setHeaders(array $headers = []): HttpRequestInterface
     {
         $this->headers = $headers;
 
@@ -201,7 +198,7 @@ class HttpRequest extends AbstractHttpRequest
     /**
      * @return array
      */
-    public function getHeaders()
+    public function getHeaders(): array
     {
         return $this->headers;
     }
@@ -209,9 +206,9 @@ class HttpRequest extends AbstractHttpRequest
     /**
      * @param string $method
      *
-     * @return $this
+     * @return HttpRequestInterface
      */
-    public function setMethod($method)
+    public function setMethod(string $method): HttpRequestInterface
     {
         $this->method = $method;
 
@@ -221,7 +218,7 @@ class HttpRequest extends AbstractHttpRequest
     /**
      * @return string
      */
-    public function getMethod()
+    public function getMethod(): string
     {
         return $this->method;
     }
@@ -229,9 +226,9 @@ class HttpRequest extends AbstractHttpRequest
     /**
      * @param array $options
      *
-     * @return $this
+     * @return HttpRequestInterface
      */
-    public function setOptions($options)
+    public function setOptions(array $options): HttpRequestInterface
     {
         $this->options = $options;
 
@@ -241,7 +238,7 @@ class HttpRequest extends AbstractHttpRequest
     /**
      * @return array
      */
-    public function getOptions()
+    public function getOptions(): array
     {
         return $this->options;
     }
@@ -249,9 +246,9 @@ class HttpRequest extends AbstractHttpRequest
     /**
      * @param string $path
      *
-     * @return $this
+     * @return HttpRequestInterface
      */
-    public function setPath($path)
+    public function setPath(string $path): HttpRequestInterface
     {
         $this->path = $path;
 
@@ -261,7 +258,7 @@ class HttpRequest extends AbstractHttpRequest
     /**
      * @return string
      */
-    public function getPath()
+    public function getPath(): string
     {
         return $this->path;
     }
@@ -269,9 +266,9 @@ class HttpRequest extends AbstractHttpRequest
     /**
      * @param string $response
      *
-     * @return $this
+     * @return HttpRequestInterface
      */
-    public function setResponse($response)
+    public function setResponse(string $response): HttpRequestInterface
     {
         $this->response = $response;
 
@@ -281,7 +278,7 @@ class HttpRequest extends AbstractHttpRequest
     /**
      * @return string
      */
-    public function getResponse()
+    public function getResponse(): string
     {
         return $this->response;
     }

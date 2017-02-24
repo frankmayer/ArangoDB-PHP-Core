@@ -8,6 +8,8 @@
 
 namespace frankmayer\ArangoDbPhpCore;
 
+use frankmayer\ArangoDbPhpCore\Protocols\Http\HttpRequestInterface;
+
 
 /**
  * Interface ClientInterface
@@ -25,11 +27,11 @@ interface ClientInterface
 
 
     /**
-     * @param $request
+     * @param HttpRequestInterface $request
      *
      * @return mixed
      */
-    public function doRequest($request);
+    public function doRequest(HttpRequestInterface $request);
 
 
     /**
@@ -38,31 +40,32 @@ interface ClientInterface
      * @param $type
      * @param $closure
      */
-    public static function bind($type, \Closure $closure);
+    public function bind($type, \Closure $closure);
 
 
     /**
      * Make method for the IOC Container
      *
-     * @param $type
+     * @param string $type
      *
      * @throws ClientException
+     *
      * @return mixed
      */
-    public static function make($type);
+    public function make(string $type);
 
 
     /**
-     * @param null $plugins
+     * @param array $plugins
      *
      * @return bool
      */
-    public function setPluginsFromPluginArray($plugins = null);
+    public function setPluginsFromPluginArray(array $plugins = []);
 
 
     /**
-     * @param       $eventName
-     * @param array $eventData
+     * @param string $eventName
+     * @param array  $eventData
      */
-    public function notifyPlugins($eventName, array $eventData = []);
+    public function notifyPlugins(string $eventName, array $eventData = []);
 }

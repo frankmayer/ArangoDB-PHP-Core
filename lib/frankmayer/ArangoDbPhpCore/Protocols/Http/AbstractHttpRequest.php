@@ -109,9 +109,9 @@ abstract class AbstractHttpRequest implements HttpRequestInterface
      * Method to send an HTTP request.
      * All request should be done through this method. Any async or batch handling is done within this method.
      *
-     * @return HttpResponse Http Response object
+     * @return HttpResponseInterface Http Response object
      */
-    public abstract function send();
+    public abstract function send(): HttpResponseInterface;
 
 
     /**
@@ -120,11 +120,9 @@ abstract class AbstractHttpRequest implements HttpRequestInterface
      * @param array  $batchParts
      * @param string $boundary
      *
-     * @return mixed
+     * @return HttpResponseInterface Http Response object
      */
-
-
-    public abstract function sendBatch(array $batchParts = [], $boundary = 'XXXbXXX');
+    public abstract function sendBatch(array $batchParts = [], string $boundary = 'XXXbXXX'): HttpResponseInterface;
 
 
     /**
@@ -132,7 +130,7 @@ abstract class AbstractHttpRequest implements HttpRequestInterface
      *
      * @return string
      */
-    public function buildUrlQuery($urlQueryArray)
+    public function buildUrlQuery(array $urlQueryArray = []): string
     {
         $params = [];
         foreach ($urlQueryArray as $key => $value) {

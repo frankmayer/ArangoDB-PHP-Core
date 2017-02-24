@@ -12,8 +12,7 @@ use frankmayer\ArangoDbPhpCore\Connectors\AbstractHttpConnector;
 use frankmayer\ArangoDbPhpCore\Plugins\PluginManager;
 use frankmayer\ArangoDbPhpCore\Protocols\Http\AbstractHttpRequest;
 use frankmayer\ArangoDbPhpCore\Protocols\Http\HttpRequestInterface;
-use frankmayer\ArangoDbPhpCore\Protocols\RequestInterface;
-use frankmayer\ArangoDbPhpCore\Protocols\ResponseInterface;
+use frankmayer\ArangoDbPhpCore\Protocols\Http\HttpResponseInterface;
 
 
 /**
@@ -23,7 +22,7 @@ use frankmayer\ArangoDbPhpCore\Protocols\ResponseInterface;
  *
  * @package   frankmayer\ArangoDbPhpCore
  */
-class Client
+class Client implements ClientInterface
 {
     protected $iocContainerArray;
 
@@ -95,22 +94,22 @@ class Client
 
 
     /**
-     * @param null $plugins
+     * @param array $plugins
      *
      * @return bool
      * @throws ClientException
      */
-    public function setPluginsFromPluginArray($plugins = null)
+    public function setPluginsFromPluginArray(array $plugins = [])
     {
         return $this->pluginManager->setPluginsFromPluginArray($plugins);
     }
 
 
     /**
-     * @param       $eventName
-     * @param array $eventData
+     * @param string $eventName
+     * @param array  $eventData
      */
-    public function notifyPlugins($eventName, array $eventData = [])
+    public function notifyPlugins(string $eventName, array $eventData = [])
     {
         if ($this->pluginManager) {
             $this->pluginManager->notifyPlugins($eventName, $eventData);
@@ -119,15 +118,15 @@ class Client
 
 
     /**
-     * @param $request
+     * @param HttpRequestInterface $request
      *
      * @return mixed
      */
-    public function doRequest($request)
+    public function doRequest(HttpRequestInterface $request)
     {
         $responseClass = $this->responseClass;
 
-        /** @var ResponseInterface $responseObject */
+        /** @var HttpResponseInterface $responseObject */
         $responseObject = new $responseClass();
 
         return $responseObject->build($request);
@@ -149,12 +148,12 @@ class Client
     /**
      * Make method for the IOC Container
      *
-     * @param $type
+     * @param string $type
      *
      * @throws ClientException
      * @return mixed
      */
-    public function make($type)
+    public function make(string $type)
     {
         if (isset($this->iocContainerArray[$type])) {
             $type = $this->iocContainerArray[$type];

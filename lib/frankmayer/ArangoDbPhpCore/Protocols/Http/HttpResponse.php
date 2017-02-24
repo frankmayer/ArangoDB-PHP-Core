@@ -37,29 +37,29 @@ class HttpResponse implements HttpResponseInterface
     /**
      * @var string $body The body of the response
      */
-    public $body;
+    public $body = '';
     /**
      * @var array $batch An array of batch parts
      */
-    public $batch;
+    public $batch = [];
     /**
      * @var string $protocol The protocol used
      */
-    public $protocol;
+    public $protocol = '';
     /**
      * @var int $status The http status code of the response
      */
-    public $status;
+    public $status = 0;
     /**
      * @var string $statusPhrase The associated text to the status code
      */
-    public $statusPhrase;
+    public $statusPhrase = '';
     /**
      * @var bool $verboseExtractStatusLine get only status code or also the accompanying text
      */
     public $verboseExtractStatusLine = false;
     /**
-     * @var bool This holds the Batchpart Content-Id of the response if one was supplied to ArangoDB in the request.
+     * @var string|int This holds the Batchpart Content-Id of the response if one was supplied to ArangoDB in the request.
      */
     public $batchContentId;
 
@@ -77,11 +77,11 @@ class HttpResponse implements HttpResponseInterface
     /**
      * @param $request
      *
-     * @return HttpResponse
+     * @return HttpResponseInterface
      * @throws ServerException
      *
      */
-    public function build($request)
+    public function build(HttpRequestInterface $request): HttpResponseInterface
     {
         if ($request instanceof AbstractHttpRequest) {
             $response      = $request->response;
@@ -114,13 +114,20 @@ class HttpResponse implements HttpResponseInterface
             throw new ServerException($this->statusPhrase, $this->status);
             // @codeCoverageIgnoreEnd
         }
+
         //todo: End revisit this:
 
         return $this;
     }
 
 
-    public function buildBatch($responseMessage)
+    /**
+     * @param string $responseMessage
+     *
+     * @return HttpResponseInterface
+     * @throws ServerException
+     */
+    public function buildBatch(string $responseMessage): HttpResponseInterface
     {
         $response = $responseMessage;
         $this->splitResponseToHeadersArrayAndBody($response);
@@ -143,6 +150,7 @@ class HttpResponse implements HttpResponseInterface
             throw new ServerException($this->statusPhrase, $this->status);
             // @codeCoverageIgnoreEnd
         }
+
         //todo: End revisit this:
 
         return $this;
@@ -154,7 +162,7 @@ class HttpResponse implements HttpResponseInterface
      *
      * @return string
      */
-    protected function decodeGetStatusPhrase($statusLineArray)
+    protected function decodeGetStatusPhrase(array $statusLineArray = []): string
     {
         $phrase = '';
         foreach ($statusLineArray as $key => $part) {
@@ -175,26 +183,30 @@ class HttpResponse implements HttpResponseInterface
      * It puts the headers into $this->headers and
      * the body into $this->body
      *
-     * @param $response
+     * @param string $response
+     *
+     * @return HttpResponseInterface
      */
-    protected function splitResponseToHeadersArrayAndBody($response)
+    protected function splitResponseToHeadersArrayAndBody(string $response): HttpResponseInterface
     {
         //        $tmp = explode("\r\n\r\n", $response, 2);
         //        var_export($tmp);
         list($headers, $this->body) = explode("\r\n\r\n", $response, 2);
 
         $this->headers = $this->getHeaderArray($headers);
+
+        return $this;
     }
 
 
     /**
-     * @param $batchResponseBody
-     * @param $boundary
+     * @param string $batchResponseBody
+     * @param string $boundary
      *
      * @return array
      * @throws ServerException
      */
-    public function deconstructBatchResponseBody($batchResponseBody, $boundary)
+    public function deconstructBatchResponseBody(string $batchResponseBody, string $boundary): array
     {
         $connector         = $this->request->client->connector;
         $batchObjects      = [];
@@ -228,7 +240,7 @@ class HttpResponse implements HttpResponseInterface
      *
      * @return array
      */
-    public static function splitBatchPart($batchPart)
+    public static function splitBatchPart(string $batchPart): array
     {
         return explode("\r\n\r\n", trim($batchPart), 2);
     }
@@ -237,9 +249,9 @@ class HttpResponse implements HttpResponseInterface
     /**
      * @param mixed $batch
      *
-     * @return $this
+     * @return HttpResponseInterface
      */
-    public function setBatch($batch)
+    public function setBatch($batch): HttpResponseInterface
     {
         $this->batch = $batch;
 
@@ -255,11 +267,11 @@ class HttpResponse implements HttpResponseInterface
     }
 
     /**
-     * @param mixed $body
+     * @param string $body
      *
-     * @return $this
+     * @return HttpResponseInterface
      */
-    public function setBody($body)
+    public function setBody(string $body): HttpResponseInterface
     {
         $this->body = $body;
 
@@ -277,9 +289,9 @@ class HttpResponse implements HttpResponseInterface
     /**
      * @param array $headers
      *
-     * @return $this
+     * @return HttpResponseInterface
      */
-    public function setHeaders($headers)
+    public function setHeaders(array $headers = []): HttpResponseInterface
     {
         $this->headers = $headers;
 
@@ -295,11 +307,11 @@ class HttpResponse implements HttpResponseInterface
     }
 
     /**
-     * @param \frankmayer\ArangoDbPhpCore\Protocols\Http\HttpRequest $request
+     * @param HttpRequestInterface $request
      *
-     * @return $this
+     * @return HttpResponseInterface
      */
-    public function setRequest($request)
+    public function setRequest(HttpRequestInterface $request): HttpResponseInterface
     {
         $this->request = $request;
 
@@ -307,9 +319,9 @@ class HttpResponse implements HttpResponseInterface
     }
 
     /**
-     * @return \frankmayer\ArangoDbPhpCore\Protocols\Http\HttpRequest
+     * @return HttpRequest|HttpRequestInterface
      */
-    public function getRequest()
+    public function getRequest(): HttpRequestInterface
     {
         return $this->request;
     }
@@ -317,9 +329,9 @@ class HttpResponse implements HttpResponseInterface
     /**
      * @param mixed $status
      *
-     * @return $this
+     * @return HttpResponseInterface
      */
-    public function setStatus($status)
+    public function setStatus($status): HttpResponseInterface
     {
         $this->status = $status;
 
@@ -327,25 +339,25 @@ class HttpResponse implements HttpResponseInterface
     }
 
     /**
-     * @return mixed
+     * @return integer
      */
-    public function getStatus()
+    public function getStatus(): int
     {
         return $this->status;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getProtocol()
+    public function getProtocol(): string
     {
         return $this->protocol;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getStatusPhrase()
+    public function getStatusPhrase(): string
     {
         return $this->statusPhrase;
     }
@@ -353,7 +365,7 @@ class HttpResponse implements HttpResponseInterface
     /**
      * @param boolean $verboseStatusLine
      *
-     * @return $this
+     * @return HttpResponseInterface
      */
     public function setVerboseExtractStatusLine($verboseStatusLine)
     {
@@ -371,11 +383,11 @@ class HttpResponse implements HttpResponseInterface
     }
 
     /**
-     * @param $headers
+     * @param string $headers
      *
      * @return array
      */
-    protected function getHeaderArray($headers)
+    protected function getHeaderArray(string $headers): array
     {
         $headerArray  = [];
         $headersArray = explode("\r\n", trim($headers));
