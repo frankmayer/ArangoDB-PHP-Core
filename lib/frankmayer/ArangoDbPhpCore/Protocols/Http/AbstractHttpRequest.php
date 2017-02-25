@@ -130,7 +130,7 @@ abstract class AbstractHttpRequest implements HttpRequestInterface
      *
      * @return string
      */
-    public function buildUrlQuery(array $urlQueryArray = []): string
+    public function buildUrlQuery(array $urlQueryArray = []): \string
     {
         $params = [];
         foreach ($urlQueryArray as $key => $value) {
