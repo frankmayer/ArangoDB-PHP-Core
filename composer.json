@@ -29,6 +29,9 @@
     "php": ">=7.0.0",
     "lib-curl": "*"
   },
+  "require-dev": {
+    "phpunit/phpunit": "~6.0"
+    },
   "autoload": {
     "psr-4": {
       "frankmayer\\ArangoDbPhpCore\\": "lib/"
