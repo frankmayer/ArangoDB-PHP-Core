@@ -236,10 +236,11 @@ TAG;
      */
     public function testBuildBatchResponseAndSplitHeadersAndBodies()
     {
-        // Stop here and mark this test as incomplete.
-        static::markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+//         Stop here and mark this test as incomplete.
+//        static::markTestIncomplete(
+//            'This test has not been implemented yet.'
+//        );
+        static::assertTrue(true);
 
         $collectionOptions = ['waitForSync' => true];
 
