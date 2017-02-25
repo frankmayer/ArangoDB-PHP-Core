@@ -122,7 +122,7 @@ abstract class AbstractHttpRequest implements HttpRequestInterface
      *
      * @return HttpResponseInterface Http Response object
      */
-    public abstract function sendBatch(array $batchParts = [], $boundary = 'XXXbXXX'): HttpResponseInterface;
+    public abstract function sendBatch(array $batchParts = [], string $boundary = 'XXXbXXX'): HttpResponseInterface;
 
 
     /**
@@ -130,7 +130,7 @@ abstract class AbstractHttpRequest implements HttpRequestInterface
      *
      * @return string
      */
-    public function buildUrlQuery(array $urlQueryArray = []): \string
+    public function buildUrlQuery(array $urlQueryArray = []): string
     {
         $params = [];
         foreach ($urlQueryArray as $key => $value) {
