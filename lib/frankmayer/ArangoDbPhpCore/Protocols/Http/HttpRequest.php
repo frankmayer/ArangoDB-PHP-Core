@@ -73,7 +73,7 @@ class HttpRequest extends AbstractHttpRequest
      *
      * @codeCoverageIgnore There is no unit-test for this ATM. However, the functionality is tested by integration tests from higher level clients like Core-Guzzle
      */
-    public function sendBatch(array $batchParts = [], $boundary = 'XXXbXXX'): HttpResponseInterface
+    public function sendBatch(array $batchParts = [], string $boundary = 'XXXbXXX'): HttpResponseInterface
     {
         $connector  = $this->client->connector;
         $this->body = '';
