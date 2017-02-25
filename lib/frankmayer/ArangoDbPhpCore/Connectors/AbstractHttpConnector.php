@@ -8,8 +8,8 @@ namespace frankmayer\ArangoDbPhpCore\Connectors;
 
 
 use frankmayer\ArangoDbPhpCore\Client;
-use frankmayer\ArangoDbPhpCore\Protocols\Http\AbstractHttpRequest;
 use frankmayer\ArangoDbPhpCore\Protocols\Http\HttpConnectorInterface;
+use frankmayer\ArangoDbPhpCore\Protocols\Http\HttpRequestInterface;
 
 /**
  * Class AbstractHttpConnector
@@ -40,18 +40,21 @@ abstract class AbstractHttpConnector implements HttpConnectorInterface
     }
 
     /**
-     * @param AbstractHttpRequest $request
+     * @param HttpRequestInterface $request
      *
      * @return mixed
      */
-    public abstract function request(AbstractHttpRequest $request);
+    public abstract function send(HttpRequestInterface $request);
 
     /**
      * @param boolean $verbose
+     *
+     * @return $this
      */
     public function setVerboseLogging($verbose)
     {
         $this->verboseLogging = $verbose;
+        return $this;
     }
 
     /**

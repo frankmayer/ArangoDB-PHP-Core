@@ -20,9 +20,9 @@ use frankmayer\ArangoDbPhpCore\ConnectorInterface;
 interface  HttpConnectorInterface extends ConnectorInterface
 {
     /**
-     * @param AbstractHttpRequest $request
+     * @param HttpRequestInterface $request
      *
      * @return mixed
      */
-    public function request(AbstractHttpRequest $request);
+    public function send(HttpRequestInterface $request);
 }

@@ -58,7 +58,7 @@ class HttpRequest extends AbstractHttpRequest
                 $this->headers['Content-Type'] = 'application/json';
             }
             $this->address  = $this->client->endpoint . $this->path;
-            $this->response = $this->client->connector->request($this);
+            $this->response = $this->client->connector->send($this);
         }
 
         return $this->client->doRequest($this);

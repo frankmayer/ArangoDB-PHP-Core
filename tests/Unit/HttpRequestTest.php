@@ -69,7 +69,7 @@ TAG;
 
         $this->connector = $this->getMockBuilder(\TestConnector::class)
             ->getMock();
-        $this->connector->method('request')
+        $this->connector->method('send')
             ->willReturn($this->batchResponseBody);
 
         $this->setupProperties();

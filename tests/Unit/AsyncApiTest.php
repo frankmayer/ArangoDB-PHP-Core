@@ -57,7 +57,7 @@ TAG;
         $body           = '{ "Hello": "World" }';
 
         $options = ['async' => true];
-        $this->connector->method('request')
+        $this->connector->method('send')
             ->willReturn($createResponse);
 
         $object = new Document($this->client);
@@ -82,7 +82,7 @@ TAG;
         $options                  = ['waitForSync' => true];
         $handle                   = 'products/1234567890';
 
-        $this->connector->method('request')
+        $this->connector->method('send')
             ->willReturn($createCollectionResponse);
 
         $object = new Async($this->client);
@@ -106,7 +106,7 @@ content-type: application/json; charset=utf-8\r\n\r\n{
 }
 TAG;
         $options                  = ['waitForSync' => true];
-        $this->connector->method('request')
+        $this->connector->method('send')
             ->willReturn($deleteCollectionResponse);
 
         $object = new Async($this->client);
@@ -130,7 +130,7 @@ content-type: application/json; charset=utf-8\r\n\r\n[
 ]
 TAG;
         $options                  = ['waitForSync' => true];
-        $this->connector->method('request')
+        $this->connector->method('send')
             ->willReturn($deleteCollectionResponse);
 
         $object = new Async($this->client);

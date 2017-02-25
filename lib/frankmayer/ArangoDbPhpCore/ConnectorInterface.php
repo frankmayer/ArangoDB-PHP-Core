@@ -16,5 +16,9 @@ namespace frankmayer\ArangoDbPhpCore;
  */
 interface  ConnectorInterface
 {
+    public function setVerboseLogging($verbose);
+
+    public function getVerboseLogging();
+
 
 }

@@ -75,7 +75,7 @@ location: /_db/_system/_api/collection/testCollectionBasics\r\n\r\n{
 }
 TAG;
         $options                  = ['waitForSync' => true];
-        $this->connector->method('request')
+        $this->connector->method('send')
             ->willReturn($createCollectionResponse);
 
         $object = new Collection($this->client);
@@ -101,7 +101,7 @@ content-type: application/json; charset=utf-8\r\n\r\n{
 }
 TAG;
         $options                  = ['waitForSync' => true];
-        $this->connector->method('request')
+        $this->connector->method('send')
             ->willReturn($deleteCollectionResponse);
 
         $object = new Collection($this->client);
@@ -131,7 +131,7 @@ content-type: application/json; charset=utf-8\r\n\r\n{
 }
 TAG;
         $options                  = ['waitForSync' => true];
-        $this->connector->method('request')
+        $this->connector->method('send')
             ->willReturn($deleteCollectionResponse);
 
         $object = new Collection($this->client);
@@ -169,7 +169,7 @@ content-type: application/json; charset=utf-8\r\n\r\n{
 }
 TAG;
         $options                  = ['excludeSystem' => true];
-        $this->connector->method('request')
+        $this->connector->method('send')
             ->willReturn($deleteCollectionResponse);
 
         $object = new Collection($this->client);

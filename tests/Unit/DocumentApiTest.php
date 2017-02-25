@@ -74,7 +74,7 @@ TAG;
         $body           = '{ "Hello": "World" }';
 
         $options = ['waitForSync' => true];
-        $this->connector->method('request')
+        $this->connector->method('send')
             ->willReturn($createResponse);
 
         $object = new Document($this->client);
@@ -103,7 +103,7 @@ TAG;
         $handle         = 'products/1234567890';
 
         $options = ['waitForSync' => true];
-        $this->connector->method('request')
+        $this->connector->method('send')
             ->willReturn($deleteResponse);
 
         $object = new Document($this->client);
@@ -133,7 +133,7 @@ TAG;
         $handle                   = 'products/1234567890';
 
         $options = ['waitForSync' => true];
-        $this->connector->method('request')
+        $this->connector->method('send')
             ->willReturn($deleteCollectionResponse);
 
         $object = new Document($this->client);
@@ -158,7 +158,7 @@ TAG;
         $handle                   = 'products/1234567890';
 
         $options = ['waitForSync' => true];
-        $this->connector->method('request')
+        $this->connector->method('send')
             ->willReturn($deleteCollectionResponse);
 
         $object = new Document($this->client);
@@ -190,7 +190,7 @@ TAG;
         $body                     = '{ "Hello": "World" }';
 
         $options = ['waitForSync' => true];
-        $this->connector->method('request')
+        $this->connector->method('send')
             ->willReturn($deleteCollectionResponse);
 
         $object = new Document($this->client);
@@ -222,7 +222,7 @@ TAG;
         $body                     = '{ "Hello": "World" }';
 
         $options = ['waitForSync' => true];
-        $this->connector->method('request')
+        $this->connector->method('send')
             ->willReturn($deleteCollectionResponse);
 
         $object = new Document($this->client);
@@ -250,7 +250,7 @@ content-type: application/json; charset=utf-8\r\n\r\n{
 }
 TAG;
         $options                  = ['excludeSystem' => true];
-        $this->connector->method('request')
+        $this->connector->method('send')
             ->willReturn($deleteCollectionResponse);
 
         $object = new Document($this->client);

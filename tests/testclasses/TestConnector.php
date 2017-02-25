@@ -1,5 +1,7 @@
 <?php
 use frankmayer\ArangoDbPhpCore\Connectors\AbstractHttpConnector;
+use frankmayer\ArangoDbPhpCore\Protocols\Http\HttpRequestInterface;
+use frankmayer\ArangoDbPhpCore\Protocols\Http\HttpResponseInterface;
 
 /**
  *
@@ -11,8 +13,9 @@ use frankmayer\ArangoDbPhpCore\Connectors\AbstractHttpConnector;
 class TestConnector extends AbstractHttpConnector
 {
 
-    public function request(\frankmayer\ArangoDbPhpCore\Protocols\Http\AbstractHttpRequest $request)
+    public function send(HttpRequestInterface $request)
     {
         // TODO: Implement request() method.
+
     }
 }

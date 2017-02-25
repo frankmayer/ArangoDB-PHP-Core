@@ -73,7 +73,7 @@ location: /_db/_system/_api/document/edges/1510938448\r\n\r\n{
 TAG;
         $body           = '{ "Hello": "World" }';
 
-        $this->connector->method('request')
+        $this->connector->method('send')
             ->willReturn($createResponse);
 
         $object = new Edge($this->client);
@@ -102,7 +102,7 @@ TAG;
         $handle         = 'edges/1234567890';
 
         $options = ['waitForSync' => true];
-        $this->connector->method('request')
+        $this->connector->method('send')
             ->willReturn($deleteResponse);
 
         $object = new Edge($this->client);
@@ -132,7 +132,7 @@ TAG;
         $handle                   = 'edges/1234567890';
 
         $options = ['waitForSync' => true];
-        $this->connector->method('request')
+        $this->connector->method('send')
             ->willReturn($deleteCollectionResponse);
 
         $object = new Edge($this->client);
@@ -157,7 +157,7 @@ TAG;
         $handle                   = 'edges/1234567890';
 
         $options = ['waitForSync' => true];
-        $this->connector->method('request')
+        $this->connector->method('send')
             ->willReturn($deleteCollectionResponse);
 
         $object = new Edge($this->client);
@@ -189,7 +189,7 @@ TAG;
         $body                     = '{ "Hello": "World" }';
 
         $options = ['waitForSync' => true];
-        $this->connector->method('request')
+        $this->connector->method('send')
             ->willReturn($deleteCollectionResponse);
 
         $object = new Edge($this->client);
@@ -220,7 +220,7 @@ TAG;
         $handle                   = 'edges/1234567890';
         $body                     = '{ "Hello": "World" }';
 
-        $this->connector->method('request')
+        $this->connector->method('send')
             ->willReturn($deleteCollectionResponse);
 
         $object = new Edge($this->client);
@@ -248,7 +248,7 @@ content-type: application/json; charset=utf-8\r\n\r\n{
 }
 TAG;
         $options                  = ['excludeSystem' => true];
-        $this->connector->method('request')
+        $this->connector->method('send')
             ->willReturn($deleteCollectionResponse);
 
         $object = new Edge($this->client);
