@@ -1,9 +1,9 @@
 language: php
 
 php: 
-  - 7.0
-  - 7.1
-  - hhvm-3.18
+#  - 7.0
+#  - 7.1
+  - hhvm-3.15
   #  - hhvm-nightly
 
 dist: trusty
@@ -18,6 +18,7 @@ matrix:
 before_install:
   - if [[ ${TRAVIS_PHP_VERSION:0:1} == "7" ]]; then composer require --dev --no-update phpunit/phpunit 6.*; else composer require --dev --no-update phpunit/phpunit ~5; fi
   - if [[ $TRAVIS_PHP_VERSION =~ ^hhvm ]]; then echo 'xdebug.enable = On' >> /etc/hhvm/php.ini; fi
+  - if [[ $TRAVIS_PHP_VERSION = hhvm ]]; then echo 'hhvm.php7.all = On' >> /etc/hhvm/php.ini; fi
 before_script:
 #  - bash tests/before.sh
   - composer install --prefer-source --no-interaction --ignore-platform-reqs
