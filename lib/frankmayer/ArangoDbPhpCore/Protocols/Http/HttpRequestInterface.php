@@ -25,7 +25,7 @@ interface HttpRequestInterface extends RequestInterface
      *
      * @return HttpResponseInterface Http Response object
      */
-    public function send(): HttpResponseInterface;
+    public function send();
 
 
     /**
@@ -36,5 +36,5 @@ interface HttpRequestInterface extends RequestInterface
      *
      * @return HttpResponseInterface
      */
-    public function sendBatch(array $batchParts = [], string $boundary = 'XXXbXXX'): HttpResponseInterface;
+    public function sendBatch(array $batchParts = [], string $boundary = 'XXXbXXX');
 }

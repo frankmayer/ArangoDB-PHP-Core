@@ -111,7 +111,7 @@ abstract class AbstractHttpRequest implements HttpRequestInterface
      *
      * @return HttpResponseInterface Http Response object
      */
-    public abstract function send(): HttpResponseInterface;
+    public abstract function send();
 
 
     /**
@@ -122,7 +122,7 @@ abstract class AbstractHttpRequest implements HttpRequestInterface
      *
      * @return HttpResponseInterface Http Response object
      */
-    public abstract function sendBatch(array $batchParts = [], string $boundary = 'XXXbXXX'): HttpResponseInterface;
+    public abstract function sendBatch(array $batchParts = [], string $boundary = 'XXXbXXX');
 
 
     /**

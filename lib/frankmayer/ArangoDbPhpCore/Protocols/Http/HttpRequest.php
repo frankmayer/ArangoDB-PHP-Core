@@ -32,7 +32,7 @@ class HttpRequest extends AbstractHttpRequest
      *
      * @return HttpResponseInterface Http Response object
      */
-    public function send(): HttpResponseInterface
+    public function send()
     {
         $this->client->notifyPlugins('beforeRequest', [$this]);
         if (isset($this->options['async'])) {
@@ -73,7 +73,7 @@ class HttpRequest extends AbstractHttpRequest
      *
      * @codeCoverageIgnore There is no unit-test for this ATM. However, the functionality is tested by integration tests from higher level clients like Core-Guzzle
      */
-    public function sendBatch(array $batchParts = [], string $boundary = 'XXXbXXX'): HttpResponseInterface
+    public function sendBatch(array $batchParts = [], string $boundary = 'XXXbXXX')
     {
         $connector  = $this->client->connector;
         $this->body = '';
