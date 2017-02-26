@@ -27,5 +27,5 @@ interface ResponseInterface
      *
      * @return mixed
      */
-    public function build(HttpRequestInterface $request): HttpResponseInterface;
+    public function build(HttpRequestInterface $request);
 }

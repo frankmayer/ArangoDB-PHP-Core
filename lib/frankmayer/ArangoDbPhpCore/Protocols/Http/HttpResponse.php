@@ -81,7 +81,7 @@ class HttpResponse implements HttpResponseInterface
      * @throws ServerException
      *
      */
-    public function build(HttpRequestInterface $request): HttpResponseInterface
+    public function build(HttpRequestInterface $request)
     {
         if ($request instanceof AbstractHttpRequest) {
             $response      = $request->response;
